@@ -8,83 +8,70 @@
 ## Table des matières
 
 - [Description du projet](#description-du-projet)
+  * [Premier module](#premier-module)
+  * [Second module](#second-module)
+  * [Troisieme module](#troisieme-module)
 - [Objectif du projet](#objectif-du-projet)
-- [Contraintes](#contraintes)
-    + [Aspect technique](#aspect-technique)
-- [Fonctionnalite](#fonctionnalite)
-- [Installation](#installation)
+  * [Aspect technique](#aspect-technique)
 
 ---
 
 ## Description du projet
 
-Application (à but éducative) permettant de faciliter la mise en place d'un réseau via une GUI qui va générer les commandes à copier-coller dans des appareils tel que :
+Application (à but éducative) permettant de faciliter la mise en place d'un réseau via une GUI facile à prendre en main.
+Cette application sera divisé en 3 modules :
+1. Configuration de divers appareils via un générateur de commandes à "_copier-coller_" dans ceux-ci.
+2. Générateur d'examen compatible avec (Cisco) **`Packet Tracer`**.
+3. Un simplificateur de calculs **`VLSM`** et pour le calcul de sous-réseau.
 
-* Routeur Cisco (cisco)
-* Switch Layer 2 (cisco)
-* Switch Layer 3 (cisco)
-* Serveur DNS (bind par exemple)
-* Serveur DHCP (isc-dhcp-server par exemple)
 
 **_⚠ Ce programme est conçu pour être à des fins éducatives._**
 
-**L'idée est par exemple** : 
+---
 
-1. D'aider les professeurs à corriger les configurations des étudiants lors d'un examen en générant la configuration correcte via ce logiciel.
-2. Donner aux étudiants l'application mobile qui elle fournit de la documentation sur les protocoles / services vu aux cours + le calcul de masque de sous-réseau via un CIDR (exemple : /24 = 255.255.255.0)
-3. Permet de vite mettre en place un petit réseau avec GNS3 (ou packet tracer) pour tester ou montrer certains concepts réseau.
+#### Premier module
+
+Le premier module consiste en la mise en place d'un générateur de commandes reprenant divers protocoles réseau et permettant la mise en place de : 
+- `Switch Layer 2` (Cisco)
+- `Switch Layer 3` (Cisco)
+- `Router` (Cisco)
+- `Serveur DNS` (bind par exemple)
+- `Serveur DHCP` (isc-dhcp-server par exemple)
+
+---
+
+#### Second module
+
+Le deuxième module consiste à mettre en place un générateur d'examen (blanc ou pas).
+Idéalement, celui-ci génèra une topologie (schéma réseau), ainsi que toutes les commandes nécessaires permettant de résoudre l'examen généré. Il faudra ensuite l'encoder dans **`Packet Tracer`** si le professeur souhaite utiliser ce programme comme examen pour les étudiants.
+
+L'idée serait de proposé un "template" (une base) comprenant un schéma du réseau avec déjà des liaisons faites (Exemple : Un Pc relié à un switch et un switch relié à un routeur,...).
+
+Ensuite l'utilisateur pourra rajouté les fonctionnalités qu'il désire comme du routage dynamique tel que **`RIP`** (au lieu du routage statique), un système de **`VLAN`**, mise en place de **`NAT`**,...
+
+---
+
+#### Troisieme module
+
+Ce dernier module est similaire à une calculatrice : il permettra de faciliter les calculs de **`VLSM`** et de calculs de sous-réseau.
+
+Pour les calculs de sous-réseau : 
+- Permet de trouver le **`wildcard`** (masque de sous-réseau inversé)
+- Permet de savoir le nombre d'adresses **`IP`** utilisable.
 
 ---
 
 ## Objectif du projet
 
-Idéalement le programme :
-
-* Permettra de générer des configurations pour les appareils Cisco (Routeur, Switch Layer 2 / Layer 3).
-* Permettra de générer des configurations pour divers services linux nécessaire dans un réseau tel que DNS et DHCP.
-* Possèdera des outils fecilitant le calcul de VLSM de sous-réseau
-* Possèdera des outils facilitant le calcul de "wildcard" (masque de sours-réseau inversé), masque de sous-réseau, nombres d'adresse IP utilasables,...
-* Permettra de visualiser des configs générer pour celui-ci en couleur et également modifié celles-ci. 
+L'objectif de ce projet, est de faire gagner du temps aux professeurs dans la mise en place d'un réseau, que ce soit pour la génération d'examen qui peut prendre jusqu'à 1h30 pour certains examens, mais aussi pour simplement générer les commandes pour d'autres topologies réseau qui n'ont pas été crée via ce logiciel.
 
 ---
 
-## Contraintes
-
-Ce projet est divisé en 2 parties :
-
-1. Une partie "**`Desktop`**" où il y aura la plupart des fonctionnalités.
-    * Application desktop disponible sur Linux (ubuntu/debian du moins) et windows.
-2. Une partie **`Mobile`** où il y aura une partie limité des fonctionnalités.
-    * Application mobile disponible sur Android.
-
-L'idée, c'est que l'application desktop soit utilisé pour mettre en place un réseau et que l'application mobile soit là juste pour aider sur quelques détails comme calculé le masque de sous-réseau inversé d'une IP qui a pour CIDR /11 par exemple.
-
-#### Aspect technique
+### Aspect technique
 
 
-Type | Langage | Détails ?
+Plateforme | Langage (programmation) | Librairie ?
 ---------|----------|---------
- **Desktop** | **`Python`** | **`PyQt`** => Librairie permettant de mettre en place des GUI plus belle.
- **Mobile** | **`Java`** + **`Xml`** | Développé pour utilisateurs **`Android`**.
+ **Application de bureau** | **`Python`** | **`PyQt`** => Librairie permettant de mettre en place des GUI plus belle.
 
----
-
-## Fonctionnalite
-
- Features | Windows & Linux | Android
- |---|---|---
- Calculateur de masque de sous-réseau, Masque de sous-réseau inversé et nombre d'IP utilisable | Bientot ! | Bientot !
- Générateur de config pour un Switch Layer 2 (Cisco) | Bientot ! | ❌
- Générateur de config pour un Switch Layer 3 (Cisco) | Bientot ! | ❌
- Générateur de config pour un Routeur (Cisco) | Bientot ! | ❌
- Générateur de config pour un Serveur DNS (Linux) | Bientot ! | ❌
- Générateur de config pour un Serveur DHCP (Linux) | Bientot ! | ❌
- Simplificateur de calcul de VLSM | Bientot ! | Bientot !
-
-> ⚠ L'application android à le **minimum** de functionnalités !
-
----
-
-## Installation
-
-**=> Prochainement !**
+> ***Ce programme sera disponible sur windows et linux.***
