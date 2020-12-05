@@ -49,6 +49,10 @@ L'idée serait de proposé un "template" (une base) comprenant un schéma du ré
 
 Ensuite l'utilisateur pourra rajouté les fonctionnalités qu'il désire comme du routage dynamique tel que **`RIP`** (au lieu du routage statique), un système de **`VLAN`**, mise en place de **`NAT`**,...
 
+BONUS : Intégrer une sorte d'aide pour insérer dans Packet Tracer. 
+  * Afficher les commandes dans l'ordre des cases à cocher dans Packet Tracer.
+  * Afficher dans quelle sous-menu mettre la commande.
+
 ---
 
 #### Troisieme module
