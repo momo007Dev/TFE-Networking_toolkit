@@ -8,11 +8,13 @@
 ## Table des matières
 
 - [Description du projet](#description-du-projet)
+- [Objectif du projet](#objectif-du-projet)
+- [Division en modules](#division-en-modules)
   * [Premier module](#premier-module)
   * [Second module](#second-module)
   * [Troisieme module](#troisieme-module)
-- [Objectif du projet](#objectif-du-projet)
-  * [Aspect technique](#aspect-technique)
+- [Aspect technique](#aspect-technique)
+- [Organisation et trello](#organisation-et-trello)
 
 ---
 
@@ -29,7 +31,15 @@ Cette application sera divisé en 3 modules :
 
 ---
 
-#### Premier module
+## Objectif du projet
+
+L'objectif de ce projet, est de faire gagner du temps aux professeurs dans la mise en place d'un réseau, que ce soit pour la génération d'examen qui peut prendre jusqu'à 1h30 pour certains examens, mais aussi pour simplement générer les commandes pour d'autres topologies réseau qui n'ont pas été crée via ce logiciel.
+
+---
+
+## Division en modules
+
+### Premier module
 
 Le premier module consiste en la mise en place d'un générateur de commandes reprenant divers protocoles réseau et permettant la mise en place de : 
 - `Switch Layer 2` (Cisco)
@@ -40,7 +50,7 @@ Le premier module consiste en la mise en place d'un générateur de commandes re
 
 ---
 
-#### Second module
+### Second module
 
 Le deuxième module consiste à mettre en place un générateur d'examen (blanc ou pas).
 Idéalement, celui-ci génèra une topologie (schéma réseau), ainsi que toutes les commandes nécessaires permettant de résoudre l'examen généré. Il faudra ensuite l'encoder dans **`Packet Tracer`** si le professeur souhaite utiliser ce programme comme examen pour les étudiants.
@@ -55,7 +65,7 @@ BONUS : Intégrer une sorte d'aide pour insérer dans Packet Tracer.
 
 ---
 
-#### Troisieme module
+### Troisieme module
 
 Ce dernier module est similaire à une calculatrice : il permettra de faciliter les calculs de **`VLSM`** et de calculs de sous-réseau.
 
@@ -65,13 +75,7 @@ Pour les calculs de sous-réseau :
 
 ---
 
-## Objectif du projet
-
-L'objectif de ce projet, est de faire gagner du temps aux professeurs dans la mise en place d'un réseau, que ce soit pour la génération d'examen qui peut prendre jusqu'à 1h30 pour certains examens, mais aussi pour simplement générer les commandes pour d'autres topologies réseau qui n'ont pas été crée via ce logiciel.
-
----
-
-### Aspect technique
+## Aspect technique
 
 
 Plateforme | Langage (programmation) | Librairie ?
@@ -79,3 +83,11 @@ Plateforme | Langage (programmation) | Librairie ?
  **Application de bureau** | **`Python`** | **`PyQt`** => Librairie permettant de mettre en place des GUI plus belle.
 
 > ***Ce programme sera disponible sur windows et linux.***
+
+---
+
+## Organisation et trello
+
+![Image du trello](img/trello.png)
+
+* [Lien vers trello](https://trello.com/b/ywBg35gv/tfe)
