@@ -13,6 +13,7 @@
   * [Premier module](#premier-module)
   * [Second module](#second-module)
   * [Troisieme module](#troisieme-module)
+  * [Fonctionnalite bonus](#fonctionnalite-bonus)
 - [Aspect technique](#aspect-technique)
 - [Organisation et trello](#organisation-et-trello)
 - [Workflow git](#workflow-git)
@@ -74,6 +75,19 @@ Ce dernier module est similaire à une calculatrice : il permettra de faciliter 
 Pour les calculs de sous-réseau : 
 - Permet de trouver le **`wildcard`** (masque de sous-réseau inversé)
 - Permet de savoir le nombre d'adresses **`IP`** utilisable.
+
+---
+
+### Fonctionnalite bonus
+
+> Correspond au boutton "Configuration Editor" dans le mocup en fin de page.
+
+Cette fonctionnalitée consiste en une sorte d'IDE pour les configurations faites par le programme. 
+
+Entre autre, permet de :
+* **Visualiser les configurations** faites par le programme.
+* Visualiser en **couleur** afin d'y voir plus claire.
+* Pouvoir **choisir le type de fichier** (Switch Layer 2 / 3, Routeur, fichier de zone DNS, config DHCP,...)
 
 ---
 
