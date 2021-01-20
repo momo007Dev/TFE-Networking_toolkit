@@ -23,7 +23,7 @@
 
 ## Description du projet
 
-Application (à but éducative) permettant de faciliter la mise en place d'un réseau via une GUI facile à prendre en main.
+Application (à but éducative) permettant de faciliter la mise en place d'un réseau ou la génération d'examen via une GUI facile à prendre en main.
 Cette application sera divisé en 3 modules :
 1. Configuration de divers appareils via un générateur de commandes à "_copier-coller_" dans ceux-ci.
 2. Générateur d'examen compatible avec (Cisco) **`Packet Tracer`**.
