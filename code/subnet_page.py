@@ -1,11 +1,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox
 
-import utils
+import utils, subnet_functions
 from utils import *
+from subnet_functions import *
 
 # Allows to quickly acces utils functions
 classBlueprint = utils.blueprintFunctions
+classSubnet = subnet_functions
 
 def setupUiSubnet(self):
 
@@ -89,6 +91,7 @@ def setupUiSubnet(self):
     self.S_vlsm_combo = QtWidgets.QComboBox(self.Subnet)
     classBlueprint.mkCombo(self.S_vlsm_combo, QtCore.QRect(250, 390, 70, 30), "color: rgb(85, 170, 0);background-color: rgb(255, 255, 255);\nselection-background-color: rgb(204,255,255);\nselection-color: rgb(85, 170, 0)")
     classBlueprint.fillComboCidr(self.S_vlsm_combo)
+    self.S_vlsm_combo.setCurrentIndex(16)
 
     self.S_gb_hosts = QtWidgets.QGroupBox(self.Subnet)
     classBlueprint.mkGroupBox(self.S_gb_hosts, QtCore.QRect(340, 330, 311, 91), "Hosts")
@@ -110,6 +113,9 @@ def setupUiSubnet(self):
     classBlueprint.addDataTable(self.S_table_vlsm, 2, "CIDR")
     classBlueprint.addDataTable(self.S_table_vlsm, 3, "IP Range")
     classBlueprint.addDataTable(self.S_table_vlsm, 4, "Broadcast")
+    self.S_table_vlsm.setColumnWidth(0, 80)
+    self.S_table_vlsm.resizeColumnToContents(2)
+    self.S_table_vlsm.setColumnWidth(3, 250)
 
     self.S_vlsm_host = QtWidgets.QLabel(self.Subnet)
     classBlueprint.mkLabel(self.S_vlsm_host, QtCore.QRect(730, 340, 111, 31), "Host Table")
@@ -124,8 +130,11 @@ def setupUiSubnet(self):
     self.S_home = QtWidgets.QPushButton(self.Subnet)
     classBlueprint.mkBtnHome(self.S_home, QtCore.QRect(740, 650, 160, 50))
 
+    self.S_subnet_combo.currentTextChanged.connect(lambda: classSubnet.comboChangedSubnet( self.S_subnet_combo, self.S_subnet_editMask, self.S_subnet_editWild, self.S_subnet_editIp))
+
     self.S_gb_add.clicked.connect(lambda: add_host_to_table(self))
     self.S_gb_clear.clicked.connect(lambda: clear_host_table(self))
+    self.S_vlsm.clicked.connect(lambda: classSubnet.vlsm(self.S_host_table, self.S_table_vlsm, self.S_vlsm_editIp))
     self.S_home.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
 
     self.stackedWidget.addWidget(self.Subnet)
@@ -136,6 +145,7 @@ def setupUiSubnet(self):
         host_text = self.S_gb_edit.text()
         item1 = QTableWidgetItem(host_text)
         self.S_host_table.setItem(lastrow, 0, item1)
+        self.S_gb_edit.setText("")
 
     def clear_host_table(self):
         x = self.S_host_table.rowCount()
