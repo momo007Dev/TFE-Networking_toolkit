@@ -53,12 +53,15 @@ def comboChangedSubnet(combo, edit1, edit2, edit3):
 def get_exp(value):
     z = math.log(int(value),(2))
     first_number = str(z).split(".")[0]
+    first_number_int = 0
+    output = 0
+    
+    while output == 0:
+        if ((2**first_number_int) - 2 >= int(value)):
+            output = first_number_int
 
-    if (2**int(first_number) - int(value) <= 0):
-        output = int(first_number) + 1
-
-    else:
-        output = first_number
+        else:
+            first_number_int = first_number_int +1
 
     return output
 
