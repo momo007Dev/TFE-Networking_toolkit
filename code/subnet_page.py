@@ -134,7 +134,7 @@ def setupUiSubnet(self):
 
     self.S_gb_add.clicked.connect(lambda: add_host_to_table(self))
     self.S_gb_clear.clicked.connect(lambda: clear_host_table(self))
-    self.S_vlsm.clicked.connect(lambda: classSubnet.vlsm(self.S_host_table, self.S_table_vlsm, self.S_vlsm_editIp))
+    self.S_vlsm.clicked.connect(lambda: classSubnet.vlsm(self.S_host_table, self.S_table_vlsm, self.S_vlsm_editIp, self.S_vlsm_combo))
     self.S_home.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
 
     self.stackedWidget.addWidget(self.Subnet)
