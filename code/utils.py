@@ -81,6 +81,17 @@ class blueprintFunctions:
         item.setText(text)
         table.setHorizontalHeaderItem(position, item)
 
+
+    #--------EXAM utils functions----------#
+
+    def fillComboIpRule (combo):
+        combo.addItem("1st IP Available")
+        combo.addItem("2nd IP Available")
+        combo.addItem("Last IP -1")
+        combo.addItem("Last IP Available")
+
+    #--------END----------------------------#
+
 #----------------
 #   FONT USED
 #----------------

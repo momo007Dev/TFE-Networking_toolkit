@@ -713,7 +713,7 @@ Generator</string>
         <x>0</x>
         <y>0</y>
         <width>901</width>
-        <height>50</height>
+        <height>51</height>
        </rect>
       </property>
       <property name="text">
@@ -752,7 +752,7 @@ Generator</string>
        <string notr="true">background-color: rgb(173, 173, 173);</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_1">
        <widget class="QLabel" name="E_p1_label">
@@ -760,7 +760,7 @@ Generator</string>
          <rect>
           <x>30</x>
           <y>10</y>
-          <width>291</width>
+          <width>241</width>
           <height>31</height>
          </rect>
         </property>
@@ -866,7 +866,7 @@ Generator</string>
          <rect>
           <x>320</x>
           <y>10</y>
-          <width>211</width>
+          <width>171</width>
           <height>31</height>
          </rect>
         </property>
@@ -887,7 +887,7 @@ Generator</string>
          <rect>
           <x>320</x>
           <y>50</y>
-          <width>231</width>
+          <width>191</width>
           <height>31</height>
          </rect>
         </property>
@@ -908,7 +908,7 @@ Generator</string>
          <rect>
           <x>320</x>
           <y>90</y>
-          <width>141</width>
+          <width>121</width>
           <height>31</height>
          </rect>
         </property>
@@ -929,7 +929,7 @@ Generator</string>
          <rect>
           <x>10</x>
           <y>230</y>
-          <width>301</width>
+          <width>251</width>
           <height>31</height>
          </rect>
         </property>
@@ -948,7 +948,7 @@ Generator</string>
        <widget class="QCheckBox" name="E_p2_check">
         <property name="geometry">
          <rect>
-          <x>320</x>
+          <x>270</x>
           <y>240</y>
           <width>21</width>
           <height>20</height>
@@ -1358,7 +1358,7 @@ color: rgb(255, 0, 255);</string>
          <set>Qt::AlignCenter</set>
         </property>
         <property name="readOnly">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
        <widget class="QComboBox" name="E_p2_comboLan">
@@ -2005,7 +2005,7 @@ selection-color: rgb(85, 170, 0);</string>
         <property name="title">
          <string/>
         </property>
-        <widget class="QLabel" name="E_p2_labelLan_13">
+        <widget class="QLabel" name="E_p3_gb2_labelS1">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -2271,7 +2271,7 @@ color: rgb(255, 0, 255)</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p2_labelLan_16">
+        <widget class="QLabel" name="E_p3_gb2_labelS2">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -2522,7 +2522,7 @@ color: rgb(255, 0, 255)</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p2_labelLan_17">
+        <widget class="QLabel" name="E_p3_gb2_labelR1">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -2716,7 +2716,7 @@ color: rgb(255, 0, 255)</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p2_labelLan_18">
+        <widget class="QLabel" name="E_p3_gb2_labelISP">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -3255,7 +3255,7 @@ selection-color: rgb(255, 0, 0);</string>
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p2_labelLan_19">
+        <widget class="QLabel" name="E_p3_gb2_labelR1_a">
          <property name="geometry">
           <rect>
            <x>210</x>
@@ -3276,7 +3276,7 @@ selection-color: rgb(255, 0, 0);</string>
           <string>(a)</string>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p2_labelLan_20">
+        <widget class="QLabel" name="E_p3_gb2_labelR1_b">
          <property name="geometry">
           <rect>
            <x>210</x>
@@ -3297,7 +3297,7 @@ selection-color: rgb(255, 0, 0);</string>
           <string>(b)</string>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p2_labelLan_21">
+        <widget class="QLabel" name="E_p3_gb2_labelR1_c">
          <property name="geometry">
           <rect>
            <x>210</x>
@@ -3318,7 +3318,7 @@ selection-color: rgb(255, 0, 0);</string>
           <string>(c)</string>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p2_labelLan_22">
+        <widget class="QLabel" name="E_p3_gb2_labelR1_d">
          <property name="geometry">
           <rect>
            <x>210</x>
@@ -3339,7 +3339,7 @@ selection-color: rgb(255, 0, 0);</string>
           <string>(d)</string>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p2_labelLan_23">
+        <widget class="QLabel" name="E_p3_gb2_labelS1_a">
          <property name="geometry">
           <rect>
            <x>210</x>
@@ -3360,7 +3360,7 @@ selection-color: rgb(255, 0, 0);</string>
           <string>(a)</string>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p2_labelLan_24">
+        <widget class="QLabel" name="E_p3_gb2_labelS2_a">
          <property name="geometry">
           <rect>
            <x>210</x>
@@ -3381,7 +3381,7 @@ selection-color: rgb(255, 0, 0);</string>
           <string>(a)</string>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p2_labelLan_25">
+        <widget class="QLabel" name="E_p3_gb2_labelISP_a">
          <property name="geometry">
           <rect>
            <x>210</x>
@@ -3508,8 +3508,7 @@ Configuration</string>
        <string notr="true">background-color: rgb(255, 255, 127);</string>
       </property>
       <property name="text">
-       <string>(3) Personal 
-Touch</string>
+       <string>(3) Connectivity</string>
       </property>
      </widget>
      <widget class="QPushButton" name="E_btn_4">
@@ -3565,6 +3564,32 @@ Touch</string>
 my exam !</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="E_save">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>650</y>
+        <width>160</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 85, 127);</string>
+      </property>
+      <property name="text">
+       <string>Save Changes</string>
+      </property>
+     </widget>
      <zorder>E_backColor</zorder>
      <zorder>E_backimg</zorder>
      <zorder>E_btn</zorder>
@@ -3575,6 +3600,7 @@ my exam !</string>
      <zorder>E_home</zorder>
      <zorder>stackedWidget_2</zorder>
      <zorder>E_btn_5</zorder>
+     <zorder>E_save</zorder>
     </widget>
     <widget class="QWidget" name="Subnet">
      <widget class="QLabel" name="S_backimg">

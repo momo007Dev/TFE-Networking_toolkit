@@ -1,10 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-import utils, home_page, config_page, subnet_page
+import utils, home_page, config_page, subnet_page, exam_page
 from utils import *
 from home_page import *
 from config_page import *
 from subnet_page import *
+from exam_page import *
 
 # Allows to quickly acces utils functions
 classBlueprint = utils.blueprintFunctions
@@ -55,13 +56,7 @@ class Ui_Main(object):
         # EXAM PAGE
         #-----------------
 
-        self.Exam = QtWidgets.QWidget()
-        self.Exam.setObjectName("Exam")
-
-        self.Exam_label = QtWidgets.QLabel(self.Exam)
-        classBlueprint.mkLabel(self.Exam_label, QtCore.QRect(120, 60, 171, 41), "Page Exam")
-
-        self.stackedWidget.addWidget(self.Exam)
+        exam_page.setupUiExam(self)
 
         #-----------------
         # SUBNET PAGE
