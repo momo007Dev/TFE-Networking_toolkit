@@ -1,10 +1,16 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox
 
-import utils
+import utils, exam_functions
 from utils import *
+from exam_functions import *
 
 # Allows to quickly acces utils functions
 classBlueprint = utils.blueprintFunctions
+
+#-------GLOBAL VARIABLES------------#
+
+#--------------END------------------#
 
 def setupUiExam(self):
 
@@ -97,23 +103,32 @@ def setupUiExam(self):
     self.E_p2_labelDns = QtWidgets.QLabel(self.page_2)
     classBlueprint.mkLabel(self.E_p2_labelDns, QtCore.QRect(320, 90, 160, 31), "DNS Domain :")
 
-    self.E_p2_editLan = QtWidgets.QLineEdit(self.page_2)
-    classBlueprint.mkLineEdit(self.E_p2_editLan, QtCore.QRect(560, 10, 230, 31), 20, "192.168.0.0")
-    self.E_p2_editLan.setStyleSheet("background-color: rgb(255, 255, 255);")
+    global E_p2_editLan
+    E_p2_editLan = QtWidgets.QLineEdit(self.page_2)
+    classBlueprint.mkLineEdit(E_p2_editLan, QtCore.QRect(560, 10, 230, 31), 20, "192.168.0.0")
+    E_p2_editLan.setStyleSheet("background-color: rgb(255, 255, 255);")
 
-    self.E_p2_editWan = QtWidgets.QLineEdit(self.page_2)
-    classBlueprint.mkLineEdit(self.E_p2_editWan, QtCore.QRect(560, 50, 230, 31), 20, "192.168.0.0")
-    self.E_p2_editWan.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 170, 0);")
+    global E_p2_editWan
+    E_p2_editWan = QtWidgets.QLineEdit(self.page_2)
+    classBlueprint.mkLineEdit(E_p2_editWan, QtCore.QRect(560, 50, 230, 31), 20, "200.0.0.0")
+    E_p2_editWan.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 170, 0);")
 
-    self.E_p2_editDns = QtWidgets.QLineEdit(self.page_2)
-    classBlueprint.mkLineEdit(self.E_p2_editDns, QtCore.QRect(560, 90, 230, 31), 22, "formation.local")
-    self.E_p2_editDns.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+    global E_p2_editDns
+    E_p2_editDns = QtWidgets.QLineEdit(self.page_2)
+    classBlueprint.mkLineEdit(E_p2_editDns, QtCore.QRect(560, 90, 230, 31), 22, "formation.local")
+    E_p2_editDns.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
-    self.E_p2_comboLan = QtWidgets.QComboBox(self.page_2)
-    classBlueprint.mkCombo(self.E_p2_comboLan, QtCore.QRect(800, 10, 70, 30), "color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);")
+    global E_p2_comboLan
+    E_p2_comboLan = QtWidgets.QComboBox(self.page_2)
+    classBlueprint.mkCombo(E_p2_comboLan, QtCore.QRect(800, 10, 70, 30), "color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);")
+    classBlueprint.fillComboCidr(E_p2_comboLan)
+    E_p2_comboLan.setCurrentIndex(8)
 
-    self.E_p2_comboWan = QtWidgets.QComboBox(self.page_2)
-    classBlueprint.mkCombo(self.E_p2_comboWan, QtCore.QRect(800, 50, 70, 30), "color: rgb(255, 170, 0); background-color: rgb(255, 255, 255);")
+    global E_p2_comboWan
+    E_p2_comboWan = QtWidgets.QComboBox(self.page_2)
+    classBlueprint.mkCombo(E_p2_comboWan, QtCore.QRect(800, 50, 70, 30), "color: rgb(255, 170, 0); background-color: rgb(255, 255, 255);")
+    classBlueprint.fillComboCidr(E_p2_comboWan)
+    E_p2_comboWan.setCurrentIndex(2)
 
     self.E_p2_labelVlsm = QtWidgets.QLabel(self.page_2)
     classBlueprint.mkLabel(self.E_p2_labelVlsm, QtCore.QRect(10, 230, 300, 31), "VLSM on local subnet (LAN) ?")
@@ -132,7 +147,7 @@ def setupUiExam(self):
     classBlueprint.mkLabel(self.E_p2_gb_labelHost, QtCore.QRect(10, 70, 181, 31), "Number of hosts :")
 
     self.E_p2_gb_editLan = QtWidgets.QLineEdit(self.E_p2_gb)
-    classBlueprint.mkLineEdit(self.E_p2_gb_editLan, QtCore.QRect(195, 30, 181, 31), 20, "LAN (A)")
+    classBlueprint.mkLineEdit(self.E_p2_gb_editLan, QtCore.QRect(195, 30, 181, 31), 20, "LAN A")
     self.E_p2_gb_editLan.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
 
     self.E_p2_gb_editHost = QtWidgets.QLineEdit(self.E_p2_gb)
@@ -145,15 +160,16 @@ def setupUiExam(self):
     self.E_p2_gb_clear = QtWidgets.QPushButton(self.E_p2_gb)
     classBlueprint.mkBtn(self.E_p2_gb_clear, QtCore.QRect(175, 105, 100, 30), "background-color: rgb(0, 255, 0);", "Clear")
 
-    self.E_p2_table = QtWidgets.QTableWidget(self.page_2)
-    classBlueprint.mkTable(self.E_p2_table, QtCore.QRect(625, 241, 271, 301), "background-color: rgb(255, 170, 0);", 2, 0)
-    classBlueprint.addDataTable(self.E_p2_table, 0, "Name")
-    classBlueprint.addDataTable(self.E_p2_table, 1, "Hosts")
+    global E_p2_table
+    E_p2_table = QtWidgets.QTableWidget(self.page_2)
+    classBlueprint.mkTable(E_p2_table, QtCore.QRect(625, 241, 271, 301), "background-color: rgb(255, 170, 0);", 2, 0)
+    classBlueprint.addDataTable(E_p2_table, 0, "Name")
+    classBlueprint.addDataTable(E_p2_table, 1, "Hosts")
 
     self.stackedWidget_2.addWidget(self.page_2)
 
     #---------------------
-    # P3 : MAIN CONFIG
+    # P3 : CONNECTIVITY
     #---------------------
 
     self.page_3 = QtWidgets.QWidget()
@@ -185,13 +201,13 @@ def setupUiExam(self):
     classBlueprint.mkLineEdit(self.E_p3_gb1_editPc1Host, QtCore.QRect(80, 60, 151, 31), 20, "PC1")
     self.E_p3_gb1_editPc1Host.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
-    self.E_p3_gb1_comboPc1Subnet = QtWidgets.QComboBox(self.E_p3_gb1)
-    classBlueprint.mkCombo(self.E_p3_gb1_comboPc1Subnet, QtCore.QRect(245, 60, 121, 31),
+    global E_p3_gb1_comboPc1Subnet
+    E_p3_gb1_comboPc1Subnet = QtWidgets.QComboBox(self.E_p3_gb1)
+    classBlueprint.mkCombo(E_p3_gb1_comboPc1Subnet, QtCore.QRect(245, 60, 121, 31),
                            "color: rgb(0, 0, 255); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
-    self.E_p3_gb1_comboPc1Subnet.addItem("LAN A")
 
     self.E_p3_gb1_comboPc1Rule = QtWidgets.QComboBox(self.E_p3_gb1)
     classBlueprint.mkCombo(self.E_p3_gb1_comboPc1Rule, QtCore.QRect(380, 60, 180, 31),
@@ -209,13 +225,13 @@ def setupUiExam(self):
     classBlueprint.mkLineEdit(self.E_p3_gb1_editPc2Host, QtCore.QRect(80, 110, 151, 31), 20, "PC2")
     self.E_p3_gb1_editPc2Host.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
-    self.E_p3_gb1_comboPc2Subnet = QtWidgets.QComboBox(self.E_p3_gb1)
-    classBlueprint.mkCombo(self.E_p3_gb1_comboPc2Subnet, QtCore.QRect(245, 110, 121, 31),
+    global E_p3_gb1_comboPc2Subnet
+    E_p3_gb1_comboPc2Subnet = QtWidgets.QComboBox(self.E_p3_gb1)
+    classBlueprint.mkCombo(E_p3_gb1_comboPc2Subnet, QtCore.QRect(245, 110, 121, 31),
                            "color: rgb(0, 0, 255); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
-    self.E_p3_gb1_comboPc2Subnet.addItem("LAN A")
 
     self.E_p3_gb1_comboPc2Rule = QtWidgets.QComboBox(self.E_p3_gb1)
     classBlueprint.mkCombo(self.E_p3_gb1_comboPc2Rule, QtCore.QRect(380, 110, 180, 31),
@@ -233,13 +249,13 @@ def setupUiExam(self):
     classBlueprint.mkLineEdit(self.E_p3_gb1_editPc3Host, QtCore.QRect(80, 160, 151, 31), 20, "PC3")
     self.E_p3_gb1_editPc3Host.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
-    self.E_p3_gb1_comboPc3Subnet = QtWidgets.QComboBox(self.E_p3_gb1)
-    classBlueprint.mkCombo(self.E_p3_gb1_comboPc3Subnet, QtCore.QRect(245, 160, 121, 31),
+    global E_p3_gb1_comboPc3Subnet
+    E_p3_gb1_comboPc3Subnet = QtWidgets.QComboBox(self.E_p3_gb1)
+    classBlueprint.mkCombo(E_p3_gb1_comboPc3Subnet, QtCore.QRect(245, 160, 121, 31),
                            "color: rgb(0, 0, 255); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
-    self.E_p3_gb1_comboPc3Subnet.addItem("LAN A")
 
     self.E_p3_gb1_comboPc3Rule = QtWidgets.QComboBox(self.E_p3_gb1)
     classBlueprint.mkCombo(self.E_p3_gb1_comboPc3Rule, QtCore.QRect(380, 160, 180, 31),
@@ -277,7 +293,6 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
-    self.E_p3_gb2_comboS1Subnet.addItem("LAN A")
 
     self.E_p3_gb2_comboS1Rule = QtWidgets.QComboBox(self.E_p3_gb2)
     classBlueprint.mkCombo(self.E_p3_gb2_comboS1Rule, QtCore.QRect(505, 10, 180, 31),
@@ -322,7 +337,6 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
-    self.E_p3_gb2_comboS2Subnet.addItem("LAN A")
 
     self.E_p3_gb2_comboS2Rule = QtWidgets.QComboBox(self.E_p3_gb2)
     classBlueprint.mkCombo(self.E_p3_gb2_comboS2Rule, QtCore.QRect(505, 69, 180, 31),
@@ -367,7 +381,6 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
-    self.E_p3_gb2_comboR1Subnet1.addItem("LAN A")
 
     self.E_p3_gb2_comboR1Rule1 = QtWidgets.QComboBox(self.E_p3_gb2)
     classBlueprint.mkCombo(self.E_p3_gb2_comboR1Rule1, QtCore.QRect(505, 119, 180, 31),
@@ -398,7 +411,6 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
-    self.E_p3_gb2_comboR1Subnet2.addItem("LAN A")
 
     self.E_p3_gb2_comboR1Rule2 = QtWidgets.QComboBox(self.E_p3_gb2)
     classBlueprint.mkCombo(self.E_p3_gb2_comboR1Rule2, QtCore.QRect(505, 154, 180, 31),
@@ -429,7 +441,6 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
-    self.E_p3_gb2_comboR1Subnet3.addItem("LAN A")
 
     self.E_p3_gb2_comboR1Rule3 = QtWidgets.QComboBox(self.E_p3_gb2)
     classBlueprint.mkCombo(self.E_p3_gb2_comboR1Rule3, QtCore.QRect(505, 189, 180, 31),
@@ -460,7 +471,6 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
-    self.E_p3_gb2_comboR1Subnet4.addItem("LAN A")
 
     self.E_p3_gb2_comboR1Rule4 = QtWidgets.QComboBox(self.E_p3_gb2)
     classBlueprint.mkCombo(self.E_p3_gb2_comboR1Rule4, QtCore.QRect(505, 225, 180, 31),
@@ -505,7 +515,6 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
-    self.E_p3_gb2_comboISPSubnet.addItem("WAN")
 
     self.E_p3_gb2_comboISPRule = QtWidgets.QComboBox(self.E_p3_gb2)
     classBlueprint.mkCombo(self.E_p3_gb2_comboISPRule, QtCore.QRect(505, 274, 180, 31),
@@ -530,3 +539,8 @@ def setupUiExam(self):
     self.E_btn_2.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(1))
     self.E_btn_3.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(2))
     self.E_btn_4.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(3))
+    self.E_save.clicked.connect(lambda: exam_functions.save_changes(self.stackedWidget_2))
+    self.E_p2_gb_add.clicked.connect(lambda: exam_functions.add_host_to_table(E_p2_table, self.E_p2_gb_editLan, self.E_p2_gb_editHost))
+    self.E_p2_gb_clear.clicked.connect(lambda: exam_functions.clear_table(E_p2_table))
+
+    self.E_btn_3.clicked.connect(lambda: exam_page.build_combo_network())

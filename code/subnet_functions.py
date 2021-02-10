@@ -1,9 +1,8 @@
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from ipaddress import IPv4Address
 from netaddr import IPNetwork
-import math, socket
+import math, socket, ipaddress
 
 
 # --------------------------------------------------------------------------------------------------#
@@ -31,17 +30,18 @@ def getUsableAdressFromCidr(cidr):
         return 1
     return usable_ip
 
-#------------------------------------------------------------------------------------------------------#
-# Takes a cidr in argument (eg: "/24") and returns the number of usable IP adress (eg:"254") #
-#------------------------------------------------------------------------------------------------------#
-def getUsableIpRange(subnet, cidr):
-    string = subnet + "/" + cidr
-    tab = list()
-    for ip in IPNetwork(string):
-        tab.append('%s' % ip)
+#-------------------------------------------------------------------------------------------------------------------#
+# Takes a subnet and a cidr and returns a tab with the first, last and broadcast IP. Also returns the next subnet.  #
+#-------------------------------------------------------------------------------------------------------------------#
+def get_all_from_subnet_and_cidr(subnet, cidr):
+    string = subnet + cidr
+    ipi =  ipaddress.ip_interface(string)
+    first_ip = ipi.ip +1
+    last_ip = ipi.network.broadcast_address -1
+    broadcast_ip = ipi.network.broadcast_address
+    next_subnet = ipi.network.broadcast_address +1
 
-    return str(tab[1]) + " => " + str(tab[len(tab) -2])
-
+    return [str(first_ip), str(last_ip), str(broadcast_ip), str(next_subnet)]
 
 #------------------------------------------------------------------------------------------------------------#
 # This function is called in the "subnet cheat-sheet" page, whenever the combobox value is changed           #
@@ -58,24 +58,23 @@ def comboChangedSubnet(combo, edit1, edit2, edit3):
     usableIps = getUsableAdressFromCidr(slash)
     edit3.setText(str(usableIps))
 
-
-def get_exp(value):
-    z = math.log(int(value),(2))
+#------------------------------------------------------------------------------------------------------------#
+# This function takes a number of host (eg:50) and returns the cidr that corresponds (eg:/26)                #
+#------------------------------------------------------------------------------------------------------------#
+def get_cidr_from_host(host):
+    z = math.log(int(host), (2))
     first_number = str(z).split(".")[0]
     first_number_int = 0
     output = 0
-    
+
     while output == 0:
-        if ((2**first_number_int) - 2 >= int(value)):
+        if ((2 ** first_number_int) - 2 >= int(host)):
             output = first_number_int
 
         else:
-            first_number_int = first_number_int +1
+            first_number_int = first_number_int + 1
 
-    return output
-
-def get_cidr(x):
-    cidr = 32 - get_exp(x)
+    cidr = 32 - output
     return "/" + str(cidr)
 
 def sort_hosts(table):
@@ -106,16 +105,21 @@ def vlsm(host_table, vlsm_table, subnet, combo_cidr):
         current_subnet = subnet.text()
         if not (hosts == -1):
             for x in hosts:
-                output = get_broadcast_adress(current_subnet, x) # Renvoie output[0]=broadcast output[1]=next subnet en STRING
+                # output[0] = first_ip
+                # output[1] = last_ip
+                # output[2] = broadcast_ip
+                # output[3] = next_subnet
+                current_cidr = get_cidr_from_host(x)
+                output = get_all_from_subnet_and_cidr(current_subnet, current_cidr)
 
                 lastrow = vlsm_table.rowCount()
                 vlsm_table.insertRow(lastrow)
 
                 host_text = str(x)
                 subnet_text = str(current_subnet)
-                cidr_text = str(get_cidr(x))
-                ip_range_text = getUsableIpRange(subnet_text, cidr_text.split("/")[1])
-                broadcast_text = output[0]
+                cidr_text = str(get_cidr_from_host(x))
+                ip_range_text = output[0] + " => " + output[1]
+                broadcast_text = output[2]
                 item1 = QTableWidgetItem(host_text)
                 item2 = QTableWidgetItem(subnet_text)
                 item3 = QTableWidgetItem(cidr_text)
@@ -127,7 +131,7 @@ def vlsm(host_table, vlsm_table, subnet, combo_cidr):
                 vlsm_table.setItem(lastrow, 3, item4)
                 vlsm_table.setItem(lastrow, 4, item5)
 
-                current_subnet = output[1]
+                current_subnet = output[3]
 
         else:
             cidr_text = str(combo_cidr.currentText())
@@ -149,79 +153,19 @@ def vlsm(host_table, vlsm_table, subnet, combo_cidr):
             vlsm_table.setItem(lastrow, 2, item3)
             vlsm_table.setItem(lastrow, 3, item4)
 
-def get_broadcast_adress(subnet, host):
+def vlsm_output_dict(host_dict, subnet, cidr):
+    if not (len(host_dict) < 1):
+        vlsm = dict()
+        count = 0
 
-    specialValues = [1, 2, 4, 8, 16, 32, 64, 128]
-    octet_modif =0
-    n = int(get_exp(host))
+        for x in host_dict.keys():
+            # output[0] = first_ip       | output[1] = last_ip
+            # output[2] = broadcast_ip   | output[3] = next_subnet
+            current_cidr = get_cidr_from_host(x)
+            output = get_all_from_subnet_and_cidr(subnet, current_cidr)
 
-    ip_splitted = subnet.split(".")
-    result=0
-    ip_output=""
+            vlsm[count] = [host_dict.get(x), x, subnet, current_cidr, output[0], output[1], output[2]]
+            subnet = output[3]
+            count += 1
 
-    if (n <=8 and n >0):
-        for i in specialValues[:n]:
-            result = result + i
-
-        x = int(ip_splitted[3]) + result
-        ip_splitted[3] = str(x)
-
-        ip_output = ip_splitted[0] + "." + ip_splitted[1] + "." + ip_splitted[2] + "." + ip_splitted[3] #172.16.1.255
-        octet_modif = 4
-
-    elif (n <=16 and n >8):
-        m = n - 8
-        for i in specialValues[:m]:
-            result = result + i
-
-        x = int(ip_splitted[2]) + result
-        ip_splitted[2] = str(x)
-
-        ip_output = ip_splitted[0] + "." + ip_splitted[1] + "." + ip_splitted[2] + ".255"
-        octet_modif = 3
-
-    elif (n <=24 and n >16):
-        m = n - 16
-        for i in specialValues[:m]:
-            result = result + i
-
-        x = int(ip_splitted[1]) + result
-        ip_splitted[1] = str(x)
-
-        ip_output = ip_splitted[0] + "." + ip_splitted[1] + ".255.255"
-        octet_modif = 2
-
-    elif (n <=32 and n >24):
-        m = n - 24
-        for i in specialValues[:m]:
-            result = result + i
-
-        x = int(ip_splitted[0]) + result
-        ip_splitted[0] = str(x)
-
-        ip_output = ip_splitted[0] + ".255.255.255"
-        octet_modif = 1
-
-    a = ip_output.split(".")
-    next_subnet = ""
-
-    if (octet_modif == 4):
-        if a[3] == "255" :
-            next_subnet = a[0] + "." + a[1] + "." + str(int(a[2]) +1) + ".0"
-        else :
-            next_subnet = a[0] + "." + a[1] + "." + a[2] + "." + str(int(a[3]) +1)
-
-    if (octet_modif == 3):
-        # On regarde si dans l'octet precedent y a 255
-        if a[3] == "255" :
-            next_subnet = a[0] + "." + a[1] + "." + str(int(a[2]) +1) + ".0"
-        else:
-            next_subnet = a[0] + "." + a[1] + "." + str(int(a[2]) +1) + "." + a[3]
-
-    if (octet_modif == 2):
-        if a[2] == "255" :
-            next_subnet = a[0] + "." + str(int(a[1]) +1) + ".0.0"
-        else:
-            next_subnet = a[0] + "." + str(int(a[1]) +1) + "." + a[2]+ "." + a[3]
-
-    return [ip_output, next_subnet]
+        return vlsm
