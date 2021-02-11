@@ -120,13 +120,21 @@ def setupUiExam(self):
 
     global E_p2_comboLan
     E_p2_comboLan = QtWidgets.QComboBox(self.page_2)
-    classBlueprint.mkCombo(E_p2_comboLan, QtCore.QRect(800, 10, 70, 30), "color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);")
+    classBlueprint.mkCombo(E_p2_comboLan, QtCore.QRect(800, 10, 70, 30),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255);"
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboCidr(E_p2_comboLan)
     E_p2_comboLan.setCurrentIndex(8)
 
     global E_p2_comboWan
     E_p2_comboWan = QtWidgets.QComboBox(self.page_2)
-    classBlueprint.mkCombo(E_p2_comboWan, QtCore.QRect(800, 50, 70, 30), "color: rgb(255, 170, 0); background-color: rgb(255, 255, 255);")
+    classBlueprint.mkCombo(E_p2_comboWan, QtCore.QRect(800, 50, 70, 30),
+                           "color: rgb(255, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 170, 0);")
     classBlueprint.fillComboCidr(E_p2_comboWan)
     E_p2_comboWan.setCurrentIndex(2)
 
@@ -197,9 +205,10 @@ def setupUiExam(self):
     self.E_p3_gb1_labelPc1 = QtWidgets.QLabel(self.E_p3_gb1)
     classBlueprint.mkLabel(self.E_p3_gb1_labelPc1, QtCore.QRect(10, 60, 61, 31), "PC1 :")
 
-    self.E_p3_gb1_editPc1Host = QtWidgets.QLineEdit(self.E_p3_gb1)
-    classBlueprint.mkLineEdit(self.E_p3_gb1_editPc1Host, QtCore.QRect(80, 60, 151, 31), 20, "PC1")
-    self.E_p3_gb1_editPc1Host.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+    global E_p3_gb1_editPc1Host
+    E_p3_gb1_editPc1Host = QtWidgets.QLineEdit(self.E_p3_gb1)
+    classBlueprint.mkLineEdit(E_p3_gb1_editPc1Host, QtCore.QRect(80, 60, 151, 31), 20, "PC1")
+    E_p3_gb1_editPc1Host.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
     global E_p3_gb1_comboPc1Subnet
     E_p3_gb1_comboPc1Subnet = QtWidgets.QComboBox(self.E_p3_gb1)
@@ -209,21 +218,23 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
 
-    self.E_p3_gb1_comboPc1Rule = QtWidgets.QComboBox(self.E_p3_gb1)
-    classBlueprint.mkCombo(self.E_p3_gb1_comboPc1Rule, QtCore.QRect(380, 60, 180, 31),
+    global E_p3_gb1_comboPc1Rule
+    E_p3_gb1_comboPc1Rule = QtWidgets.QComboBox(self.E_p3_gb1)
+    classBlueprint.mkCombo(E_p3_gb1_comboPc1Rule, QtCore.QRect(380, 60, 180, 31),
                            "color: rgb(85, 170, 0); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
-    classBlueprint.fillComboIpRule(self.E_p3_gb1_comboPc1Rule)
+    classBlueprint.fillComboIpRule(E_p3_gb1_comboPc1Rule)
 
     #PC2
     self.E_p3_gb1_labelPc2 = QtWidgets.QLabel(self.E_p3_gb1)
     classBlueprint.mkLabel(self.E_p3_gb1_labelPc2, QtCore.QRect(10, 110, 61, 31), "PC2 :")
 
-    self.E_p3_gb1_editPc2Host = QtWidgets.QLineEdit(self.E_p3_gb1)
-    classBlueprint.mkLineEdit(self.E_p3_gb1_editPc2Host, QtCore.QRect(80, 110, 151, 31), 20, "PC2")
-    self.E_p3_gb1_editPc2Host.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+    global E_p3_gb1_editPc2Host
+    E_p3_gb1_editPc2Host = QtWidgets.QLineEdit(self.E_p3_gb1)
+    classBlueprint.mkLineEdit(E_p3_gb1_editPc2Host, QtCore.QRect(80, 110, 151, 31), 20, "PC2")
+    E_p3_gb1_editPc2Host.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
     global E_p3_gb1_comboPc2Subnet
     E_p3_gb1_comboPc2Subnet = QtWidgets.QComboBox(self.E_p3_gb1)
@@ -233,21 +244,23 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
 
-    self.E_p3_gb1_comboPc2Rule = QtWidgets.QComboBox(self.E_p3_gb1)
-    classBlueprint.mkCombo(self.E_p3_gb1_comboPc2Rule, QtCore.QRect(380, 110, 180, 31),
+    global E_p3_gb1_comboPc2Rule
+    E_p3_gb1_comboPc2Rule = QtWidgets.QComboBox(self.E_p3_gb1)
+    classBlueprint.mkCombo(E_p3_gb1_comboPc2Rule, QtCore.QRect(380, 110, 180, 31),
                            "color: rgb(85, 170, 0); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
-    classBlueprint.fillComboIpRule(self.E_p3_gb1_comboPc2Rule)
+    classBlueprint.fillComboIpRule(E_p3_gb1_comboPc2Rule)
 
     #PC3
     self.E_p3_gb1_labelPc3 = QtWidgets.QLabel(self.E_p3_gb1)
     classBlueprint.mkLabel(self.E_p3_gb1_labelPc3, QtCore.QRect(10, 160, 61, 31), "PC3 :")
 
-    self.E_p3_gb1_editPc3Host = QtWidgets.QLineEdit(self.E_p3_gb1)
-    classBlueprint.mkLineEdit(self.E_p3_gb1_editPc3Host, QtCore.QRect(80, 160, 151, 31), 20, "PC3")
-    self.E_p3_gb1_editPc3Host.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+    global E_p3_gb1_editPc3Host
+    E_p3_gb1_editPc3Host = QtWidgets.QLineEdit(self.E_p3_gb1)
+    classBlueprint.mkLineEdit(E_p3_gb1_editPc3Host, QtCore.QRect(80, 160, 151, 31), 20, "PC3")
+    E_p3_gb1_editPc3Host.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
     global E_p3_gb1_comboPc3Subnet
     E_p3_gb1_comboPc3Subnet = QtWidgets.QComboBox(self.E_p3_gb1)
@@ -257,13 +270,14 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 0, 255);")
 
-    self.E_p3_gb1_comboPc3Rule = QtWidgets.QComboBox(self.E_p3_gb1)
-    classBlueprint.mkCombo(self.E_p3_gb1_comboPc3Rule, QtCore.QRect(380, 160, 180, 31),
+    global E_p3_gb1_comboPc3Rule
+    E_p3_gb1_comboPc3Rule = QtWidgets.QComboBox(self.E_p3_gb1)
+    classBlueprint.mkCombo(E_p3_gb1_comboPc3Rule, QtCore.QRect(380, 160, 180, 31),
                            "color: rgb(85, 170, 0); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
-    classBlueprint.fillComboIpRule(self.E_p3_gb1_comboPc3Rule)
+    classBlueprint.fillComboIpRule(E_p3_gb1_comboPc3Rule)
 
     self.E_p3_gb2 = QtWidgets.QGroupBox(self.page_3)
     classBlueprint.mkGroupBox(self.E_p3_gb2, QtCore.QRect(10, 230, 881, 311), "")
