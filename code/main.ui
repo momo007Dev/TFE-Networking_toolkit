@@ -866,7 +866,7 @@ Generator</string>
          <rect>
           <x>320</x>
           <y>10</y>
-          <width>171</width>
+          <width>210</width>
           <height>31</height>
          </rect>
         </property>
@@ -887,7 +887,7 @@ Generator</string>
          <rect>
           <x>320</x>
           <y>50</y>
-          <width>191</width>
+          <width>230</width>
           <height>31</height>
          </rect>
         </property>
@@ -908,7 +908,7 @@ Generator</string>
          <rect>
           <x>320</x>
           <y>90</y>
-          <width>121</width>
+          <width>160</width>
           <height>31</height>
          </rect>
         </property>
@@ -922,43 +922,6 @@ Generator</string>
         </property>
         <property name="text">
          <string>DNS Domain :</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="E_p2_labelVlsm">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>230</y>
-          <width>251</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-          <underline>true</underline>
-         </font>
-        </property>
-        <property name="text">
-         <string>VLSM on local subnet (LAN) ?</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="E_p2_check">
-        <property name="geometry">
-         <rect>
-          <x>270</x>
-          <y>240</y>
-          <width>21</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
         </property>
        </widget>
        <widget class="QTableWidget" name="E_p2_table">

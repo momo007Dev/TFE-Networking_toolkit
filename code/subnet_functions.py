@@ -9,7 +9,10 @@ import math, socket, ipaddress
 # Takes a cidr in argument (eg: "/24") and returns the subnet mask equivalent (eg:"255.255.255.0") #
 # --------------------------------------------------------------------------------------------------#
 def getMaskFromSlash(cidr):
-    subnet = "192.168.0.0" + "/" + str(cidr)
+    if ("/" in cidr):
+        subnet = "192.168.0.0" + cidr
+    else:
+        subnet = "192.168.0.0" + "/" + str(cidr)
     ip = IPNetwork(subnet)
     return ip.netmask
 

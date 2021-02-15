@@ -1,10 +1,22 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
+
+import os, platform
 #--------------------------------------------------------------------------------#
 # This class contains blueprint functions that allows quick build of gui objects #
 #--------------------------------------------------------------------------------#
 
 class blueprintFunctions:
+
+    def getCurrentOS():
+        return platform.system()
+
+    def getDesktopPath():  # Returns the user' path to their Desktop
+        if (blueprintFunctions.getCurrentOS() == "Linux"):
+            desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+        elif (blueprintFunctions.getCurrentOS() == "Windows"):
+            desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+        return desktop
 
     def mkBtn (btn, geometry, style, text):
         btn.setGeometry(geometry)
@@ -60,6 +72,13 @@ class blueprintFunctions:
     #----------------------------
     def fillComboCidr (combo):
         for i in reversed(range(0,33)):
+            combo.addItem("/" + str(i))
+
+    # ---------------------------
+    # Fills combo with /30 => /0
+    #----------------------------
+    def fillComboCidr2 (combo):
+        for i in reversed(range(0,31)):
             combo.addItem("/" + str(i))
 
     def mkTable (table, geometry, style, col, row):
