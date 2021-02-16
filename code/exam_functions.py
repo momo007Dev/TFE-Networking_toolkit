@@ -14,12 +14,10 @@ wan_network = ""
 dns = ""
 wan_ip_tab = list() # Contains all ip for wan subnet (eg: 200.0.0.0/23)
 vlsm_dict = dict()
-lan_names_set = set()
+lan_names_set = list()
 devices_dict = dict() # PC1-2-3/S1-2/ISP
 router_dict = dict() # R1
 #--------------END------------------#
-
-
 
 def add_host_to_table(table, name, host): # Used when user clicks "add" btn
     lastrow = table.rowCount()
@@ -47,8 +45,6 @@ def clear_table(table): # Used when user clicks "clear" btn
 
 def sort_hosts(table):
     lan_names_set.clear() # Clears set
-    if not ("WAN" in lan_names_set):
-        lan_names_set.add("WAN")
     rowCount = table.rowCount()
     output = dict()
     output_sorted = dict()
@@ -57,11 +53,14 @@ def sort_hosts(table):
         return output
     else:
         for x in range(rowCount):
-            lan_names_set.add(table.item(x, 0).text()) # Adds "LAN A" to set
+            lan_names_set.append(table.item(x, 0).text()) # Adds "LAN A" to set
             output[int(table.item(x, 1).text())] = table.item(x, 0).text()
 
         for i in sorted(output.keys(), reverse=True):
             output_sorted[i] = output.get(i)
+
+        if not ("WAN" in lan_names_set):
+            lan_names_set.append("WAN")
 
         return output_sorted
 
@@ -89,6 +88,7 @@ def save_changes_p2():
     print("WAN subnet : " + wan_network)
     print("DNS Domain : " + dns)
 
+    wan_ip_tab.clear()
     for ip in IPNetwork(wan_network):
         wan_ip_tab.append('%s' % ip)
     wan_ip_tab.pop(0) # Removes first IP (that is used for network)
@@ -106,8 +106,6 @@ def save_changes_p2():
 # Function used when press "save changes" within "connectivity" (page 3)      #
 #-----------------------------------------------------------------------------#
 
-#TODO : Interface S1-2, R1(a=>d) et ISP
-#TODO : Ajouter S1-S2-ISP au "device_dict"
 #TODO : Faire un test avec les interfaces recuperer et le mettre dans le router_dict
 #TODO : Recuperer les valeurs de R1 dans le router_dict pour injecter "gateway" dans PC1-2-3
 
@@ -116,19 +114,44 @@ def save_changes_p3():
     devices_dict = {
         "PC1": [exam_page.E_p3_gb1_editPc1Host.text(), "f0", exam_page.E_p3_gb1_comboPc1Subnet.currentText(), exam_page.E_p3_gb1_comboPc1Rule.currentText(), "mask", "gateway"],
         "PC2": [exam_page.E_p3_gb1_editPc2Host.text(), "f0", exam_page.E_p3_gb1_comboPc2Subnet.currentText(), exam_page.E_p3_gb1_comboPc2Rule.currentText(), "mask", "gateway"],
-        "PC3": [exam_page.E_p3_gb1_editPc3Host.text(), "f0", exam_page.E_p3_gb1_comboPc3Subnet.currentText(), exam_page.E_p3_gb1_comboPc3Rule.currentText(), "mask", "gateway"]
+        "PC3": [exam_page.E_p3_gb1_editPc3Host.text(), "f0", exam_page.E_p3_gb1_comboPc3Subnet.currentText(), exam_page.E_p3_gb1_comboPc3Rule.currentText(), "mask", "gateway"],
+        "S1": [exam_page.E_p3_gb2_editS1Host.text(), exam_page.E_p3_gb2_comboS1Interface.currentText(), exam_page.E_p3_gb2_comboS1Subnet.currentText(), exam_page.E_p3_gb2_comboS1Rule.currentText(), "mask", "gateway", exam_page.E_p3_gb2_editS1Description.text()],
+        "S2": [exam_page.E_p3_gb2_editS2Host.text(), exam_page.E_p3_gb2_comboS2Interface.currentText(), exam_page.E_p3_gb2_comboS2Subnet.currentText(), exam_page.E_p3_gb2_comboS2Rule.currentText(), "mask", "gateway", exam_page.E_p3_gb2_editS2Description.text()],
+        "ISP": [exam_page.E_p3_gb2_editISPHost.text(), exam_page.E_p3_gb2_comboISPInterface.currentText(), exam_page.E_p3_gb2_comboISPSubnet.currentText(), exam_page.E_p3_gb2_comboISPRule.currentText(), "mask", exam_page.E_p3_gb2_editISPDescription.text()]
+
     }
     for i in devices_dict.keys():
         print(str(i) + " : " + str(devices_dict.get(i)))
 
     global router_dict
     router_dict = {
-        "name" : ["R1"],
-        exam_page.E_p3_gb2_comboR1Interface1.currentText() : ["LAN A"],
-        exam_page.E_p3_gb2_comboR1Interface2.currentText() : ["LAN B"],
-        exam_page.E_p3_gb2_comboR1Interface3.currentText(): ["LAN C"],
-        exam_page.E_p3_gb2_comboR1Interface4.currentText(): ["WAN"]
+        "name" : [exam_page.E_p3_gb2_editR1Host.text()],
+        exam_page.E_p3_gb2_comboR1Interface1.currentText() : [exam_page.E_p3_gb2_comboR1Subnet1.currentText(), exam_page.E_p3_gb2_comboR1Rule1.currentText(), "mask", exam_page.E_p3_gb2_editR1Description1.text()],
+        exam_page.E_p3_gb2_comboR1Interface2.currentText() : [exam_page.E_p3_gb2_comboR1Subnet2.currentText(), exam_page.E_p3_gb2_comboR1Rule2.currentText(), "mask", exam_page.E_p3_gb2_editR1Description2.text()],
+        exam_page.E_p3_gb2_comboR1Interface3.currentText(): [exam_page.E_p3_gb2_comboR1Subnet3.currentText(), exam_page.E_p3_gb2_comboR1Rule3.currentText(), "mask", exam_page.E_p3_gb2_editR1Description3.text()],
+        exam_page.E_p3_gb2_comboR1Interface4.currentText(): [exam_page.E_p3_gb2_comboR1Subnet4.currentText(), exam_page.E_p3_gb2_comboR1Rule4.currentText(), "mask", exam_page.E_p3_gb2_editR1Description4.text()],
     }
+
+    # Updates the "MASK" and "IP" field in the "router_dict"
+    for a in router_dict.values():
+        for b in vlsm_dict.values():
+            if (a[0] == b[0]):
+                a[2] = str(subnet_functions.getMaskFromSlash(b[3]))
+                if (a[1] == "1st IP Available"):
+                    a[1] = b[4]
+                elif (a[1] == "2nd IP Available"):
+                    a[1] = str(ipaddress.ip_interface(b[4]) + 1).split("/")[0]
+                elif (a[1] == "Last IP -1"):
+                    a[1] = str(ipaddress.ip_interface(b[5]) - 1).split("/")[0]
+                elif (a[1] == "Last IP Available"):
+                    a[1] = b[5]
+
+        if (a[0] == "WAN"):
+            a[2] = str(subnet_functions.getMaskFromSlash(exam_page.E_p2_comboWan.currentText()))
+
+    print("Router dict")
+    for e in router_dict.keys():
+        print(str(e) + " : " + str(router_dict.get(e)))
 
     for a in devices_dict.values():
         for b in vlsm_dict.values():
@@ -142,6 +165,15 @@ def save_changes_p3():
                     a[3] = str(ipaddress.ip_interface(b[5]) - 1).split("/")[0]
                 elif (a[3] == "Last IP Available"):
                     a[3] = b[5]
+
+        if (a[2] == "WAN"):
+            a[4] = str(subnet_functions.getMaskFromSlash(exam_page.E_p2_comboWan.currentText()))
+
+    for x in devices_dict.values():
+        for y in router_dict.values():
+            if (x[2] == y[0] and "gateway" in x[5]): # If both are in same LAN AND device needs a gateway (not a router)
+                x[5] = y[1]
+
 
     print("New dict updated")
     for z in devices_dict.keys():
@@ -162,14 +194,89 @@ def generate_my_exam():
         f.write(output)
     """
 
-    for b in devices_dict.values():
-        output += "----------------\n"
-        output += "   " + b[0] + " (" + b[2] + ")      \n"
-        output += "----------------\n"
-        output += "IP : " + b[3] + "\n"
-        output += "Mask : " + a[4] + "\n"
-        output += "Gateway : \n"
+    for b in devices_dict.values(): # Prints out MAIN + PC (clients) configuration
+        if not ("f0" in b[1]):
+            break
+        else:
+            output += "----------------\n"
+            output += "   " + b[0] + " (" + b[2] + ")\n"
+            output += "----------------\n"
+            output += "IP : " + b[3] + "\n"
+            output += "Mask : " + b[4] + "\n"
+            output += "Gateway : " + b[5] + "\n"
 
+    for c in devices_dict.values(): # Prints out SWITCH configuration
+        if not ("f0" in c[1]):
+            if (len(c) ==7 ):
+                output += "\n"
+                output += "----------------\n"
+                output += "   " + c[0] + "\n"
+                output += "----------------\n"
+                output += "en" + "\n"
+                output += "conf t" + "\n"
+                output += "host " + c[0] + "\n"
+                output += "enable secret class" + "\n"
+                output += "\n"
+
+                output += "line console 0" + "\n"
+                output += "password cisco" + "\n"
+                output += "login" + "\n"
+                output += "exit" + "\n"
+                output += "\n"
+
+                output += "line vty 0 15" + "\n"
+                output += "password cisco" + "\n"
+                output += "login" + "\n"
+                output += "exit" + "\n"
+                output += "\n"
+
+                output += "int vlan1" + "\n"
+                output += "description " + c[6] + "\n"
+                output += "ip add " + c[3] + " " + c[4] + "\n"
+                output += "no shut" + "\n"
+                output += "exit" + "\n"
+                output += "\n"
+
+                output += "ip default-gateway " + c[5] + "\n"
+                output += "end" + "\n"
+                output += "wr" + "\n"
+
+    output += "\n"
+    output += "----------------\n"
+    output += "   " + str(list(router_dict.get("name"))[0]) + "\n"
+    output += "----------------\n"
+    output += "en" + "\n"
+    output += "conf t" + "\n"
+    output += "host " + str(list(router_dict.get("name"))[0]) + "\n"
+    output += "enable secret class" + "\n"
+    output += "\n"
+
+    output += "line console 0" + "\n"
+    output += "password cisco" + "\n"
+    output += "login" + "\n"
+    output += "exit" + "\n"
+    output += "\n"
+
+    output += "line vty 0 15" + "\n"
+    output += "password cisco" + "\n"
+    output += "login" + "\n"
+    output += "exit" + "\n"
+    output += "\n"
+
+    for d in router_dict.keys():  # Prints out ROUTER configuration
+        if (len(router_dict.get(d)) >=4):
+            output += "int " + d + "\n"
+            output += "description " + str(router_dict.get(d)[3]) + "\n"
+            output += "ip add " + str(router_dict.get(d)[1]) + " " + str(router_dict.get(d)[2]) + "\n"
+            output += "no shut" + "\n"
+            output += "exit" + "\n"
+            output += "\n"
+
+    output += "ip route 0.0.0.0 0.0.0.0 " + exam_page.E_p3_gb2_comboR1Interface3.currentText() + "\n"
+    output += "end" + "\n"
+    output += "wr" + "\n"
+
+    print("-----")
     print(output)
 
 

@@ -299,7 +299,7 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
-    E_p3_gb2_comboS1Interface.addItem("F0/24")
+    classBlueprint.fillComboIntSwitch(E_p3_gb2_comboS1Interface)
 
     global E_p3_gb2_comboS1Subnet
     E_p3_gb2_comboS1Subnet = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -351,7 +351,7 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
-    E_p3_gb2_comboS2Interface.addItem("F0/24")
+    classBlueprint.fillComboIntSwitch(E_p3_gb2_comboS2Interface)
 
     global E_p3_gb2_comboS2Subnet
     E_p3_gb2_comboS2Subnet = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -403,7 +403,7 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
-    E_p3_gb2_comboR1Interface1.addItem("F0/24")
+    classBlueprint.fillComboIntRouter(E_p3_gb2_comboR1Interface1)
 
     global E_p3_gb2_comboR1Subnet1
     E_p3_gb2_comboR1Subnet1 = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -440,7 +440,7 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
-    E_p3_gb2_comboR1Interface2.addItem("F0/24")
+    classBlueprint.fillComboIntRouter(E_p3_gb2_comboR1Interface2)
 
     global E_p3_gb2_comboR1Subnet2
     E_p3_gb2_comboR1Subnet2 = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -477,7 +477,7 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
-    E_p3_gb2_comboR1Interface3.addItem("F0/24")
+    classBlueprint.fillComboIntRouter(E_p3_gb2_comboR1Interface3)
 
     global E_p3_gb2_comboR1Subnet3
     E_p3_gb2_comboR1Subnet3 = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -513,7 +513,7 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
-    E_p3_gb2_comboR1Interface4.addItem("F0/24")
+    classBlueprint.fillComboIntRouter(E_p3_gb2_comboR1Interface4)
 
     global E_p3_gb2_comboR1Subnet4
     E_p3_gb2_comboR1Subnet4 = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -564,7 +564,7 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
-    E_p3_gb2_comboISPInterface.addItem("S0/0/0")
+    classBlueprint.fillComboIntRouter(E_p3_gb2_comboISPInterface)
 
     global E_p3_gb2_comboISPSubnet
     E_p3_gb2_comboISPSubnet = QtWidgets.QComboBox(self.E_p3_gb2)

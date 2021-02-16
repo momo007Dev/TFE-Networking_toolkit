@@ -16,7 +16,6 @@
   * [Fonctionnalite bonus](#fonctionnalite-bonus)
 - [Aspect technique](#aspect-technique)
 - [Organisation et trello](#organisation-et-trello)
-- [Workflow git](#workflow-git)
 - [Mocup](#mocup)
 
 ---
@@ -107,25 +106,6 @@ Plateforme | Langage (programmation) | Librairie ?
 ![Image du trello](img/trello.png)
 
 * [Lien vers trello](https://trello.com/b/ywBg35gv/tfe)
-
----
-
-## Workflow git
-
-***1 branches minimum par module.***
-
-Par exemple, pour le module 1 :
-
-* branche module_1
-	* sous-branche module_1_switchL2
-	* sous-branche module_1_switchL3
-	* sous-branche module_1_routeur
-
-Par exemple, pour le module 2 :
-
-* branche module_2
-	* sous-branche module_2_templates
-	* ...
 
 ---
 

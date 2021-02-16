@@ -109,6 +109,33 @@ class blueprintFunctions:
         combo.addItem("Last IP -1")
         combo.addItem("Last IP Available")
 
+    def fillComboIntSwitch(combo):
+        for i in reversed(range(1, 25)):
+            combo.addItem("F0/" + str(i))
+        combo.addItem("G0/2")
+        combo.addItem("G0/1")
+
+    def fillComboIntRouter(combo):
+        tab = {0: "G", 1: "F", 2: "S", 3: "E"}
+        for i in tab:
+            if (i == 2 or i==3):  # S0/0/0
+                n1 = 0
+                n2 = 0
+                while n2 <= 2:
+                    n3 = 0
+                    while n3 <= 1:
+                        combo.addItem(str(tab.get(i)) + str(n1) + "/" + str(n2) + "/" + str(n3))
+                        n3 += 1
+                    n2 += 1
+            else:  # F0/0 - G0/0
+                n1 = 0
+                while n1 <= 2:
+                    n2 = 0
+                    while n2 <= 2:
+                        combo.addItem(str(tab.get(i)) + str(n1) + "/" + str(n2))
+                        n2 += 1
+                    n1 += 1
+
     #--------END----------------------------#
 
 #----------------
