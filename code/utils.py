@@ -33,9 +33,12 @@ class blueprintFunctions:
         lab.setScaledContents(scaled)
         lab.setObjectName(str(lab))
 
-    def mkLabel (lab, geometry, text):
+    def mkLabel (lab, geometry, text, small_size = False):
         lab.setGeometry(geometry)
-        lab.setFont(font_label)
+        if (small_size is True):
+            lab.setFont(font_label2)
+        else:
+            lab.setFont(font_label)
         lab.setObjectName(str(lab))
         lab.setText(text)
 
@@ -55,9 +58,12 @@ class blueprintFunctions:
         btn.setFont(font_btn)
         btn.setText("Home")
 
-    def mkGroupBox (gb, geometry, text):
+    def mkGroupBox (gb, geometry, text, small_size = False):
         gb.setGeometry(geometry)
-        gb.setFont(font_gb)
+        if (small_size is True):
+            gb.setFont(font_gb2)
+        else:
+            gb.setFont(font_gb)
         gb.setTitle(text)
         gb.setObjectName(str(gb))
 
@@ -66,6 +72,17 @@ class blueprintFunctions:
         combo.setFont(font_linedit)
         combo.setStyleSheet(style)
         combo.setObjectName(str(combo))
+
+    def mkCheck (check, geometry, checked, text, small_size = False):
+        check.setGeometry(geometry)
+        if (small_size is True):
+            check.setFont(font_label2)
+        else:
+            check.setFont(font_label)
+        check.setLayoutDirection(QtCore.Qt.RightToLeft)
+        check.setChecked(checked)
+        check.setObjectName(str(check))
+        check.setText(text)
 
     # ---------------------------
     # Fills combo with /32 => /0
@@ -152,6 +169,12 @@ font_label.setBold(True)
 font_label.setUnderline(True)
 font_label.setWeight(75)
 
+font_label2 = QtGui.QFont()
+font_label2.setPointSize(10)
+font_label2.setBold(True)
+font_label2.setUnderline(True)
+font_label2.setWeight(75)
+
 font_linedit = QtGui.QFont()
 font_linedit.setFamily("Verdana")
 font_linedit.setPointSize(10)
@@ -163,6 +186,11 @@ font_gb.setPointSize(12)
 font_gb.setBold(True)
 font_btn.setUnderline(False)
 font_gb.setWeight(75)
+
+font_gb2 = QtGui.QFont()
+font_gb2.setPointSize(10)
+font_gb2.setBold(False)
+font_gb2.setUnderline(False)
 
 font_table = QtGui.QFont()
 font_table.setPointSize(9)

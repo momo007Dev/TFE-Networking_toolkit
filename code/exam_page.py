@@ -592,7 +592,118 @@ def setupUiExam(self):
 
     self.stackedWidget_2.addWidget(self.page_3)
 
+    #---------------------
+    # P4 : ADDONS
+    #---------------------
+
+    self.page_4 = QtWidgets.QWidget()
+    self.page_4.setObjectName("page_4")
+
+    self.E_p4_img = QtWidgets.QLabel(self.page_4)
+    classBlueprint.mkLabPic(self.E_p4_img, QtCore.QRect(590, 0, 311, 221), QtGui.QPixmap(".\\../img/schema1-1.png"), True)
+
+    # Groupbox R1 - Security
+    self.E_p4_gb1 = QtWidgets.QGroupBox(self.page_4)
+    classBlueprint.mkGroupBox(self.E_p4_gb1, QtCore.QRect(10, 10, 571, 261), "R1 (Security)", True)
+
+    self.E_p4_gb1_labelSecret = QtWidgets.QLabel(self.E_p4_gb1)
+    classBlueprint.mkLabel(self.E_p4_gb1_labelSecret, QtCore.QRect(10, 20, 131, 31), "enable secret :", True)
+
+    global E_p4_gb1_editSecret
+    E_p4_gb1_editSecret = QtWidgets.QLineEdit(self.E_p4_gb1)
+    classBlueprint.mkLineEdit(E_p4_gb1_editSecret, QtCore.QRect(150, 20, 271, 31), 22, "class")
+    E_p4_gb1_editSecret.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p4_gb1_labelPassword = QtWidgets.QLabel(self.E_p4_gb1)
+    classBlueprint.mkLabel(self.E_p4_gb1_labelPassword, QtCore.QRect(10, 70, 251, 31), "line console / vty password :", True)
+
+    global E_p4_gb1_editPassword
+    E_p4_gb1_editPassword = QtWidgets.QLineEdit(self.E_p4_gb1)
+    classBlueprint.mkLineEdit(E_p4_gb1_editPassword, QtCore.QRect(270, 70, 271, 31), 22, "cisco")
+    E_p4_gb1_editPassword.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 0, 255);")
+
+    global E_p4_gb1_checkEncryption
+    E_p4_gb1_checkEncryption = QtWidgets.QCheckBox(self.E_p4_gb1)
+    classBlueprint.mkCheck(E_p4_gb1_checkEncryption, QtCore.QRect(10, 120, 221, 20), True, "Password encryption ?", True)
+
+    global E_p4_gb1_checkSsh
+    E_p4_gb1_checkSsh = QtWidgets.QCheckBox(self.E_p4_gb1)
+    classBlueprint.mkCheck(E_p4_gb1_checkSsh, QtCore.QRect(10, 150, 81, 20), True, "SSH ?", True)
+
+    self.E_p4_gb1_1 = QtWidgets.QGroupBox(self.E_p4_gb1)
+    classBlueprint.mkGroupBox(self.E_p4_gb1_1, QtCore.QRect(120, 144, 441, 42), "")
+
+    global E_p4_gb1_1_editUsername
+    E_p4_gb1_1_editUsername = QtWidgets.QLineEdit(self.E_p4_gb1_1)
+    classBlueprint.mkLineEdit(E_p4_gb1_1_editUsername, QtCore.QRect(3, 5, 211, 31), 18, "username")
+    E_p4_gb1_1_editUsername.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 170, 0);")
+
+    global E_p4_gb1_1_editPassword
+    E_p4_gb1_1_editPassword = QtWidgets.QLineEdit(self.E_p4_gb1_1)
+    classBlueprint.mkLineEdit(E_p4_gb1_1_editPassword, QtCore.QRect(217, 5, 221, 31), 18, "password")
+    E_p4_gb1_1_editPassword.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 127);")
+
+    self.E_p4_gb1_labelBanner = QtWidgets.QLabel(self.E_p4_gb1)
+    classBlueprint.mkLabel(self.E_p4_gb1_labelBanner, QtCore.QRect(10, 190, 141, 21), "Banner MOTD ?", True)
+
+    global E_p4_gb1_editBanner
+    E_p4_gb1_editBanner = QtWidgets.QLineEdit(self.E_p4_gb1)
+    classBlueprint.mkLineEdit(E_p4_gb1_editBanner, QtCore.QRect(10, 220, 541, 31), 50, "You are accessing a restricted system")
+    E_p4_gb1_editBanner.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(85, 170, 0);")
+
+    # Groupbox Switchs - Security
+    self.E_p4_gb2 = QtWidgets.QGroupBox(self.page_4)
+    classBlueprint.mkGroupBox(self.E_p4_gb2, QtCore.QRect(10, 280, 571, 261), "Switchs (Security)", True)
+
+    self.E_p4_gb2_labelSecret = QtWidgets.QLabel(self.E_p4_gb2)
+    classBlueprint.mkLabel(self.E_p4_gb2_labelSecret, QtCore.QRect(10, 20, 131, 31), "enable secret :", True)
+
+    global E_p4_gb2_editSecret
+    E_p4_gb2_editSecret = QtWidgets.QLineEdit(self.E_p4_gb2)
+    classBlueprint.mkLineEdit(E_p4_gb2_editSecret, QtCore.QRect(150, 20, 271, 31), 22, "class")
+    E_p4_gb2_editSecret.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p4_gb2_labelPassword = QtWidgets.QLabel(self.E_p4_gb2)
+    classBlueprint.mkLabel(self.E_p4_gb2_labelPassword, QtCore.QRect(10, 70, 251, 31), "line console / vty password :", True)
+
+    global E_p4_gb2_editPassword
+    E_p4_gb2_editPassword = QtWidgets.QLineEdit(self.E_p4_gb2)
+    classBlueprint.mkLineEdit(E_p4_gb2_editPassword, QtCore.QRect(270, 70, 271, 31), 22, "cisco")
+    E_p4_gb2_editPassword.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 0, 255);")
+
+    global E_p4_gb2_checkEncryption
+    E_p4_gb2_checkEncryption = QtWidgets.QCheckBox(self.E_p4_gb2)
+    classBlueprint.mkCheck(E_p4_gb2_checkEncryption, QtCore.QRect(10, 120, 221, 20), True, "Password encryption ?", True)
+
+    global E_p4_gb2_checkSsh
+    E_p4_gb2_checkSsh = QtWidgets.QCheckBox(self.E_p4_gb2)
+    classBlueprint.mkCheck(E_p4_gb2_checkSsh, QtCore.QRect(10, 150, 81, 20), True, "SSH ?", True)
+
+    self.E_p4_gb2_1 = QtWidgets.QGroupBox(self.E_p4_gb2)
+    classBlueprint.mkGroupBox(self.E_p4_gb2_1, QtCore.QRect(120, 144, 441, 42), "")
+
+    global E_p4_gb2_1_editUsername
+    E_p4_gb2_1_editUsername = QtWidgets.QLineEdit(self.E_p4_gb2_1)
+    classBlueprint.mkLineEdit(E_p4_gb2_1_editUsername, QtCore.QRect(3, 5, 211, 31), 18, "username")
+    E_p4_gb2_1_editUsername.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 170, 0);")
+
+    global E_p4_gb2_1_editPassword
+    E_p4_gb2_1_editPassword = QtWidgets.QLineEdit(self.E_p4_gb2_1)
+    classBlueprint.mkLineEdit(E_p4_gb2_1_editPassword, QtCore.QRect(217, 5, 221, 31), 18, "password")
+    E_p4_gb2_1_editPassword.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 127);")
+
+    self.E_p4_gb2_labelBanner = QtWidgets.QLabel(self.E_p4_gb2)
+    classBlueprint.mkLabel(self.E_p4_gb2_labelBanner, QtCore.QRect(10, 190, 141, 21), "Banner MOTD ?", True)
+
+    global E_p4_gb2_editBanner
+    E_p4_gb2_editBanner = QtWidgets.QLineEdit(self.E_p4_gb2)
+    classBlueprint.mkLineEdit(E_p4_gb2_editBanner, QtCore.QRect(10, 220, 541, 31), 50, "You are accessing a restricted system")
+    E_p4_gb2_editBanner.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(85, 170, 0);")
+
+    self.stackedWidget_2.addWidget(self.page_4)
     self.stackedWidget.addWidget(self.Exam)
+
+
 
     self.E_btn_1.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(0))
     self.E_btn_2.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(1))

@@ -17,6 +17,7 @@ vlsm_dict = dict()
 lan_names_set = list()
 devices_dict = dict() # PC1-2-3/S1-2/ISP
 router_dict = dict() # R1
+security_enabled = False
 #--------------END------------------#
 
 def add_host_to_table(table, name, host): # Used when user clicks "add" btn
@@ -72,6 +73,10 @@ def save_changes(stacked_widget):
     elif (current_index == 2): # Page 3
         save_changes_p3()
 
+    elif (current_index == 3): # Page 4 (Addons/Secuirty)
+        global security_enabled
+        security_enabled = True
+
 #-----------------------------------------------------------------------------#
 # Function used when press "save changes" within main configuration (page 2)  #
 #-----------------------------------------------------------------------------#
@@ -84,9 +89,11 @@ def save_changes_p2():
     dns = exam_page.E_p2_editDns.text()
     vlsm_dict = subnet_functions.vlsm_output_dict(sort_hosts(exam_page.E_p2_table), local_subnet, local_cidr)
 
+    """
     print("Local subnet : " + local_subnet + local_cidr)
     print("WAN subnet : " + wan_network)
     print("DNS Domain : " + dns)
+    """
 
     wan_ip_tab.clear()
     for ip in IPNetwork(wan_network):
@@ -94,6 +101,7 @@ def save_changes_p2():
     wan_ip_tab.pop(0) # Removes first IP (that is used for network)
     wan_ip_tab.pop()  # Removes last IP (that is used for broadcast)
 
+    """
     for x in wan_ip_tab:
         print(x)
 
@@ -101,6 +109,7 @@ def save_changes_p2():
         print(str(a) + " : " + str(vlsm_dict.get(a)))
 
     print("---PAGE-3-----")
+    """
 
 #-----------------------------------------------------------------------------#
 # Function used when press "save changes" within "connectivity" (page 3)      #
@@ -120,8 +129,10 @@ def save_changes_p3():
         "ISP": [exam_page.E_p3_gb2_editISPHost.text(), exam_page.E_p3_gb2_comboISPInterface.currentText(), exam_page.E_p3_gb2_comboISPSubnet.currentText(), exam_page.E_p3_gb2_comboISPRule.currentText(), "mask", exam_page.E_p3_gb2_editISPDescription.text()]
 
     }
+    """
     for i in devices_dict.keys():
         print(str(i) + " : " + str(devices_dict.get(i)))
+    """
 
     global router_dict
     router_dict = {
@@ -149,9 +160,11 @@ def save_changes_p3():
         if (a[0] == "WAN"):
             a[2] = str(subnet_functions.getMaskFromSlash(exam_page.E_p2_comboWan.currentText()))
 
+    """
     print("Router dict")
     for e in router_dict.keys():
         print(str(e) + " : " + str(router_dict.get(e)))
+    """
 
     for a in devices_dict.values():
         for b in vlsm_dict.values():
@@ -174,10 +187,11 @@ def save_changes_p3():
             if (x[2] == y[0] and "gateway" in x[5]): # If both are in same LAN AND device needs a gateway (not a router)
                 x[5] = y[1]
 
-
+    """
     print("New dict updated")
     for z in devices_dict.keys():
         print(str(z) + " : " + str(devices_dict.get(z)))
+    """
 
 def generate_my_exam():
     output =  "----------------\n"
@@ -187,12 +201,6 @@ def generate_my_exam():
     for a in vlsm_dict.values():
         output += a[0] + " (" + str(a[1]) + ") : " + a[4] + " => " + a[5] + " " + a[3] + " (" + str(subnet_functions.getMaskFromSlash(a[3])) + ")\n"
         output += "\n"
-
-    """
-    print(output)
-    with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution.txt", "a") as f:
-        f.write(output)
-    """
 
     for b in devices_dict.values(): # Prints out MAIN + PC (clients) configuration
         if not ("f0" in b[1]):
@@ -215,20 +223,42 @@ def generate_my_exam():
                 output += "en" + "\n"
                 output += "conf t" + "\n"
                 output += "host " + c[0] + "\n"
-                output += "enable secret class" + "\n"
+                if (security_enabled is True):
+                    output += "enable secret " + exam_page.E_p4_gb2_editSecret.text() + "\n"
+                    output += "\n"
+                    output += "banner motd #" + exam_page.E_p4_gb2_editBanner.text() + "#" + "\n"
                 output += "\n"
 
-                output += "line console 0" + "\n"
-                output += "password cisco" + "\n"
-                output += "login" + "\n"
-                output += "exit" + "\n"
-                output += "\n"
+                if (security_enabled is True and exam_page.E_p4_gb2_checkSsh.isChecked()):
+                    output += "ip domain-name " + dns + "\n"
+                    output += "crypto key generate rsa general-keys modulus 1024" + "\n"
+                    output += "username " + exam_page.E_p4_gb2_1_editUsername.text() + " password " + exam_page.E_p4_gb2_1_editPassword.text() + "\n"
+                    output += "\n"
 
-                output += "line vty 0 15" + "\n"
-                output += "password cisco" + "\n"
-                output += "login" + "\n"
-                output += "exit" + "\n"
-                output += "\n"
+                if (security_enabled is True):
+                    output += "line console 0" + "\n"
+                    output += "password " + exam_page.E_p4_gb2_editPassword.text()  + "\n"
+                    output += "login" + "\n"
+                    output += "exit" + "\n"
+                    output += "\n"
+
+                    if (security_enabled is True and exam_page.E_p4_gb2_checkSsh.isChecked()):
+                        output += "line vty 0 15" + "\n"
+                        output += "password " + exam_page.E_p4_gb2_editPassword.text() + "\n"
+                        output += "transport input ssh" + "\n"
+                        output += "login local" + "\n"
+                        output += "exit" + "\n"
+                        output += "\n"
+
+                    output += "line vty 0 15" + "\n"
+                    output += "password " + exam_page.E_p4_gb2_editPassword.text() + "\n"
+                    output += "login" + "\n"
+                    output += "exit" + "\n"
+                    output += "\n"
+
+                if (security_enabled is True and exam_page.E_p4_gb2_checkEncryption.isChecked()):
+                    output += "service password-encryption" + "\n"
+                    output += "\n"
 
                 output += "int vlan1" + "\n"
                 output += "description " + c[6] + "\n"
@@ -248,20 +278,42 @@ def generate_my_exam():
     output += "en" + "\n"
     output += "conf t" + "\n"
     output += "host " + str(list(router_dict.get("name"))[0]) + "\n"
-    output += "enable secret class" + "\n"
+    if (security_enabled is True):
+        output += "enable secret " + exam_page.E_p4_gb1_editSecret.text() + "\n"
+        output += "\n"
+        output += "banner motd #" + exam_page.E_p4_gb1_editBanner.text() + "#" + "\n"
     output += "\n"
 
-    output += "line console 0" + "\n"
-    output += "password cisco" + "\n"
-    output += "login" + "\n"
-    output += "exit" + "\n"
-    output += "\n"
+    if (security_enabled is True and exam_page.E_p4_gb1_checkSsh.isChecked()):
+        output += "ip domain-name " + dns + "\n"
+        output += "crypto key generate rsa general-keys modulus 1024" + "\n"
+        output += "username " + exam_page.E_p4_gb1_1_editUsername.text() + " password " + exam_page.E_p4_gb1_1_editPassword.text() + "\n"
+        output += "\n"
 
-    output += "line vty 0 15" + "\n"
-    output += "password cisco" + "\n"
-    output += "login" + "\n"
-    output += "exit" + "\n"
-    output += "\n"
+    if (security_enabled is True):
+        output += "line console 0" + "\n"
+        output += "password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
+        output += "login" + "\n"
+        output += "exit" + "\n"
+        output += "\n"
+
+        if (security_enabled is True and exam_page.E_p4_gb1_checkSsh.isChecked()):
+            output += "line vty 0 4" + "\n"
+            output += "password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
+            output += "transport input ssh" + "\n"
+            output += "login local" + "\n"
+            output += "exit" + "\n"
+            output += "\n"
+
+        output += "line vty 0 15" + "\n"
+        output += "password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
+        output += "login" + "\n"
+        output += "exit" + "\n"
+        output += "\n"
+
+    if (security_enabled is True and exam_page.E_p4_gb1_checkEncryption.isChecked()):
+        output += "service password-encryption" + "\n"
+        output += "\n"
 
     for d in router_dict.keys():  # Prints out ROUTER configuration
         if (len(router_dict.get(d)) >=4):
@@ -276,8 +328,8 @@ def generate_my_exam():
     output += "end" + "\n"
     output += "wr" + "\n"
 
-    print("-----")
-    print(output)
+    with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution.txt", "a") as f:
+        f.write(output)
 
 
 def build_combo_network(): # Called when user clicks "(3) Connectivity"
