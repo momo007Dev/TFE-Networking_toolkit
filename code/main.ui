@@ -3672,7 +3672,7 @@ color: rgb(255, 170, 0);</string>
          </widget>
         </widget>
        </widget>
-       <widget class="QGroupBox" name="E_p4_gb1_2">
+       <widget class="QGroupBox" name="E_p4_gb2">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -3689,7 +3689,7 @@ color: rgb(255, 170, 0);</string>
         <property name="title">
          <string>Switchs (Security)</string>
         </property>
-        <widget class="QLabel" name="E_p4_gb1_labelSecret_2">
+        <widget class="QLabel" name="E_p4_gb2_labelSecret">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -3710,7 +3710,7 @@ color: rgb(255, 170, 0);</string>
           <string>enable secret :</string>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p4_gb1_label2_2">
+        <widget class="QLabel" name="E_p4_gb2_labelPassword">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -3731,7 +3731,7 @@ color: rgb(255, 170, 0);</string>
           <string>line console / vty password :</string>
          </property>
         </widget>
-        <widget class="QLabel" name="E_p4_gb1_label3_2">
+        <widget class="QLabel" name="E_p4_gb2_labelBanner">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -3752,7 +3752,7 @@ color: rgb(255, 170, 0);</string>
           <string>Banner MOTD ?</string>
          </property>
         </widget>
-        <widget class="QCheckBox" name="E_p4_gb1_check2_2">
+        <widget class="QCheckBox" name="E_p4_gb2_checkSsh">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -3776,7 +3776,7 @@ color: rgb(255, 170, 0);</string>
           <string>SSH ?</string>
          </property>
         </widget>
-        <widget class="QCheckBox" name="E_p4_gb1_check1_2">
+        <widget class="QCheckBox" name="E_p4_gb2_checkEncryption">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -3800,7 +3800,7 @@ color: rgb(255, 170, 0);</string>
           <string>Password encryption ?</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="E_p4_gb1_edit1_2">
+        <widget class="QLineEdit" name="E_p4_gb2_editSecret">
          <property name="geometry">
           <rect>
            <x>150</x>
@@ -3828,7 +3828,7 @@ color: rgb(255, 0, 255)</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLineEdit" name="E_p4_gb1_edit2_2">
+        <widget class="QLineEdit" name="E_p4_gb2_editPassword">
          <property name="geometry">
           <rect>
            <x>270</x>
@@ -3856,7 +3856,7 @@ color: rgb(0, 0, 255);</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLineEdit" name="E_p4_gb1_edit3_2">
+        <widget class="QLineEdit" name="E_p4_gb2_editBanner">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -3884,7 +3884,7 @@ color: rgb(85, 170, 0);</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QGroupBox" name="E_p4_gb1_3">
+        <widget class="QGroupBox" name="E_p4_gb2_1">
          <property name="geometry">
           <rect>
            <x>120</x>
@@ -3896,7 +3896,7 @@ color: rgb(85, 170, 0);</string>
          <property name="title">
           <string/>
          </property>
-         <widget class="QLineEdit" name="E_p4_gb1_1_edit2_2">
+         <widget class="QLineEdit" name="E_p4_gb2_1_editPassword">
           <property name="geometry">
            <rect>
             <x>217</x>
@@ -3924,7 +3924,7 @@ color: rgb(255, 0, 127);</string>
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QLineEdit" name="E_p4_gb1_1_edit1_2">
+         <widget class="QLineEdit" name="E_p4_gb2_1_editUsername">
           <property name="geometry">
            <rect>
             <x>3</x>

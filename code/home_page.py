@@ -43,8 +43,11 @@ def setupUiHome(self):
 
     self.stackedWidget.addWidget(self.Home)
 
-    self.Btn_Config.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
-    self.Btn_Editor.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
+    self.Btn_Config.clicked.connect(lambda: classBlueprint.mkWarningMsg("Page in construction...", "This <b><span style=color:'red'>page</b></span> is not <b>yet available</b> :)"))
+    #self.Btn_Config.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
+    self.Btn_Editor.clicked.connect(lambda: classBlueprint.mkWarningMsg("Page in construction...", "This <b><span style=color:'red'>page</b></span> is not <b>yet available</b> :)"))
+    #self.Btn_Editor.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
     self.Btn_Exam.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
     self.Btn_Subnet.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(4))
-    self.Btn_About.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(5))
+    self.Btn_About.clicked.connect(lambda: classBlueprint.mkWarningMsg("Page in construction...", "This <b><span style=color:'red'>page</b></span> is not <b>yet available</b> :)"))
+    #self.Btn_About.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(5))

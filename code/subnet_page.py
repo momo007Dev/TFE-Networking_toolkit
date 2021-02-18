@@ -53,6 +53,7 @@ def setupUiSubnet(self):
     self.S_subnet_editMask = QtWidgets.QLineEdit(self.Subnet)
     classBlueprint.mkLineEdit(self.S_subnet_editMask, QtCore.QRect(170, 290, 181, 31), 20, "255.255.255.255")
     self.S_subnet_editMask.setReadOnly(True)
+    self.S_subnet_editMask.mousePressEvent = lambda _ : line_edit_selectall_and_copy(self.S_subnet_editMask)
 
     self.S_subnet_wildcard = QtWidgets.QLabel(self.Subnet)
     classBlueprint.mkLabel(self.S_subnet_wildcard, QtCore.QRect(400, 250, 101, 31), "Wildcard")
@@ -61,6 +62,7 @@ def setupUiSubnet(self):
     classBlueprint.mkLineEdit(self.S_subnet_editWild, QtCore.QRect(390, 290, 181, 31), 20, "0.0.0.0")
     self.S_subnet_editWild.setStyleSheet("color: rgb(0, 85, 255);")
     self.S_subnet_editWild.setReadOnly(True)
+    self.S_subnet_editWild.mousePressEvent = lambda _: line_edit_selectall_and_copy(self.S_subnet_editWild)
 
     self.S_subnet_ip = QtWidgets.QLabel(self.Subnet)
     classBlueprint.mkLabel(self.S_subnet_ip, QtCore.QRect(610, 250, 111, 31), "Usable IPs")
@@ -69,6 +71,7 @@ def setupUiSubnet(self):
     classBlueprint.mkLineEdit(self.S_subnet_editIp, QtCore.QRect(610, 290, 181, 31), 30, "1")
     self.S_subnet_editIp.setStyleSheet("color: rgb(255, 170, 0);")
     self.S_subnet_editIp.setReadOnly(True)
+    self.S_subnet_editIp.mousePressEvent = lambda _: line_edit_selectall_and_copy(self.S_subnet_editIp)
 
     # ---VLSM---#
     self.S_line = QtWidgets.QFrame(self.Subnet)
@@ -90,8 +93,8 @@ def setupUiSubnet(self):
 
     self.S_vlsm_combo = QtWidgets.QComboBox(self.Subnet)
     classBlueprint.mkCombo(self.S_vlsm_combo, QtCore.QRect(250, 390, 70, 30), "color: rgb(85, 170, 0);background-color: rgb(255, 255, 255);\nselection-background-color: rgb(204,255,255);\nselection-color: rgb(85, 170, 0)")
-    classBlueprint.fillComboCidr(self.S_vlsm_combo)
-    self.S_vlsm_combo.setCurrentIndex(16)
+    classBlueprint.fillComboCidr2(self.S_vlsm_combo)
+    self.S_vlsm_combo.setCurrentIndex(14)
 
     self.S_gb_hosts = QtWidgets.QGroupBox(self.Subnet)
     classBlueprint.mkGroupBox(self.S_gb_hosts, QtCore.QRect(340, 330, 311, 91), "Hosts")
@@ -140,15 +143,22 @@ def setupUiSubnet(self):
     self.stackedWidget.addWidget(self.Subnet)
 
     def add_host_to_table(self):
-        lastrow = self.S_host_table.rowCount()
-        self.S_host_table.insertRow(lastrow)
         host_text = self.S_gb_edit.text()
-        item1 = QTableWidgetItem(host_text)
-        self.S_host_table.setItem(lastrow, 0, item1)
-        self.S_gb_edit.setText("")
+        if (utils.blueprintFunctions.checkInt(host_text) is False):
+            utils.blueprintFunctions.mkWarningMsg("Host input Check", "<b><span style=color:'red'>Host number</b></span> must <b>only</b> be composed of <span style=color:'blue'>numbers</span> !")
+        else:
+            lastrow = self.S_host_table.rowCount()
+            self.S_host_table.insertRow(lastrow)
+            item1 = QTableWidgetItem(host_text)
+            self.S_host_table.setItem(lastrow, 0, item1)
+            self.S_gb_edit.setText("")
 
     def clear_host_table(self):
         x = self.S_host_table.rowCount()
         while (self.S_host_table.rowCount() > 0):
             self.S_host_table.removeRow(x)
             x -= 1
+
+    def line_edit_selectall_and_copy(line_edit):
+        line_edit.selectAll()
+        line_edit.copy()

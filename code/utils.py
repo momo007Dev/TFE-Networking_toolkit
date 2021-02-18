@@ -1,6 +1,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 
+from netaddr import IPNetwork
+import math, socket, ipaddress
+
 import os, platform
 #--------------------------------------------------------------------------------#
 # This class contains blueprint functions that allows quick build of gui objects #
@@ -17,6 +20,12 @@ class blueprintFunctions:
         elif (blueprintFunctions.getCurrentOS() == "Windows"):
             desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
         return desktop
+
+    def deleteOutputFile():
+        tab = [str(blueprintFunctions.getDesktopPath()) + "/solution.txt", str(blueprintFunctions.getDesktopPath()) + "/packet-tracer.txt"]
+        for i in range(len(tab)):
+            if (os.path.exists(tab[i])):
+                os.remove(tab[i])
 
     def mkBtn (btn, geometry, style, text):
         btn.setGeometry(geometry)
@@ -84,6 +93,14 @@ class blueprintFunctions:
         check.setObjectName(str(check))
         check.setText(text)
 
+    def mkWarningMsg(title, text):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Warning)
+        msg.setWindowIcon(QtGui.QIcon(".\\../img/worker-warning-msg.png"))
+        msg.setText(text)
+        msg.setWindowTitle(title)
+        msg.exec()
+
     # ---------------------------
     # Fills combo with /32 => /0
     #----------------------------
@@ -116,6 +133,19 @@ class blueprintFunctions:
         item = QtWidgets.QTableWidgetItem()
         item.setText(text)
         table.setHorizontalHeaderItem(position, item)
+
+    def checkIp(ip_string):
+        try:
+            network = ipaddress.IPv4Network(ip_string)
+            return True
+        except ValueError:
+            return False
+
+    def checkInt(str):
+        if (str.isdigit()):
+            return True
+        else:
+            return False
 
 
     #--------EXAM utils functions----------#

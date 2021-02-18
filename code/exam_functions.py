@@ -194,6 +194,8 @@ def save_changes_p3():
     """
 
 def generate_my_exam():
+
+    # Generates the "txt" file network solution
     output =  "----------------\n"
     output += "   SUBNETS      \n"
     output += "----------------\n"
@@ -331,6 +333,8 @@ def generate_my_exam():
     with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution.txt", "a") as f:
         f.write(output)
 
+    # Generates the "yaml" file for Packet Tracer wizard
+
 
 def build_combo_network(): # Called when user clicks "(3) Connectivity"
     clear_combo_network()
@@ -338,15 +342,12 @@ def build_combo_network(): # Called when user clicks "(3) Connectivity"
         exam_page.E_p3_gb1_comboPc1Subnet.addItem(a) # PC1
         exam_page.E_p3_gb1_comboPc2Subnet.addItem(a) # PC2
         exam_page.E_p3_gb1_comboPc3Subnet.addItem(a) # PC3
-
         exam_page.E_p3_gb2_comboS1Subnet.addItem(a) # S1
         exam_page.E_p3_gb2_comboS2Subnet.addItem(a) # S2
-
         exam_page.E_p3_gb2_comboR1Subnet1.addItem(a) # R1-1
-        exam_page.E_p3_gb2_comboR1Subnet2.addItem(a)
-        exam_page.E_p3_gb2_comboR1Subnet3.addItem(a)
+        exam_page.E_p3_gb2_comboR1Subnet2.addItem(a) # R1-2
+        exam_page.E_p3_gb2_comboR1Subnet3.addItem(a) # R1-3
         exam_page.E_p3_gb2_comboR1Subnet4.addItem(a) # R1-4
-
         exam_page.E_p3_gb2_comboISPSubnet.addItem(a) # ISP
 
 def clear_combo_network():

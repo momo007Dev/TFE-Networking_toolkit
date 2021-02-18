@@ -4,12 +4,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from netaddr import IPNetwork
 import math, socket, ipaddress
 
+import utils
+from utils import *
 
 # --------------------------------------------------------------------------------------------------#
 # Takes a cidr in argument (eg: "/24") and returns the subnet mask equivalent (eg:"255.255.255.0") #
 # --------------------------------------------------------------------------------------------------#
 def getMaskFromSlash(cidr):
-    if ("/" in cidr):
+    if ("/" in str(cidr)):
         subnet = "192.168.0.0" + cidr
     else:
         subnet = "192.168.0.0" + "/" + str(cidr)
@@ -20,7 +22,7 @@ def getMaskFromSlash(cidr):
 # Takes a mask in argument (eg: "0.0.0.0") and returns the wildcard  equivalent (eg:"255.255.255.255") #
 #------------------------------------------------------------------------------------------------------#
 def getWildcardFromMask(mask):
-    return IPv4Address("255.255.255.255") - int(IPv4Address(mask))
+    return ipaddress.IPv4Address("255.255.255.255") - int(ipaddress.IPv4Address(mask))
 
 #------------------------------------------------------------------------------------------------------#
 # Takes a cidr in argument (eg: "/24") and returns the number of usable IP adress (eg:"254") #
@@ -84,7 +86,6 @@ def sort_hosts(table):
     rowCount = table.rowCount()
     hosts = [];
     if (rowCount == 0):
-        print("No hosts !")
         return -1
     else:
         for x in range(rowCount):
@@ -100,7 +101,9 @@ def clear_table(table):
         x -= 1
 
 def vlsm(host_table, vlsm_table, subnet, combo_cidr):
-    if (vlsm_table.rowCount() > 0):
+    if (utils.blueprintFunctions.checkIp(subnet.text()) is False):
+        utils.blueprintFunctions.mkWarningMsg("Ip Check","<b><span style=color:'red'>Ip</b></span> <b>format</b> not respected !")
+    elif (vlsm_table.rowCount() > 0):
         clear_table(vlsm_table)
 
     else:
@@ -140,14 +143,12 @@ def vlsm(host_table, vlsm_table, subnet, combo_cidr):
             cidr_text = str(combo_cidr.currentText())
             subnet_text = subnet.text()
 
-            output = getUsableIpRange(subnet_text, cidr_text.split("/")[1])
-            print("Error")
-            print(output)
+            output = get_all_from_subnet_and_cidr(subnet_text, cidr_text)
 
             lastrow = vlsm_table.rowCount()
             vlsm_table.insertRow(lastrow)
 
-            ip_range_text = getUsableIpRange(subnet_text, cidr_text.split("/")[1])
+            ip_range_text = output[0] + " => " + output[1]
             broadcast_text = output[0]
             item2 = QTableWidgetItem(subnet_text)
             item3 = QTableWidgetItem(cidr_text)
