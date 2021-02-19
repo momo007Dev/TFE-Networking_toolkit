@@ -17,6 +17,8 @@
 - [Aspect technique](#aspect-technique)
 - [Organisation et trello](#organisation-et-trello)
 - [Mocup](#mocup)
+- [Demo](#demo)
+  * [Demo de la partie subneting utilities](#Demo-de-la-partie-subneting-utilities)
 
 ---
 
@@ -112,3 +114,11 @@ Plateforme | Langage (programmation) | Librairie ?
 ## Mocup
 
 ![Image de l'application](img/mocup.png)
+
+---
+
+## Demo
+
+### Demo de la partie subneting utilities
+
+![](img/demo_subnet.gif)
