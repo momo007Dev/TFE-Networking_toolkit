@@ -37,14 +37,20 @@ def setupUiExam(self):
     self.E_btn_2 = QtWidgets.QPushButton(self.Exam)
     classBlueprint.mkBtn(self.E_btn_2, QtCore.QRect(185, 47, 160, 50), "background-color: rgb(255, 170, 0);", "(2) Main\nConfiguration")
 
-    self.E_btn_3 = QtWidgets.QPushButton(self.Exam)
-    classBlueprint.mkBtn(self.E_btn_3, QtCore.QRect(370, 47, 160, 50),"background-color: rgb(255, 255, 127);", "(3) Connectivity")
+    global E_btn_3
+    E_btn_3 = QtWidgets.QPushButton(self.Exam)
+    classBlueprint.mkBtn(E_btn_3, QtCore.QRect(370, 47, 160, 50),"background-color: rgb(255, 255, 127);", "(3) Connectivity")
+    E_btn_3.setVisible(False)
 
-    self.E_btn_4 = QtWidgets.QPushButton(self.Exam)
-    classBlueprint.mkBtn(self.E_btn_4, QtCore.QRect(555, 47, 160, 50), "background-color: rgb(85, 255, 127);", "(4) Addons")
+    global E_btn_4
+    E_btn_4 = QtWidgets.QPushButton(self.Exam)
+    classBlueprint.mkBtn(E_btn_4, QtCore.QRect(555, 47, 160, 50), "background-color: rgb(85, 255, 127);", "(4) Addons")
+    E_btn_4.setVisible(False)
 
-    self.E_btn_5 = QtWidgets.QPushButton(self.Exam)
-    classBlueprint.mkBtn(self.E_btn_5, QtCore.QRect(740, 47, 160, 50), "background-color: rgb(255, 170, 255);", "(5) Generate\nmy exam !")
+    global E_btn_5
+    E_btn_5 = QtWidgets.QPushButton(self.Exam)
+    classBlueprint.mkBtn(E_btn_5, QtCore.QRect(740, 47, 160, 50), "background-color: rgb(255, 170, 255);", "(5) Generate\nmy exam !")
+    E_btn_5.setVisible(False)
 
     self.E_home = QtWidgets.QPushButton(self.Exam)
 
@@ -150,9 +156,10 @@ def setupUiExam(self):
     classBlueprint.mkLineEdit(self.E_p2_gb_editLan, QtCore.QRect(195, 30, 181, 31), 20, "LAN A")
     self.E_p2_gb_editLan.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
 
-    self.E_p2_gb_editHost = QtWidgets.QLineEdit(self.E_p2_gb)
-    classBlueprint.mkLineEdit(self.E_p2_gb_editHost, QtCore.QRect(195, 70, 181, 31), 10, "50")
-    self.E_p2_gb_editHost.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 170, 0);")
+    global E_p2_gb_editHost
+    E_p2_gb_editHost = QtWidgets.QLineEdit(self.E_p2_gb)
+    classBlueprint.mkLineEdit(E_p2_gb_editHost, QtCore.QRect(195, 70, 181, 31), 10, "50")
+    E_p2_gb_editHost.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 170, 0);")
 
     self.E_p2_gb_add = QtWidgets.QPushButton(self.E_p2_gb)
     classBlueprint.mkBtn(self.E_p2_gb_add, QtCore.QRect(285, 105, 100, 30), "background-color: rgb(255, 255, 0);", "Add")
@@ -300,6 +307,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntSwitch(E_p3_gb2_comboS1Interface)
+    E_p3_gb2_comboS1Interface.setCurrentIndex(23)
 
     global E_p3_gb2_comboS1Subnet
     E_p3_gb2_comboS1Subnet = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -317,6 +325,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboIpRule(E_p3_gb2_comboS1Rule)
+    E_p3_gb2_comboS1Rule.setCurrentIndex(2)
 
     global E_p3_gb2_editS1Description
     E_p3_gb2_editS1Description = QtWidgets.QLineEdit(self.E_p3_gb2)
@@ -352,6 +361,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntSwitch(E_p3_gb2_comboS2Interface)
+    E_p3_gb2_comboS2Interface.setCurrentIndex(23)
 
     global E_p3_gb2_comboS2Subnet
     E_p3_gb2_comboS2Subnet = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -369,6 +379,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboIpRule(E_p3_gb2_comboS2Rule)
+    E_p3_gb2_comboS2Rule.setCurrentIndex(2)
 
     global E_p3_gb2_editS2Description
     E_p3_gb2_editS2Description = QtWidgets.QLineEdit(self.E_p3_gb2)
@@ -421,6 +432,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboIpRule(E_p3_gb2_comboR1Rule1)
+    E_p3_gb2_comboR1Rule1.setCurrentIndex(3)
 
     global E_p3_gb2_editR1Description1
     E_p3_gb2_editR1Description1 = QtWidgets.QLineEdit(self.E_p3_gb2)
@@ -458,6 +470,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboIpRule(E_p3_gb2_comboR1Rule2)
+    E_p3_gb2_comboR1Rule2.setCurrentIndex(3)
 
     global E_p3_gb2_editR1Description2
     E_p3_gb2_editR1Description2 = QtWidgets.QLineEdit(self.E_p3_gb2)
@@ -478,6 +491,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntRouter(E_p3_gb2_comboR1Interface3)
+    E_p3_gb2_comboR1Interface3.setCurrentIndex(18)
 
     global E_p3_gb2_comboR1Subnet3
     E_p3_gb2_comboR1Subnet3 = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -495,6 +509,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboIpRule(E_p3_gb2_comboR1Rule3)
+    E_p3_gb2_comboR1Rule3.setCurrentIndex(3)
 
     global E_p3_gb2_editR1Description3
     E_p3_gb2_editR1Description3 = QtWidgets.QLineEdit(self.E_p3_gb2)
@@ -514,6 +529,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntRouter(E_p3_gb2_comboR1Interface4)
+    E_p3_gb2_comboR1Interface4.setCurrentIndex(24)
 
     global E_p3_gb2_comboR1Subnet4
     E_p3_gb2_comboR1Subnet4 = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -531,6 +547,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboIpRule(E_p3_gb2_comboR1Rule4)
+    E_p3_gb2_comboR1Rule4.setCurrentIndex(3)
 
     global E_p3_gb2_editR1Description4
     E_p3_gb2_editR1Description4 = QtWidgets.QLineEdit(self.E_p3_gb2)
@@ -565,6 +582,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntRouter(E_p3_gb2_comboISPInterface)
+    E_p3_gb2_comboISPInterface.setCurrentIndex(18)
 
     global E_p3_gb2_comboISPSubnet
     E_p3_gb2_comboISPSubnet = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -632,6 +650,7 @@ def setupUiExam(self):
 
     self.E_p4_gb1_1 = QtWidgets.QGroupBox(self.E_p4_gb1)
     classBlueprint.mkGroupBox(self.E_p4_gb1_1, QtCore.QRect(120, 144, 441, 42), "")
+    E_p4_gb1_checkSsh.stateChanged.connect(lambda: ssh_hide_groupbox(E_p4_gb1_checkSsh, self.E_p4_gb1_1))
 
     global E_p4_gb1_1_editUsername
     E_p4_gb1_1_editUsername = QtWidgets.QLineEdit(self.E_p4_gb1_1)
@@ -681,6 +700,7 @@ def setupUiExam(self):
 
     self.E_p4_gb2_1 = QtWidgets.QGroupBox(self.E_p4_gb2)
     classBlueprint.mkGroupBox(self.E_p4_gb2_1, QtCore.QRect(120, 144, 441, 42), "")
+    E_p4_gb2_checkSsh.stateChanged.connect(lambda: ssh_hide_groupbox(E_p4_gb2_checkSsh, self.E_p4_gb2_1))
 
     global E_p4_gb2_1_editUsername
     E_p4_gb2_1_editUsername = QtWidgets.QLineEdit(self.E_p4_gb2_1)
@@ -707,11 +727,18 @@ def setupUiExam(self):
 
     self.E_btn_1.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(0))
     self.E_btn_2.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(1))
-    self.E_btn_3.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(2))
-    self.E_btn_4.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(3))
+    E_btn_3.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(2))
+    E_btn_4.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(3))
     self.E_save.clicked.connect(lambda: exam_functions.save_changes(self.stackedWidget_2))
-    self.E_p2_gb_add.clicked.connect(lambda: exam_functions.add_host_to_table(E_p2_table, self.E_p2_gb_editLan, self.E_p2_gb_editHost))
+    self.E_p2_gb_add.clicked.connect(lambda: exam_functions.add_host_to_table(E_p2_table, self.E_p2_gb_editLan, E_p2_gb_editHost))
     self.E_p2_gb_clear.clicked.connect(lambda: exam_functions.clear_table(E_p2_table))
-    self.E_btn_5.clicked.connect(lambda: exam_functions.generate_my_exam())
+    E_btn_5.clicked.connect(lambda: exam_functions.generate_my_exam())
 
-    self.E_btn_3.clicked.connect(lambda: exam_page.build_combo_network())
+    E_btn_3.clicked.connect(lambda: exam_page.build_combo_network())
+
+
+    def ssh_hide_groupbox(ssh_checkbox, ssh_groupbox):
+        if (ssh_checkbox.isChecked()):
+            ssh_groupbox.setVisible(True)
+        elif not (ssh_checkbox.isChecked()):
+            ssh_groupbox.setVisible(False)

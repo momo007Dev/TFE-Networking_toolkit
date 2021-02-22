@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-import subnet_functions, exam_page
+import subnet_functions, exam_page, yaml
 from subnet_functions import *
 from exam_page import *
 
@@ -21,17 +21,21 @@ security_enabled = False
 #--------------END------------------#
 
 def add_host_to_table(table, name, host): # Used when user clicks "add" btn
-    lastrow = table.rowCount()
-    table.insertRow(lastrow)
-
-    lan_text = name.text()
-    item1 = QTableWidgetItem(lan_text)
-
     host_text = host.text()
-    item2 = QTableWidgetItem(host_text)
+    lan_text = name.text()
+    if (utils.blueprintFunctions.checkInt(host_text) is False):
+        utils.blueprintFunctions.mkWarningMsg("Host input Check", "<b><span style=color:'red'>Host number</b></span> must <b>only</b> be composed of <span style=color:'blue'>numbers</span> !")
+    elif (lan_text in lan_names_set):
+        utils.blueprintFunctions.mkWarningMsg("Lan Name Error", "<b><span style=color:'red'>Lan Name</b></span> is <b>already </b><span style=color:'blue'>used</span> !")
+    else:
+        lan_names_set.append(lan_text)
+        lastrow = table.rowCount()
+        table.insertRow(lastrow)
+        item1 = QTableWidgetItem(lan_text)
+        item2 = QTableWidgetItem(host_text)
 
-    table.setItem(lastrow, 0, item1)
-    table.setItem(lastrow, 1, item2)
+        table.setItem(lastrow, 0, item1)
+        table.setItem(lastrow, 1, item2)
 
 def clear_table(table): # Used when user clicks "clear" btn
     x = table.rowCount()
@@ -43,18 +47,15 @@ def clear_table(table): # Used when user clicks "clear" btn
     vlsm_dict = dict()
     clear_combo_network()
 
-
 def sort_hosts(table):
-    lan_names_set.clear() # Clears set
     rowCount = table.rowCount()
     output = dict()
     output_sorted = dict()
     if (rowCount == 0):
-        print("No hosts !")
         return output
     else:
         for x in range(rowCount):
-            lan_names_set.append(table.item(x, 0).text()) # Adds "LAN A" to set
+            #lan_names_set.append(table.item(x, 0).text()) # Adds "LAN A" to set
             output[int(table.item(x, 1).text())] = table.item(x, 0).text()
 
         for i in sorted(output.keys(), reverse=True):
@@ -68,12 +69,29 @@ def sort_hosts(table):
 def save_changes(stacked_widget):
     current_index = stacked_widget.currentIndex()
     if (current_index == 1): # Page 2
-        save_changes_p2()
+        if (utils.blueprintFunctions.checkIp(exam_page.E_p2_editLan.text()) is False or utils.blueprintFunctions.checkIp(exam_page.E_p2_editWan.text()) is False):
+            utils.blueprintFunctions.mkWarningMsg("Ip Check","<b><span style=color:'red'>Ip</b></span> <b>format</b> not respected !")
+        else:
+            save_changes_p2()
+            exam_page.E_btn_3.setVisible(True)
+
 
     elif (current_index == 2): # Page 3
-        save_changes_p3()
+        r1_int_1 = exam_page.E_p3_gb2_comboR1Interface1.currentText()
+        r1_int_2 = exam_page.E_p3_gb2_comboR1Interface2.currentText()
+        r1_int_3 = exam_page.E_p3_gb2_comboR1Interface3.currentText()
+        r1_int_4 = exam_page.E_p3_gb2_comboR1Interface4.currentText()
+        r1_int_list = [r1_int_1, r1_int_2, r1_int_3, r1_int_4]
+        for x in r1_int_list:
+            if r1_int_list.count(x) > 1:
+                utils.blueprintFunctions.mkWarningMsg("Interface Error", "<b><span style=color:'red'>Interface</b></span>" + " <b>" + x + "</b> is already <span style=color:'blue'>used</span> !")
+                break
+            else:
+                save_changes_p3()
+                exam_page.E_btn_4.setVisible(True)
+                exam_page.E_btn_5.setVisible(True)
 
-    elif (current_index == 3): # Page 4 (Addons/Secuirty)
+    elif (current_index == 3): # Page 4 (Addons/Security)
         global security_enabled
         security_enabled = True
 
@@ -115,9 +133,6 @@ def save_changes_p2():
 # Function used when press "save changes" within "connectivity" (page 3)      #
 #-----------------------------------------------------------------------------#
 
-#TODO : Faire un test avec les interfaces recuperer et le mettre dans le router_dict
-#TODO : Recuperer les valeurs de R1 dans le router_dict pour injecter "gateway" dans PC1-2-3
-
 def save_changes_p3():
     global devices_dict
     devices_dict = {
@@ -139,8 +154,8 @@ def save_changes_p3():
         "name" : [exam_page.E_p3_gb2_editR1Host.text()],
         exam_page.E_p3_gb2_comboR1Interface1.currentText() : [exam_page.E_p3_gb2_comboR1Subnet1.currentText(), exam_page.E_p3_gb2_comboR1Rule1.currentText(), "mask", exam_page.E_p3_gb2_editR1Description1.text()],
         exam_page.E_p3_gb2_comboR1Interface2.currentText() : [exam_page.E_p3_gb2_comboR1Subnet2.currentText(), exam_page.E_p3_gb2_comboR1Rule2.currentText(), "mask", exam_page.E_p3_gb2_editR1Description2.text()],
-        exam_page.E_p3_gb2_comboR1Interface3.currentText(): [exam_page.E_p3_gb2_comboR1Subnet3.currentText(), exam_page.E_p3_gb2_comboR1Rule3.currentText(), "mask", exam_page.E_p3_gb2_editR1Description3.text()],
-        exam_page.E_p3_gb2_comboR1Interface4.currentText(): [exam_page.E_p3_gb2_comboR1Subnet4.currentText(), exam_page.E_p3_gb2_comboR1Rule4.currentText(), "mask", exam_page.E_p3_gb2_editR1Description4.text()],
+        exam_page.E_p3_gb2_comboR1Interface3.currentText() : [exam_page.E_p3_gb2_comboR1Subnet3.currentText(), exam_page.E_p3_gb2_comboR1Rule3.currentText(), "mask", exam_page.E_p3_gb2_editR1Description3.text()],
+        exam_page.E_p3_gb2_comboR1Interface4.currentText() : [exam_page.E_p3_gb2_comboR1Subnet4.currentText(), exam_page.E_p3_gb2_comboR1Rule4.currentText(), "mask", exam_page.E_p3_gb2_editR1Description4.text()],
     }
 
     # Updates the "MASK" and "IP" field in the "router_dict"
@@ -194,8 +209,13 @@ def save_changes_p3():
     """
 
 def generate_my_exam():
+    generate_solution_text()
+    generate_solution_packet_tracer()
 
-    # Generates the "txt" file network solution
+#----------------------------------------------------------#
+# Function that generates the "txt" file network solution  #
+#----------------------------------------------------------#
+def generate_solution_text():
     output =  "----------------\n"
     output += "   SUBNETS      \n"
     output += "----------------\n"
@@ -333,8 +353,265 @@ def generate_my_exam():
     with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution.txt", "a") as f:
         f.write(output)
 
-    # Generates the "yaml" file for Packet Tracer wizard
+    # ----------------------------------------------------------#
+    # Function that generates the "yaml" file for packet tracer #
+    # ----------------------------------------------------------#
+def generate_solution_packet_tracer():
+    global packet_tracer_stuct
+    packet_tracer_stuct = {
+        "Network": {
+            devices_dict.get("PC1")[0]: {
+                "Default Gateway": devices_dict.get("PC1")[5],
+                "Ports": {
+                    "F0": {
+                        "IP": devices_dict.get("PC1")[3],
+                        "Link": {
+                            "Connects to": "F0/1",
+                            "Type": "0 0"
+                        },
+                        "Mask": devices_dict.get("PC1")[4]
+                    }
+                }
+            },
+            devices_dict.get("PC2")[0]: {
+                "Default Gateway": devices_dict.get("PC2")[5],
+                "Ports": {
+                    "F0": {
+                        "IP": devices_dict.get("PC2")[3],
+                        "Link": {
+                            "Connects to": "F0/1",
+                            "Type": "0 0"
+                        },
+                        "Mask": devices_dict.get("PC2")[4]
+                    }
+                }
+            },
+            devices_dict.get("PC3")[0]: {
+                "Default Gateway": devices_dict.get("PC3")[5],
+                "Ports": {
+                    "F0": {
+                        "IP": devices_dict.get("PC3")[3],
+                        "Link": {
+                            "Connects to": "F0/1",
+                            "Type": "0 0"
+                        },
+                        "Mask": devices_dict.get("PC3")[4]
+                    }
+                }
+            },
+            devices_dict.get("S1")[0]: {
+                "Banner MOTD" : exam_page.E_p4_gb2_editBanner.text(),
+                "Console Line": {
+                    "Login": 1,
+                    "Password": exam_page.E_p4_gb2_editPassword.text()
+                },
+                "Default Gateway": devices_dict.get("S1")[5],
+                "DNS" : {
+                    "Ip Domain Name" : dns
+                },
+                "Enable Secret": exam_page.E_p4_gb2_editSecret.text(),
+                "Host Name": devices_dict.get("S1")[0],
+                "Ports": {
+                    "F0/1": {
+                        "Link to " + devices_dict.get("PC1")[0]: {
+                            "Connects to F0": "True",
+                            "Type": "0 0"
+                        }
+                    }, # ---S1---
+                    devices_dict.get("S1")[1]: {
+                        "Link to " + str(list(router_dict.get("name"))[0]): {
+                            "Connects to " + str(list(router_dict.keys())[1]): "True",
+                            "Type": "0 0"
+                        }
+                    },
+                    "Vlan1": {
+                        "IP": devices_dict.get("S1")[3],
+                        "Port Status": 1,
+                        "Mask": devices_dict.get("S1")[4]
+                    },
+                },
+                "User Names" : { # SSH
+                    "Username" : exam_page.E_p4_gb2_1_editUsername.text() + " " + exam_page.E_p4_gb2_1_editPassword.text()
+                },
+                "Security" : { # SSH
+                    "Crypto Key Set" : "Check this case",
+                    "Modulus Bits" : 1024
+                },
+                "Service Password Encryption": 1,
+                "Startup config": 1,
+                "VTY Lines": {
+                    "VTY Line 0": {
+                        "Login": 2, # SSH
+                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Transport Input": 2  # SSH
+                    },
+                    "VTY Line 15": {
+                        "Login": 2, # SSH
+                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Transport Input" : 2 # SSH
+                    }
+                }
+            }, # ---S2---
+            devices_dict.get("S2")[0]: {
+                "Banner MOTD": exam_page.E_p4_gb2_editBanner.text(),
+                "Console Line": {
+                    "Login": 1,
+                    "Password": exam_page.E_p4_gb2_editPassword.text()
+                },
+                "Default Gateway": devices_dict.get("S2")[5],
+                "DNS": {
+                    "Ip Domain Name": dns
+                },
+                "Enable Secret": exam_page.E_p4_gb2_editSecret.text(),
+                "Host Name": devices_dict.get("S2")[0],
+                "Ports": {
+                    "F0/1": {
+                        "Link to " + devices_dict.get("PC2")[0]: {
+                            "Connects to F0": "True",
+                            "Type": "0 0"
+                        }
+                    },
+                    devices_dict.get("S2")[1]: {
+                        "Link to " + str(list(router_dict.get("name"))[0]): {
+                            "Connects to " + str(list(router_dict.keys())[2]): "True",
+                            "Type": "0 0"
+                        }
+                    },
+                    "Vlan1": {
+                        "IP": devices_dict.get("S2")[3],
+                        "Port Status": 1,
+                        "Mask": devices_dict.get("S2")[4]
+                    },
+                },
+                "User Names": {  # SSH
+                    "Username": exam_page.E_p4_gb2_1_editUsername.text() + " " + exam_page.E_p4_gb2_1_editPassword.text()
+                },
+                "Security": {  # SSH
+                    "Crypto Key Set": "Check this case",
+                    "Modulus Bits": 1024
+                },
+                "Service Password Encryption": 1,
+                "Startup config": 1,
+                "VTY Lines": {
+                    "VTY Line 0": {
+                        "Login": 2,  # SSH
+                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Transport Input": 2  # SSH
+                    },
+                    "VTY Line 15": {
+                        "Login": 2,  # SSH
+                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Transport Input": 2  # SSH
+                    }
+                }
+            }, # ---R1---
+            str(list(router_dict.get("name"))[0]): {
+                "Banner MOTD": exam_page.E_p4_gb1_editBanner.text(),
+                "Console Line": {
+                    "Login": 1,
+                    "Password": exam_page.E_p4_gb1_editPassword.text()
+                },
+                "DNS": {
+                    "Ip Domain Name": dns
+                },
+                "Enable Secret": exam_page.E_p4_gb1_editSecret.text(),
+                "Host Name": str(list(router_dict.get("name"))[0]),
+                "Ports": {
+                    str(list(router_dict.keys())[1]): { # F0/0
+                        "Description": router_dict[str(list(router_dict.keys())[1])][3],
+                        "IP": router_dict[str(list(router_dict.keys())[1])][1],
+                        "Link to " + devices_dict.get("S1")[0]: {
+                            "Connects to " + devices_dict.get("S1")[1]: "True",
+                            "Type": "0 0"
+                        },
+                        "Port Status": 1,
+                        "Mask": router_dict[str(list(router_dict.keys())[1])][2]
+                    },
+                    str(list(router_dict.keys())[2]): { # F0/1
+                        "Description" : router_dict[str(list(router_dict.keys())[2])][3],
+                        "IP" : router_dict[str(list(router_dict.keys())[2])][1],
+                        "Link to " + devices_dict.get("S2")[0]: {
+                            "Connects to " + devices_dict.get("S2")[1]: "True",
+                            "Type": "0 0"
+                        },
+                        "Port Status" : 1,
+                        "Mask" : router_dict[str(list(router_dict.keys())[2])][2]
+                    },
+                    str(list(router_dict.keys())[3]): { # S0/0/0
+                        "Description": router_dict[str(list(router_dict.keys())[3])][3],
+                        "IP": router_dict[str(list(router_dict.keys())[3])][1],
+                        "Link to " + devices_dict.get("ISP")[0]: {
+                            "Connects to " + devices_dict.get("ISP")[1]: "True",
+                            "Type": "0 0"
+                        },
+                        "Port Status": 1,
+                        "Mask": router_dict[str(list(router_dict.keys())[3])][2]
+                    },
+                    str(list(router_dict.keys())[4]): { # E0/0/0
+                        "Description": router_dict[str(list(router_dict.keys())[4])][3],
+                        "IP": router_dict[str(list(router_dict.keys())[4])][1],
+                        "Link to " + devices_dict.get("PC3")[0]: {
+                            "Connects to F0" : "True",
+                            "Type": "0 0"
+                        },
+                        "Port Status": 1,
+                        "Mask": router_dict[str(list(router_dict.keys())[4])][2]
+                    },
+                },
+                #"Routes" : {
+                #  "Static Routes" : {
+                #      "Route0" : "0.0.0.0-0-Serial0/0/1-0-1"
+                #  }
+                #},
+                "User Names": {  # SSH
+                    "Username": exam_page.E_p4_gb2_1_editUsername.text() + " " + exam_page.E_p4_gb2_1_editPassword.text()
+                },
+                "Security": {  # SSH
+                    "Crypto Key Set": "Check this case",
+                    "Modulus Bits": 1024
+                },
+                "Service Password Encryption": 1,
+                "Startup config": 1,
+                "VTY Lines": {
+                    "VTY Line 0": {
+                        "Login": 2,  # SSH
+                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Transport Input": 2  # SSH
+                    },
+                    "VTY Line 15": {
+                        "Login": 2,  # SSH
+                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Transport Input": 2  # SSH
+                    }
+                }
+            }
+        }
+    }
+    if not (exam_page.E_p4_gb2_checkSsh.isChecked()): # If SSH is DISABLED on switchs
+        disable_ssh_output_packet_tracer("S1")
+        disable_ssh_output_packet_tracer("S2")
 
+    if not (exam_page.E_p4_gb2_checkEncryption.isChecked()): # If password-encryption is DISABLED on switchs
+        del packet_tracer_stuct["Network"]["S1"]["Service Password Encryption"]
+        del packet_tracer_stuct["Network"]["S2"]["Service Password Encryption"]
+
+    if not (exam_page.E_p4_gb1_checkSsh.isChecked()):  # If SSH is DISABLED on R1
+        disable_ssh_output_packet_tracer("R1")
+
+    if not (exam_page.E_p4_gb1_checkEncryption.isChecked()):  # If password-encryption is DISABLED on R1
+        del packet_tracer_stuct["Network"]["R1"]["Service Password Encryption"]
+
+    with open(str(utils.blueprintFunctions.getDesktopPath()) + "/packet-tracer.yaml", "a") as f:
+        yaml.dump(packet_tracer_stuct, f)
+
+def disable_ssh_output_packet_tracer(device_name):
+    packet_tracer_stuct["Network"][device_name]["VTY Lines"]["VTY Line 0"]["Login"] = 1
+    packet_tracer_stuct["Network"][device_name]["VTY Lines"]["VTY Line 15"]["Login"] = 1
+    del packet_tracer_stuct["Network"][device_name]["VTY Lines"]["VTY Line 0"]["Transport Input"]
+    del packet_tracer_stuct["Network"][device_name]["VTY Lines"]["VTY Line 15"]["Transport Input"]
+    del packet_tracer_stuct["Network"][device_name]["Security"]
+    del packet_tracer_stuct["Network"][device_name]["User Names"]
+    del packet_tracer_stuct["Network"][device_name]["DNS"]
 
 def build_combo_network(): # Called when user clicks "(3) Connectivity"
     clear_combo_network()
@@ -349,6 +626,12 @@ def build_combo_network(): # Called when user clicks "(3) Connectivity"
         exam_page.E_p3_gb2_comboR1Subnet3.addItem(a) # R1-3
         exam_page.E_p3_gb2_comboR1Subnet4.addItem(a) # R1-4
         exam_page.E_p3_gb2_comboISPSubnet.addItem(a) # ISP
+        exam_page.E_p3_gb2_comboS1Rule.setCurrentIndex(2)
+        exam_page.E_p3_gb2_comboS2Rule.setCurrentIndex(2)
+        exam_page.E_p3_gb2_comboR1Rule1.setCurrentIndex(3)
+        exam_page.E_p3_gb2_comboR1Rule2.setCurrentIndex(3)
+        exam_page.E_p3_gb2_comboR1Rule3.setCurrentIndex(3)
+        exam_page.E_p3_gb2_comboR1Rule4.setCurrentIndex(3)
 
 def clear_combo_network():
     exam_page.E_p3_gb1_comboPc1Subnet.clear()

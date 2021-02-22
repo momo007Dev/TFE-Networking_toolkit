@@ -89,5 +89,6 @@ if __name__ == "__main__":
     Main = QtWidgets.QMainWindow()
     ui = Ui_Main()
     ui.setupUi(Main)
+    classBlueprint.deleteOutputFile()
     Main.show()
     sys.exit(app.exec_())
