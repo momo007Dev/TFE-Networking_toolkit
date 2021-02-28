@@ -17,7 +17,7 @@ Nom du fichier | hash sha1 associé
 ---------|----------
  release_windows.zip | 7ebb98c7017b2d922916c1521c31a8d841afa863
 
-**Comment générer un hash md5 sous windows ?**
+**Comment générer un hash sha1 sous windows ?**
 
 1. Télécharger le fichier sur votre machine.
 2. Ouvrir l'explorateur de fichier windows et aller dans le dossier où se situe le fichier téléchargé (généralement "Téléchargement")
@@ -145,3 +145,10 @@ Plateforme | Langage (programmation) | Librairie ?
 ### Demo de la partie subneting utilities
 
 ![](code/img/demo_subnet.gif)
+
+---
+
+## Sources utilisées
+
+* [Générer un hash sha1/md5 sous windows](https://www.lifewire.com/validate-md5-checksum-file-4037391)
+* [Documentation des composants graphiques de la librairie "PyQT5"](https://doc.qt.io/qt-5/)
