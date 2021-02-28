@@ -96,7 +96,7 @@ class blueprintFunctions:
     def mkWarningMsg(title, text):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Warning)
-        msg.setWindowIcon(QtGui.QIcon(".\\../img/worker-warning-msg.png"))
+        msg.setWindowIcon(QtGui.QIcon("img/worker-warning-msg.png"))
         msg.setText(text)
         msg.setWindowTitle(title)
         msg.exec()
