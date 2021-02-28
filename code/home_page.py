@@ -31,7 +31,7 @@ def setupUiHome(self):
     classBlueprint.mkBtn(self.Btn_About, QtCore.QRect(690, 0, 160, 70), "background-color: rgb(147, 147, 147);", "About")
 
     self.Background_img = QtWidgets.QLabel(self.Home)
-    classBlueprint.mkLabPic(self.Background_img, QtCore.QRect(0, 70, 901, 631), QtGui.QPixmap(".\\../img/logo.jpg"), True)
+    classBlueprint.mkLabPic(self.Background_img, QtCore.QRect(0, 70, 901, 631), QtGui.QPixmap("./img/logo.jpg"), True)
 
     self.Black_Square1 = QtWidgets.QLabel(self.Home)
     classBlueprint.mkLabel(self.Black_Square1, QtCore.QRect(0, 0, 51, 71), "")

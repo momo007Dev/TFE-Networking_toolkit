@@ -19,7 +19,7 @@ def setupUiSubnet(self):
     self.Subnet.setObjectName("Subnet")
 
     self.S_backimg = QtWidgets.QLabel(self.Subnet)
-    classBlueprint.mkLabPic(self.S_backimg, QtCore.QRect(0, 0, 901, 50), QtGui.QPixmap(".\\../img/cisco1.png"), False)
+    classBlueprint.mkLabPic(self.S_backimg, QtCore.QRect(0, 0, 901, 50), QtGui.QPixmap("./img/cisco1.png"), False)
 
     self.S_Btn_title = QtWidgets.QPushButton(self.Subnet)
     classBlueprint.mkBtn(self.S_Btn_title, QtCore.QRect(370, 0, 161, 51), "background-color: rgb(85, 255, 127);", "Subneting\nUtilities")
@@ -32,13 +32,13 @@ def setupUiSubnet(self):
     classBlueprint.mkLabel(self.S_label_classful, QtCore.QRect(120, 60, 171, 41), "Classful Ranges")
 
     self.S_img1 = QtWidgets.QLabel(self.Subnet)
-    classBlueprint.mkLabPic(self.S_img1, QtCore.QRect(40, 100, 331, 131), QtGui.QPixmap(".\\../img/cheatSheet1.png"), True)
+    classBlueprint.mkLabPic(self.S_img1, QtCore.QRect(40, 100, 331, 131), QtGui.QPixmap("./img/cheatSheet1.png"), True)
 
     self.S_label_reserved = QtWidgets.QLabel(self.Subnet)
     classBlueprint.mkLabel(self.S_label_reserved, QtCore.QRect(550, 60, 181, 41), "Reserved Ranges")
 
     self.S_img2 = QtWidgets.QLabel(self.Subnet)
-    classBlueprint.mkLabPic(self.S_img2, QtCore.QRect(480, 100, 331, 111), QtGui.QPixmap(".\\../img/cheatSheet2.png"), True)
+    classBlueprint.mkLabPic(self.S_img2, QtCore.QRect(480, 100, 331, 111), QtGui.QPixmap("./img/cheatSheet2.png"), True)
 
     self.S_subnet_cidr = QtWidgets.QLabel(self.Subnet)
     classBlueprint.mkLabel(self.S_subnet_cidr, QtCore.QRect(70, 250, 61, 31), "CIDR")

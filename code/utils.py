@@ -183,6 +183,10 @@ class blueprintFunctions:
                         n2 += 1
                     n1 += 1
 
+    def fillComboStaticRoute(combo_route, combo_r1_int, combo_isp_ip):
+        combo_route.addItem(combo_r1_int.currentText())
+        combo_route.addItem(combo_isp_ip.currentText())
+
     #--------END----------------------------#
 
 #----------------

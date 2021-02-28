@@ -346,7 +346,9 @@ def generate_solution_text():
             output += "exit" + "\n"
             output += "\n"
 
-    output += "ip route 0.0.0.0 0.0.0.0 " + exam_page.E_p3_gb2_comboR1Interface3.currentText() + "\n"
+    if (exam_page.E_p4_gb3_check.isChecked()):
+        output += "ip route " + exam_page.E_p4_gb3_edit1.text() + " " + exam_page.E_p4_gb3_edit2.text() + " " + exam_page.E_p4_gb3_combo.currentText()  + "\n"
+
     output += "end" + "\n"
     output += "wr" + "\n"
 
@@ -560,7 +562,7 @@ def generate_solution_packet_tracer():
                 },
                 #"Routes" : {
                 #  "Static Routes" : {
-                #      "Route0" : "0.0.0.0-0-Serial0/0/1-0-1"
+                #      "Route0" : "0.0.0.0-0-Serial0/0/1-0-1" 0.0.0.0-0-GigabitEthernet0/1-0-1
                 #  }
                 #},
                 "User Names": {  # SSH
@@ -654,3 +656,12 @@ def on_change_dropdown_network(combo, combo2): # Combo = LAN A, LAN B, WAN | Com
         combo2.clear()
         for ip in wan_ip_tab:
             combo2.addItem(ip)
+
+def show_topologie_selected(label, btn, swap):
+    if (swap is True):
+        label.setStyleSheet("border : 0px;")
+        btn.setVisible(False)
+        utils.blueprintFunctions.mkWarningMsg("Info", "<b><span style=color:'red'>Coming</b></span> <b><i>soon</i></b> !")
+    elif (swap is False):
+        label.setStyleSheet("border : 3px solid red;")
+        btn.setVisible(True)

@@ -22,7 +22,7 @@ def setupUiExam(self):
     self.Exam.setObjectName("Exam")
 
     self.E_backimg = QtWidgets.QLabel(self.Exam)
-    classBlueprint.mkLabPic(self.E_backimg, QtCore.QRect(0, 0, 901, 51), QtGui.QPixmap(".\\../img/cisco1.png"), False)
+    classBlueprint.mkLabPic(self.E_backimg, QtCore.QRect(0, 0, 901, 51), QtGui.QPixmap("./img/cisco1.png"), False)
 
     self.E_Btn_title = QtWidgets.QPushButton(self.Exam)
     classBlueprint.mkBtn(self.E_Btn_title, QtCore.QRect(370, 0, 161, 51), "background-color: rgb(255, 179, 179);", "Exam\nGenerator")
@@ -36,6 +36,7 @@ def setupUiExam(self):
 
     self.E_btn_2 = QtWidgets.QPushButton(self.Exam)
     classBlueprint.mkBtn(self.E_btn_2, QtCore.QRect(185, 47, 160, 50), "background-color: rgb(255, 170, 0);", "(2) Main\nConfiguration")
+    self.E_btn_2.setVisible(False)
 
     global E_btn_3
     E_btn_3 = QtWidgets.QPushButton(self.Exam)
@@ -59,6 +60,7 @@ def setupUiExam(self):
 
     self.E_save = QtWidgets.QPushButton(self.Exam)
     classBlueprint.mkBtn(self.E_save, QtCore.QRect(570, 650, 160, 50), "background-color: rgb(255, 85, 127);", "Save Changes")
+    self.E_save.setVisible(False)
 
     self.stackedWidget_2 = QtWidgets.QStackedWidget(self.Exam)
     self.stackedWidget_2.setGeometry(QtCore.QRect(0, 99, 901, 551))
@@ -76,17 +78,20 @@ def setupUiExam(self):
     classBlueprint.mkLabel(self.E_p1_label, QtCore.QRect(30, 10, 285, 31), "Choose your base topology :")
 
     self.frame = QtWidgets.QFrame(self.page_1)
-    self.frame.setGeometry(QtCore.QRect(30, 60, 861, 481))
+    self.frame.setGeometry(QtCore.QRect(40, 50, 821, 495))
     self.frame.setStyleSheet("background-color: rgb(170, 255, 127);")
 
     self.E_p1_img1 = QtWidgets.QLabel(self.frame)
-    classBlueprint.mkLabPic(self.E_p1_img1, QtCore.QRect(10, 10, 281, 191), QtGui.QPixmap(".\\../img/schema1.png"), True)
+    classBlueprint.mkLabPic(self.E_p1_img1, QtCore.QRect(5, 5, 281, 201), QtGui.QPixmap("./img/schema1.png"), True)
+    self.E_p1_img1.mousePressEvent = lambda _: exam_functions.show_topologie_selected(self.E_p1_img1, self.E_btn_2, False)
 
-    self.E_p1_line = QtWidgets.QFrame(self.frame)
-    self.E_p1_line.setGeometry(QtCore.QRect(0, 200, 851, 16))
-    self.E_p1_line.setFrameShape(QtWidgets.QFrame.HLine)
-    self.E_p1_line.setFrameShadow(QtWidgets.QFrame.Sunken)
-    self.E_p1_line.setObjectName("E_p1_line")
+    self.E_p1_img2 = QtWidgets.QLabel(self.frame)
+    classBlueprint.mkLabPic(self.E_p1_img2, QtCore.QRect(5, 210, 421, 281), QtGui.QPixmap("./img/schema2_lock.png"), True)
+    self.E_p1_img2.mousePressEvent = lambda _: exam_functions.show_topologie_selected(self.E_p1_img1, self.E_btn_2, True)
+
+    self.E_p1_img3 = QtWidgets.QLabel(self.frame)
+    classBlueprint.mkLabPic(self.E_p1_img3, QtCore.QRect(465, 5, 351, 341), QtGui.QPixmap("./img/schema3_lock.png"), True)
+    self.E_p1_img3.mousePressEvent = lambda _: exam_functions.show_topologie_selected(self.E_p1_img1, self.E_btn_2, True)
 
     self.stackedWidget_2.addWidget(self.page_1)
 
@@ -98,7 +103,7 @@ def setupUiExam(self):
     self.page_2.setObjectName("page_2")
 
     self.E_p2_img = QtWidgets.QLabel(self.page_2)
-    classBlueprint.mkLabPic(self.E_p2_img, QtCore.QRect(0, 0, 311, 221), QtGui.QPixmap(".\\../img/schema1-1.png"), True)
+    classBlueprint.mkLabPic(self.E_p2_img, QtCore.QRect(0, 0, 311, 221), QtGui.QPixmap("./img/schema1-1.png"), True)
 
     self.E_p2_labelLan = QtWidgets.QLabel(self.page_2)
     classBlueprint.mkLabel(self.E_p2_labelLan, QtCore.QRect(320, 10, 210, 31), "Local subnet (LAN) :")
@@ -183,7 +188,7 @@ def setupUiExam(self):
     self.page_3.setObjectName("page_3")
 
     self.E_p3_img = QtWidgets.QLabel(self.page_3)
-    classBlueprint.mkLabPic(self.E_p3_img, QtCore.QRect(590, 0, 311, 221), QtGui.QPixmap(".\\../img/schema1-1.png"), True)
+    classBlueprint.mkLabPic(self.E_p3_img, QtCore.QRect(590, 0, 311, 221), QtGui.QPixmap("./img/schema1-1.png"), True)
 
     self.E_p3_gb1 = QtWidgets.QGroupBox(self.page_3)
     classBlueprint.mkGroupBox(self.E_p3_gb1, QtCore.QRect(10, 10, 571, 201), "")
@@ -618,7 +623,7 @@ def setupUiExam(self):
     self.page_4.setObjectName("page_4")
 
     self.E_p4_img = QtWidgets.QLabel(self.page_4)
-    classBlueprint.mkLabPic(self.E_p4_img, QtCore.QRect(590, 0, 311, 221), QtGui.QPixmap(".\\../img/schema1-1.png"), True)
+    classBlueprint.mkLabPic(self.E_p4_img, QtCore.QRect(590, 0, 311, 221), QtGui.QPixmap("./img/schema1-1.png"), True)
 
     # Groupbox R1 - Security
     self.E_p4_gb1 = QtWidgets.QGroupBox(self.page_4)
@@ -720,6 +725,41 @@ def setupUiExam(self):
     classBlueprint.mkLineEdit(E_p4_gb2_editBanner, QtCore.QRect(10, 220, 541, 31), 50, "You are accessing a restricted system")
     E_p4_gb2_editBanner.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(85, 170, 0);")
 
+    # Groupbox Static routing
+    self.E_p4_gb3 = QtWidgets.QGroupBox(self.page_4)
+    classBlueprint.mkGroupBox(self.E_p4_gb3, QtCore.QRect(600, 250, 291, 281), "Static Route ?", True)
+
+    self.E_p4_gb3_label1 = QtWidgets.QLabel(self.E_p4_gb3)
+    classBlueprint.mkLabel(self.E_p4_gb3_label1, QtCore.QRect(10, 30, 41, 31), "IP :", True)
+
+    self.E_p4_gb3_label2 = QtWidgets.QLabel(self.E_p4_gb3)
+    classBlueprint.mkLabel(self.E_p4_gb3_label2, QtCore.QRect(10, 80, 61, 31), "Mask :", True)
+
+    self.E_p4_gb3_label3 = QtWidgets.QLabel(self.E_p4_gb3)
+    classBlueprint.mkLabel(self.E_p4_gb3_label3, QtCore.QRect(10, 130, 261, 31), "Next hop / output interface :", True)
+
+    global E_p4_gb3_edit1
+    E_p4_gb3_edit1 = QtWidgets.QLineEdit(self.E_p4_gb3)
+    classBlueprint.mkLineEdit(E_p4_gb3_edit1, QtCore.QRect(110, 30, 171, 31), 22, "0.0.0.0")
+    E_p4_gb3_edit1.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    global E_p4_gb3_edit2
+    E_p4_gb3_edit2 = QtWidgets.QLineEdit(self.E_p4_gb3)
+    classBlueprint.mkLineEdit(E_p4_gb3_edit2, QtCore.QRect(110, 80, 171, 31), 22, "0.0.0.0")
+    E_p4_gb3_edit2.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 0, 255);")
+
+    global E_p4_gb3_combo
+    E_p4_gb3_combo = QtWidgets.QComboBox(self.E_p4_gb3)
+    classBlueprint.mkCombo(E_p4_gb3_combo, QtCore.QRect(50, 180, 181, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+
+    global E_p4_gb3_check
+    E_p4_gb3_check = QtWidgets.QCheckBox(self.E_p4_gb3)
+    classBlueprint.mkCheck(E_p4_gb3_check, QtCore.QRect(50, 250, 191, 20), True, "Add a static route ?", True)
+
     self.stackedWidget_2.addWidget(self.page_4)
     self.stackedWidget.addWidget(self.Exam)
 
@@ -729,12 +769,21 @@ def setupUiExam(self):
     self.E_btn_2.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(1))
     E_btn_3.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(2))
     E_btn_4.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(3))
+
     self.E_save.clicked.connect(lambda: exam_functions.save_changes(self.stackedWidget_2))
     self.E_p2_gb_add.clicked.connect(lambda: exam_functions.add_host_to_table(E_p2_table, self.E_p2_gb_editLan, E_p2_gb_editHost))
     self.E_p2_gb_clear.clicked.connect(lambda: exam_functions.clear_table(E_p2_table))
     E_btn_5.clicked.connect(lambda: exam_functions.generate_my_exam())
 
+    self.E_btn_2.clicked.connect(lambda: self.E_save.setVisible(True))
     E_btn_3.clicked.connect(lambda: exam_page.build_combo_network())
+    E_btn_4.clicked.connect(lambda: utils.blueprintFunctions.fillComboStaticRoute(E_p4_gb3_combo, E_p3_gb2_comboR1Interface3, E_p3_gb2_comboISPRule))
+
+    self.stackedWidget_2.currentChanged.connect(lambda: hide_save_btn())
+
+    def hide_save_btn():
+        if (self.stackedWidget_2.currentIndex() == 0):
+            self.E_save.setVisible(False)
 
 
     def ssh_hide_groupbox(ssh_checkbox, ssh_groupbox):

@@ -105,7 +105,7 @@ Plateforme | Langage (programmation) | Librairie ?
 
 ## Organisation et trello
 
-![Image du trello](img/trello.png)
+![Image du trello](code/img/trello.png)
 
 * [Lien vers trello](https://trello.com/b/ywBg35gv/tfe)
 
@@ -113,7 +113,7 @@ Plateforme | Langage (programmation) | Librairie ?
 
 ## Mocup
 
-![Image de l'application](img/mocup.png)
+![Image de l'application](code/img/mocup.png)
 
 ---
 
@@ -121,4 +121,4 @@ Plateforme | Langage (programmation) | Librairie ?
 
 ### Demo de la partie subneting utilities
 
-![](img/demo_subnet.gif)
+![](code/img/demo_subnet.gif)

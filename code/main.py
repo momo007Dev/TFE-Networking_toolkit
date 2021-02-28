@@ -19,7 +19,7 @@ class Ui_Main(object):
         Main.setMaximumSize(QtCore.QSize(900, 700))
 
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(".\\../img/ciscoIcon.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("./img/logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Main.setWindowIcon(icon)
 
         self.centralwidget = QtWidgets.QWidget(Main)

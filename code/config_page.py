@@ -23,16 +23,16 @@ def setupUiConfig(self):
     classBlueprint.mkBtn(self.C_Btn_title, QtCore.QRect(370, 0, 160, 51), "background-color: rgb(0, 170, 255);", "Configuration\nManager")
 
     self.C_img = QtWidgets.QLabel(self.Config)
-    classBlueprint.mkLabPic(self.C_img, QtCore.QRect(0, 0, 900, 100), QtGui.QPixmap(".\\../img/cisco1.png"), False)
+    classBlueprint.mkLabPic(self.C_img, QtCore.QRect(0, 0, 900, 100), QtGui.QPixmap("./img/cisco1.png"), False)
 
     self.C_img_swl2 = QtWidgets.QLabel(self.Config)
-    classBlueprint.mkLabPic(self.C_img_swl2, QtCore.QRect(170, 60, 80, 40), QtGui.QPixmap(".\\../img/switchL2.png"), True)
+    classBlueprint.mkLabPic(self.C_img_swl2, QtCore.QRect(170, 60, 80, 40), QtGui.QPixmap("./img/switchL2.png"), True)
 
     self.C_img_Router = QtWidgets.QLabel(self.Config)
-    classBlueprint.mkLabPic(self.C_img_Router, QtCore.QRect(300, 60, 80, 40), QtGui.QPixmap(".\\../img/router.png"), True)
+    classBlueprint.mkLabPic(self.C_img_Router, QtCore.QRect(300, 60, 80, 40), QtGui.QPixmap("./img/router.png"), True)
 
     self.C_img_swl3 = QtWidgets.QLabel(self.Config)
-    classBlueprint.mkLabPic(self.C_img_swl3, QtCore.QRect(430, 60, 80, 40), QtGui.QPixmap(".\\../img/switchL3.png"), True)
+    classBlueprint.mkLabPic(self.C_img_swl3, QtCore.QRect(430, 60, 80, 40), QtGui.QPixmap("./img/switchL3.png"), True)
 
     self.C_Btn_Swl2 = QtWidgets.QPushButton(self.Config)
     classBlueprint.mkBtn(self.C_Btn_Swl2, QtCore.QRect(170, 60, 80, 40), "border: 0px", "")
