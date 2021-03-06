@@ -590,18 +590,18 @@ def generate_solution_packet_tracer():
         }
     }
     if not (exam_page.E_p4_gb2_checkSsh.isChecked()): # If SSH is DISABLED on switchs
-        disable_ssh_output_packet_tracer("S1")
-        disable_ssh_output_packet_tracer("S2")
+        disable_ssh_output_packet_tracer(devices_dict.get("S1")[0])
+        disable_ssh_output_packet_tracer(devices_dict.get("S2")[0])
 
     if not (exam_page.E_p4_gb2_checkEncryption.isChecked()): # If password-encryption is DISABLED on switchs
         del packet_tracer_stuct["Network"]["S1"]["Service Password Encryption"]
         del packet_tracer_stuct["Network"]["S2"]["Service Password Encryption"]
 
     if not (exam_page.E_p4_gb1_checkSsh.isChecked()):  # If SSH is DISABLED on R1
-        disable_ssh_output_packet_tracer("R1")
+        disable_ssh_output_packet_tracer(str(list(router_dict.get("name"))[0]))
 
     if not (exam_page.E_p4_gb1_checkEncryption.isChecked()):  # If password-encryption is DISABLED on R1
-        del packet_tracer_stuct["Network"]["R1"]["Service Password Encryption"]
+        del packet_tracer_stuct["Network"][str(list(router_dict.get("name"))[0])]["Service Password Encryption"]
 
     with open(str(utils.blueprintFunctions.getDesktopPath()) + "/packet-tracer.yaml", "a") as f:
         yaml.dump(packet_tracer_stuct, f)

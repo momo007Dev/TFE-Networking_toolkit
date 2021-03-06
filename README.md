@@ -7,7 +7,7 @@
 
 ### Release
 
-* Version ***1.0*** : [release-windows.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/release/release_windows.zip)
+* Version ***1.0*** : [release_windows.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/release/release_windows.zip)
 
 > ***PS : Cette première version peut générer des examens de 1ère et inclu également un simplificateur de calcul de sous-réseau et VLSM. Disponible uniquement pour Windows (pour l'instant)***
 
@@ -15,7 +15,7 @@
 
 Nom du fichier | hash sha1 associé
 ---------|----------
- release_windows.zip | 7ebb98c7017b2d922916c1521c31a8d841afa863
+ release_windows.zip | 16b9e0554c76446aebab74f721991816aafa6492
 
 **Comment générer un hash sha1 sous windows ?**
 
@@ -23,7 +23,7 @@ Nom du fichier | hash sha1 associé
 2. Ouvrir l'explorateur de fichier windows et aller dans le dossier où se situe le fichier téléchargé (généralement "Téléchargement")
 3. Maintenir la touche "Maj" ("shift" en anglais) + faire un click droit avec la souris et sélectionner "Ouvrir powershell ici"
 4. Taper la commande "***```certutil -hashfile release_windows.zip```***"
-  * Sans argument, il optera pour le sha1 qui fera l'affaire pour ce petit programme de TFE.
+   * Sans argument, il optera pour le sha1 qui fera l'affaire pour ce petit programme de TFE.
 5. Vérifier si le hash correspond à celui mis dans le tableau ci-dessus. 
 
 ---
