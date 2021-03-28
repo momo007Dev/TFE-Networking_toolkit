@@ -34,9 +34,10 @@ def setupUiExam(self):
     self.E_btn_1 = QtWidgets.QPushButton(self.Exam)
     classBlueprint.mkBtn(self.E_btn_1, QtCore.QRect(0, 47, 160, 50), "background-color: rgb(85, 170, 255);", "(1) Topologies")
 
-    self.E_btn_2 = QtWidgets.QPushButton(self.Exam)
-    classBlueprint.mkBtn(self.E_btn_2, QtCore.QRect(185, 47, 160, 50), "background-color: rgb(255, 170, 0);", "(2) Main\nConfiguration")
-    self.E_btn_2.setVisible(False)
+    global E_btn_2
+    E_btn_2 = QtWidgets.QPushButton(self.Exam)
+    classBlueprint.mkBtn(E_btn_2, QtCore.QRect(185, 47, 160, 50), "background-color: rgb(255, 170, 0);", "(2) Main\nConfiguration")
+    E_btn_2.setVisible(False)
 
     global E_btn_3
     E_btn_3 = QtWidgets.QPushButton(self.Exam)
@@ -52,6 +53,19 @@ def setupUiExam(self):
     E_btn_5 = QtWidgets.QPushButton(self.Exam)
     classBlueprint.mkBtn(E_btn_5, QtCore.QRect(740, 47, 160, 50), "background-color: rgb(255, 170, 255);", "(5) Generate\nmy exam !")
     E_btn_5.setVisible(False)
+
+    #---NEW BUTTONS---#
+    global E_btn_1_2
+    E_btn_1_2 = QtWidgets.QPushButton(self.Exam)
+    classBlueprint.mkBtn(E_btn_1_2, QtCore.QRect(185, 47, 145, 50), "background-color: rgb(255, 0, 127);", "(2) VLAN")
+    E_btn_1_2.setVisible(False)
+
+    global E_btn_1_3
+    E_btn_1_3 = QtWidgets.QPushButton(self.Exam)
+    classBlueprint.mkBtn(E_btn_1_3, QtCore.QRect(355, 47, 145, 50), "background-color: rgb(255, 255, 127);", "(3) Layer 2\nSwitchs")
+    E_btn_1_3.setVisible(False)
+
+    #-----------------#
 
     self.E_home = QtWidgets.QPushButton(self.Exam)
 
@@ -83,15 +97,16 @@ def setupUiExam(self):
 
     self.E_p1_img1 = QtWidgets.QLabel(self.frame)
     classBlueprint.mkLabPic(self.E_p1_img1, QtCore.QRect(5, 5, 281, 201), QtGui.QPixmap("./img/schema1.png"), True)
-    self.E_p1_img1.mousePressEvent = lambda _: exam_functions.show_topologie_selected(self.E_p1_img1, self.E_btn_2, False)
+    #selected_img, img1, img2, img3, btn1, btn2, islocked
+    self.E_p1_img1.mousePressEvent = lambda _: exam_functions.show_selected_topology(self.E_p1_img1, self.E_p1_img1, self.E_p1_img2, self.E_p1_img3, E_btn_2, E_btn_1_2, False)
 
     self.E_p1_img2 = QtWidgets.QLabel(self.frame)
-    classBlueprint.mkLabPic(self.E_p1_img2, QtCore.QRect(5, 210, 421, 281), QtGui.QPixmap("./img/schema2_lock.png"), True)
-    self.E_p1_img2.mousePressEvent = lambda _: exam_functions.show_topologie_selected(self.E_p1_img1, self.E_btn_2, True)
+    classBlueprint.mkLabPic(self.E_p1_img2, QtCore.QRect(5, 210, 421, 281), QtGui.QPixmap("./img/schema2.png"), True)
+    self.E_p1_img2.mousePressEvent = lambda _: exam_functions.show_selected_topology(self.E_p1_img2, self.E_p1_img1, self.E_p1_img2, self.E_p1_img3, E_btn_2, E_btn_1_2, False)
 
     self.E_p1_img3 = QtWidgets.QLabel(self.frame)
     classBlueprint.mkLabPic(self.E_p1_img3, QtCore.QRect(465, 5, 351, 341), QtGui.QPixmap("./img/schema3_lock.png"), True)
-    self.E_p1_img3.mousePressEvent = lambda _: exam_functions.show_topologie_selected(self.E_p1_img1, self.E_btn_2, True)
+    self.E_p1_img3.mousePressEvent = lambda _: exam_functions.show_selected_topology(self.E_p1_img3, self.E_p1_img1, self.E_p1_img2, self.E_p1_img3, E_btn_2, E_btn_1_2, True)
 
     self.stackedWidget_2.addWidget(self.page_1)
 
@@ -761,21 +776,109 @@ def setupUiExam(self):
     classBlueprint.mkCheck(E_p4_gb3_check, QtCore.QRect(50, 250, 191, 20), True, "Add a static route ?", True)
 
     self.stackedWidget_2.addWidget(self.page_4)
+
+    #---------------------
+    # P2_1 : VLAN
+    #---------------------
+
+    self.page_2_1 = QtWidgets.QWidget()
+    self.page_2_1.setObjectName("page_2_1")
+
+    self.E_p2_1_img = QtWidgets.QLabel(self.page_2_1)
+    classBlueprint.mkLabPic(self.E_p2_1_img, QtCore.QRect(540, 30, 351, 241), QtGui.QPixmap("./img/schema2.png"), True)
+
+    # Groupbox VLAN
+    self.p2_1_gb = QtWidgets.QGroupBox(self.page_2_1)
+    classBlueprint.mkGroupBox(self.p2_1_gb, QtCore.QRect(10, 20, 441, 261), "VLAN")
+
+    self.p2_1_gb_label1 = QtWidgets.QLabel(self.p2_1_gb)
+    classBlueprint.mkLabel(self.p2_1_gb_label1, QtCore.QRect(10, 40, 101, 21), "VLAN n° :")
+
+    global p2_1_gb_edit1
+    p2_1_gb_edit1 = QtWidgets.QLineEdit(self.p2_1_gb)
+    classBlueprint.mkLineEdit(p2_1_gb_edit1, QtCore.QRect(120, 40, 60, 31), 2, "10")
+    p2_1_gb_edit1.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
+
+    self.p2_1_gb_label2 = QtWidgets.QLabel(self.p2_1_gb)
+    classBlueprint.mkLabel(self.p2_1_gb_label2, QtCore.QRect(10, 80, 81, 21), "Name :")
+
+    global p2_1_gb_edit2
+    p2_1_gb_edit2 = QtWidgets.QLineEdit(self.p2_1_gb)
+    classBlueprint.mkLineEdit(p2_1_gb_edit2, QtCore.QRect(100, 80, 180, 31), 10, "IT")
+    p2_1_gb_edit2.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(85, 170, 0);")
+
+    self.p2_1_gb_label3 = QtWidgets.QLabel(self.p2_1_gb)
+    classBlueprint.mkLabel(self.p2_1_gb_label3, QtCore.QRect(10, 125, 91, 21), "Subnet :")
+
+    global p2_1_gb_edit3
+    p2_1_gb_edit3 = QtWidgets.QLineEdit(self.p2_1_gb)
+    classBlueprint.mkLineEdit(p2_1_gb_edit3, QtCore.QRect(112, 125, 181, 31), 15, "192.168.10.0")
+    p2_1_gb_edit3.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+
+    self.p2_1_gb_label4 = QtWidgets.QLabel(self.p2_1_gb)
+    classBlueprint.mkLabel(self.p2_1_gb_label4, QtCore.QRect(10, 170, 71, 21), "CIDR :")
+
+    global p2_1_gb_combo
+    p2_1_gb_combo = QtWidgets.QComboBox(self.p2_1_gb)
+    classBlueprint.mkCombo(p2_1_gb_combo, QtCore.QRect(89, 170, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr2(p2_1_gb_combo)
+
+    global p2_1_gb_check
+    p2_1_gb_check = QtWidgets.QCheckBox(self.p2_1_gb)
+    classBlueprint.mkCheck(p2_1_gb_check, QtCore.QRect(5, 220, 131, 31), False, "Is native ?")
+
+    self.p2_1_gb_add = QtWidgets.QPushButton(self.p2_1_gb)
+    classBlueprint.mkBtn(self.p2_1_gb_add, QtCore.QRect(220, 220, 101, 31), "background-color: rgb(255, 255, 0);", "Add")
+    self.p2_1_gb_add.clicked.connect(lambda: add_vlan_to_table())
+
+    self.p2_1_gb_clear = QtWidgets.QPushButton(self.p2_1_gb)
+    classBlueprint.mkBtn(self.p2_1_gb_clear, QtCore.QRect(330, 220, 101, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.p2_1_gb_clear.clicked.connect(lambda: clear_vlan_table())
+
+    global E_p2_1_table
+    E_p2_1_table = QtWidgets.QTableWidget(self.page_2_1)
+    classBlueprint.mkTable(E_p2_1_table, QtCore.QRect(10, 290, 681, 241), "background-color: rgb(255, 170, 0);", 5, 0)
+    classBlueprint.addDataTable(E_p2_1_table, 0, "Vlan n°")
+    classBlueprint.addDataTable(E_p2_1_table, 1, "Vlan name")
+    classBlueprint.addDataTable(E_p2_1_table, 2, "Subnet")
+    classBlueprint.addDataTable(E_p2_1_table, 3, "Mask")
+    classBlueprint.addDataTable(E_p2_1_table, 4, "Is native ?")
+    E_p2_1_table.setColumnWidth(0, 70)
+    E_p2_1_table.setColumnWidth(1, 100)
+    E_p2_1_table.setColumnWidth(2, 160)
+    E_p2_1_table.setColumnWidth(3, 160)
+
+    self.stackedWidget_2.addWidget(self.page_2_1)
+
+    #---END OF PAGE--#
+
     self.stackedWidget.addWidget(self.Exam)
 
 
 
     self.E_btn_1.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(0))
-    self.E_btn_2.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(1))
+    self.E_btn_1.clicked.connect(lambda: hide_main_buttons())
+    self.E_btn_1.clicked.connect(lambda: reset_stylesheet_topologie_imgs())
+
+    E_btn_2.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(1))
     E_btn_3.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(2))
     E_btn_4.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(3))
+
+    E_btn_1_2.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(4))
+    E_btn_1_3.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(5))
 
     self.E_save.clicked.connect(lambda: exam_functions.save_changes(self.stackedWidget_2))
     self.E_p2_gb_add.clicked.connect(lambda: exam_functions.add_host_to_table(E_p2_table, self.E_p2_gb_editLan, E_p2_gb_editHost))
     self.E_p2_gb_clear.clicked.connect(lambda: exam_functions.clear_table(E_p2_table))
     E_btn_5.clicked.connect(lambda: exam_functions.generate_my_exam())
 
-    self.E_btn_2.clicked.connect(lambda: self.E_save.setVisible(True))
+    E_btn_2.clicked.connect(lambda: self.E_save.setVisible(True))
+    E_btn_1_2.clicked.connect(lambda: self.E_save.setVisible(True))
     E_btn_3.clicked.connect(lambda: exam_page.build_combo_network())
     E_btn_4.clicked.connect(lambda: utils.blueprintFunctions.fillComboStaticRoute(E_p4_gb3_combo, E_p3_gb2_comboR1Interface3, E_p3_gb2_comboISPRule))
 
@@ -785,9 +888,58 @@ def setupUiExam(self):
         if (self.stackedWidget_2.currentIndex() == 0):
             self.E_save.setVisible(False)
 
-
     def ssh_hide_groupbox(ssh_checkbox, ssh_groupbox):
         if (ssh_checkbox.isChecked()):
             ssh_groupbox.setVisible(True)
         elif not (ssh_checkbox.isChecked()):
             ssh_groupbox.setVisible(False)
+
+    def show_other_buttons(): # Used when user clicks on a 2nd Year Exam
+        E_btn_2.setVisible(False)
+        E_btn_3.setVisible(False)
+        E_btn_4.setVisible(False)
+        E_btn_5.setVisible(False)
+        E_btn_1_2.setVisible(True)
+        E_btn_1_3.setVisible(True)
+
+    def hide_main_buttons(): # Used when user clicks back on the "topologie" button
+        E_btn_2.setVisible(False)
+        E_btn_3.setVisible(False)
+        E_btn_4.setVisible(False)
+        E_btn_5.setVisible(False)
+        E_btn_1_2.setVisible(False)
+        E_btn_1_3.setVisible(False)
+
+    def reset_stylesheet_topologie_imgs():
+        self.E_p1_img1.setStyleSheet("")
+        self.E_p1_img2.setStyleSheet("")
+        self.E_p1_img3.setStyleSheet("")
+
+    def add_vlan_to_table():
+        vlan_number = p2_1_gb_edit1.text()
+        vlan_name = p2_1_gb_edit2.text()
+        vlan_cidr = p2_1_gb_combo.currentText()
+        vlan_subnet = str(p2_1_gb_edit3.text() + " (" + vlan_cidr + ")")
+        vlan_mask = str(subnet_functions.getMaskFromSlash(vlan_cidr))
+        if (utils.blueprintFunctions.checkInt(vlan_number) is False):
+            utils.blueprintFunctions.mkWarningMsg("Vlan number error", "<b><span style=color:'red'>Vlan number</b></span> must <b>only</b> be composed of <span style=color:'blue'>numbers</span> !")
+        else:
+            lastrow = E_p2_1_table.rowCount()
+            E_p2_1_table.insertRow(lastrow)
+            item1 = QTableWidgetItem(vlan_number)
+            item2 = QTableWidgetItem(vlan_name)
+            item3 = QTableWidgetItem(vlan_subnet)
+            item4 = QTableWidgetItem(vlan_mask)
+            if (p2_1_gb_check.isChecked()): item5 = QTableWidgetItem("Yes")
+            else: item5 = QTableWidgetItem("No")
+            E_p2_1_table.setItem(lastrow, 0, item1)
+            E_p2_1_table.setItem(lastrow, 1, item2)
+            E_p2_1_table.setItem(lastrow, 2, item3)
+            E_p2_1_table.setItem(lastrow, 3, item4)
+            E_p2_1_table.setItem(lastrow, 4, item5)
+
+    def clear_vlan_table():
+        x = E_p2_1_table.rowCount()
+        while (E_p2_1_table.rowCount() > 0):
+            E_p2_1_table.removeRow(x)
+            x -= 1

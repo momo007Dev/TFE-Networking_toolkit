@@ -657,11 +657,24 @@ def on_change_dropdown_network(combo, combo2): # Combo = LAN A, LAN B, WAN | Com
         for ip in wan_ip_tab:
             combo2.addItem(ip)
 
-def show_topologie_selected(label, btn, swap):
-    if (swap is True):
-        label.setStyleSheet("border : 0px;")
-        btn.setVisible(False)
+def show_selected_topology(selected_img, img1, img2, img3, btn1, btn2, islocked):
+    if (islocked): # means that img3 isSelected
+        # Reset colors (stylesheet boder) for ALL imgs
+        img1.setStyleSheet("border : 0px;")
+        img2.setStyleSheet("border : 0px;")
+        # Hide "next page" buttons
+        btn1.setVisible(False)
+        btn2.setVisible(False)
+        # Warning message
         utils.blueprintFunctions.mkWarningMsg("Info", "<b><span style=color:'red'>Coming</b></span> <b><i>soon</i></b> !")
-    elif (swap is False):
-        label.setStyleSheet("border : 3px solid red;")
-        btn.setVisible(True)
+
+    else:
+        selected_img.setStyleSheet("border : 3px solid red;")
+        if (selected_img == img1):
+            img2.setStyleSheet("border : 0px;")
+            btn1.setVisible(True)
+            btn2.setVisible(False)
+        elif (selected_img == img2):
+            img1.setStyleSheet("border : 0px;")
+            btn1.setVisible(False)
+            btn2.setVisible(True)

@@ -166,7 +166,7 @@ Utilities</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../img/logo.jpg</pixmap>
+       <pixmap>img/logo.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -320,7 +320,7 @@ Manager</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../img/cisco1.png</pixmap>
+       <pixmap>img/cisco1.png</pixmap>
       </property>
      </widget>
      <widget class="QLabel" name="C_img_swl2">
@@ -453,7 +453,7 @@ Manager</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../img/cisco1.png</pixmap>
+       <pixmap>img/cisco1.png</pixmap>
       </property>
      </widget>
      <widget class="QPushButton" name="Btn3_1">
@@ -720,7 +720,7 @@ Generator</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../img/cisco1.png</pixmap>
+       <pixmap>img/cisco1.png</pixmap>
       </property>
      </widget>
      <widget class="QLabel" name="E_backColor">
@@ -752,7 +752,7 @@ Generator</string>
        <string notr="true">background-color: rgb(173, 173, 173);</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page_1">
        <widget class="QLabel" name="E_p1_label">
@@ -810,7 +810,7 @@ Generator</string>
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../img/schema1.png</pixmap>
+          <pixmap>img/schema1.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -832,7 +832,7 @@ Generator</string>
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../img/schema2_lock.png</pixmap>
+          <pixmap>img/schema2.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -854,7 +854,7 @@ Generator</string>
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../img/schema3_lock.png</pixmap>
+          <pixmap>img/schema3_lock.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -881,7 +881,7 @@ Generator</string>
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>../img/schema1-1.png</pixmap>
+         <pixmap>img/schema1-1.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1458,7 +1458,7 @@ background-color: rgb(255, 255, 255);</string>
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>../img/schema1-1.png</pixmap>
+         <pixmap>img/schema1-1.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -3410,7 +3410,7 @@ selection-color: rgb(255, 0, 0);</string>
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>../img/schema1-1.png</pixmap>
+         <pixmap>img/schema1-1.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -4189,6 +4189,486 @@ selection-color: rgb(85, 170, 0);</string>
         </widget>
        </widget>
       </widget>
+      <widget class="QWidget" name="page_2_1">
+       <widget class="QGroupBox" name="p2_1_gb">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>441</width>
+          <height>261</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="title">
+         <string>VLAN</string>
+        </property>
+        <widget class="QLabel" name="p2_1_gb_label1">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>40</y>
+           <width>101</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+           <underline>true</underline>
+          </font>
+         </property>
+         <property name="text">
+          <string>VLAN n° :</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="p2_1_gb_label2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>81</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+           <underline>true</underline>
+          </font>
+         </property>
+         <property name="text">
+          <string>Name :</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="p2_1_gb_edit2">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
+           <y>80</y>
+           <width>180</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>181</horstretch>
+           <verstretch>31</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>180</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>181</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Verdana</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(85, 170, 0);</string>
+         </property>
+         <property name="text">
+          <string>IT</string>
+         </property>
+         <property name="maxLength">
+          <number>12</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="p2_1_gb_edit1">
+         <property name="geometry">
+          <rect>
+           <x>120</x>
+           <y>40</y>
+           <width>60</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Verdana</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>10</string>
+         </property>
+         <property name="maxLength">
+          <number>2</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="p2_1_gb_edit3">
+         <property name="geometry">
+          <rect>
+           <x>112</x>
+           <y>125</y>
+           <width>181</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>181</horstretch>
+           <verstretch>31</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>180</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>181</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Verdana</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 85, 255);</string>
+         </property>
+         <property name="text">
+          <string>192.168.10.0</string>
+         </property>
+         <property name="maxLength">
+          <number>15</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="p2_1_gb_label3">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>125</y>
+           <width>91</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+           <underline>true</underline>
+          </font>
+         </property>
+         <property name="text">
+          <string>Subnet :</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="p2_1_gb_combo">
+         <property name="geometry">
+          <rect>
+           <x>89</x>
+           <y>170</y>
+           <width>70</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>70</horstretch>
+           <verstretch>30</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Verdana</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>/24</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QLabel" name="p2_1_gb_label4">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>170</y>
+           <width>71</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+           <underline>true</underline>
+          </font>
+         </property>
+         <property name="text">
+          <string>CIDR :</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="p2_1_gb_add">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>220</y>
+           <width>101</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+           <underline>false</underline>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 0);</string>
+         </property>
+         <property name="text">
+          <string>Add</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="p2_1_gb_clear">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>220</y>
+           <width>101</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+           <underline>false</underline>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 255, 0);</string>
+         </property>
+         <property name="text">
+          <string>Clear</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="p2_1_gb_check">
+         <property name="geometry">
+          <rect>
+           <x>5</x>
+           <y>220</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+           <underline>true</underline>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string>Is native ?</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QTableWidget" name="E_p2_1_table">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>290</y>
+          <width>681</width>
+          <height>241</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 170, 127);</string>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAsNeeded</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::NoSelection</enum>
+        </property>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <row>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>2</string>
+         </property>
+        </row>
+        <column>
+         <property name="text">
+          <string>Vlan n°</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Vlan name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Subnet</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Mask</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Is Native ?</string>
+         </property>
+        </column>
+        <item row="0" column="0">
+         <property name="text">
+          <string>99</string>
+         </property>
+        </item>
+        <item row="0" column="1">
+         <property name="text">
+          <string>IT</string>
+         </property>
+        </item>
+        <item row="0" column="2">
+         <property name="text">
+          <string>192.168.10.0 (/24)</string>
+         </property>
+        </item>
+        <item row="0" column="3">
+         <property name="text">
+          <string>255.255.255.255</string>
+         </property>
+        </item>
+        <item row="0" column="4">
+         <property name="text">
+          <string>No</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="E_p2_1_img1">
+        <property name="geometry">
+         <rect>
+          <x>540</x>
+          <y>30</y>
+          <width>351</width>
+          <height>241</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>img/schema2.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_2_2"/>
      </widget>
      <widget class="QPushButton" name="E_home">
       <property name="enabled">
@@ -4374,17 +4854,72 @@ my exam !</string>
        <string>Save Changes</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="E_btn_1_2">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>185</x>
+        <y>50</y>
+        <width>145</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 0, 127);</string>
+      </property>
+      <property name="text">
+       <string>(2) VLAN</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="E_btn_1_3">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>355</x>
+        <y>50</y>
+        <width>145</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 127);</string>
+      </property>
+      <property name="text">
+       <string>(3) Layer 2
+Switchs</string>
+      </property>
+     </widget>
+     <zorder>E_btn_3</zorder>
+     <zorder>E_btn_5</zorder>
+     <zorder>E_btn_2</zorder>
+     <zorder>E_btn_4</zorder>
      <zorder>E_backColor</zorder>
      <zorder>E_backimg</zorder>
      <zorder>E_btn</zorder>
-     <zorder>E_btn_1</zorder>
-     <zorder>E_btn_2</zorder>
-     <zorder>E_btn_3</zorder>
-     <zorder>E_btn_4</zorder>
      <zorder>E_home</zorder>
      <zorder>stackedWidget_2</zorder>
-     <zorder>E_btn_5</zorder>
      <zorder>E_save</zorder>
+     <zorder>E_btn_1</zorder>
+     <zorder>E_btn_1_2</zorder>
+     <zorder>E_btn_1_3</zorder>
     </widget>
     <widget class="QWidget" name="Subnet">
      <widget class="QLabel" name="S_backimg">
@@ -4400,7 +4935,7 @@ my exam !</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../img/cisco1.png</pixmap>
+       <pixmap>img/cisco1.png</pixmap>
       </property>
      </widget>
      <widget class="QPushButton" name="S_Btn_title">
@@ -4443,7 +4978,7 @@ Utilities</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../img/cheatSheet1.png</pixmap>
+       <pixmap>img/cheatSheet1.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -4462,7 +4997,7 @@ Utilities</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../img/cheatSheet2.png</pixmap>
+       <pixmap>img/cheatSheet2.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
