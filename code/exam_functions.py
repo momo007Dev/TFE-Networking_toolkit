@@ -18,6 +18,9 @@ lan_names_set = list()
 devices_dict = dict() # PC1-2-3/S1-2/ISP
 router_dict = dict() # R1
 security_enabled = False
+
+        #---Page 2_1---#
+vlan_dict = dict()
 #--------------END------------------#
 
 def add_host_to_table(table, name, host): # Used when user clicks "add" btn
@@ -94,6 +97,9 @@ def save_changes(stacked_widget):
     elif (current_index == 3): # Page 4 (Addons/Security)
         global security_enabled
         security_enabled = True
+
+    elif (current_index == 4):
+        save_changes_p2_1(exam_page.E_p2_1_table)
 
 #-----------------------------------------------------------------------------#
 # Function used when press "save changes" within main configuration (page 2)  #
@@ -678,3 +684,18 @@ def show_selected_topology(selected_img, img1, img2, img3, btn1, btn2, islocked)
             img1.setStyleSheet("border : 0px;")
             btn1.setVisible(False)
             btn2.setVisible(True)
+
+#-----------------------------------------------------------------------#
+# Function used when press "save changes" within "VLAN" (page 2_1)      #
+#-----------------------------------------------------------------------#
+def save_changes_p2_1(table):
+    global vlan_dict
+    vlan_dict.clear()
+
+    rowCount = table.rowCount() # 10 : ["IT", "192.168.10.0", "255.255.255.0", "Yes"],
+    for x in range(rowCount):
+        #new_input = {str(table.item(x, 0).text()): [str(table.item(x, 1).text()), str(table.item(x, 2).text()).split("(")[0][:-1], str(table.item(x, 3).text()), str(table.item(x, 4).text())]}
+        vlan_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(table.item(x, 2).text()).split("(")[0][:-1], str(table.item(x, 3).text()), str(table.item(x, 4).text())]
+
+    for x, y in vlan_dict.items():
+        print(x, y)

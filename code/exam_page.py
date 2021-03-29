@@ -9,7 +9,9 @@ from exam_functions import *
 classBlueprint = utils.blueprintFunctions
 
 #-------GLOBAL VARIABLES------------#
-
+vlan_set = set()
+vlan_subnet_set = set()
+vlan_name_set = set()
 #--------------END------------------#
 
 def setupUiExam(self):
@@ -839,6 +841,7 @@ def setupUiExam(self):
     self.p2_1_gb_clear = QtWidgets.QPushButton(self.p2_1_gb)
     classBlueprint.mkBtn(self.p2_1_gb_clear, QtCore.QRect(330, 220, 101, 31), "background-color: rgb(0, 255, 0);", "Clear")
     self.p2_1_gb_clear.clicked.connect(lambda: clear_vlan_table())
+    self.p2_1_gb_clear.clicked.connect(lambda: restore_checkbox())
 
     global E_p2_1_table
     E_p2_1_table = QtWidgets.QTableWidget(self.page_2_1)
@@ -917,29 +920,53 @@ def setupUiExam(self):
 
     def add_vlan_to_table():
         vlan_number = p2_1_gb_edit1.text()
+        vlan_ip = p2_1_gb_edit3.text()
         vlan_name = p2_1_gb_edit2.text()
-        vlan_cidr = p2_1_gb_combo.currentText()
-        vlan_subnet = str(p2_1_gb_edit3.text() + " (" + vlan_cidr + ")")
-        vlan_mask = str(subnet_functions.getMaskFromSlash(vlan_cidr))
-        if (utils.blueprintFunctions.checkInt(vlan_number) is False):
-            utils.blueprintFunctions.mkWarningMsg("Vlan number error", "<b><span style=color:'red'>Vlan number</b></span> must <b>only</b> be composed of <span style=color:'blue'>numbers</span> !")
+        if (vlan_number in vlan_set):
+            utils.blueprintFunctions.mkWarningMsg("Vlan error", "VLAN <b><span style=color:'red'>" + vlan_number + "</b></span> is <b>already </b><span style=color:'blue'>used</span> !")
+        elif (vlan_name in vlan_name_set):
+            utils.blueprintFunctions.mkWarningMsg("Name error", "VLAN name <b><span style=color:'red'> \'" + vlan_name + "\'</b></span> is <b>already </b><span style=color:'blue'>used</span> !")
+        elif (vlan_ip in vlan_subnet_set):
+            utils.blueprintFunctions.mkWarningMsg("Subnet error", "Subnet <b><span style=color:'red'>" + vlan_ip + "</b></span> is <b>already </b><span style=color:'blue'>used</span> !")
         else:
-            lastrow = E_p2_1_table.rowCount()
-            E_p2_1_table.insertRow(lastrow)
-            item1 = QTableWidgetItem(vlan_number)
-            item2 = QTableWidgetItem(vlan_name)
-            item3 = QTableWidgetItem(vlan_subnet)
-            item4 = QTableWidgetItem(vlan_mask)
-            if (p2_1_gb_check.isChecked()): item5 = QTableWidgetItem("Yes")
-            else: item5 = QTableWidgetItem("No")
-            E_p2_1_table.setItem(lastrow, 0, item1)
-            E_p2_1_table.setItem(lastrow, 1, item2)
-            E_p2_1_table.setItem(lastrow, 2, item3)
-            E_p2_1_table.setItem(lastrow, 3, item4)
-            E_p2_1_table.setItem(lastrow, 4, item5)
+            vlan_cidr = p2_1_gb_combo.currentText()
+            vlan_subnet = str(p2_1_gb_edit3.text() + " (" + vlan_cidr + ")")
+            vlan_mask = str(subnet_functions.getMaskFromSlash(vlan_cidr))
+            if (utils.blueprintFunctions.checkInt(vlan_number) is False):
+                utils.blueprintFunctions.mkWarningMsg("Vlan number error", "<b><span style=color:'red'>Vlan number</b></span> must <b>only</b> be composed of <span style=color:'blue'>numbers</span> !")
+            else:
+                lastrow = E_p2_1_table.rowCount()
+                E_p2_1_table.insertRow(lastrow)
+                item1 = QTableWidgetItem(vlan_number)
+                item2 = QTableWidgetItem(vlan_name)
+                item3 = QTableWidgetItem(vlan_subnet)
+                item4 = QTableWidgetItem(vlan_mask)
+                if (p2_1_gb_check.isChecked()): item5 = QTableWidgetItem("Yes")
+                else: item5 = QTableWidgetItem("No")
+                E_p2_1_table.setItem(lastrow, 0, item1)
+                E_p2_1_table.setItem(lastrow, 1, item2)
+                E_p2_1_table.setItem(lastrow, 2, item3)
+                E_p2_1_table.setItem(lastrow, 3, item4)
+                E_p2_1_table.setItem(lastrow, 4, item5)
+                vlan_name_set.add(vlan_name)
+                vlan_set.add(vlan_number)
+                vlan_subnet_set.add(vlan_ip)
+                hide_checkbox()
 
     def clear_vlan_table():
         x = E_p2_1_table.rowCount()
         while (E_p2_1_table.rowCount() > 0):
             E_p2_1_table.removeRow(x)
             x -= 1
+        vlan_name_set.clear()
+        vlan_set.clear()
+        vlan_subnet_set.clear()
+
+    def hide_checkbox(): # When "add"
+        if (p2_1_gb_check.isChecked()):
+            p2_1_gb_check.setChecked(False)
+            p2_1_gb_check.setVisible(False)
+
+    def restore_checkbox(): # When "clear"
+        p2_1_gb_check.setChecked(False)
+        p2_1_gb_check.setVisible(True)
