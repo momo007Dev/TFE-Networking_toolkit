@@ -692,10 +692,71 @@ def save_changes_p2_1(table):
     global vlan_dict
     vlan_dict.clear()
 
-    rowCount = table.rowCount() # 10 : ["IT", "192.168.10.0", "255.255.255.0", "Yes"],
+    rowCount = table.rowCount() # 10 : ["IT", "192.168.10.0", "/24", "255.255.255.0", "Yes"],
     for x in range(rowCount):
         #new_input = {str(table.item(x, 0).text()): [str(table.item(x, 1).text()), str(table.item(x, 2).text()).split("(")[0][:-1], str(table.item(x, 3).text()), str(table.item(x, 4).text())]}
-        vlan_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(table.item(x, 2).text()).split("(")[0][:-1], str(table.item(x, 3).text()), str(table.item(x, 4).text())]
-
+        vlan_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(table.item(x, 2).text()).split("(")[1][:-1], str(table.item(x, 2).text()).split("(")[0][:-1], str(table.item(x, 3).text()), str(table.item(x, 4).text())]
     for x, y in vlan_dict.items():
         print(x, y)
+
+    exam_page.E_btn_1_3.setVisible(True)
+    populate_vlan_in_combo(exam_page.E_p2_2_s1_isVlan_combo, True)
+    populate_vlan_in_combo(exam_page.E_p2_2_s1_comboA_vlan, False)
+    populate_vlan_in_combo(exam_page.E_p2_2_s1_comboB_vlan, False)
+    populate_vlan_in_combo(exam_page.E_p2_2_s1_comboC_vlan, False)
+    populate_vlan_in_combo(exam_page.E_p2_2_s1_comboD_vlan, False)
+
+    populate_vlan_in_combo(exam_page.E_p2_2_s2_isVlan_combo, True)
+    populate_vlan_in_combo(exam_page.E_p2_2_s2_comboA_vlan, False)
+    populate_vlan_in_combo(exam_page.E_p2_2_s2_comboB_vlan, False)
+
+    populate_vlan_in_combo(exam_page.E_p2_2_s3_isVlan_combo, True)
+    populate_vlan_in_combo(exam_page.E_p2_2_s3_comboA_vlan, False)
+    populate_vlan_in_combo(exam_page.E_p2_2_s3_comboB_vlan, False)
+    populate_vlan_in_combo(exam_page.E_p2_2_s3_comboC_vlan, False)
+
+def populate_vlan_in_combo(combo, include_no):
+    combo.clear()
+    if (include_no is True):
+        combo.addItem("No")
+
+    for x in vlan_dict.keys():
+        s = "Vlan " + x
+        combo.addItem(s)
+
+def populate_gateway_combo(combo_part_of_vlan, combo_gateway, label_gateway): # Applies only after "is part of vlan" combo changes value !!!
+    if (len(combo_part_of_vlan.currentText()) > 4):
+        combo_gateway.clear()
+        combo_gateway.setVisible(True)
+        label_gateway.setVisible(True)
+        for x in vlan_dict.keys():
+            if (x in combo_part_of_vlan.currentText()):
+                subnet = vlan_dict[x][1]
+                cidr = vlan_dict[x][2]
+
+                the_list = generate_usable_ip_from_network_and_cidr(cidr, subnet)
+                for y in the_list:
+                    combo_gateway.addItem(y)
+
+    elif (combo_part_of_vlan.currentText() == "No"):
+        combo_gateway.clear()
+        combo_gateway.setVisible(False)
+        label_gateway.setVisible(False)
+
+
+def generate_usable_ip_from_network_and_cidr(subnet, cidr):
+    usable_ip_list = list()
+    network = subnet + cidr
+    for ip in IPNetwork(network):
+        usable_ip_list.append('%s' % ip)
+    usable_ip_list.pop(0)  # Removes first IP (that is used for network)
+    usable_ip_list.pop()  # Removes last IP (that is used for broadcast)
+    return usable_ip_list
+
+# Hides the combo with vlan number if "Trunk" is selected
+
+def hide_if_trunk_selected(combo_trunk, combo_to_hide):
+    if (combo_trunk.currentText() == "Trunk"):
+        combo_to_hide.setVisible(False)
+    elif (combo_trunk.currentText() == "Access"):
+        combo_to_hide.setVisible(True)

@@ -752,7 +752,7 @@ Generator</string>
        <string notr="true">background-color: rgb(173, 173, 173);</string>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="page_1">
        <widget class="QLabel" name="E_p1_label">
@@ -4668,7 +4668,1863 @@ background-color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="page_2_2"/>
+      <widget class="QWidget" name="page_2_2">
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>881</width>
+          <height>521</height>
+         </rect>
+        </property>
+        <property name="currentIndex">
+         <number>2</number>
+        </property>
+        <widget class="QWidget" name="s1">
+         <attribute name="title">
+          <string>   S1   </string>
+         </attribute>
+         <widget class="QLabel" name="E_p2_2_s1_img">
+          <property name="geometry">
+           <rect>
+            <x>590</x>
+            <y>308</y>
+            <width>281</width>
+            <height>181</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>img/schema2-s1.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboA_interface">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboA_access">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 0, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Access</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Trunk</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_2_s1_comboA_description">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>60</y>
+            <width>201</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>To LAN A</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s1_labelHostname">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Hostname :</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_2_s1_editHostname">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>10</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>S1</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s1_comboA_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>60</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (a) :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboA_vlan">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 20</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboB_interface">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>110</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboB_vlan">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>110</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 20</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboB_access">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>110</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 0, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Access</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Trunk</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s1_comboB_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>110</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (b) :</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_2_s1_comboB_description">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>110</y>
+            <width>201</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>To LAN B</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_2_s1_comboC_description">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>160</y>
+            <width>201</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>Trunk to S2</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboC_vlan">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>160</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 20</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboC_interface">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>160</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboC_access">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>160</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 0, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Trunk</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s1_comboC_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (c) :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboD_vlan">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>210</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 20</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboD_access">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>210</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 0, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Trunk</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s1_comboD_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>210</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (d) :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_comboD_interface">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>210</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_2_s1_comboD_description">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>210</y>
+            <width>201</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>Trunk to R1</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s1_isVlan_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>270</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Is part of a vlan ?</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_isVlan_combo">
+          <property name="geometry">
+           <rect>
+            <x>200</x>
+            <y>270</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>No</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s1_gateway_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>310</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Default-gateway :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_gateway_combo">
+          <property name="geometry">
+           <rect>
+            <x>200</x>
+            <y>310</y>
+            <width>161</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 85, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 85, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>192.168.0.1</string>
+           </property>
+          </item>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="s2">
+         <attribute name="title">
+          <string>   S2   </string>
+         </attribute>
+         <widget class="QLabel" name="E_p2_2_s2_img">
+          <property name="geometry">
+           <rect>
+            <x>590</x>
+            <y>308</y>
+            <width>281</width>
+            <height>181</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>img/schema2-s2.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s2_comboA_access">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 0, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Access</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Trunk</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s2_comboB_interface">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>110</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s2_labelHostname">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Hostname :</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s2_comboA_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>60</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (a) :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s2_comboA_vlan">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 20</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_2_s2_comboA_description">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>60</y>
+            <width>201</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>To LAN A</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s2_comboB_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>110</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (b) :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s2_comboB_vlan">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>110</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 20</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s2_comboA_interface">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_2_s2_editHostname">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>10</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>S2</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_2_s2_comboB_description">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>110</y>
+            <width>201</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>To LAN B</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s2_comboB_access">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>110</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 0, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Access</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Trunk</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s2_gateway_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>310</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Default-gateway :</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s2_isVlan_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>270</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Is part of a vlan ?</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s2_gateway_combo">
+          <property name="geometry">
+           <rect>
+            <x>200</x>
+            <y>310</y>
+            <width>161</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 85, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 85, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>192.168.0.1</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s2_isVlan_combo">
+          <property name="geometry">
+           <rect>
+            <x>200</x>
+            <y>270</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>No</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="s3">
+         <attribute name="title">
+          <string>   S3   </string>
+         </attribute>
+         <widget class="QLabel" name="E_p2_2_s3_img">
+          <property name="geometry">
+           <rect>
+            <x>590</x>
+            <y>308</y>
+            <width>281</width>
+            <height>181</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>img/schema2-s3.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s3_comboB_interface">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>110</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_1_s1_comboA_access_3">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 0, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Access</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Trunk</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s3_labelHostname">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Hostname :</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s3_comboA_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>60</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (a) :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s3_comboC_interface">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>160</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s3_comboC_access">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>160</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 0, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Trunk</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s3_comboC_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (c) :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s3_comboA_vlan">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 20</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_1_s1_comboA_description_3">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>60</y>
+            <width>201</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>To LAN A</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s3_comboB_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>110</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (b) :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s3_comboB_vlan">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>110</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 20</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s3_comboC_vlan">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>160</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 20</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_1_s1_comboA_interface_3">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_2_s3_editHostname">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>10</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>S3</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s3_comboB_access">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>110</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 0, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Access</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Trunk</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_2_s3_comboB_description">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>110</y>
+            <width>201</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>To LAN B</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_2_s3_comboC_description">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>160</y>
+            <width>201</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>Trunk to S2</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s3_gateway_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>310</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Default-gateway :</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s3_isVlan_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>270</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Is part of a vlan ?</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s3_gateway_combo">
+          <property name="geometry">
+           <rect>
+            <x>200</x>
+            <y>310</y>
+            <width>161</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 85, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 85, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>192.168.0.1</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s3_isVlan_combo">
+          <property name="geometry">
+           <rect>
+            <x>200</x>
+            <y>270</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>No</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vlan 10</string>
+           </property>
+          </item>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
      </widget>
      <widget class="QPushButton" name="E_home">
       <property name="enabled">

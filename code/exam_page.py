@@ -842,6 +842,7 @@ def setupUiExam(self):
     classBlueprint.mkBtn(self.p2_1_gb_clear, QtCore.QRect(330, 220, 101, 31), "background-color: rgb(0, 255, 0);", "Clear")
     self.p2_1_gb_clear.clicked.connect(lambda: clear_vlan_table())
     self.p2_1_gb_clear.clicked.connect(lambda: restore_checkbox())
+    self.p2_1_gb_clear.clicked.connect(lambda: exam_page.E_btn_1_3.setVisible(False))
 
     global E_p2_1_table
     E_p2_1_table = QtWidgets.QTableWidget(self.page_2_1)
@@ -857,6 +858,477 @@ def setupUiExam(self):
     E_p2_1_table.setColumnWidth(3, 160)
 
     self.stackedWidget_2.addWidget(self.page_2_1)
+
+    #---------------------
+    # P2_2 : SWITCH L2
+    #---------------------
+
+    self.page_2_2 = QtWidgets.QWidget()
+    self.page_2_2.setObjectName("page_2_2")
+
+    p2_2_tabwidget = QtWidgets.QTabWidget(self.page_2_2)
+    p2_2_tabwidget.setGeometry(QtCore.QRect(10, 20, 881, 521))
+    font = QtGui.QFont()
+    font.setBold(True)
+    font.setWeight(75)
+    p2_2_tabwidget.setFont(font)
+    p2_2_tabwidget_tab1 = QtWidgets.QWidget()
+    p2_2_tabwidget_tab2 = QtWidgets.QWidget()
+    p2_2_tabwidget_tab3 = QtWidgets.QWidget()
+
+    #--TAB S1--#
+    self.E_p2_2_s1_img = QtWidgets.QLabel(p2_2_tabwidget_tab1)
+    classBlueprint.mkLabPic(self.E_p2_2_s1_img, QtCore.QRect(590, 308, 281, 181), QtGui.QPixmap("./img/schema2-s1.png"), True)
+
+    self.E_p2_2_s1_labelHostname = QtWidgets.QLabel(p2_2_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_2_s1_labelHostname, QtCore.QRect(10, 10, 121, 31), "Hostname :")
+
+    global E_p2_2_s1_editHostname
+    E_p2_2_s1_editHostname = QtWidgets.QLineEdit(p2_2_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_2_s1_editHostname, QtCore.QRect(140, 10, 141, 31), 10, "S1")
+    E_p2_2_s1_editHostname.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_s1_comboA_label = QtWidgets.QLabel(p2_2_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_2_s1_comboA_label, QtCore.QRect(10, 60, 151, 31), "Interface (a) :")
+
+    global E_p2_2_s1_comboA_interface
+    E_p2_2_s1_comboA_interface = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboA_interface, QtCore.QRect(170, 60, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_2_s1_comboA_interface)
+
+    global E_p2_2_s1_comboA_access
+    E_p2_2_s1_comboA_access = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboA_access, QtCore.QRect(300, 60, 121, 31),
+                           "color: rgb(0, 0, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 0, 255);")
+    E_p2_2_s1_comboA_access.addItem("Access")
+    E_p2_2_s1_comboA_access.addItem("Trunk")
+    E_p2_2_s1_comboA_access.currentIndexChanged.connect(lambda: exam_functions.hide_if_trunk_selected(E_p2_2_s1_comboA_access, E_p2_2_s1_comboA_vlan))
+
+
+    global E_p2_2_s1_comboA_vlan
+    E_p2_2_s1_comboA_vlan = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboA_vlan, QtCore.QRect(430, 60, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+
+    global E_p2_2_s1_comboA_description
+    E_p2_2_s1_comboA_description = QtWidgets.QLineEdit(p2_2_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_2_s1_comboA_description, QtCore.QRect(570, 60, 201, 31), 20, "To LAN A")
+    E_p2_2_s1_comboA_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_s1_comboB_label = QtWidgets.QLabel(p2_2_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_2_s1_comboB_label, QtCore.QRect(10, 110, 151, 31), "Interface (b) :")
+
+    global E_p2_2_s1_comboB_interface
+    E_p2_2_s1_comboB_interface = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboB_interface, QtCore.QRect(170, 110, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_2_s1_comboB_interface)
+
+    global E_p2_2_s1_comboB_access
+    E_p2_2_s1_comboB_access = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboB_access, QtCore.QRect(300, 110, 121, 31),
+                           "color: rgb(0, 0, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 0, 255);")
+    E_p2_2_s1_comboB_access.addItem("Access")
+    E_p2_2_s1_comboB_access.addItem("Trunk")
+    E_p2_2_s1_comboB_access.currentIndexChanged.connect(lambda: exam_functions.hide_if_trunk_selected(E_p2_2_s1_comboB_access, E_p2_2_s1_comboB_vlan))
+
+
+    global E_p2_2_s1_comboB_vlan
+    E_p2_2_s1_comboB_vlan = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboB_vlan, QtCore.QRect(430, 110, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+
+    global E_p2_2_s1_comboB_description
+    E_p2_2_s1_comboB_description = QtWidgets.QLineEdit(p2_2_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_2_s1_comboB_description, QtCore.QRect(570, 110, 201, 31), 20, "To LAN B")
+    E_p2_2_s1_comboB_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_s1_comboC_label = QtWidgets.QLabel(p2_2_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_2_s1_comboC_label, QtCore.QRect(10, 160, 151, 31), "Interface (c) :")
+
+    global E_p2_2_s1_comboC_interface
+    E_p2_2_s1_comboC_interface = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboC_interface, QtCore.QRect(170, 160, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_2_s1_comboC_interface)
+
+    global E_p2_2_s1_comboC_access
+    E_p2_2_s1_comboC_access = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboC_access, QtCore.QRect(300, 160, 121, 31),
+                           "color: rgb(0, 0, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 0, 255);")
+    E_p2_2_s1_comboC_access.addItem("Access")
+    E_p2_2_s1_comboC_access.addItem("Trunk")
+    E_p2_2_s1_comboC_access.setCurrentIndex(1)
+    E_p2_2_s1_comboC_access.currentIndexChanged.connect(lambda: exam_functions.hide_if_trunk_selected(E_p2_2_s1_comboC_access, E_p2_2_s1_comboC_vlan))
+
+    global E_p2_2_s1_comboC_vlan
+    E_p2_2_s1_comboC_vlan = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboC_vlan, QtCore.QRect(430, 160, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    E_p2_2_s1_comboC_vlan.setVisible(False)
+
+    global E_p2_2_s1_comboC_description
+    E_p2_2_s1_comboC_description = QtWidgets.QLineEdit(p2_2_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_2_s1_comboC_description, QtCore.QRect(570, 160, 201, 31), 20, "To S2")
+    E_p2_2_s1_comboC_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_s1_comboD_label = QtWidgets.QLabel(p2_2_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_2_s1_comboD_label, QtCore.QRect(10, 210, 151, 31), "Interface (d) :")
+
+    global E_p2_2_s1_comboD_interface
+    E_p2_2_s1_comboD_interface = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboD_interface, QtCore.QRect(170, 210, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_2_s1_comboD_interface)
+
+    global E_p2_2_s1_comboD_access
+    E_p2_2_s1_comboD_access = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboD_access, QtCore.QRect(300, 210, 121, 31),
+                           "color: rgb(0, 0, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 0, 255);")
+    E_p2_2_s1_comboD_access.addItem("Access")
+    E_p2_2_s1_comboD_access.addItem("Trunk")
+    E_p2_2_s1_comboD_access.setCurrentIndex(1)
+    E_p2_2_s1_comboD_access.currentIndexChanged.connect(lambda: exam_functions.hide_if_trunk_selected(E_p2_2_s1_comboD_access, E_p2_2_s1_comboD_vlan))
+
+
+    global E_p2_2_s1_comboD_vlan
+    E_p2_2_s1_comboD_vlan = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_comboD_vlan, QtCore.QRect(430, 210, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    E_p2_2_s1_comboD_vlan.setVisible(False)
+
+    global E_p2_2_s1_comboD_description
+    E_p2_2_s1_comboD_description = QtWidgets.QLineEdit(p2_2_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_2_s1_comboD_description, QtCore.QRect(570, 210, 201, 31), 20, "To R1")
+    E_p2_2_s1_comboD_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_s1_isVlan_label = QtWidgets.QLabel(p2_2_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_2_s1_isVlan_label, QtCore.QRect(10, 270, 191, 31), "Is part of a vlan ?")
+
+    global E_p2_2_s1_isVlan_combo
+    E_p2_2_s1_isVlan_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_isVlan_combo, QtCore.QRect(200, 270, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    E_p2_2_s1_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s1_isVlan_combo, E_p2_2_s1_gateway_combo, self.E_p2_2_s1_gateway_label))
+
+    self.E_p2_2_s1_gateway_label = QtWidgets.QLabel(p2_2_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_2_s1_gateway_label, QtCore.QRect(10, 310, 191, 31), "Default-gateway :")
+
+    global E_p2_2_s1_gateway_combo
+    E_p2_2_s1_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_gateway_combo, QtCore.QRect(200, 310, 161, 31),
+                           "color: rgb(0, 85, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 85, 255);")
+
+    #--TAB S2--#
+    self.E_p2_2_s2_img = QtWidgets.QLabel(p2_2_tabwidget_tab2)
+    classBlueprint.mkLabPic(self.E_p2_2_s2_img, QtCore.QRect(590, 308, 281, 181), QtGui.QPixmap("./img/schema2-s2.png"), True)
+
+    self.E_p2_2_s2_labelHostname = QtWidgets.QLabel(p2_2_tabwidget_tab2)
+    classBlueprint.mkLabel(self.E_p2_2_s2_labelHostname, QtCore.QRect(10, 10, 121, 31), "Hostname :")
+
+    global E_p2_2_s2_editHostname
+    E_p2_2_s2_editHostname = QtWidgets.QLineEdit(p2_2_tabwidget_tab2)
+    classBlueprint.mkLineEdit(E_p2_2_s2_editHostname, QtCore.QRect(140, 10, 141, 31), 10, "S2")
+    E_p2_2_s2_editHostname.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_s2_comboA_label = QtWidgets.QLabel(p2_2_tabwidget_tab2)
+    classBlueprint.mkLabel(self.E_p2_2_s2_comboA_label, QtCore.QRect(10, 60, 151, 31), "Interface (a) :")
+
+    global E_p2_2_s2_comboA_interface
+    E_p2_2_s2_comboA_interface = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
+    classBlueprint.mkCombo(E_p2_2_s2_comboA_interface, QtCore.QRect(170, 60, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_2_s2_comboA_interface)
+
+    global E_p2_2_s2_comboA_access
+    E_p2_2_s2_comboA_access = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
+    classBlueprint.mkCombo(E_p2_2_s2_comboA_access, QtCore.QRect(300, 60, 121, 31),
+                           "color: rgb(0, 0, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 0, 255);")
+    E_p2_2_s2_comboA_access.addItem("Access")
+    E_p2_2_s2_comboA_access.addItem("Trunk")
+    E_p2_2_s2_comboA_access.currentIndexChanged.connect(lambda: exam_functions.hide_if_trunk_selected(E_p2_2_s2_comboA_access, E_p2_2_s2_comboA_vlan))
+
+
+    global E_p2_2_s2_comboA_vlan
+    E_p2_2_s2_comboA_vlan = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
+    classBlueprint.mkCombo(E_p2_2_s2_comboA_vlan, QtCore.QRect(430, 60, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+
+    global E_p2_2_s2_comboA_description
+    E_p2_2_s2_comboA_description = QtWidgets.QLineEdit(p2_2_tabwidget_tab2)
+    classBlueprint.mkLineEdit(E_p2_2_s2_comboA_description, QtCore.QRect(570, 60, 201, 31), 20, "To S1")
+    E_p2_2_s2_comboA_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_s2_comboB_label = QtWidgets.QLabel(p2_2_tabwidget_tab2)
+    classBlueprint.mkLabel(self.E_p2_2_s2_comboB_label, QtCore.QRect(10, 110, 151, 31), "Interface (b) :")
+
+    global E_p2_2_s2_comboB_interface
+    E_p2_2_s2_comboB_interface = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
+    classBlueprint.mkCombo(E_p2_2_s2_comboB_interface, QtCore.QRect(170, 110, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_2_s2_comboB_interface)
+
+    global E_p2_2_s2_comboB_access
+    E_p2_2_s2_comboB_access = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
+    classBlueprint.mkCombo(E_p2_2_s2_comboB_access, QtCore.QRect(300, 110, 121, 31),
+                           "color: rgb(0, 0, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 0, 255);")
+    E_p2_2_s2_comboB_access.addItem("Access")
+    E_p2_2_s2_comboB_access.addItem("Trunk")
+    E_p2_2_s2_comboB_access.currentIndexChanged.connect(lambda: exam_functions.hide_if_trunk_selected(E_p2_2_s2_comboB_access, E_p2_2_s2_comboB_vlan))
+
+
+    global E_p2_2_s2_comboB_vlan
+    E_p2_2_s2_comboB_vlan = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
+    classBlueprint.mkCombo(E_p2_2_s2_comboB_vlan, QtCore.QRect(430, 110, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+
+    global E_p2_2_s2_comboB_description
+    E_p2_2_s2_comboB_description = QtWidgets.QLineEdit(p2_2_tabwidget_tab2)
+    classBlueprint.mkLineEdit(E_p2_2_s2_comboB_description, QtCore.QRect(570, 110, 201, 31), 20, "To LAN A")
+    E_p2_2_s2_comboB_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_s2_isVlan_label = QtWidgets.QLabel(p2_2_tabwidget_tab2)
+    classBlueprint.mkLabel(self.E_p2_2_s2_isVlan_label, QtCore.QRect(10, 270, 191, 31), "Is part of a vlan ?")
+
+    global E_p2_2_s2_isVlan_combo
+    E_p2_2_s2_isVlan_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
+    classBlueprint.mkCombo(E_p2_2_s2_isVlan_combo, QtCore.QRect(200, 270, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    E_p2_2_s2_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s2_isVlan_combo, E_p2_2_s2_gateway_combo,self.E_p2_2_s2_gateway_label))
+
+    self.E_p2_2_s2_gateway_label = QtWidgets.QLabel(p2_2_tabwidget_tab2)
+    classBlueprint.mkLabel(self.E_p2_2_s2_gateway_label, QtCore.QRect(10, 310, 191, 31), "Default-gateway :")
+
+    global E_p2_2_s2_gateway_combo
+    E_p2_2_s2_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
+    classBlueprint.mkCombo(E_p2_2_s2_gateway_combo, QtCore.QRect(200, 310, 161, 31),
+                           "color: rgb(0, 85, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 85, 255);")
+
+    #--TAB S3--#
+    self.E_p2_2_s3_img = QtWidgets.QLabel(p2_2_tabwidget_tab3)
+    classBlueprint.mkLabPic(self.E_p2_2_s3_img, QtCore.QRect(590, 308, 281, 181), QtGui.QPixmap("./img/schema2-s3.png"), True)
+
+    self.E_p2_2_s3_labelHostname = QtWidgets.QLabel(p2_2_tabwidget_tab3)
+    classBlueprint.mkLabel(self.E_p2_2_s3_labelHostname, QtCore.QRect(10, 10, 121, 31), "Hostname :")
+
+    global E_p2_2_s3_editHostname
+    E_p2_2_s3_editHostname = QtWidgets.QLineEdit(p2_2_tabwidget_tab3)
+    classBlueprint.mkLineEdit(E_p2_2_s3_editHostname, QtCore.QRect(140, 10, 141, 31), 10, "S3")
+    E_p2_2_s3_editHostname.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_s3_comboA_label = QtWidgets.QLabel(p2_2_tabwidget_tab3)
+    classBlueprint.mkLabel(self.E_p2_2_s3_comboA_label, QtCore.QRect(10, 60, 151, 31), "Interface (a) :")
+
+    global E_p2_2_s3_comboA_interface
+    E_p2_2_s3_comboA_interface = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_comboA_interface, QtCore.QRect(170, 60, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_2_s3_comboA_interface)
+
+    global E_p2_2_s3_comboA_access
+    E_p2_2_s3_comboA_access = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_comboA_access, QtCore.QRect(300, 60, 121, 31),
+                           "color: rgb(0, 0, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 0, 255);")
+    E_p2_2_s3_comboA_access.addItem("Access")
+    E_p2_2_s3_comboA_access.addItem("Trunk")
+    E_p2_2_s3_comboA_access.currentIndexChanged.connect(lambda: exam_functions.hide_if_trunk_selected(E_p2_2_s3_comboA_access, E_p2_2_s3_comboA_vlan))
+
+
+    global E_p2_2_s3_comboA_vlan
+    E_p2_2_s3_comboA_vlan = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_comboA_vlan, QtCore.QRect(430, 60, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+
+    global E_p2_2_s3_comboA_description
+    E_p2_2_s3_comboA_description = QtWidgets.QLineEdit(p2_2_tabwidget_tab3)
+    classBlueprint.mkLineEdit(E_p2_2_s3_comboA_description, QtCore.QRect(570, 60, 201, 31), 20, "To LAN A")
+    E_p2_2_s3_comboA_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_s3_comboB_label = QtWidgets.QLabel(p2_2_tabwidget_tab3)
+    classBlueprint.mkLabel(self.E_p2_2_s3_comboB_label, QtCore.QRect(10, 110, 151, 31), "Interface (b) :")
+
+    global E_p2_2_s3_comboB_interface
+    E_p2_2_s3_comboB_interface = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_comboB_interface, QtCore.QRect(170, 110, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_2_s3_comboB_interface)
+
+    global E_p2_2_s3_comboB_access
+    E_p2_2_s3_comboB_access = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_comboB_access, QtCore.QRect(300, 110, 121, 31),
+                           "color: rgb(0, 0, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 0, 255);")
+    E_p2_2_s3_comboB_access.addItem("Access")
+    E_p2_2_s3_comboB_access.addItem("Trunk")
+    E_p2_2_s3_comboB_access.currentIndexChanged.connect(lambda: exam_functions.hide_if_trunk_selected(E_p2_2_s3_comboB_access, E_p2_2_s3_comboB_vlan))
+
+
+    global E_p2_2_s3_comboB_vlan
+    E_p2_2_s3_comboB_vlan = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_comboB_vlan, QtCore.QRect(430, 110, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+
+    global E_p2_2_s3_comboB_description
+    E_p2_2_s3_comboB_description = QtWidgets.QLineEdit(p2_2_tabwidget_tab3)
+    classBlueprint.mkLineEdit(E_p2_2_s3_comboB_description, QtCore.QRect(570, 110, 201, 31), 20, "To LAN B")
+    E_p2_2_s3_comboB_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_s3_comboC_label = QtWidgets.QLabel(p2_2_tabwidget_tab3)
+    classBlueprint.mkLabel(self.E_p2_2_s3_comboC_label, QtCore.QRect(10, 160, 151, 31), "Interface (c) :")
+
+    global E_p2_2_s3_comboC_interface
+    E_p2_2_s3_comboC_interface = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_comboC_interface, QtCore.QRect(170, 160, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_2_s3_comboC_interface)
+
+    global E_p2_2_s3_comboC_access
+    E_p2_2_s3_comboC_access = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_comboC_access, QtCore.QRect(300, 160, 121, 31),
+                           "color: rgb(0, 0, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 0, 255);")
+    E_p2_2_s3_comboC_access.addItem("Access")
+    E_p2_2_s3_comboC_access.addItem("Trunk")
+    E_p2_2_s3_comboC_access.setCurrentIndex(1)
+    E_p2_2_s3_comboC_access.currentIndexChanged.connect(lambda: exam_functions.hide_if_trunk_selected(E_p2_2_s3_comboC_access, E_p2_2_s3_comboC_vlan))
+
+    global E_p2_2_s3_comboC_vlan
+    E_p2_2_s3_comboC_vlan = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_comboC_vlan, QtCore.QRect(430, 160, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    E_p2_2_s3_comboC_vlan.setVisible(False)
+
+    global E_p2_2_s3_comboC_description
+    E_p2_2_s3_comboC_description = QtWidgets.QLineEdit(p2_2_tabwidget_tab3)
+    classBlueprint.mkLineEdit(E_p2_2_s3_comboC_description, QtCore.QRect(570, 160, 201, 31), 20, "To SWL3")
+    E_p2_2_s3_comboC_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+
+
+    self.E_p2_2_s3_isVlan_label = QtWidgets.QLabel(p2_2_tabwidget_tab3)
+    classBlueprint.mkLabel(self.E_p2_2_s3_isVlan_label, QtCore.QRect(10, 270, 191, 31), "Is part of a vlan ?")
+
+    global E_p2_2_s3_isVlan_combo
+    E_p2_2_s3_isVlan_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_isVlan_combo, QtCore.QRect(200, 270, 121, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    E_p2_2_s3_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s3_isVlan_combo, E_p2_2_s3_gateway_combo,self.E_p2_2_s2_gateway_label))
+
+    self.E_p2_2_s3_gateway_label = QtWidgets.QLabel(p2_2_tabwidget_tab3)
+    classBlueprint.mkLabel(self.E_p2_2_s3_gateway_label, QtCore.QRect(10, 310, 191, 31), "Default-gateway :")
+
+    global E_p2_2_s3_gateway_combo
+    E_p2_2_s3_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_gateway_combo, QtCore.QRect(200, 310, 161, 31),
+                           "color: rgb(0, 85, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 85, 255);")
+
+
+
+
+    p2_2_tabwidget.addTab(p2_2_tabwidget_tab1, "   S1   ")
+    p2_2_tabwidget.addTab(p2_2_tabwidget_tab2, "   S2   ")
+    p2_2_tabwidget.addTab(p2_2_tabwidget_tab3, "   S3   ")
+    p2_2_tabwidget.setObjectName("p2_2_tabwidget")
+
+    self.stackedWidget_2.addWidget(self.page_2_2)
 
     #---END OF PAGE--#
 
