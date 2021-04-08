@@ -101,6 +101,9 @@ def save_changes(stacked_widget):
     elif (current_index == 4):
         save_changes_p2_1(exam_page.E_p2_1_table)
 
+    elif (current_index == 5):
+        save_changes_p2_2()
+
 #-----------------------------------------------------------------------------#
 # Function used when press "save changes" within main configuration (page 2)  #
 #-----------------------------------------------------------------------------#
@@ -740,6 +743,7 @@ def populate_gateway_combo(combo_part_of_vlan, combo_gateway, label_gateway): # 
 
     elif (combo_part_of_vlan.currentText() == "No"):
         combo_gateway.clear()
+        combo_gateway.addItem("/")
         combo_gateway.setVisible(False)
         label_gateway.setVisible(False)
 
@@ -760,3 +764,78 @@ def hide_if_trunk_selected(combo_trunk, combo_to_hide):
         combo_to_hide.setVisible(False)
     elif (combo_trunk.currentText() == "Access"):
         combo_to_hide.setVisible(True)
+
+def save_changes_p2_2():
+
+    global s1_dict
+    s1_dict = {
+        "name" : [exam_page.E_p2_2_s1_editHostname.text()],
+        "is_part_of_a_vlan": [exam_page.E_p2_2_s1_gateway_combo.currentText()],
+        "a" : [exam_page.E_p2_2_s1_comboA_interface.currentText(), exam_page.E_p2_2_s1_comboA_access.currentText(), exam_page.E_p2_2_s1_comboA_vlan.currentText() if (exam_page.E_p2_2_s1_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboA_description.text()],
+        "b" : [exam_page.E_p2_2_s1_comboB_interface.currentText(), exam_page.E_p2_2_s1_comboB_access.currentText(), exam_page.E_p2_2_s1_comboB_vlan.currentText() if (exam_page.E_p2_2_s1_comboB_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboB_description.text()],
+        "c" : [exam_page.E_p2_2_s1_comboC_interface.currentText(), exam_page.E_p2_2_s1_comboC_access.currentText(), exam_page.E_p2_2_s1_comboC_vlan.currentText() if (exam_page.E_p2_2_s1_comboC_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboC_description.text()],
+        "d" : [exam_page.E_p2_2_s1_comboD_interface.currentText(), exam_page.E_p2_2_s1_comboD_access.currentText(), exam_page.E_p2_2_s1_comboD_vlan.currentText() if (exam_page.E_p2_2_s1_comboD_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboD_description.text()],
+    }
+    global s2_dict
+    s2_dict = {
+        "name" : [exam_page.E_p2_2_s2_editHostname.text()],
+        "is_part_of_a_vlan": [exam_page.E_p2_2_s2_gateway_combo.currentText()],
+        "a" : [exam_page.E_p2_2_s2_comboA_interface.currentText(), exam_page.E_p2_2_s2_comboA_access.currentText(), exam_page.E_p2_2_s2_comboA_vlan.currentText() if (exam_page.E_p2_2_s2_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s2_comboA_description.text()],
+        "b" : [exam_page.E_p2_2_s2_comboB_interface.currentText(), exam_page.E_p2_2_s2_comboB_access.currentText(), exam_page.E_p2_2_s2_comboB_vlan.currentText() if (exam_page.E_p2_2_s2_comboB_access.currentText() == "Access") else "/", exam_page.E_p2_2_s2_comboB_description.text()]
+    }
+
+    global s3_dict
+    s3_dict = {
+        "name" : [exam_page.E_p2_2_s3_editHostname.text()],
+        "is_part_of_a_vlan": [exam_page.E_p2_2_s3_gateway_combo.currentText()],
+        "a" : [exam_page.E_p2_2_s3_comboA_interface.currentText(), exam_page.E_p2_2_s3_comboA_access.currentText(), exam_page.E_p2_2_s3_comboA_vlan.currentText() if (exam_page.E_p2_2_s3_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboA_description.text()],
+        "b" : [exam_page.E_p2_2_s3_comboB_interface.currentText(), exam_page.E_p2_2_s3_comboB_access.currentText(), exam_page.E_p2_2_s3_comboB_vlan.currentText() if (exam_page.E_p2_2_s3_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboB_description.text()],
+        "c" : [exam_page.E_p2_2_s3_comboC_interface.currentText(), exam_page.E_p2_2_s3_comboC_access.currentText(), exam_page.E_p2_2_s3_comboC_vlan.currentText() if (exam_page.E_p2_2_s3_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboC_description.text()]
+    }
+    """
+    S1 = {
+       "name" : ["S1"],
+       "is_part_of_a_vlan" : ["192.168.99.1"]
+        "a" : ["F0/24", "Access", "Vlan 10", "description"],
+        "b" : ["G0/2", "Trunk", "/", "description"],
+        "c" : ["WAN", "1st IP", "mask", "description"],
+        "d" : ["LAN C", "Last IP", "mask", "description"]
+    }
+    """
+    print("----S1 data----")
+    for a in s1_dict.keys():
+        print(str(a) + " : " + str(s1_dict.get(a)))
+
+    print("----S2 data----")
+    for a in s2_dict.keys():
+        print(str(a) + " : " + str(s2_dict.get(a)))
+
+    print("----S3 data----")
+    for a in s3_dict.keys():
+        print(str(a) + " : " + str(s3_dict.get(a)))
+
+#TODO
+"""
+
+def generate_solution_text_v2():
+    output = "----------------\n"
+    output += "   SUBNETS      \n"
+    output += "----------------\n"
+    output += "\n"
+    for a in vlsm_dict.values():
+        output += a[0] + " (" + str(a[1]) + ") : " + a[4] + " => " + a[5] + " " + a[3] + " (" + str(
+            subnet_functions.getMaskFromSlash(a[3])) + ")\n"
+        output += "\n"
+
+    for b in devices_dict.values():  # Prints out MAIN + PC (clients) configuration
+        if not ("f0" in b[1]):
+            break
+        else:
+            output += "----------------\n"
+            output += "   " + b[0] + " (" + b[2] + ")\n"
+            output += "----------------\n"
+            output += "IP : " + b[3] + "\n"
+            output += "Mask : " + b[4] + "\n"
+            output += "Gateway : " + b[5] + "\n"
+
+"""

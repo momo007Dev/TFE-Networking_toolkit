@@ -4679,7 +4679,7 @@ background-color: rgb(255, 255, 255);</string>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="s1">
          <attribute name="title">
@@ -5411,7 +5411,7 @@ selection-color: rgb(85, 170, 0);</string>
            <rect>
             <x>200</x>
             <y>310</y>
-            <width>161</width>
+            <width>181</width>
             <height>31</height>
            </rect>
           </property>

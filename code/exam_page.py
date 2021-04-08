@@ -1056,7 +1056,7 @@ def setupUiExam(self):
 
     global E_p2_2_s1_gateway_combo
     E_p2_2_s1_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
-    classBlueprint.mkCombo(E_p2_2_s1_gateway_combo, QtCore.QRect(200, 310, 161, 31),
+    classBlueprint.mkCombo(E_p2_2_s1_gateway_combo, QtCore.QRect(200, 310, 181, 31),
                            "color: rgb(0, 85, 255); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
@@ -1095,6 +1095,7 @@ def setupUiExam(self):
                            "selection-color: rgb(0, 0, 255);")
     E_p2_2_s2_comboA_access.addItem("Access")
     E_p2_2_s2_comboA_access.addItem("Trunk")
+    E_p2_2_s2_comboA_access.setCurrentIndex(1)
     E_p2_2_s2_comboA_access.currentIndexChanged.connect(lambda: exam_functions.hide_if_trunk_selected(E_p2_2_s2_comboA_access, E_p2_2_s2_comboA_vlan))
 
 
@@ -1105,6 +1106,7 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
+    E_p2_2_s2_comboA_vlan.setVisible(False)
 
     global E_p2_2_s2_comboA_description
     E_p2_2_s2_comboA_description = QtWidgets.QLineEdit(p2_2_tabwidget_tab2)
@@ -1165,7 +1167,7 @@ def setupUiExam(self):
 
     global E_p2_2_s2_gateway_combo
     E_p2_2_s2_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
-    classBlueprint.mkCombo(E_p2_2_s2_gateway_combo, QtCore.QRect(200, 310, 161, 31),
+    classBlueprint.mkCombo(E_p2_2_s2_gateway_combo, QtCore.QRect(200, 310, 181, 31),
                            "color: rgb(0, 85, 255); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
@@ -1205,7 +1207,6 @@ def setupUiExam(self):
     E_p2_2_s3_comboA_access.addItem("Access")
     E_p2_2_s3_comboA_access.addItem("Trunk")
     E_p2_2_s3_comboA_access.currentIndexChanged.connect(lambda: exam_functions.hide_if_trunk_selected(E_p2_2_s3_comboA_access, E_p2_2_s3_comboA_vlan))
-
 
     global E_p2_2_s3_comboA_vlan
     E_p2_2_s3_comboA_vlan = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
@@ -1295,8 +1296,6 @@ def setupUiExam(self):
     classBlueprint.mkLineEdit(E_p2_2_s3_comboC_description, QtCore.QRect(570, 160, 201, 31), 20, "To SWL3")
     E_p2_2_s3_comboC_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
-
-
     self.E_p2_2_s3_isVlan_label = QtWidgets.QLabel(p2_2_tabwidget_tab3)
     classBlueprint.mkLabel(self.E_p2_2_s3_isVlan_label, QtCore.QRect(10, 270, 191, 31), "Is part of a vlan ?")
 
@@ -1307,14 +1306,14 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
-    E_p2_2_s3_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s3_isVlan_combo, E_p2_2_s3_gateway_combo,self.E_p2_2_s2_gateway_label))
+    E_p2_2_s3_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s3_isVlan_combo, E_p2_2_s3_gateway_combo,self.E_p2_2_s3_gateway_label))
 
     self.E_p2_2_s3_gateway_label = QtWidgets.QLabel(p2_2_tabwidget_tab3)
     classBlueprint.mkLabel(self.E_p2_2_s3_gateway_label, QtCore.QRect(10, 310, 191, 31), "Default-gateway :")
 
     global E_p2_2_s3_gateway_combo
     E_p2_2_s3_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
-    classBlueprint.mkCombo(E_p2_2_s3_gateway_combo, QtCore.QRect(200, 310, 161, 31),
+    classBlueprint.mkCombo(E_p2_2_s3_gateway_combo, QtCore.QRect(200, 310, 181, 31),
                            "color: rgb(0, 85, 255); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
