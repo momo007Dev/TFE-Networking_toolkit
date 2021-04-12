@@ -5389,7 +5389,7 @@ selection-color: rgb(85, 170, 0);</string>
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>310</y>
+            <y>360</y>
             <width>191</width>
             <height>31</height>
            </rect>
@@ -5410,7 +5410,57 @@ selection-color: rgb(85, 170, 0);</string>
           <property name="geometry">
            <rect>
             <x>200</x>
-            <y>310</y>
+            <y>360</y>
+            <width>181</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 85, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 85, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>192.168.0.1</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s1_ip_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>315</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Switch IP :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s1_ip_combo">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>315</y>
             <width>181</width>
             <height>31</height>
            </rect>
@@ -5803,27 +5853,6 @@ selection-color: rgb(0, 0, 255);</string>
            </property>
           </item>
          </widget>
-         <widget class="QLabel" name="E_p2_2_s2_gateway_label">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>310</y>
-            <width>191</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-            <underline>true</underline>
-           </font>
-          </property>
-          <property name="text">
-           <string>Default-gateway :</string>
-          </property>
-         </widget>
          <widget class="QLabel" name="E_p2_2_s2_isVlan_label">
           <property name="geometry">
            <rect>
@@ -5844,35 +5873,6 @@ selection-color: rgb(0, 0, 255);</string>
           <property name="text">
            <string>Is part of a vlan ?</string>
           </property>
-         </widget>
-         <widget class="QComboBox" name="E_p2_2_s2_gateway_combo">
-          <property name="geometry">
-           <rect>
-            <x>200</x>
-            <y>310</y>
-            <width>161</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Verdana</family>
-            <pointsize>9</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(0, 85, 255);
-background-color: rgb(255, 255, 255);
-selection-background-color: rgb(204,255,255);
-selection-color: rgb(0, 85, 255);</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>192.168.0.1</string>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="E_p2_2_s2_isVlan_combo">
           <property name="geometry">
@@ -5905,6 +5905,106 @@ selection-color: rgb(85, 170, 0);</string>
           <item>
            <property name="text">
             <string>Vlan 10</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s2_gateway_combo">
+          <property name="geometry">
+           <rect>
+            <x>200</x>
+            <y>360</y>
+            <width>181</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 85, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 85, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>192.168.0.1</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s2_ip_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>315</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Switch IP :</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s2_gateway_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>360</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Default-gateway :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s2_ip_combo">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>315</y>
+            <width>181</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 85, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 85, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>192.168.0.1</string>
            </property>
           </item>
          </widget>
@@ -6421,7 +6521,7 @@ color: rgb(255, 0, 255)</string>
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>310</y>
+            <y>360</y>
             <width>191</width>
             <height>31</height>
            </rect>
@@ -6463,8 +6563,8 @@ color: rgb(255, 0, 255)</string>
           <property name="geometry">
            <rect>
             <x>200</x>
-            <y>310</y>
-            <width>161</width>
+            <y>360</y>
+            <width>181</width>
             <height>31</height>
            </rect>
           </property>
@@ -6519,6 +6619,56 @@ selection-color: rgb(85, 170, 0);</string>
           <item>
            <property name="text">
             <string>Vlan 10</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_2_s3_ip_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>315</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Switch IP :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_2_s3_ip_combo">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>315</y>
+            <width>181</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 85, 255);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(0, 85, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>192.168.0.1</string>
            </property>
           </item>
          </widget>

@@ -268,22 +268,22 @@ def generate_solution_text():
 
                 if (security_enabled is True):
                     output += "line console 0" + "\n"
-                    output += "password " + exam_page.E_p4_gb2_editPassword.text()  + "\n"
-                    output += "login" + "\n"
+                    output += "   password " + exam_page.E_p4_gb2_editPassword.text()  + "\n"
+                    output += "   login" + "\n"
                     output += "exit" + "\n"
                     output += "\n"
 
                     if (security_enabled is True and exam_page.E_p4_gb2_checkSsh.isChecked()):
                         output += "line vty 0 15" + "\n"
-                        output += "password " + exam_page.E_p4_gb2_editPassword.text() + "\n"
-                        output += "transport input ssh" + "\n"
-                        output += "login local" + "\n"
+                        output += "   password " + exam_page.E_p4_gb2_editPassword.text() + "\n"
+                        output += "   transport input ssh" + "\n"
+                        output += "   login local" + "\n"
                         output += "exit" + "\n"
                         output += "\n"
 
                     output += "line vty 0 15" + "\n"
-                    output += "password " + exam_page.E_p4_gb2_editPassword.text() + "\n"
-                    output += "login" + "\n"
+                    output += "   password " + exam_page.E_p4_gb2_editPassword.text() + "\n"
+                    output += "   login" + "\n"
                     output += "exit" + "\n"
                     output += "\n"
 
@@ -292,9 +292,9 @@ def generate_solution_text():
                     output += "\n"
 
                 output += "int vlan1" + "\n"
-                output += "description " + c[6] + "\n"
-                output += "ip add " + c[3] + " " + c[4] + "\n"
-                output += "no shut" + "\n"
+                output += "   description " + c[6] + "\n"
+                output += "   ip add " + c[3] + " " + c[4] + "\n"
+                output += "   no shut" + "\n"
                 output += "exit" + "\n"
                 output += "\n"
 
@@ -323,22 +323,22 @@ def generate_solution_text():
 
     if (security_enabled is True):
         output += "line console 0" + "\n"
-        output += "password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
-        output += "login" + "\n"
+        output += "   password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
+        output += "   login" + "\n"
         output += "exit" + "\n"
         output += "\n"
 
         if (security_enabled is True and exam_page.E_p4_gb1_checkSsh.isChecked()):
             output += "line vty 0 4" + "\n"
-            output += "password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
-            output += "transport input ssh" + "\n"
-            output += "login local" + "\n"
+            output += "   password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
+            output += "   transport input ssh" + "\n"
+            output += "   login local" + "\n"
             output += "exit" + "\n"
             output += "\n"
 
         output += "line vty 0 15" + "\n"
-        output += "password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
-        output += "login" + "\n"
+        output += "   password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
+        output += "   login" + "\n"
         output += "exit" + "\n"
         output += "\n"
 
@@ -349,9 +349,9 @@ def generate_solution_text():
     for d in router_dict.keys():  # Prints out ROUTER configuration
         if (len(router_dict.get(d)) >=4):
             output += "int " + d + "\n"
-            output += "description " + str(router_dict.get(d)[3]) + "\n"
-            output += "ip add " + str(router_dict.get(d)[1]) + " " + str(router_dict.get(d)[2]) + "\n"
-            output += "no shut" + "\n"
+            output += "   description " + str(router_dict.get(d)[3]) + "\n"
+            output += "   ip add " + str(router_dict.get(d)[1]) + " " + str(router_dict.get(d)[2]) + "\n"
+            output += "   no shut" + "\n"
             output += "exit" + "\n"
             output += "\n"
 
@@ -727,11 +727,14 @@ def populate_vlan_in_combo(combo, include_no):
         s = "Vlan " + x
         combo.addItem(s)
 
-def populate_gateway_combo(combo_part_of_vlan, combo_gateway, label_gateway): # Applies only after "is part of vlan" combo changes value !!!
+def populate_gateway_combo(combo_part_of_vlan, combo_gateway, label_gateway, combo_switch, label_switch): # Applies only after "is part of vlan" combo changes value !!!
     if (len(combo_part_of_vlan.currentText()) > 4):
         combo_gateway.clear()
         combo_gateway.setVisible(True)
         label_gateway.setVisible(True)
+        combo_switch.clear()
+        combo_switch.setVisible(True)
+        label_switch.setVisible(True)
         for x in vlan_dict.keys():
             if (x in combo_part_of_vlan.currentText()):
                 subnet = vlan_dict[x][1]
@@ -740,12 +743,17 @@ def populate_gateway_combo(combo_part_of_vlan, combo_gateway, label_gateway): # 
                 the_list = generate_usable_ip_from_network_and_cidr(cidr, subnet)
                 for y in the_list:
                     combo_gateway.addItem(y)
+                    combo_switch.addItem(y)
 
     elif (combo_part_of_vlan.currentText() == "No"):
         combo_gateway.clear()
         combo_gateway.addItem("/")
         combo_gateway.setVisible(False)
         label_gateway.setVisible(False)
+        combo_switch.clear()
+        combo_switch.addItem("/")
+        combo_switch.setVisible(False)
+        label_switch.setVisible(False)
 
 
 def generate_usable_ip_from_network_and_cidr(subnet, cidr):
@@ -765,32 +773,43 @@ def hide_if_trunk_selected(combo_trunk, combo_to_hide):
     elif (combo_trunk.currentText() == "Access"):
         combo_to_hide.setVisible(True)
 
+def get_native_vlan(dict): # Returns the vlan which has a "native" in it
+    for x, y in dict.items():
+        if (y[4] == "Yes"):
+            return ("vlan " + str(x))
+    return "/"
+
 def save_changes_p2_2():
 
     global s1_dict
+    vlan_number_s1 = exam_page.E_p2_2_s1_isVlan_combo.currentText()[-2:]
     s1_dict = {
         "name" : [exam_page.E_p2_2_s1_editHostname.text()],
-        "is_part_of_a_vlan": [exam_page.E_p2_2_s1_gateway_combo.currentText()],
+        "is_part_of_a_vlan": ["No"] if (exam_page.E_p2_2_s1_isVlan_combo.currentText() == "No") else [vlan_number_s1, exam_page.E_p2_2_s1_ip_combo.currentText(), vlan_dict.get(vlan_number_s1)[3], exam_page.E_p2_2_s1_gateway_combo.currentText()],
         "a" : [exam_page.E_p2_2_s1_comboA_interface.currentText(), exam_page.E_p2_2_s1_comboA_access.currentText(), exam_page.E_p2_2_s1_comboA_vlan.currentText() if (exam_page.E_p2_2_s1_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboA_description.text()],
         "b" : [exam_page.E_p2_2_s1_comboB_interface.currentText(), exam_page.E_p2_2_s1_comboB_access.currentText(), exam_page.E_p2_2_s1_comboB_vlan.currentText() if (exam_page.E_p2_2_s1_comboB_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboB_description.text()],
         "c" : [exam_page.E_p2_2_s1_comboC_interface.currentText(), exam_page.E_p2_2_s1_comboC_access.currentText(), exam_page.E_p2_2_s1_comboC_vlan.currentText() if (exam_page.E_p2_2_s1_comboC_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboC_description.text()],
         "d" : [exam_page.E_p2_2_s1_comboD_interface.currentText(), exam_page.E_p2_2_s1_comboD_access.currentText(), exam_page.E_p2_2_s1_comboD_vlan.currentText() if (exam_page.E_p2_2_s1_comboD_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboD_description.text()],
     }
+    #"is_part_of_a_vlan" : ["IT", "192.168.99.2", "255.255.255.0", "192.168.99.1"]
+    #"is_part_of_a_vlan" : ["192.168.99.1"]
     global s2_dict
+    vlan_number_s2 = exam_page.E_p2_2_s2_isVlan_combo.currentText()[-2:]
     s2_dict = {
         "name" : [exam_page.E_p2_2_s2_editHostname.text()],
-        "is_part_of_a_vlan": [exam_page.E_p2_2_s2_gateway_combo.currentText()],
+        "is_part_of_a_vlan": ["No"] if (exam_page.E_p2_2_s2_isVlan_combo.currentText() == "No") else [vlan_number_s2, exam_page.E_p2_2_s2_ip_combo.currentText(), vlan_dict.get(vlan_number_s2)[3], exam_page.E_p2_2_s2_gateway_combo.currentText()],
         "a" : [exam_page.E_p2_2_s2_comboA_interface.currentText(), exam_page.E_p2_2_s2_comboA_access.currentText(), exam_page.E_p2_2_s2_comboA_vlan.currentText() if (exam_page.E_p2_2_s2_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s2_comboA_description.text()],
         "b" : [exam_page.E_p2_2_s2_comboB_interface.currentText(), exam_page.E_p2_2_s2_comboB_access.currentText(), exam_page.E_p2_2_s2_comboB_vlan.currentText() if (exam_page.E_p2_2_s2_comboB_access.currentText() == "Access") else "/", exam_page.E_p2_2_s2_comboB_description.text()]
     }
 
     global s3_dict
+    vlan_number_s3 = exam_page.E_p2_2_s3_isVlan_combo.currentText()[-2:]
     s3_dict = {
         "name" : [exam_page.E_p2_2_s3_editHostname.text()],
-        "is_part_of_a_vlan": [exam_page.E_p2_2_s3_gateway_combo.currentText()],
+        "is_part_of_a_vlan": ["No"] if (exam_page.E_p2_2_s3_isVlan_combo.currentText() == "No") else [vlan_number_s3, exam_page.E_p2_2_s3_ip_combo.currentText(), vlan_dict.get(vlan_number_s3)[3], exam_page.E_p2_2_s3_gateway_combo.currentText()],
         "a" : [exam_page.E_p2_2_s3_comboA_interface.currentText(), exam_page.E_p2_2_s3_comboA_access.currentText(), exam_page.E_p2_2_s3_comboA_vlan.currentText() if (exam_page.E_p2_2_s3_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboA_description.text()],
-        "b" : [exam_page.E_p2_2_s3_comboB_interface.currentText(), exam_page.E_p2_2_s3_comboB_access.currentText(), exam_page.E_p2_2_s3_comboB_vlan.currentText() if (exam_page.E_p2_2_s3_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboB_description.text()],
-        "c" : [exam_page.E_p2_2_s3_comboC_interface.currentText(), exam_page.E_p2_2_s3_comboC_access.currentText(), exam_page.E_p2_2_s3_comboC_vlan.currentText() if (exam_page.E_p2_2_s3_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboC_description.text()]
+        "b" : [exam_page.E_p2_2_s3_comboB_interface.currentText(), exam_page.E_p2_2_s3_comboB_access.currentText(), exam_page.E_p2_2_s3_comboB_vlan.currentText() if (exam_page.E_p2_2_s3_comboB_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboB_description.text()],
+        "c" : [exam_page.E_p2_2_s3_comboC_interface.currentText(), exam_page.E_p2_2_s3_comboC_access.currentText(), exam_page.E_p2_2_s3_comboC_vlan.currentText() if (exam_page.E_p2_2_s3_comboC_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboC_description.text()]
     }
     """
     S1 = {
@@ -802,10 +821,19 @@ def save_changes_p2_2():
         "d" : ["LAN C", "Last IP", "mask", "description"]
     }
     """
+    global switch_dict
+    switch_dict = { # Dict that contains all three other dict
+        "S1" : s1_dict,
+        "S2" : s2_dict,
+        "S3" : s3_dict
+    }
+    for x in list(switch_dict.keys()):
+        print(x)
+
     print("----S1 data----")
     for a in s1_dict.keys():
         print(str(a) + " : " + str(s1_dict.get(a)))
-
+    """
     print("----S2 data----")
     for a in s2_dict.keys():
         print(str(a) + " : " + str(s2_dict.get(a)))
@@ -813,29 +841,44 @@ def save_changes_p2_2():
     print("----S3 data----")
     for a in s3_dict.keys():
         print(str(a) + " : " + str(s3_dict.get(a)))
+        
+    """
+    print("TEST")
+    generate_solution_text_v2()
 
 #TODO
-"""
 
 def generate_solution_text_v2():
-    output = "----------------\n"
-    output += "   SUBNETS      \n"
-    output += "----------------\n"
-    output += "\n"
-    for a in vlsm_dict.values():
-        output += a[0] + " (" + str(a[1]) + ") : " + a[4] + " => " + a[5] + " " + a[3] + " (" + str(
-            subnet_functions.getMaskFromSlash(a[3])) + ")\n"
+    native = get_native_vlan(vlan_dict)
+    dict_keys = list(switch_dict.keys())
+
+    for x in dict_keys:
+
+        output =  "----------------\n"
+        output += "   "+x+"        \n"
+        output += "----------------\n"
+
+        output += "hostname " + str(list(switch_dict.get(x).get("name"))[0]) + "\n"
         output += "\n"
+        int_keys = list(switch_dict.get(x).keys())[2:]
+        for current_int in int_keys:
+            output += "int " + str(list(switch_dict.get(x).get(current_int))[0]) + "\n"
+            output += "   description " + str(list(switch_dict.get(x).get(current_int))[3]) + "\n"
 
-    for b in devices_dict.values():  # Prints out MAIN + PC (clients) configuration
-        if not ("f0" in b[1]):
-            break
-        else:
-            output += "----------------\n"
-            output += "   " + b[0] + " (" + b[2] + ")\n"
-            output += "----------------\n"
-            output += "IP : " + b[3] + "\n"
-            output += "Mask : " + b[4] + "\n"
-            output += "Gateway : " + b[5] + "\n"
+            if (str(list(switch_dict.get(x).get(current_int))[1]) == "Access"):
+                output += "   switchport access " + str(list(switch_dict.get(x).get(current_int))[2]) + "\n"
+                output += "   switchport mode access" + "\n"
+                output += "\n"
+            elif not (native == "/"):
+                output += "   switchport trunk native " + native + "\n"
+                output += "   switchport mode trunk" + "\n"
+                output += "\n"
+            else:
+                output += "   switchport mode trunk" + "\n"
+                output += "\n"
 
-"""
+        output += "end" + "\n"
+        output += "wr" + "\n"
+
+        with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
+            f.write(output)

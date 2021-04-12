@@ -1049,14 +1049,25 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
-    E_p2_2_s1_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s1_isVlan_combo, E_p2_2_s1_gateway_combo, self.E_p2_2_s1_gateway_label))
+    E_p2_2_s1_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s1_isVlan_combo, E_p2_2_s1_gateway_combo, self.E_p2_2_s1_gateway_label, E_p2_2_s1_ip_combo, self.E_p2_2_s1_ip_label))
+
+    self.E_p2_2_s1_ip_label = QtWidgets.QLabel(p2_2_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_2_s1_ip_label, QtCore.QRect(10, 315, 121, 31), "Switch IP :")
+
+    global E_p2_2_s1_ip_combo
+    E_p2_2_s1_ip_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_2_s1_ip_combo, QtCore.QRect(150, 315, 181, 31),
+                           "color: rgb(0, 85, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 85, 255);")
 
     self.E_p2_2_s1_gateway_label = QtWidgets.QLabel(p2_2_tabwidget_tab1)
-    classBlueprint.mkLabel(self.E_p2_2_s1_gateway_label, QtCore.QRect(10, 310, 191, 31), "Default-gateway :")
+    classBlueprint.mkLabel(self.E_p2_2_s1_gateway_label, QtCore.QRect(10, 360, 191, 31), "Default-gateway :")
 
     global E_p2_2_s1_gateway_combo
     E_p2_2_s1_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
-    classBlueprint.mkCombo(E_p2_2_s1_gateway_combo, QtCore.QRect(200, 310, 181, 31),
+    classBlueprint.mkCombo(E_p2_2_s1_gateway_combo, QtCore.QRect(200, 360, 181, 31),
                            "color: rgb(0, 85, 255); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
@@ -1160,14 +1171,25 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
-    E_p2_2_s2_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s2_isVlan_combo, E_p2_2_s2_gateway_combo,self.E_p2_2_s2_gateway_label))
+    E_p2_2_s2_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s2_isVlan_combo, E_p2_2_s2_gateway_combo, self.E_p2_2_s2_gateway_label, E_p2_2_s2_ip_combo, self.E_p2_2_s2_ip_label))
+
+    self.E_p2_2_s2_ip_label = QtWidgets.QLabel(p2_2_tabwidget_tab2)
+    classBlueprint.mkLabel(self.E_p2_2_s2_ip_label, QtCore.QRect(10, 315, 121, 31), "Switch IP :")
+
+    global E_p2_2_s2_ip_combo
+    E_p2_2_s2_ip_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
+    classBlueprint.mkCombo(E_p2_2_s2_ip_combo, QtCore.QRect(150, 315, 181, 31),
+                           "color: rgb(0, 85, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 85, 255);")
 
     self.E_p2_2_s2_gateway_label = QtWidgets.QLabel(p2_2_tabwidget_tab2)
-    classBlueprint.mkLabel(self.E_p2_2_s2_gateway_label, QtCore.QRect(10, 310, 191, 31), "Default-gateway :")
+    classBlueprint.mkLabel(self.E_p2_2_s2_gateway_label, QtCore.QRect(10, 360, 191, 31), "Default-gateway :")
 
     global E_p2_2_s2_gateway_combo
     E_p2_2_s2_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
-    classBlueprint.mkCombo(E_p2_2_s2_gateway_combo, QtCore.QRect(200, 310, 181, 31),
+    classBlueprint.mkCombo(E_p2_2_s2_gateway_combo, QtCore.QRect(200, 360, 181, 31),
                            "color: rgb(0, 85, 255); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
@@ -1306,14 +1328,25 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
-    E_p2_2_s3_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s3_isVlan_combo, E_p2_2_s3_gateway_combo,self.E_p2_2_s3_gateway_label))
+    E_p2_2_s3_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s3_isVlan_combo, E_p2_2_s3_gateway_combo, self.E_p2_2_s3_gateway_label, E_p2_2_s3_ip_combo, self.E_p2_2_s3_ip_label))
+
+    self.E_p2_2_s3_ip_label = QtWidgets.QLabel(p2_2_tabwidget_tab3)
+    classBlueprint.mkLabel(self.E_p2_2_s3_ip_label, QtCore.QRect(10, 315, 121, 31), "Switch IP :")
+
+    global E_p2_2_s3_ip_combo
+    E_p2_2_s3_ip_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
+    classBlueprint.mkCombo(E_p2_2_s3_ip_combo, QtCore.QRect(150, 315, 181, 31),
+                           "color: rgb(0, 85, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 85, 255);")
 
     self.E_p2_2_s3_gateway_label = QtWidgets.QLabel(p2_2_tabwidget_tab3)
-    classBlueprint.mkLabel(self.E_p2_2_s3_gateway_label, QtCore.QRect(10, 310, 191, 31), "Default-gateway :")
+    classBlueprint.mkLabel(self.E_p2_2_s3_gateway_label, QtCore.QRect(10, 360, 191, 31), "Default-gateway :")
 
     global E_p2_2_s3_gateway_combo
     E_p2_2_s3_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
-    classBlueprint.mkCombo(E_p2_2_s3_gateway_combo, QtCore.QRect(200, 310, 181, 31),
+    classBlueprint.mkCombo(E_p2_2_s3_gateway_combo, QtCore.QRect(200, 360, 181, 31),
                            "color: rgb(0, 85, 255); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "

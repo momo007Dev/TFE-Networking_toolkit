@@ -22,7 +22,7 @@ class blueprintFunctions:
         return desktop
 
     def deleteOutputFile():
-        tab = [str(blueprintFunctions.getDesktopPath()) + "/solution.txt", str(blueprintFunctions.getDesktopPath()) + "/packet-tracer.yaml"]
+        tab = [str(blueprintFunctions.getDesktopPath()) + "/solution.txt", str(blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", str(blueprintFunctions.getDesktopPath()) + "/packet-tracer.yaml", str(blueprintFunctions.getDesktopPath()) + "/packet-tracer_v2.yaml"]
         for i in range(len(tab)):
             if (os.path.exists(tab[i])):
                 os.remove(tab[i])
