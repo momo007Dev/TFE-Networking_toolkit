@@ -811,6 +811,18 @@ def save_changes_p2_2():
         "b" : [exam_page.E_p2_2_s3_comboB_interface.currentText(), exam_page.E_p2_2_s3_comboB_access.currentText(), exam_page.E_p2_2_s3_comboB_vlan.currentText() if (exam_page.E_p2_2_s3_comboB_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboB_description.text()],
         "c" : [exam_page.E_p2_2_s3_comboC_interface.currentText(), exam_page.E_p2_2_s3_comboC_access.currentText(), exam_page.E_p2_2_s3_comboC_vlan.currentText() if (exam_page.E_p2_2_s3_comboC_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboC_description.text()]
     }
+
+    global client_dict
+    client_dict = {
+        "PC1" : [exam_page.E_p2_2_clients_gb5_pc1.text(), exam_page.E_p2_2_clients_gb1_ip.text(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_2_clients_gb1_cidr.currentText())), exam_page.E_p2_2_clients_gb1_gateway.text(), exam_page.E_p2_2_clients_gb1_dns.text()],
+        "PC2": [exam_page.E_p2_2_clients_gb5_pc2.text(), exam_page.E_p2_2_clients_gb2_ip.text(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_2_clients_gb2_cidr.currentText())), exam_page.E_p2_2_clients_gb2_gateway.text(), exam_page.E_p2_2_clients_gb2_dns.text()],
+        "PC3" : [exam_page.E_p2_2_clients_gb5_pc3.text(), exam_page.E_p2_2_clients_gb3_ip.text(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_2_clients_gb3_cidr.currentText())), exam_page.E_p2_2_clients_gb3_gateway.text(), exam_page.E_p2_2_clients_gb3_dns.text()],
+        "PC4" : [exam_page.E_p2_2_clients_gb5_pc4.text(), exam_page.E_p2_2_clients_gb4_ip.text(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_2_clients_gb4_cidr.currentText())), exam_page.E_p2_2_clients_gb4_gateway.text(), exam_page.E_p2_2_clients_gb4_dns.text()],
+    }
+    # "PC1" : ["hostname", "IP", "cidr", "gateway", "dns"]
+    # "PC1" : [exam_page.E_p2_2_clients_gb5_pc1.text(), exam_page.E_p2_2_clients_gb1_ip.text(), exam_page.E_p2_2_clients_gb1_cidr.currentText(), exam_page.E_p2_2_clients_gb1_gateway.text(), exam_page.E_p2_2_clients_gb1_dns.text()]
+
+
     """
     S1 = {
        "name" : ["S1"],
@@ -833,7 +845,7 @@ def save_changes_p2_2():
     print("----S1 data----")
     for a in s1_dict.keys():
         print(str(a) + " : " + str(s1_dict.get(a)))
-    """
+
     print("----S2 data----")
     for a in s2_dict.keys():
         print(str(a) + " : " + str(s2_dict.get(a)))
@@ -842,13 +854,19 @@ def save_changes_p2_2():
     for a in s3_dict.keys():
         print(str(a) + " : " + str(s3_dict.get(a)))
         
-    """
+
+    print("----CLIENT data----")
+    for a in client_dict.keys():
+        print(str(a) + " : " + str(client_dict.get(a)))
     print("TEST")
     generate_solution_text_v2()
 
 #TODO
-
 def generate_solution_text_v2():
+    #generate_solution_client()
+    generate_solution_switch()
+
+def generate_solution_switch():
     native = get_native_vlan(vlan_dict)
     dict_keys = list(switch_dict.keys())
 
@@ -869,7 +887,7 @@ def generate_solution_text_v2():
                 output += "   switchport access " + str(list(switch_dict.get(x).get(current_int))[2]) + "\n"
                 output += "   switchport mode access" + "\n"
                 output += "\n"
-            elif not (native == "/"):
+            elif not (native == "/"): # If au moins un vlan est natif... A corriger
                 output += "   switchport trunk native " + native + "\n"
                 output += "   switchport mode trunk" + "\n"
                 output += "\n"
@@ -880,5 +898,20 @@ def generate_solution_text_v2():
         output += "end" + "\n"
         output += "wr" + "\n"
 
+        with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
+            f.write(output)
+
+def generate_solution_client():
+    count = 1
+    for b in client_dict.values(): # Prints out MAIN + PC (clients) configuration
+        output = "----------------\n"
+        output += "   PC" + str(count) + " (" + b[0] + ")\n"
+        output += "----------------\n"
+        output += "IP : " + b[1] + "\n"
+        output += "Mask : " + b[2] + "\n"
+        output += "Gateway : " + b[3] + "\n"
+        if (len(b[4]) > 4):
+            output += "Dns : " + b[4] + "\n"
+        count+=1
         with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
             f.write(output)
