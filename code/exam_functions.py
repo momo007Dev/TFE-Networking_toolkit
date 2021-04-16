@@ -776,7 +776,7 @@ def hide_if_trunk_selected(combo_trunk, combo_to_hide):
 def get_native_vlan(dict): # Returns the vlan which has a "native" in it
     for x, y in dict.items():
         if (y[4] == "Yes"):
-            return ("vlan " + str(x))
+            return str(x)
     return "/"
 
 def save_changes_p2_2():
@@ -826,13 +826,14 @@ def save_changes_p2_2():
     """
     S1 = {
        "name" : ["S1"],
-       "is_part_of_a_vlan" : ["192.168.99.1"]
+       "is_part_of_a_vlan" : ["10", "192.168.99.2", "255.255.255.0", "192.168.99.1"]
         "a" : ["F0/24", "Access", "Vlan 10", "description"],
         "b" : ["G0/2", "Trunk", "/", "description"],
         "c" : ["WAN", "1st IP", "mask", "description"],
         "d" : ["LAN C", "Last IP", "mask", "description"]
     }
     """
+
     global switch_dict
     switch_dict = { # Dict that contains all three other dict
         "S1" : s1_dict,
@@ -887,13 +888,21 @@ def generate_solution_switch():
                 output += "   switchport access " + str(list(switch_dict.get(x).get(current_int))[2]) + "\n"
                 output += "   switchport mode access" + "\n"
                 output += "\n"
-            elif not (native == "/"): # If au moins un vlan est natif... A corriger
-                output += "   switchport trunk native " + native + "\n"
+            elif (check_if_switch_has_a_native_vlan(switch_dict.get(x), native)):
+                output += "   switchport trunk native vlan " + native + "\n"
                 output += "   switchport mode trunk" + "\n"
                 output += "\n"
             else:
                 output += "   switchport mode trunk" + "\n"
                 output += "\n"
+
+        index = switch_dict.get(x).get("is_part_of_a_vlan")
+        if (len(index) == 4):
+            output += "int vlan" + index[0] + "\n"
+            output += "   ip add " + index[1] + " " + index[2] + "\n"
+            output += "\n"
+            output += "ip default-gateway " + index[3] + "\n"
+            output += "\n"
 
         output += "end" + "\n"
         output += "wr" + "\n"
@@ -915,3 +924,21 @@ def generate_solution_client():
         count+=1
         with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
             f.write(output)
+
+
+def check_if_switch_has_a_native_vlan(dict, native):
+    vlan_used = set()
+    vlan_used.clear()
+    # Fetchs all possible vlans associated with any interface and inject vlan number in "vlan_used" set
+    if not (dict.get("is_part_of_a_vlan")[0] == "/"):
+        vlan_used.add(dict.get("is_part_of_a_vlan")[0])
+    int_keys = list(dict.keys())[2:]
+    for a in int_keys:
+        if (dict.get(a)[1] == "Access"):
+            vlan_used.add(dict.get(a)[2].split(" ")[1])
+
+    # Checks if the native vlan is part of vlan_used set
+    if (native in vlan_used):
+        return True
+
+    return False
