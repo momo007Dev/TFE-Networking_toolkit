@@ -59,14 +59,28 @@ def setupUiExam(self):
     #---NEW BUTTONS---#
     global E_btn_1_2
     E_btn_1_2 = QtWidgets.QPushButton(self.Exam)
-    classBlueprint.mkBtn(E_btn_1_2, QtCore.QRect(185, 47, 145, 50), "background-color: rgb(255, 0, 127);", "(2) VLAN")
+    classBlueprint.mkBtn(E_btn_1_2, QtCore.QRect(170, 47, 135, 50), "background-color: rgb(255, 0, 127);", "(2) VLAN")
     E_btn_1_2.setVisible(False)
 
     global E_btn_1_3
     E_btn_1_3 = QtWidgets.QPushButton(self.Exam)
-    classBlueprint.mkBtn(E_btn_1_3, QtCore.QRect(355, 47, 145, 50), "background-color: rgb(255, 255, 127);", "(3) Layer 2\nSwitchs")
+    classBlueprint.mkBtn(E_btn_1_3, QtCore.QRect(315, 47, 135, 50), "background-color: rgb(255, 255, 127);", "(3) PCs and\nSwitchs")
     E_btn_1_3.setVisible(False)
 
+    global E_btn_1_4
+    E_btn_1_4 = QtWidgets.QPushButton(self.Exam)
+    classBlueprint.mkBtn(E_btn_1_4, QtCore.QRect(460, 47, 135, 50), "background-color: rgb(85, 255, 127);", "(4) Layer 3\nSwitch")
+    E_btn_1_4.setVisible(False)
+
+    global E_btn_1_5
+    E_btn_1_5 = QtWidgets.QPushButton(self.Exam)
+    classBlueprint.mkBtn(E_btn_1_5, QtCore.QRect(605, 47, 135, 50), "background-color: rgb(255, 170, 0);", "(5) Routers")
+    E_btn_1_5.setVisible(False)
+
+    global E_btn_1_6
+    E_btn_1_6 = QtWidgets.QPushButton(self.Exam)
+    classBlueprint.mkBtn(E_btn_1_6, QtCore.QRect(755, 47, 135, 50), "background-color: rgb(255, 170, 255);", "(6) Generate\nmy exam !")
+    E_btn_1_6.setVisible(False)
     #-----------------#
 
     self.E_home = QtWidgets.QPushButton(self.Exam)
@@ -107,7 +121,7 @@ def setupUiExam(self):
     self.E_p1_img2.mousePressEvent = lambda _: exam_functions.show_selected_topology(self.E_p1_img2, self.E_p1_img1, self.E_p1_img2, self.E_p1_img3, E_btn_2, E_btn_1_2, False)
 
     self.E_p1_img3 = QtWidgets.QLabel(self.frame)
-    classBlueprint.mkLabPic(self.E_p1_img3, QtCore.QRect(465, 5, 351, 341), QtGui.QPixmap("./img/schema3_lock.png"), True)
+    classBlueprint.mkLabPic(self.E_p1_img3, QtCore.QRect(445, 5, 371, 481), QtGui.QPixmap("./img/schema3_lock.png"), True)
     self.E_p1_img3.mousePressEvent = lambda _: exam_functions.show_selected_topology(self.E_p1_img3, self.E_p1_img1, self.E_p1_img2, self.E_p1_img3, E_btn_2, E_btn_1_2, True)
 
     self.stackedWidget_2.addWidget(self.page_1)
@@ -791,71 +805,89 @@ def setupUiExam(self):
 
     # Groupbox VLAN
     self.p2_1_gb = QtWidgets.QGroupBox(self.page_2_1)
-    classBlueprint.mkGroupBox(self.p2_1_gb, QtCore.QRect(10, 20, 441, 261), "VLAN")
+    classBlueprint.mkGroupBox(self.p2_1_gb, QtCore.QRect(10, 20, 481, 261), "VLAN")
 
-    self.p2_1_gb_label1 = QtWidgets.QLabel(self.p2_1_gb)
-    classBlueprint.mkLabel(self.p2_1_gb_label1, QtCore.QRect(10, 40, 101, 21), "VLAN n° :")
+    self.p2_1_gb_labelVlan = QtWidgets.QLabel(self.p2_1_gb)
+    classBlueprint.mkLabel(self.p2_1_gb_labelVlan, QtCore.QRect(10, 40, 101, 21), "VLAN n° :")
 
-    global p2_1_gb_edit1
-    p2_1_gb_edit1 = QtWidgets.QLineEdit(self.p2_1_gb)
-    classBlueprint.mkLineEdit(p2_1_gb_edit1, QtCore.QRect(120, 40, 60, 31), 2, "10")
-    p2_1_gb_edit1.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
+    global p2_1_gb_editVlan
+    p2_1_gb_editVlan = QtWidgets.QLineEdit(self.p2_1_gb)
+    classBlueprint.mkLineEdit(p2_1_gb_editVlan, QtCore.QRect(120, 40, 60, 31), 2, "10")
+    p2_1_gb_editVlan.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
 
-    self.p2_1_gb_label2 = QtWidgets.QLabel(self.p2_1_gb)
-    classBlueprint.mkLabel(self.p2_1_gb_label2, QtCore.QRect(10, 80, 81, 21), "Name :")
+    self.p2_1_gb_labelName = QtWidgets.QLabel(self.p2_1_gb)
+    classBlueprint.mkLabel(self.p2_1_gb_labelName, QtCore.QRect(200, 40, 81, 21), "Name :")
 
-    global p2_1_gb_edit2
-    p2_1_gb_edit2 = QtWidgets.QLineEdit(self.p2_1_gb)
-    classBlueprint.mkLineEdit(p2_1_gb_edit2, QtCore.QRect(100, 80, 180, 31), 10, "IT")
-    p2_1_gb_edit2.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(85, 170, 0);")
+    global p2_1_gb_editName
+    p2_1_gb_editName = QtWidgets.QLineEdit(self.p2_1_gb)
+    classBlueprint.mkLineEdit(p2_1_gb_editName, QtCore.QRect(290, 40, 180, 31), 10, "IT")
+    p2_1_gb_editName.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(85, 170, 0);")
 
     self.p2_1_gb_label3 = QtWidgets.QLabel(self.p2_1_gb)
-    classBlueprint.mkLabel(self.p2_1_gb_label3, QtCore.QRect(10, 125, 91, 21), "Subnet :")
+    classBlueprint.mkLabel(self.p2_1_gb_label3, QtCore.QRect(10, 90, 91, 21), "Subnet :")
 
-    global p2_1_gb_edit3
-    p2_1_gb_edit3 = QtWidgets.QLineEdit(self.p2_1_gb)
-    classBlueprint.mkLineEdit(p2_1_gb_edit3, QtCore.QRect(112, 125, 181, 31), 15, "192.168.10.0")
-    p2_1_gb_edit3.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+    global p2_1_gb_editSubnet
+    p2_1_gb_editSubnet = QtWidgets.QLineEdit(self.p2_1_gb)
+    classBlueprint.mkLineEdit(p2_1_gb_editSubnet, QtCore.QRect(138, 90, 181, 31), 15, "192.168.10.0")
+    p2_1_gb_editSubnet.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 127);")
 
-
-    self.p2_1_gb_label4 = QtWidgets.QLabel(self.p2_1_gb)
-    classBlueprint.mkLabel(self.p2_1_gb_label4, QtCore.QRect(10, 170, 71, 21), "CIDR :")
-
-    global p2_1_gb_combo
-    p2_1_gb_combo = QtWidgets.QComboBox(self.p2_1_gb)
-    classBlueprint.mkCombo(p2_1_gb_combo, QtCore.QRect(89, 170, 70, 30),
+    global p2_1_gb_comboSubnet
+    p2_1_gb_comboSubnet = QtWidgets.QComboBox(self.p2_1_gb)
+    classBlueprint.mkCombo(p2_1_gb_comboSubnet, QtCore.QRect(330, 90, 70, 30),
                            "color: rgb(85, 170, 0); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
-    classBlueprint.fillComboCidr2(p2_1_gb_combo)
+    classBlueprint.fillComboCidr2(p2_1_gb_comboSubnet)
+    p2_1_gb_comboSubnet.setCurrentIndex(6)
+
+    self.p2_1_gb_labelGateway = QtWidgets.QLabel(self.p2_1_gb)
+    classBlueprint.mkLabel(self.p2_1_gb_labelGateway, QtCore.QRect(10, 130, 101, 31), "Gateway :")
+
+    global p2_1_gb_editGateway
+    p2_1_gb_editGateway = QtWidgets.QLineEdit(self.p2_1_gb)
+    classBlueprint.mkLineEdit(p2_1_gb_editGateway, QtCore.QRect(138, 130, 181, 31), 15, "192.168.10.254")
+    p2_1_gb_editGateway.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    self.p2_1_gb_labelDhcp = QtWidgets.QLabel(self.p2_1_gb)
+    classBlueprint.mkLabel(self.p2_1_gb_labelDhcp, QtCore.QRect(10, 170, 115, 31), "DHCP IP ? : :")
+
+    global p2_1_gb_editDhcp
+    p2_1_gb_editDhcp = QtWidgets.QLineEdit(self.p2_1_gb)
+    classBlueprint.mkLineEdit(p2_1_gb_editDhcp, QtCore.QRect(138, 170, 181, 31), 15, "192.168.20.11")
+    p2_1_gb_editDhcp.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 85, 0);")
 
     global p2_1_gb_check
     p2_1_gb_check = QtWidgets.QCheckBox(self.p2_1_gb)
     classBlueprint.mkCheck(p2_1_gb_check, QtCore.QRect(5, 220, 131, 31), False, "Is native ?")
 
     self.p2_1_gb_add = QtWidgets.QPushButton(self.p2_1_gb)
-    classBlueprint.mkBtn(self.p2_1_gb_add, QtCore.QRect(220, 220, 101, 31), "background-color: rgb(255, 255, 0);", "Add")
+    classBlueprint.mkBtn(self.p2_1_gb_add, QtCore.QRect(370, 220, 101, 31), "background-color: rgb(255, 255, 0);", "Add")
     self.p2_1_gb_add.clicked.connect(lambda: add_vlan_to_table())
 
     self.p2_1_gb_clear = QtWidgets.QPushButton(self.p2_1_gb)
-    classBlueprint.mkBtn(self.p2_1_gb_clear, QtCore.QRect(330, 220, 101, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    classBlueprint.mkBtn(self.p2_1_gb_clear, QtCore.QRect(260, 220, 101, 31), "background-color: rgb(0, 255, 0);", "Clear")
     self.p2_1_gb_clear.clicked.connect(lambda: clear_vlan_table())
     self.p2_1_gb_clear.clicked.connect(lambda: restore_checkbox())
     self.p2_1_gb_clear.clicked.connect(lambda: exam_page.E_btn_1_3.setVisible(False))
 
     global E_p2_1_table
     E_p2_1_table = QtWidgets.QTableWidget(self.page_2_1)
-    classBlueprint.mkTable(E_p2_1_table, QtCore.QRect(10, 290, 681, 241), "background-color: rgb(255, 170, 0);", 5, 0)
+    classBlueprint.mkTable(E_p2_1_table, QtCore.QRect(10, 290, 881, 241), "background-color: rgb(255, 170, 0);", 7, 0)
     classBlueprint.addDataTable(E_p2_1_table, 0, "Vlan n°")
     classBlueprint.addDataTable(E_p2_1_table, 1, "Vlan name")
     classBlueprint.addDataTable(E_p2_1_table, 2, "Subnet")
     classBlueprint.addDataTable(E_p2_1_table, 3, "Mask")
-    classBlueprint.addDataTable(E_p2_1_table, 4, "Is native ?")
+    classBlueprint.addDataTable(E_p2_1_table, 4, "Gateway")
+    classBlueprint.addDataTable(E_p2_1_table, 5, "DHCP ?")
+    classBlueprint.addDataTable(E_p2_1_table, 6, "Is native ?")
     E_p2_1_table.setColumnWidth(0, 70)
     E_p2_1_table.setColumnWidth(1, 100)
-    E_p2_1_table.setColumnWidth(2, 160)
-    E_p2_1_table.setColumnWidth(3, 160)
+    E_p2_1_table.setColumnWidth(2, 150)
+    E_p2_1_table.setColumnWidth(3, 150)
+    E_p2_1_table.setColumnWidth(4, 150)
+    E_p2_1_table.setColumnWidth(5, 150)
+    E_p2_1_table.setColumnWidth(6, 80)
 
     self.stackedWidget_2.addWidget(self.page_2_1)
 
@@ -1050,7 +1082,7 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
-    E_p2_2_s1_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s1_isVlan_combo, E_p2_2_s1_gateway_combo, self.E_p2_2_s1_gateway_label, E_p2_2_s1_ip_combo, self.E_p2_2_s1_ip_label))
+    E_p2_2_s1_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s1_isVlan_combo, E_p2_2_s1_ip_combo, self.E_p2_2_s1_ip_label))
 
     self.E_p2_2_s1_ip_label = QtWidgets.QLabel(p2_2_tabwidget_tab1)
     classBlueprint.mkLabel(self.E_p2_2_s1_ip_label, QtCore.QRect(10, 315, 121, 31), "Switch IP :")
@@ -1058,17 +1090,6 @@ def setupUiExam(self):
     global E_p2_2_s1_ip_combo
     E_p2_2_s1_ip_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
     classBlueprint.mkCombo(E_p2_2_s1_ip_combo, QtCore.QRect(150, 315, 181, 31),
-                           "color: rgb(0, 85, 255); "
-                           "background-color: rgb(255, 255, 255); "
-                           "selection-background-color: rgb(204,255,255); "
-                           "selection-color: rgb(0, 85, 255);")
-
-    self.E_p2_2_s1_gateway_label = QtWidgets.QLabel(p2_2_tabwidget_tab1)
-    classBlueprint.mkLabel(self.E_p2_2_s1_gateway_label, QtCore.QRect(10, 360, 191, 31), "Default-gateway :")
-
-    global E_p2_2_s1_gateway_combo
-    E_p2_2_s1_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
-    classBlueprint.mkCombo(E_p2_2_s1_gateway_combo, QtCore.QRect(200, 360, 181, 31),
                            "color: rgb(0, 85, 255); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
@@ -1172,7 +1193,7 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
-    E_p2_2_s2_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s2_isVlan_combo, E_p2_2_s2_gateway_combo, self.E_p2_2_s2_gateway_label, E_p2_2_s2_ip_combo, self.E_p2_2_s2_ip_label))
+    E_p2_2_s2_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s2_isVlan_combo, E_p2_2_s2_ip_combo, self.E_p2_2_s2_ip_label))
 
     self.E_p2_2_s2_ip_label = QtWidgets.QLabel(p2_2_tabwidget_tab2)
     classBlueprint.mkLabel(self.E_p2_2_s2_ip_label, QtCore.QRect(10, 315, 121, 31), "Switch IP :")
@@ -1180,17 +1201,6 @@ def setupUiExam(self):
     global E_p2_2_s2_ip_combo
     E_p2_2_s2_ip_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
     classBlueprint.mkCombo(E_p2_2_s2_ip_combo, QtCore.QRect(150, 315, 181, 31),
-                           "color: rgb(0, 85, 255); "
-                           "background-color: rgb(255, 255, 255); "
-                           "selection-background-color: rgb(204,255,255); "
-                           "selection-color: rgb(0, 85, 255);")
-
-    self.E_p2_2_s2_gateway_label = QtWidgets.QLabel(p2_2_tabwidget_tab2)
-    classBlueprint.mkLabel(self.E_p2_2_s2_gateway_label, QtCore.QRect(10, 360, 191, 31), "Default-gateway :")
-
-    global E_p2_2_s2_gateway_combo
-    E_p2_2_s2_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
-    classBlueprint.mkCombo(E_p2_2_s2_gateway_combo, QtCore.QRect(200, 360, 181, 31),
                            "color: rgb(0, 85, 255); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
@@ -1329,7 +1339,7 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
-    E_p2_2_s3_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s3_isVlan_combo, E_p2_2_s3_gateway_combo, self.E_p2_2_s3_gateway_label, E_p2_2_s3_ip_combo, self.E_p2_2_s3_ip_label))
+    E_p2_2_s3_isVlan_combo.currentIndexChanged.connect(lambda: exam_functions.populate_gateway_combo(E_p2_2_s3_isVlan_combo, E_p2_2_s3_ip_combo, self.E_p2_2_s3_ip_label))
 
     self.E_p2_2_s3_ip_label = QtWidgets.QLabel(p2_2_tabwidget_tab3)
     classBlueprint.mkLabel(self.E_p2_2_s3_ip_label, QtCore.QRect(10, 315, 121, 31), "Switch IP :")
@@ -1342,21 +1352,9 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(0, 85, 255);")
 
-    self.E_p2_2_s3_gateway_label = QtWidgets.QLabel(p2_2_tabwidget_tab3)
-    classBlueprint.mkLabel(self.E_p2_2_s3_gateway_label, QtCore.QRect(10, 360, 191, 31), "Default-gateway :")
-
-    global E_p2_2_s3_gateway_combo
-    E_p2_2_s3_gateway_combo = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
-    classBlueprint.mkCombo(E_p2_2_s3_gateway_combo, QtCore.QRect(200, 360, 181, 31),
-                           "color: rgb(0, 85, 255); "
-                           "background-color: rgb(255, 255, 255); "
-                           "selection-background-color: rgb(204,255,255); "
-                           "selection-color: rgb(0, 85, 255);")
-
-
     #--TAB Clients-PC--#
     self.E_p2_2_clients_img = QtWidgets.QLabel(p2_2_tabwidget_tab4)
-    classBlueprint.mkLabPic(self.E_p2_2_clients_img, QtCore.QRect(520, 3, 351, 241), QtGui.QPixmap("./img/schema2.png"), True)
+    classBlueprint.mkLabPic(self.E_p2_2_clients_img, QtCore.QRect(520, 3, 351, 241), QtGui.QPixmap("./img/schema2-pc.png"), True)
 
     # Groupbox PC1
     self.E_p2_2_clients_gb1 = QtWidgets.QGroupBox(p2_2_tabwidget_tab4)
@@ -1624,18 +1622,22 @@ def setupUiExam(self):
         self.E_p1_img3.setStyleSheet("")
 
     def add_vlan_to_table():
-        vlan_number = p2_1_gb_edit1.text()
-        vlan_ip = p2_1_gb_edit3.text()
-        vlan_name = p2_1_gb_edit2.text()
+        vlan_number = p2_1_gb_editVlan.text()
+        vlan_ip = p2_1_gb_editSubnet.text()
+        vlan_name = p2_1_gb_editName.text()
+        vlan_gateway = p2_1_gb_editGateway.text()
+        vlan_dhcp = p2_1_gb_editDhcp.text()
+        vlan_cidr = p2_1_gb_comboSubnet.currentText()
         if (vlan_number in vlan_set):
             utils.blueprintFunctions.mkWarningMsg("Vlan error", "VLAN <b><span style=color:'red'>" + vlan_number + "</b></span> is <b>already </b><span style=color:'blue'>used</span> !")
         elif (vlan_name in vlan_name_set):
             utils.blueprintFunctions.mkWarningMsg("Name error", "VLAN name <b><span style=color:'red'> \'" + vlan_name + "\'</b></span> is <b>already </b><span style=color:'blue'>used</span> !")
         elif (vlan_ip in vlan_subnet_set):
             utils.blueprintFunctions.mkWarningMsg("Subnet error", "Subnet <b><span style=color:'red'>" + vlan_ip + "</b></span> is <b>already </b><span style=color:'blue'>used</span> !")
+        elif not (vlan_gateway in exam_page.generate_usable_ip_from_network_and_cidr(vlan_ip, vlan_cidr)): # Gateway isn't in the range of the given subnet
+            utils.blueprintFunctions.mkWarningMsg("Gateway error", "The gateway ip <b><span style=color:'red'>" + vlan_gateway + "</b></span> is <b>not </b>in the <span style=color:'blue'>subnet range</span> !")
         else:
-            vlan_cidr = p2_1_gb_combo.currentText()
-            vlan_subnet = str(p2_1_gb_edit3.text() + " (" + vlan_cidr + ")")
+            vlan_subnet = str(p2_1_gb_editSubnet.text() + " (" + vlan_cidr + ")")
             vlan_mask = str(subnet_functions.getMaskFromSlash(vlan_cidr))
             if (utils.blueprintFunctions.checkInt(vlan_number) is False):
                 utils.blueprintFunctions.mkWarningMsg("Vlan number error", "<b><span style=color:'red'>Vlan number</b></span> must <b>only</b> be composed of <span style=color:'blue'>numbers</span> !")
@@ -1646,13 +1648,18 @@ def setupUiExam(self):
                 item2 = QTableWidgetItem(vlan_name)
                 item3 = QTableWidgetItem(vlan_subnet)
                 item4 = QTableWidgetItem(vlan_mask)
-                if (p2_1_gb_check.isChecked()): item5 = QTableWidgetItem("Yes")
-                else: item5 = QTableWidgetItem("No")
+                item5 = QTableWidgetItem(vlan_gateway)
+                item6 = QTableWidgetItem(vlan_dhcp)
+                if (len(vlan_dhcp) < 1): item6 = QTableWidgetItem("No")
+                if (p2_1_gb_check.isChecked()): item7 = QTableWidgetItem("Yes")
+                else: item7 = QTableWidgetItem("No")
                 E_p2_1_table.setItem(lastrow, 0, item1)
                 E_p2_1_table.setItem(lastrow, 1, item2)
                 E_p2_1_table.setItem(lastrow, 2, item3)
                 E_p2_1_table.setItem(lastrow, 3, item4)
                 E_p2_1_table.setItem(lastrow, 4, item5)
+                E_p2_1_table.setItem(lastrow, 5, item6)
+                E_p2_1_table.setItem(lastrow, 6, item7)
                 vlan_name_set.add(vlan_name)
                 vlan_set.add(vlan_number)
                 vlan_subnet_set.add(vlan_ip)

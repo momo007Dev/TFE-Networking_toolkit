@@ -99,7 +99,10 @@ def save_changes(stacked_widget):
         security_enabled = True
 
     elif (current_index == 4):
-        save_changes_p2_1(exam_page.E_p2_1_table)
+        if not (exam_page.E_p2_1_table.rowCount() == 0):
+            save_changes_p2_1(exam_page.E_p2_1_table)
+        else:
+            utils.blueprintFunctions.mkWarningMsg("Data Error", "<b><span style=color:'red'>Table</b></span> is <b><span style=color:'blue'>empty</span></b> !")
 
     elif (current_index == 5):
         save_changes_p2_2()
@@ -695,10 +698,11 @@ def save_changes_p2_1(table):
     global vlan_dict
     vlan_dict.clear()
 
-    rowCount = table.rowCount() # 10 : ["IT", "192.168.10.0", "/24", "255.255.255.0", "Yes"],
+    # 10 : ["IT", "192.168.10.0", "/24", "255.255.255.0", "Yes"]
+    # (NEW Version) 10 : ["IT", "192.168.10.0", "/24", "255.255.255.0", "192.168.10.254", "192.168.20.11", "Yes"]
+    rowCount = table.rowCount()
     for x in range(rowCount):
-        #new_input = {str(table.item(x, 0).text()): [str(table.item(x, 1).text()), str(table.item(x, 2).text()).split("(")[0][:-1], str(table.item(x, 3).text()), str(table.item(x, 4).text())]}
-        vlan_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(table.item(x, 2).text()).split("(")[1][:-1], str(table.item(x, 2).text()).split("(")[0][:-1], str(table.item(x, 3).text()), str(table.item(x, 4).text())]
+        vlan_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(table.item(x, 2).text()).split("(")[1][:-1], str(table.item(x, 2).text()).split("(")[0][:-1], str(table.item(x, 3).text()), str(table.item(x, 4).text()), str(table.item(x, 5).text()), str(table.item(x, 6).text())]
     for x, y in vlan_dict.items():
         print(x, y)
 
@@ -727,11 +731,8 @@ def populate_vlan_in_combo(combo, include_no):
         s = "Vlan " + x
         combo.addItem(s)
 
-def populate_gateway_combo(combo_part_of_vlan, combo_gateway, label_gateway, combo_switch, label_switch): # Applies only after "is part of vlan" combo changes value !!!
+def populate_gateway_combo(combo_part_of_vlan, combo_switch, label_switch): # Applies only after "is part of vlan" combo changes value !!!
     if (len(combo_part_of_vlan.currentText()) > 4):
-        combo_gateway.clear()
-        combo_gateway.setVisible(True)
-        label_gateway.setVisible(True)
         combo_switch.clear()
         combo_switch.setVisible(True)
         label_switch.setVisible(True)
@@ -739,17 +740,14 @@ def populate_gateway_combo(combo_part_of_vlan, combo_gateway, label_gateway, com
             if (x in combo_part_of_vlan.currentText()):
                 subnet = vlan_dict[x][1]
                 cidr = vlan_dict[x][2]
+                gateway = vlan_dict[x][4]
 
                 the_list = generate_usable_ip_from_network_and_cidr(cidr, subnet)
+                the_list.remove(gateway)
                 for y in the_list:
-                    combo_gateway.addItem(y)
                     combo_switch.addItem(y)
 
     elif (combo_part_of_vlan.currentText() == "No"):
-        combo_gateway.clear()
-        combo_gateway.addItem("/")
-        combo_gateway.setVisible(False)
-        label_gateway.setVisible(False)
         combo_switch.clear()
         combo_switch.addItem("/")
         combo_switch.setVisible(False)
@@ -785,19 +783,19 @@ def save_changes_p2_2():
     vlan_number_s1 = exam_page.E_p2_2_s1_isVlan_combo.currentText()[-2:]
     s1_dict = {
         "name" : [exam_page.E_p2_2_s1_editHostname.text()],
-        "is_part_of_a_vlan": ["No"] if (exam_page.E_p2_2_s1_isVlan_combo.currentText() == "No") else [vlan_number_s1, exam_page.E_p2_2_s1_ip_combo.currentText(), vlan_dict.get(vlan_number_s1)[3], exam_page.E_p2_2_s1_gateway_combo.currentText()],
+        "is_part_of_a_vlan": ["No"] if (exam_page.E_p2_2_s1_isVlan_combo.currentText() == "No") else [vlan_number_s1, exam_page.E_p2_2_s1_ip_combo.currentText(), vlan_dict.get(vlan_number_s1)[3], vlan_dict.get(vlan_number_s1)[4]],
         "a" : [exam_page.E_p2_2_s1_comboA_interface.currentText(), exam_page.E_p2_2_s1_comboA_access.currentText(), exam_page.E_p2_2_s1_comboA_vlan.currentText() if (exam_page.E_p2_2_s1_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboA_description.text()],
         "b" : [exam_page.E_p2_2_s1_comboB_interface.currentText(), exam_page.E_p2_2_s1_comboB_access.currentText(), exam_page.E_p2_2_s1_comboB_vlan.currentText() if (exam_page.E_p2_2_s1_comboB_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboB_description.text()],
         "c" : [exam_page.E_p2_2_s1_comboC_interface.currentText(), exam_page.E_p2_2_s1_comboC_access.currentText(), exam_page.E_p2_2_s1_comboC_vlan.currentText() if (exam_page.E_p2_2_s1_comboC_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboC_description.text()],
         "d" : [exam_page.E_p2_2_s1_comboD_interface.currentText(), exam_page.E_p2_2_s1_comboD_access.currentText(), exam_page.E_p2_2_s1_comboD_vlan.currentText() if (exam_page.E_p2_2_s1_comboD_access.currentText() == "Access") else "/", exam_page.E_p2_2_s1_comboD_description.text()],
     }
-    #"is_part_of_a_vlan" : ["IT", "192.168.99.2", "255.255.255.0", "192.168.99.1"]
+    #"is_part_of_a_vlan" : ["10", "192.168.99.2", "255.255.255.0", "192.168.99.1"]
     #"is_part_of_a_vlan" : ["192.168.99.1"]
     global s2_dict
     vlan_number_s2 = exam_page.E_p2_2_s2_isVlan_combo.currentText()[-2:]
     s2_dict = {
         "name" : [exam_page.E_p2_2_s2_editHostname.text()],
-        "is_part_of_a_vlan": ["No"] if (exam_page.E_p2_2_s2_isVlan_combo.currentText() == "No") else [vlan_number_s2, exam_page.E_p2_2_s2_ip_combo.currentText(), vlan_dict.get(vlan_number_s2)[3], exam_page.E_p2_2_s2_gateway_combo.currentText()],
+        "is_part_of_a_vlan": ["No"] if (exam_page.E_p2_2_s2_isVlan_combo.currentText() == "No") else [vlan_number_s2, exam_page.E_p2_2_s2_ip_combo.currentText(), vlan_dict.get(vlan_number_s2)[3], vlan_dict.get(vlan_number_s2)[4]],
         "a" : [exam_page.E_p2_2_s2_comboA_interface.currentText(), exam_page.E_p2_2_s2_comboA_access.currentText(), exam_page.E_p2_2_s2_comboA_vlan.currentText() if (exam_page.E_p2_2_s2_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s2_comboA_description.text()],
         "b" : [exam_page.E_p2_2_s2_comboB_interface.currentText(), exam_page.E_p2_2_s2_comboB_access.currentText(), exam_page.E_p2_2_s2_comboB_vlan.currentText() if (exam_page.E_p2_2_s2_comboB_access.currentText() == "Access") else "/", exam_page.E_p2_2_s2_comboB_description.text()]
     }
@@ -806,7 +804,7 @@ def save_changes_p2_2():
     vlan_number_s3 = exam_page.E_p2_2_s3_isVlan_combo.currentText()[-2:]
     s3_dict = {
         "name" : [exam_page.E_p2_2_s3_editHostname.text()],
-        "is_part_of_a_vlan": ["No"] if (exam_page.E_p2_2_s3_isVlan_combo.currentText() == "No") else [vlan_number_s3, exam_page.E_p2_2_s3_ip_combo.currentText(), vlan_dict.get(vlan_number_s3)[3], exam_page.E_p2_2_s3_gateway_combo.currentText()],
+        "is_part_of_a_vlan": ["No"] if (exam_page.E_p2_2_s3_isVlan_combo.currentText() == "No") else [vlan_number_s3, exam_page.E_p2_2_s3_ip_combo.currentText(), vlan_dict.get(vlan_number_s3)[3], vlan_dict.get(vlan_number_s3)[4]],
         "a" : [exam_page.E_p2_2_s3_comboA_interface.currentText(), exam_page.E_p2_2_s3_comboA_access.currentText(), exam_page.E_p2_2_s3_comboA_vlan.currentText() if (exam_page.E_p2_2_s3_comboA_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboA_description.text()],
         "b" : [exam_page.E_p2_2_s3_comboB_interface.currentText(), exam_page.E_p2_2_s3_comboB_access.currentText(), exam_page.E_p2_2_s3_comboB_vlan.currentText() if (exam_page.E_p2_2_s3_comboB_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboB_description.text()],
         "c" : [exam_page.E_p2_2_s3_comboC_interface.currentText(), exam_page.E_p2_2_s3_comboC_access.currentText(), exam_page.E_p2_2_s3_comboC_vlan.currentText() if (exam_page.E_p2_2_s3_comboC_access.currentText() == "Access") else "/", exam_page.E_p2_2_s3_comboC_description.text()]

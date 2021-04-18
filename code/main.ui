@@ -841,10 +841,10 @@ Generator</string>
         <widget class="QLabel" name="E_p1_img1_3">
          <property name="geometry">
           <rect>
-           <x>465</x>
+           <x>445</x>
            <y>5</y>
-           <width>351</width>
-           <height>341</height>
+           <width>371</width>
+           <height>481</height>
           </rect>
          </property>
          <property name="styleSheet">
@@ -854,7 +854,7 @@ Generator</string>
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>img/schema3_lock.png</pixmap>
+          <pixmap>img/schema4_lock.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -4195,7 +4195,7 @@ selection-color: rgb(85, 170, 0);</string>
          <rect>
           <x>10</x>
           <y>20</y>
-          <width>441</width>
+          <width>481</width>
           <height>261</height>
          </rect>
         </property>
@@ -4209,7 +4209,7 @@ selection-color: rgb(85, 170, 0);</string>
         <property name="title">
          <string>VLAN</string>
         </property>
-        <widget class="QLabel" name="p2_1_gb_label1">
+        <widget class="QLabel" name="p2_1_gb_labelVlan">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -4230,11 +4230,11 @@ selection-color: rgb(85, 170, 0);</string>
           <string>VLAN n° :</string>
          </property>
         </widget>
-        <widget class="QLabel" name="p2_1_gb_label2">
+        <widget class="QLabel" name="p2_1_gb_labelName">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>80</y>
+           <x>200</x>
+           <y>40</y>
            <width>81</width>
            <height>21</height>
           </rect>
@@ -4251,11 +4251,11 @@ selection-color: rgb(85, 170, 0);</string>
           <string>Name :</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="p2_1_gb_edit2">
+        <widget class="QLineEdit" name="p2_1_gb_editName">
          <property name="geometry">
           <rect>
-           <x>100</x>
-           <y>80</y>
+           <x>290</x>
+           <y>40</y>
            <width>180</width>
            <height>31</height>
           </rect>
@@ -4300,7 +4300,7 @@ color: rgb(85, 170, 0);</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLineEdit" name="p2_1_gb_edit1">
+        <widget class="QLineEdit" name="p2_1_gb_editVlan">
          <property name="geometry">
           <rect>
            <x>120</x>
@@ -4331,11 +4331,11 @@ color: rgb(255, 0, 0);</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLineEdit" name="p2_1_gb_edit3">
+        <widget class="QLineEdit" name="p2_1_gb_editSubnet">
          <property name="geometry">
           <rect>
-           <x>112</x>
-           <y>125</y>
+           <x>138</x>
+           <y>90</y>
            <width>181</width>
            <height>31</height>
           </rect>
@@ -4368,7 +4368,7 @@ color: rgb(255, 0, 0);</string>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 85, 255);</string>
+color: rgb(255, 0, 127);</string>
          </property>
          <property name="text">
           <string>192.168.10.0</string>
@@ -4380,11 +4380,11 @@ color: rgb(0, 85, 255);</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLabel" name="p2_1_gb_label3">
+        <widget class="QLabel" name="p2_1_gb_labelSubnet">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>125</y>
+           <y>90</y>
            <width>91</width>
            <height>21</height>
           </rect>
@@ -4401,11 +4401,11 @@ color: rgb(0, 85, 255);</string>
           <string>Subnet :</string>
          </property>
         </widget>
-        <widget class="QComboBox" name="p2_1_gb_combo">
+        <widget class="QComboBox" name="p2_1_gb_comboSubnet">
          <property name="geometry">
           <rect>
-           <x>89</x>
-           <y>170</y>
+           <x>330</x>
+           <y>90</y>
            <width>70</width>
            <height>30</height>
           </rect>
@@ -4446,13 +4446,13 @@ background-color: rgb(255, 255, 255);</string>
           </property>
          </item>
         </widget>
-        <widget class="QLabel" name="p2_1_gb_label4">
+        <widget class="QLabel" name="p2_1_gb_labelGateway">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>170</y>
-           <width>71</width>
-           <height>21</height>
+           <y>130</y>
+           <width>101</width>
+           <height>31</height>
           </rect>
          </property>
          <property name="font">
@@ -4464,7 +4464,7 @@ background-color: rgb(255, 255, 255);</string>
           </font>
          </property>
          <property name="text">
-          <string>CIDR :</string>
+          <string>Gateway :</string>
          </property>
         </widget>
         <widget class="QPushButton" name="p2_1_gb_add">
@@ -4473,7 +4473,7 @@ background-color: rgb(255, 255, 255);</string>
          </property>
          <property name="geometry">
           <rect>
-           <x>220</x>
+           <x>370</x>
            <y>220</y>
            <width>101</width>
            <height>31</height>
@@ -4500,7 +4500,7 @@ background-color: rgb(255, 255, 255);</string>
          </property>
          <property name="geometry">
           <rect>
-           <x>330</x>
+           <x>260</x>
            <y>220</y>
            <width>101</width>
            <height>31</height>
@@ -4548,13 +4548,132 @@ background-color: rgb(255, 255, 255);</string>
           <bool>true</bool>
          </property>
         </widget>
+        <widget class="QLineEdit" name="p2_1_gb_editGateway">
+         <property name="geometry">
+          <rect>
+           <x>138</x>
+           <y>130</y>
+           <width>181</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>181</horstretch>
+           <verstretch>31</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>180</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>181</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Verdana</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 85, 255);</string>
+         </property>
+         <property name="text">
+          <string>192.168.10.254</string>
+         </property>
+         <property name="maxLength">
+          <number>15</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="p2_1_gb_labelDhcp">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>170</y>
+           <width>115</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+           <underline>true</underline>
+          </font>
+         </property>
+         <property name="text">
+          <string>DHCP IP ? :</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="p2_1_gb_editDhcp">
+         <property name="geometry">
+          <rect>
+           <x>138</x>
+           <y>170</y>
+           <width>181</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>181</horstretch>
+           <verstretch>31</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>180</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>181</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Verdana</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 85, 0);
+background-color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>192.168.20.11</string>
+         </property>
+         <property name="maxLength">
+          <number>15</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
        </widget>
        <widget class="QTableWidget" name="E_p2_1_table">
         <property name="geometry">
          <rect>
           <x>10</x>
           <y>290</y>
-          <width>681</width>
+          <width>881</width>
           <height>241</height>
          </rect>
         </property>
@@ -4616,6 +4735,16 @@ background-color: rgb(255, 255, 255);</string>
         </column>
         <column>
          <property name="text">
+          <string>Gateway</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>DHCP ?</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
           <string>Is Native ?</string>
          </property>
         </column>
@@ -4640,6 +4769,16 @@ background-color: rgb(255, 255, 255);</string>
          </property>
         </item>
         <item row="0" column="4">
+         <property name="text">
+          <string>192.168.10.254</string>
+         </property>
+        </item>
+        <item row="0" column="5">
+         <property name="text">
+          <string>192.168.20.11</string>
+         </property>
+        </item>
+        <item row="0" column="6">
          <property name="text">
           <string>No</string>
          </property>
@@ -4679,7 +4818,7 @@ background-color: rgb(255, 255, 255);</string>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="s1">
          <attribute name="title">
@@ -5385,56 +5524,6 @@ selection-color: rgb(85, 170, 0);</string>
            </property>
           </item>
          </widget>
-         <widget class="QLabel" name="E_p2_2_s1_gateway_label">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>360</y>
-            <width>191</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-            <underline>true</underline>
-           </font>
-          </property>
-          <property name="text">
-           <string>Default-gateway :</string>
-          </property>
-         </widget>
-         <widget class="QComboBox" name="E_p2_2_s1_gateway_combo">
-          <property name="geometry">
-           <rect>
-            <x>200</x>
-            <y>360</y>
-            <width>181</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Verdana</family>
-            <pointsize>9</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(0, 85, 255);
-background-color: rgb(255, 255, 255);
-selection-background-color: rgb(204,255,255);
-selection-color: rgb(0, 85, 255);</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>192.168.0.1</string>
-           </property>
-          </item>
-         </widget>
          <widget class="QLabel" name="E_p2_2_s1_ip_label">
           <property name="geometry">
            <rect>
@@ -5908,35 +5997,6 @@ selection-color: rgb(85, 170, 0);</string>
            </property>
           </item>
          </widget>
-         <widget class="QComboBox" name="E_p2_2_s2_gateway_combo">
-          <property name="geometry">
-           <rect>
-            <x>200</x>
-            <y>360</y>
-            <width>181</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Verdana</family>
-            <pointsize>9</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(0, 85, 255);
-background-color: rgb(255, 255, 255);
-selection-background-color: rgb(204,255,255);
-selection-color: rgb(0, 85, 255);</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>192.168.0.1</string>
-           </property>
-          </item>
-         </widget>
          <widget class="QLabel" name="E_p2_2_s2_ip_label">
           <property name="geometry">
            <rect>
@@ -5956,27 +6016,6 @@ selection-color: rgb(0, 85, 255);</string>
           </property>
           <property name="text">
            <string>Switch IP :</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="E_p2_2_s2_gateway_label">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>360</y>
-            <width>191</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-            <underline>true</underline>
-           </font>
-          </property>
-          <property name="text">
-           <string>Default-gateway :</string>
           </property>
          </widget>
          <widget class="QComboBox" name="E_p2_2_s2_ip_combo">
@@ -6517,27 +6556,6 @@ color: rgb(255, 0, 255)</string>
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QLabel" name="E_p2_2_s3_gateway_label">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>360</y>
-            <width>191</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-            <underline>true</underline>
-           </font>
-          </property>
-          <property name="text">
-           <string>Default-gateway :</string>
-          </property>
-         </widget>
          <widget class="QLabel" name="E_p2_2_s3_isVlan_label">
           <property name="geometry">
            <rect>
@@ -6558,35 +6576,6 @@ color: rgb(255, 0, 255)</string>
           <property name="text">
            <string>Is part of a vlan ?</string>
           </property>
-         </widget>
-         <widget class="QComboBox" name="E_p2_2_s3_gateway_combo">
-          <property name="geometry">
-           <rect>
-            <x>200</x>
-            <y>360</y>
-            <width>181</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Verdana</family>
-            <pointsize>9</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(0, 85, 255);
-background-color: rgb(255, 255, 255);
-selection-background-color: rgb(204,255,255);
-selection-color: rgb(0, 85, 255);</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>192.168.0.1</string>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="E_p2_2_s3_isVlan_combo">
           <property name="geometry">
@@ -6693,7 +6682,7 @@ selection-color: rgb(0, 85, 255);</string>
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap>img/schema2.png</pixmap>
+           <pixmap>img/schema2-pc.png</pixmap>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -8102,6 +8091,524 @@ color: rgb(255, 0, 255)</string>
         </widget>
        </widget>
       </widget>
+      <widget class="QWidget" name="page_2_3">
+       <widget class="QTabWidget" name="tabWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>881</width>
+          <height>521</height>
+         </rect>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="SWL3_Int">
+         <attribute name="title">
+          <string>Interfaces</string>
+         </attribute>
+         <widget class="QLabel" name="E_p2_2_s3_img_2">
+          <property name="geometry">
+           <rect>
+            <x>590</x>
+            <y>308</y>
+            <width>281</width>
+            <height>181</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>img/schema2-swl3.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_3_int_B_description">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>110</y>
+            <width>181</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>To LAN B</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_3_int_C_comboInterface">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>160</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="E_p2_3_int_A_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>60</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (a) :</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_3_int_editHostname">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>10</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>SWL3</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_3_int_C_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (c) :</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_3_int_B_label">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>110</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Interface (b) :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_3_int_B_comboInterface">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>110</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QComboBox" name="E_p2_3_int_A_comboInterface">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(255, 0, 0);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_3_int_A_description">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>60</y>
+            <width>181</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>To S3</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="E_p2_3_int_labelHostname">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Hostname :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_3_int_B_comboCidr">
+          <property name="geometry">
+           <rect>
+            <x>490</x>
+            <y>110</y>
+            <width>70</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>70</horstretch>
+            <verstretch>30</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>70</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>70</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_3_int_B_ip">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>110</y>
+            <width>181</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>181</horstretch>
+            <verstretch>31</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>180</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>181</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 85, 255);</string>
+          </property>
+          <property name="text">
+           <string>192.168.10.0</string>
+          </property>
+          <property name="maxLength">
+           <number>15</number>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_3_int_C_ip">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>160</y>
+            <width>181</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>181</horstretch>
+            <verstretch>31</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>180</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>181</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 85, 255);</string>
+          </property>
+          <property name="text">
+           <string>192.168.10.0</string>
+          </property>
+          <property name="maxLength">
+           <number>15</number>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="E_p2_3_int_C_comboCidr">
+          <property name="geometry">
+           <rect>
+            <x>490</x>
+            <y>160</y>
+            <width>70</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>70</horstretch>
+            <verstretch>30</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>70</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>70</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLineEdit" name="E_p2_3_int_C_description">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>160</y>
+            <width>181</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+          </property>
+          <property name="text">
+           <string>To LAN B</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="SWL3_Routing">
+         <attribute name="title">
+          <string>Routing</string>
+         </attribute>
+        </widget>
+       </widget>
+      </widget>
      </widget>
      <widget class="QPushButton" name="E_home">
       <property name="enabled">
@@ -8293,9 +8800,9 @@ my exam !</string>
       </property>
       <property name="geometry">
        <rect>
-        <x>185</x>
+        <x>170</x>
         <y>50</y>
-        <width>145</width>
+        <width>135</width>
         <height>50</height>
        </rect>
       </property>
@@ -8319,9 +8826,9 @@ my exam !</string>
       </property>
       <property name="geometry">
        <rect>
-        <x>355</x>
+        <x>315</x>
         <y>50</y>
-        <width>145</width>
+        <width>135</width>
         <height>50</height>
        </rect>
       </property>
@@ -8336,14 +8843,94 @@ my exam !</string>
        <string notr="true">background-color: rgb(255, 255, 127);</string>
       </property>
       <property name="text">
-       <string>(3) Layer 2
+       <string>(3) PCs and
 Switchs</string>
       </property>
      </widget>
-     <zorder>E_btn_3</zorder>
+     <widget class="QPushButton" name="E_btn_1_4">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>50</y>
+        <width>135</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(85, 255, 127);</string>
+      </property>
+      <property name="text">
+       <string>(4) Layer 3
+Switch</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="E_btn_1_6">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>755</x>
+        <y>50</y>
+        <width>135</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 170, 255);</string>
+      </property>
+      <property name="text">
+       <string>(6) Generate
+my exam !</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="E_btn_1_5">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>605</x>
+        <y>50</y>
+        <width>135</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 170, 0);</string>
+      </property>
+      <property name="text">
+       <string>(5) Routers</string>
+      </property>
+     </widget>
      <zorder>E_btn_5</zorder>
-     <zorder>E_btn_2</zorder>
      <zorder>E_btn_4</zorder>
+     <zorder>E_btn_3</zorder>
+     <zorder>E_btn_2</zorder>
      <zorder>E_backColor</zorder>
      <zorder>E_backimg</zorder>
      <zorder>E_btn</zorder>
@@ -8353,6 +8940,9 @@ Switchs</string>
      <zorder>E_btn_1</zorder>
      <zorder>E_btn_1_2</zorder>
      <zorder>E_btn_1_3</zorder>
+     <zorder>E_btn_1_4</zorder>
+     <zorder>E_btn_1_6</zorder>
+     <zorder>E_btn_1_5</zorder>
     </widget>
     <widget class="QWidget" name="Subnet">
      <widget class="QLabel" name="S_backimg">
