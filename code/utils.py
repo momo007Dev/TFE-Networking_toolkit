@@ -51,9 +51,12 @@ class blueprintFunctions:
         lab.setObjectName(str(lab))
         lab.setText(text)
 
-    def mkLineEdit (edit, geometry, maxLength, text):
+    def mkLineEdit (edit, geometry, maxLength, text, small_size = False):
         edit.setGeometry(geometry)
-        edit.setFont(font_linedit)
+        if (small_size is True):
+            edit.setFont(font_linedit2)
+        else:
+            edit.setFont(font_linedit)
         edit.setStyleSheet("background-color: rgb(255, 255, 255);")
         edit.setAlignment(QtCore.Qt.AlignCenter)
         edit.setMaxLength(maxLength)
@@ -115,9 +118,12 @@ class blueprintFunctions:
         for i in reversed(range(0,31)):
             combo.addItem("/" + str(i))
 
-    def mkTable (table, geometry, style, col, row):
+    def mkTable (table, geometry, style, col, row, small_size = False):
         table.setGeometry(geometry)
-        table.setFont(font_table)
+        if (small_size is True):
+            table.setFont(font_table2)
+        else:
+            table.setFont(font_table)
         table.setStyleSheet(style)
         table.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         table.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
@@ -215,6 +221,12 @@ font_linedit.setPointSize(10)
 font_linedit.setBold(True)
 font_linedit.setWeight(75)
 
+font_linedit2 = QtGui.QFont()
+font_linedit2.setFamily("Verdana")
+font_linedit2.setPointSize(8)
+font_linedit2.setBold(True)
+font_linedit2.setWeight(75)
+
 font_gb = QtGui.QFont()
 font_gb.setPointSize(12)
 font_gb.setBold(True)
@@ -228,6 +240,9 @@ font_gb2.setUnderline(False)
 
 font_table = QtGui.QFont()
 font_table.setPointSize(9)
+
+font_table2 = QtGui.QFont()
+font_table2.setPointSize(7)
 
 #---------------------
 #   STYLESHEETS USED

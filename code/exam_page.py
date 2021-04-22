@@ -12,6 +12,7 @@ classBlueprint = utils.blueprintFunctions
 vlan_set = set()
 vlan_subnet_set = set()
 vlan_name_set = set()
+dhcp_pool_name_set = set()
 #--------------END------------------#
 
 def setupUiExam(self):
@@ -908,6 +909,7 @@ def setupUiExam(self):
     p2_2_tabwidget_tab2 = QtWidgets.QWidget()
     p2_2_tabwidget_tab3 = QtWidgets.QWidget()
     p2_2_tabwidget_tab4 = QtWidgets.QWidget()
+    p2_2_tabwidget_tab5 = QtWidgets.QWidget()
 
     #--TAB S1--#
     self.E_p2_2_s1_img = QtWidgets.QLabel(p2_2_tabwidget_tab1)
@@ -1358,7 +1360,7 @@ def setupUiExam(self):
 
     # Groupbox PC1
     self.E_p2_2_clients_gb1 = QtWidgets.QGroupBox(p2_2_tabwidget_tab4)
-    classBlueprint.mkGroupBox(self.E_p2_2_clients_gb1, QtCore.QRect(10, 10, 505, 111), "PC1")
+    classBlueprint.mkGroupBox(self.E_p2_2_clients_gb1, QtCore.QRect(5, 10, 510, 111), "PC1")
 
     self.E_p2_2_clients_gb1_ip_label = QtWidgets.QLabel(self.E_p2_2_clients_gb1)
     classBlueprint.mkLabel(self.E_p2_2_clients_gb1_ip_label, QtCore.QRect(5, 30, 31, 31), "Ip :", True)
@@ -1380,36 +1382,49 @@ def setupUiExam(self):
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboCidr2(E_p2_2_clients_gb1_cidr)
 
+    global E_p2_2_clients_gb1_dhcp_check
+    E_p2_2_clients_gb1_dhcp_check = QtWidgets.QCheckBox(self.E_p2_2_clients_gb1)
+    classBlueprint.mkCheck(E_p2_2_clients_gb1_dhcp_check, QtCore.QRect(150, 70, 91, 20), False, "DHCP ?", True)
+    E_p2_2_clients_gb1_dhcp_check.stateChanged.connect(lambda: exam_functions.pc_dhcp_hide(E_p2_2_clients_gb1_dhcp_check,
+                                                                                           self.E_p2_2_clients_gb1_ip_label,
+                                                                                           E_p2_2_clients_gb1_ip,
+                                                                                           self.E_p2_2_clients_gb1_gateway_label,
+                                                                                           E_p2_2_clients_gb1_gateway,
+                                                                                           self.E_p2_2_clients_gb1_cidr_label,
+                                                                                           E_p2_2_clients_gb1_cidr,
+                                                                                           self.E_p2_2_clients_gb1_dns_label,
+                                                                                           E_p2_2_clients_gb1_dns))
+
     self.E_p2_2_clients_gb1_gateway_label = QtWidgets.QLabel(self.E_p2_2_clients_gb1)
-    classBlueprint.mkLabel(self.E_p2_2_clients_gb1_gateway_label, QtCore.QRect(225, 30, 91, 25), "Gateway :", True)
+    classBlueprint.mkLabel(self.E_p2_2_clients_gb1_gateway_label, QtCore.QRect(230, 30, 91, 25), "Gateway :", True)
 
     global E_p2_2_clients_gb1_gateway
     E_p2_2_clients_gb1_gateway = QtWidgets.QLineEdit(self.E_p2_2_clients_gb1)
-    classBlueprint.mkLineEdit(E_p2_2_clients_gb1_gateway, QtCore.QRect(317, 28, 181, 31), 15, "192.168.10.254")
+    classBlueprint.mkLineEdit(E_p2_2_clients_gb1_gateway, QtCore.QRect(322, 28, 181, 31), 15, "192.168.10.254")
     E_p2_2_clients_gb1_gateway.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
 
     self.E_p2_2_clients_gb1_dns_label = QtWidgets.QLabel(self.E_p2_2_clients_gb1)
-    classBlueprint.mkLabel(self.E_p2_2_clients_gb1_dns_label, QtCore.QRect(225, 65, 51, 25), "DNS :", True)
+    classBlueprint.mkLabel(self.E_p2_2_clients_gb1_dns_label, QtCore.QRect(265, 65, 51, 25), "DNS :", True)
 
     global E_p2_2_clients_gb1_dns
     E_p2_2_clients_gb1_dns = QtWidgets.QLineEdit(self.E_p2_2_clients_gb1)
-    classBlueprint.mkLineEdit(E_p2_2_clients_gb1_dns, QtCore.QRect(317, 65, 181, 31), 15, "192.168.20.11")
+    classBlueprint.mkLineEdit(E_p2_2_clients_gb1_dns, QtCore.QRect(322, 65, 181, 31), 15, "192.168.20.11")
     E_p2_2_clients_gb1_dns.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
 
     # Groupbox PC2
     self.E_p2_2_clients_gb2 = QtWidgets.QGroupBox(p2_2_tabwidget_tab4)
-    classBlueprint.mkGroupBox(self.E_p2_2_clients_gb2, QtCore.QRect(10, 130, 505, 111), "PC2")
+    classBlueprint.mkGroupBox(self.E_p2_2_clients_gb2, QtCore.QRect(5, 130, 510, 111), "PC2")
 
-    self.E_p2_2_clients_gb1_ip_label = QtWidgets.QLabel(self.E_p2_2_clients_gb2)
-    classBlueprint.mkLabel(self.E_p2_2_clients_gb1_ip_label, QtCore.QRect(5, 30, 31, 31), "Ip :", True)
+    self.E_p2_2_clients_gb2_ip_label = QtWidgets.QLabel(self.E_p2_2_clients_gb2)
+    classBlueprint.mkLabel(self.E_p2_2_clients_gb2_ip_label, QtCore.QRect(5, 30, 31, 31), "Ip :", True)
 
     global E_p2_2_clients_gb2_ip
     E_p2_2_clients_gb2_ip = QtWidgets.QLineEdit(self.E_p2_2_clients_gb2)
     classBlueprint.mkLineEdit(E_p2_2_clients_gb2_ip, QtCore.QRect(40, 30, 181, 31), 15, "192.168.30.2")
     E_p2_2_clients_gb2_ip.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
-    self.E_p2_2_clients_gb1_cidr_label = QtWidgets.QLabel(self.E_p2_2_clients_gb2)
-    classBlueprint.mkLabel(self.E_p2_2_clients_gb1_cidr_label, QtCore.QRect(5, 65, 61, 31), "CIDR :", True)
+    self.E_p2_2_clients_gb2_cidr_label = QtWidgets.QLabel(self.E_p2_2_clients_gb2)
+    classBlueprint.mkLabel(self.E_p2_2_clients_gb2_cidr_label, QtCore.QRect(5, 65, 61, 31), "CIDR :", True)
 
     global E_p2_2_clients_gb2_cidr
     E_p2_2_clients_gb2_cidr = QtWidgets.QComboBox(self.E_p2_2_clients_gb2)
@@ -1420,25 +1435,38 @@ def setupUiExam(self):
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboCidr2(E_p2_2_clients_gb2_cidr)
 
+    global E_p2_2_clients_gb2_dhcp_check
+    E_p2_2_clients_gb2_dhcp_check = QtWidgets.QCheckBox(self.E_p2_2_clients_gb2)
+    classBlueprint.mkCheck(E_p2_2_clients_gb2_dhcp_check, QtCore.QRect(150, 70, 91, 20), False, "DHCP ?", True)
+    E_p2_2_clients_gb2_dhcp_check.stateChanged.connect(lambda: exam_functions.pc_dhcp_hide(E_p2_2_clients_gb2_dhcp_check,
+                                                                                           self.E_p2_2_clients_gb2_ip_label,
+                                                                                           E_p2_2_clients_gb2_ip,
+                                                                                           self.E_p2_2_clients_gb2_gateway_label,
+                                                                                           E_p2_2_clients_gb2_gateway,
+                                                                                           self.E_p2_2_clients_gb2_cidr_label,
+                                                                                           E_p2_2_clients_gb2_cidr,
+                                                                                           self.E_p2_2_clients_gb2_dns_label,
+                                                                                           E_p2_2_clients_gb2_dns))
+
     self.E_p2_2_clients_gb2_gateway_label = QtWidgets.QLabel(self.E_p2_2_clients_gb2)
-    classBlueprint.mkLabel(self.E_p2_2_clients_gb2_gateway_label, QtCore.QRect(225, 30, 91, 25), "Gateway :", True)
+    classBlueprint.mkLabel(self.E_p2_2_clients_gb2_gateway_label, QtCore.QRect(230, 30, 91, 25), "Gateway :", True)
 
     global E_p2_2_clients_gb2_gateway
     E_p2_2_clients_gb2_gateway = QtWidgets.QLineEdit(self.E_p2_2_clients_gb2)
-    classBlueprint.mkLineEdit(E_p2_2_clients_gb2_gateway, QtCore.QRect(317, 28, 181, 31), 15, "192.168.30.254")
+    classBlueprint.mkLineEdit(E_p2_2_clients_gb2_gateway, QtCore.QRect(322, 28, 181, 31), 15, "192.168.30.254")
     E_p2_2_clients_gb2_gateway.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
 
     self.E_p2_2_clients_gb2_dns_label = QtWidgets.QLabel(self.E_p2_2_clients_gb2)
-    classBlueprint.mkLabel(self.E_p2_2_clients_gb2_dns_label, QtCore.QRect(225, 65, 51, 25), "DNS :", True)
+    classBlueprint.mkLabel(self.E_p2_2_clients_gb2_dns_label, QtCore.QRect(265, 65, 51, 25), "DNS :", True)
 
     global E_p2_2_clients_gb2_dns
     E_p2_2_clients_gb2_dns = QtWidgets.QLineEdit(self.E_p2_2_clients_gb2)
-    classBlueprint.mkLineEdit(E_p2_2_clients_gb2_dns, QtCore.QRect(317, 65, 181, 31), 15, "192.168.20.11")
+    classBlueprint.mkLineEdit(E_p2_2_clients_gb2_dns, QtCore.QRect(322, 65, 181, 31), 15, "192.168.20.11")
     E_p2_2_clients_gb2_dns.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
 
     # Groupbox PC3
     self.E_p2_2_clients_gb3 = QtWidgets.QGroupBox(p2_2_tabwidget_tab4)
-    classBlueprint.mkGroupBox(self.E_p2_2_clients_gb3, QtCore.QRect(10, 250, 505, 111), "PC3")
+    classBlueprint.mkGroupBox(self.E_p2_2_clients_gb3, QtCore.QRect(5, 250, 510, 111), "PC3")
 
     self.E_p2_2_clients_gb3_ip_label = QtWidgets.QLabel(self.E_p2_2_clients_gb3)
     classBlueprint.mkLabel(self.E_p2_2_clients_gb3_ip_label, QtCore.QRect(5, 30, 31, 31), "Ip :", True)
@@ -1460,25 +1488,38 @@ def setupUiExam(self):
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboCidr2(E_p2_2_clients_gb3_cidr)
 
+    global E_p2_2_clients_gb3_dhcp_check
+    E_p2_2_clients_gb3_dhcp_check = QtWidgets.QCheckBox(self.E_p2_2_clients_gb3)
+    classBlueprint.mkCheck(E_p2_2_clients_gb3_dhcp_check, QtCore.QRect(150, 70, 91, 20), False, "DHCP ?", True)
+    E_p2_2_clients_gb3_dhcp_check.stateChanged.connect(lambda: exam_functions.pc_dhcp_hide(E_p2_2_clients_gb3_dhcp_check,
+                                                                                           self.E_p2_2_clients_gb3_ip_label,
+                                                                                           E_p2_2_clients_gb3_ip,
+                                                                                           self.E_p2_2_clients_gb3_gateway_label,
+                                                                                           E_p2_2_clients_gb3_gateway,
+                                                                                           self.E_p2_2_clients_gb3_cidr_label,
+                                                                                           E_p2_2_clients_gb3_cidr,
+                                                                                           self.E_p2_2_clients_gb3_dns_label,
+                                                                                           E_p2_2_clients_gb3_dns))
+
     self.E_p2_2_clients_gb3_gateway_label = QtWidgets.QLabel(self.E_p2_2_clients_gb3)
-    classBlueprint.mkLabel(self.E_p2_2_clients_gb3_gateway_label, QtCore.QRect(225, 30, 91, 25), "Gateway :", True)
+    classBlueprint.mkLabel(self.E_p2_2_clients_gb3_gateway_label, QtCore.QRect(230, 30, 91, 25), "Gateway :", True)
 
     global E_p2_2_clients_gb3_gateway
     E_p2_2_clients_gb3_gateway = QtWidgets.QLineEdit(self.E_p2_2_clients_gb3)
-    classBlueprint.mkLineEdit(E_p2_2_clients_gb3_gateway, QtCore.QRect(317, 28, 181, 31), 15, "192.168.40.254")
+    classBlueprint.mkLineEdit(E_p2_2_clients_gb3_gateway, QtCore.QRect(322, 28, 181, 31), 15, "192.168.40.254")
     E_p2_2_clients_gb3_gateway.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
 
     self.E_p2_2_clients_gb3_dns_label = QtWidgets.QLabel(self.E_p2_2_clients_gb3)
-    classBlueprint.mkLabel(self.E_p2_2_clients_gb3_dns_label, QtCore.QRect(225, 65, 51, 25), "DNS :", True)
+    classBlueprint.mkLabel(self.E_p2_2_clients_gb3_dns_label, QtCore.QRect(265, 65, 51, 25), "DNS :", True)
 
     global E_p2_2_clients_gb3_dns
     E_p2_2_clients_gb3_dns = QtWidgets.QLineEdit(self.E_p2_2_clients_gb3)
-    classBlueprint.mkLineEdit(E_p2_2_clients_gb3_dns, QtCore.QRect(317, 65, 181, 31), 15, "192.168.20.11")
+    classBlueprint.mkLineEdit(E_p2_2_clients_gb3_dns, QtCore.QRect(322, 65, 181, 31), 15, "192.168.20.11")
     E_p2_2_clients_gb3_dns.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
 
     # Groupbox PC4
     self.E_p2_2_clients_gb4 = QtWidgets.QGroupBox(p2_2_tabwidget_tab4)
-    classBlueprint.mkGroupBox(self.E_p2_2_clients_gb4, QtCore.QRect(10, 370, 505, 111), "PC4")
+    classBlueprint.mkGroupBox(self.E_p2_2_clients_gb4, QtCore.QRect(5, 370, 510, 111), "PC4")
 
     self.E_p2_2_clients_gb4_ip_label = QtWidgets.QLabel(self.E_p2_2_clients_gb4)
     classBlueprint.mkLabel(self.E_p2_2_clients_gb4_ip_label, QtCore.QRect(5, 30, 31, 31), "Ip :", True)
@@ -1500,20 +1541,33 @@ def setupUiExam(self):
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboCidr2(E_p2_2_clients_gb4_cidr)
 
+    global E_p2_2_clients_gb4_dhcp_check
+    E_p2_2_clients_gb4_dhcp_check = QtWidgets.QCheckBox(self.E_p2_2_clients_gb4)
+    classBlueprint.mkCheck(E_p2_2_clients_gb4_dhcp_check, QtCore.QRect(150, 70, 91, 20), False, "DHCP ?", True)
+    E_p2_2_clients_gb4_dhcp_check.stateChanged.connect(lambda: exam_functions.pc_dhcp_hide(E_p2_2_clients_gb4_dhcp_check,
+                                                                                           self.E_p2_2_clients_gb4_ip_label,
+                                                                                           E_p2_2_clients_gb4_ip,
+                                                                                           self.E_p2_2_clients_gb4_gateway_label,
+                                                                                           E_p2_2_clients_gb4_gateway,
+                                                                                           self.E_p2_2_clients_gb4_cidr_label,
+                                                                                           E_p2_2_clients_gb4_cidr,
+                                                                                           self.E_p2_2_clients_gb4_dns_label,
+                                                                                           E_p2_2_clients_gb4_dns))
+
     self.E_p2_2_clients_gb4_gateway_label = QtWidgets.QLabel(self.E_p2_2_clients_gb4)
-    classBlueprint.mkLabel(self.E_p2_2_clients_gb4_gateway_label, QtCore.QRect(225, 30, 91, 25), "Gateway :", True)
+    classBlueprint.mkLabel(self.E_p2_2_clients_gb4_gateway_label, QtCore.QRect(230, 30, 91, 25), "Gateway :", True)
 
     global E_p2_2_clients_gb4_gateway
     E_p2_2_clients_gb4_gateway = QtWidgets.QLineEdit(self.E_p2_2_clients_gb4)
-    classBlueprint.mkLineEdit(E_p2_2_clients_gb4_gateway, QtCore.QRect(317, 28, 181, 31), 15, "172.16.0.254")
+    classBlueprint.mkLineEdit(E_p2_2_clients_gb4_gateway, QtCore.QRect(322, 28, 181, 31), 15, "172.16.0.254")
     E_p2_2_clients_gb4_gateway.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
 
     self.E_p2_2_clients_gb4_dns_label = QtWidgets.QLabel(self.E_p2_2_clients_gb4)
-    classBlueprint.mkLabel(self.E_p2_2_clients_gb4_dns_label, QtCore.QRect(225, 65, 51, 25), "DNS :", True)
+    classBlueprint.mkLabel(self.E_p2_2_clients_gb4_dns_label, QtCore.QRect(265, 65, 51, 25), "DNS :", True)
 
     global E_p2_2_clients_gb4_dns
     E_p2_2_clients_gb4_dns = QtWidgets.QLineEdit(self.E_p2_2_clients_gb4)
-    classBlueprint.mkLineEdit(E_p2_2_clients_gb4_dns, QtCore.QRect(317, 65, 181, 31), 15, "")
+    classBlueprint.mkLineEdit(E_p2_2_clients_gb4_dns, QtCore.QRect(322, 65, 181, 31), 15, "")
     E_p2_2_clients_gb4_dns.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
 
     # Groupbox 5 - Hostnames
@@ -1552,11 +1606,170 @@ def setupUiExam(self):
     classBlueprint.mkLineEdit(E_p2_2_clients_gb5_pc4, QtCore.QRect(170, 190, 151, 31), 12, "PC4")
     E_p2_2_clients_gb5_pc4.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
+    #--TAB Servers-SRV1--#
+    self.E_p2_2_srv1_img = QtWidgets.QLabel(p2_2_tabwidget_tab5)
+    classBlueprint.mkLabPic(self.E_p2_2_srv1_img, QtCore.QRect(550, 3, 321, 221), QtGui.QPixmap("./img/schema2-server.png"), True)
+
+    # Groupbox Main configuration
+    self.E_p2_2_srv1_gb1 = QtWidgets.QGroupBox(p2_2_tabwidget_tab5)
+    classBlueprint.mkGroupBox(self.E_p2_2_srv1_gb1, QtCore.QRect(10, 10, 505, 188), "SRV1 - Main configuration")
+
+    self.E_p2_2_srv1_gb1_labelHostname = QtWidgets.QLabel(self.E_p2_2_srv1_gb1)
+    classBlueprint.mkLabel(self.E_p2_2_srv1_gb1_labelHostname, QtCore.QRect(10, 35, 101, 21), "Hostname :", True)
+
+    global E_p2_2_srv1_gb1_editHostname
+    E_p2_2_srv1_gb1_editHostname = QtWidgets.QLineEdit(self.E_p2_2_srv1_gb1)
+    classBlueprint.mkLineEdit(E_p2_2_srv1_gb1_editHostname, QtCore.QRect(115, 30, 181, 31), 12, "SRV-01")
+    E_p2_2_srv1_gb1_editHostname.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_2_srv1_gb1_labelIp = QtWidgets.QLabel(self.E_p2_2_srv1_gb1)
+    classBlueprint.mkLabel(self.E_p2_2_srv1_gb1_labelIp, QtCore.QRect(10, 70, 31, 31), "IP :", True)
+
+    global E_p2_2_srv1_gb1_editIp
+    E_p2_2_srv1_gb1_editIp = QtWidgets.QLineEdit(self.E_p2_2_srv1_gb1)
+    classBlueprint.mkLineEdit(E_p2_2_srv1_gb1_editIp, QtCore.QRect(115, 70, 181, 31), 15, "192.168.20.11")
+    E_p2_2_srv1_gb1_editIp.setStyleSheet("background-color: rgb(255, 255, 255);")
+
+    global E_p2_2_srv1_gb1_comboCidr
+    E_p2_2_srv1_gb1_comboCidr = QtWidgets.QComboBox(self.E_p2_2_srv1_gb1)
+    classBlueprint.mkCombo(E_p2_2_srv1_gb1_comboCidr, QtCore.QRect(305, 70, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr2(E_p2_2_srv1_gb1_comboCidr)
+
+    self.E_p2_2_srv1_gb1_labelGateway = QtWidgets.QLabel(self.E_p2_2_srv1_gb1)
+    classBlueprint.mkLabel(self.E_p2_2_srv1_gb1_labelGateway, QtCore.QRect(10, 110, 91, 25), "Gateway :", True)
+
+    global E_p2_2_srv1_gb1_editGateway
+    E_p2_2_srv1_gb1_editGateway = QtWidgets.QLineEdit(self.E_p2_2_srv1_gb1)
+    classBlueprint.mkLineEdit(E_p2_2_srv1_gb1_editGateway, QtCore.QRect(115, 110, 181, 31), 15, "192.168.10.254")
+    E_p2_2_srv1_gb1_editGateway.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);;")
+
+    self.E_p2_2_srv1_gb1_labelDns = QtWidgets.QLabel(self.E_p2_2_srv1_gb1)
+    classBlueprint.mkLabel(self.E_p2_2_srv1_gb1_labelDns, QtCore.QRect(10, 150, 51, 25), "DNS :", True)
+
+    global E_p2_2_srv1_gb1_editDns
+    E_p2_2_srv1_gb1_editDns = QtWidgets.QLineEdit(self.E_p2_2_srv1_gb1)
+    classBlueprint.mkLineEdit(E_p2_2_srv1_gb1_editDns, QtCore.QRect(115, 150, 181, 31), 15, "192.168.20.11")
+    E_p2_2_srv1_gb1_editDns.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    # Groupbox DNS
+    self.E_p2_2_srv1_gb2 = QtWidgets.QGroupBox(p2_2_tabwidget_tab5)
+    classBlueprint.mkGroupBox(self.E_p2_2_srv1_gb2, QtCore.QRect(10, 200, 505, 111), "SRV1 - DNS")
+
+    self.E_p2_2_srv1_gb2_labelName = QtWidgets.QLabel(self.E_p2_2_srv1_gb2)
+    classBlueprint.mkLabel(self.E_p2_2_srv1_gb2_labelName, QtCore.QRect(10, 35, 91, 21), "RR Name :", True)
+
+    global E_p2_2_srv1_gb2_editName
+    E_p2_2_srv1_gb2_editName = QtWidgets.QLineEdit(self.E_p2_2_srv1_gb2)
+    classBlueprint.mkLineEdit(E_p2_2_srv1_gb2_editName, QtCore.QRect(105, 30, 200, 31), 20, "www.labo.local", True)
+    E_p2_2_srv1_gb2_editName.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    self.E_p2_2_srv1_gb2_labelType = QtWidgets.QLabel(self.E_p2_2_srv1_gb2)
+    classBlueprint.mkLabel(self.E_p2_2_srv1_gb2_labelType, QtCore.QRect(315, 30, 81, 31), "RR Type :", True)
+
+    global E_p2_2_srv1_gb2_comboType
+    E_p2_2_srv1_gb2_comboType = QtWidgets.QComboBox(self.E_p2_2_srv1_gb2)
+    classBlueprint.mkCombo(E_p2_2_srv1_gb2_comboType, QtCore.QRect(400, 30, 101, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    E_p2_2_srv1_gb2_comboType.addItem("A")
+    E_p2_2_srv1_gb2_comboType.addItem("CNAME")
+
+    self.E_p2_2_srv1_gb2_labelValue = QtWidgets.QLabel(self.E_p2_2_srv1_gb2)
+    classBlueprint.mkLabel(self.E_p2_2_srv1_gb2_labelValue, QtCore.QRect(10, 70, 91, 25), "RR Value :", True)
+
+    global E_p2_2_srv1_gb2_editValue
+    E_p2_2_srv1_gb2_editValue = QtWidgets.QLineEdit(self.E_p2_2_srv1_gb2)
+    classBlueprint.mkLineEdit(E_p2_2_srv1_gb2_editValue, QtCore.QRect(105, 70, 181, 31), 15, "192.168.20.11")
+    E_p2_2_srv1_gb2_editValue.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
+
+    self.E_p2_2_srv1_gb2_clear = QtWidgets.QPushButton(self.E_p2_2_srv1_gb2)
+    classBlueprint.mkBtn(self.E_p2_2_srv1_gb2_clear, QtCore.QRect(295, 75, 101, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_2_srv1_gb2_clear.clicked.connect(lambda: clear_dns_dhcp_table(E_p2_2_srv1_tableDns, "DNS"))
+
+    self.E_p2_2_srv1_gb2_add = QtWidgets.QPushButton(self.E_p2_2_srv1_gb2)
+    classBlueprint.mkBtn(self.E_p2_2_srv1_gb2_add, QtCore.QRect(400, 75, 101, 31), "background-color: rgb(255, 255, 0);", "Add")
+    self.E_p2_2_srv1_gb2_add.clicked.connect(lambda: add_dns_to_table())
+
+    # Groupbox DHCP
+    self.E_p2_2_srv1_gb3 = QtWidgets.QGroupBox(p2_2_tabwidget_tab5)
+    classBlueprint.mkGroupBox(self.E_p2_2_srv1_gb3, QtCore.QRect(10, 320, 491, 161), "SRV1 - DHCP")
+
+    self.E_p2_2_srv1_gb3_labelName = QtWidgets.QLabel(self.E_p2_2_srv1_gb3)
+    classBlueprint.mkLabel(self.E_p2_2_srv1_gb3_labelName, QtCore.QRect(10, 35, 101, 21), "Pool Name :", True)
+
+    global E_p2_2_srv1_gb3_editName
+    E_p2_2_srv1_gb3_editName = QtWidgets.QLineEdit(self.E_p2_2_srv1_gb3)
+    classBlueprint.mkLineEdit(E_p2_2_srv1_gb3_editName, QtCore.QRect(115, 30, 181, 31), 12, "POOL-VLAN30")
+    E_p2_2_srv1_gb3_editName.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    self.E_p2_2_srv1_gb3_labelIp = QtWidgets.QLabel(self.E_p2_2_srv1_gb3)
+    classBlueprint.mkLabel(self.E_p2_2_srv1_gb3_labelIp, QtCore.QRect(10, 70, 81, 25), "Start IP :", True)
+
+    global E_p2_2_srv1_gb3_editIp
+    E_p2_2_srv1_gb3_editIp = QtWidgets.QLineEdit(self.E_p2_2_srv1_gb3)
+    classBlueprint.mkLineEdit(E_p2_2_srv1_gb3_editIp, QtCore.QRect(115, 70, 181, 31), 15, "192.168.30.2")
+    E_p2_2_srv1_gb3_editIp.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
+
+    global E_p2_2_srv1_gb3_comboCidr
+    E_p2_2_srv1_gb3_comboCidr = QtWidgets.QComboBox(self.E_p2_2_srv1_gb3)
+    classBlueprint.mkCombo(E_p2_2_srv1_gb3_comboCidr, QtCore.QRect(300, 70, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr2(E_p2_2_srv1_gb3_comboCidr)
+
+    self.E_p2_2_srv1_gb3_labelGateway = QtWidgets.QLabel(self.E_p2_2_srv1_gb3)
+    classBlueprint.mkLabel(self.E_p2_2_srv1_gb3_labelGateway, QtCore.QRect(10, 110, 91, 25), "Gateway :", True)
+
+    global E_p2_2_srv1_gb3_editGateway
+    E_p2_2_srv1_gb3_editGateway = QtWidgets.QLineEdit(self.E_p2_2_srv1_gb3)
+    classBlueprint.mkLineEdit(E_p2_2_srv1_gb3_editGateway, QtCore.QRect(115, 110, 181, 31), 15, "192.168.30.1")
+    E_p2_2_srv1_gb3_editGateway.setStyleSheet("background-color: rgb(255, 255, 255);")
+
+    self.E_p2_2_srv1_gb3_clear = QtWidgets.QPushButton(self.E_p2_2_srv1_gb3)
+    classBlueprint.mkBtn(self.E_p2_2_srv1_gb3_clear, QtCore.QRect(380, 80, 101, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_2_srv1_gb3_clear.clicked.connect(lambda: clear_dns_dhcp_table(E_p2_2_srv1_tableDhcp, "DHCP"))
+
+    self.E_p2_2_srv1_gb3_add = QtWidgets.QPushButton(self.E_p2_2_srv1_gb3)
+    classBlueprint.mkBtn(self.E_p2_2_srv1_gb3_add, QtCore.QRect(380, 120, 101, 31), "background-color: rgb(255, 255, 0);", "Add")
+    self.E_p2_2_srv1_gb3_add.clicked.connect(lambda: add_dhcp_to_table())
+
+    global E_p2_2_srv1_tableDns
+    E_p2_2_srv1_tableDns = QtWidgets.QTableWidget(p2_2_tabwidget_tab5)
+    classBlueprint.mkTable(E_p2_2_srv1_tableDns, QtCore.QRect(520, 230, 351, 111), "background-color: rgb(255, 170, 0);", 3, 0)
+    classBlueprint.addDataTable(E_p2_2_srv1_tableDns, 0, "RR Name")
+    classBlueprint.addDataTable(E_p2_2_srv1_tableDns, 1, "RR Type")
+    classBlueprint.addDataTable(E_p2_2_srv1_tableDns, 2, "RR Value")
+    E_p2_2_srv1_tableDns.setColumnWidth(1, 70)
+
+    global E_p2_2_srv1_tableDhcp
+    E_p2_2_srv1_tableDhcp = QtWidgets.QTableWidget(p2_2_tabwidget_tab5)
+    classBlueprint.mkTable(E_p2_2_srv1_tableDhcp, QtCore.QRect(510, 350, 361, 131), "background-color: rgb(255, 170, 0);", 4, 0, True)
+    classBlueprint.addDataTable(E_p2_2_srv1_tableDhcp, 0, "Pool Name")
+    classBlueprint.addDataTable(E_p2_2_srv1_tableDhcp, 1, "Start Ip")
+    classBlueprint.addDataTable(E_p2_2_srv1_tableDhcp, 2, "Mask")
+    classBlueprint.addDataTable(E_p2_2_srv1_tableDhcp, 3, "Gateway")
+    E_p2_2_srv1_tableDhcp.setColumnWidth(0, 85)
+    E_p2_2_srv1_tableDhcp.setColumnWidth(1, 85)
+    E_p2_2_srv1_tableDhcp.setColumnWidth(2, 100)
+    E_p2_2_srv1_tableDhcp.setColumnWidth(3, 85)
+
+
+
+
 
     p2_2_tabwidget.addTab(p2_2_tabwidget_tab1, "   S1   ")
     p2_2_tabwidget.addTab(p2_2_tabwidget_tab2, "   S2   ")
     p2_2_tabwidget.addTab(p2_2_tabwidget_tab3, "   S3   ")
     p2_2_tabwidget.addTab(p2_2_tabwidget_tab4, "   Clients - PC   ")
+    p2_2_tabwidget.addTab(p2_2_tabwidget_tab5, "   Servers - SRV1   ")
     p2_2_tabwidget.setObjectName("p2_2_tabwidget")
 
     self.stackedWidget_2.addWidget(self.page_2_2)
@@ -1673,6 +1886,55 @@ def setupUiExam(self):
         vlan_name_set.clear()
         vlan_set.clear()
         vlan_subnet_set.clear()
+
+    def add_dns_to_table():
+        rr_name = E_p2_2_srv1_gb2_editName.text()
+        rr_type = E_p2_2_srv1_gb2_comboType.currentText()
+        rr_value = E_p2_2_srv1_gb2_editValue.text()
+
+        lastrow = E_p2_2_srv1_tableDns.rowCount()
+        E_p2_2_srv1_tableDns.insertRow(lastrow)
+        item1 = QTableWidgetItem(rr_name)
+        item2 = QTableWidgetItem(rr_type)
+        item3 = QTableWidgetItem(rr_value)
+        E_p2_2_srv1_tableDns.setItem(lastrow, 0, item1)
+        E_p2_2_srv1_tableDns.setItem(lastrow, 1, item2)
+        E_p2_2_srv1_tableDns.setItem(lastrow, 2, item3)
+
+    def add_dhcp_to_table():
+        pool_name = E_p2_2_srv1_gb3_editName.text()
+        start_ip = E_p2_2_srv1_gb3_editIp.text()
+        cidr = E_p2_2_srv1_gb3_comboCidr.currentText()
+        gateway = E_p2_2_srv1_gb3_editGateway.text()
+        if (pool_name in dhcp_pool_name_set):
+            utils.blueprintFunctions.mkWarningMsg("Pool name error", "Pool name <b><span style=color:'red'>" + pool_name + "</b></span> is <b>already </b><span style=color:'blue'>used</span> !")
+        elif not (gateway in exam_page.generate_usable_ip_from_network_and_cidr(start_ip, cidr)):  # Gateway isn't in the range of the given subnet
+            utils.blueprintFunctions.mkWarningMsg("Gateway error", "The gateway ip <b><span style=color:'red'>" + gateway + "</b></span> is <b>not </b>in the <span style=color:'blue'>subnet range</span> !")
+        else:
+            lastrow = E_p2_2_srv1_tableDhcp.rowCount()
+            E_p2_2_srv1_tableDhcp.insertRow(lastrow)
+            item1 = QTableWidgetItem(pool_name)
+            item2 = QTableWidgetItem(start_ip)
+            item3 = QTableWidgetItem(cidr)
+            item4 = QTableWidgetItem(gateway)
+            E_p2_2_srv1_tableDhcp.setItem(lastrow, 0, item1)
+            E_p2_2_srv1_tableDhcp.setItem(lastrow, 1, item2)
+            E_p2_2_srv1_tableDhcp.setItem(lastrow, 2, item3)
+            E_p2_2_srv1_tableDhcp.setItem(lastrow, 3, item4)
+            dhcp_pool_name_set.add(pool_name)
+
+    def clear_dns_dhcp_table(table, type): # type = "DNS" or "DHCP"
+        x = table.rowCount()
+        while (table.rowCount() > 0):
+            table.removeRow(x)
+            x -= 1
+        if (type == "DNS"):
+            pass
+        elif(type == "DHCP"):
+            dhcp_pool_name_set.clear()
+        #vlan_name_set.clear()
+        #vlan_set.clear()
+        #vlan_subnet_set.clear()
 
     def hide_checkbox(): # When "add"
         if (p2_1_gb_check.isChecked()):
