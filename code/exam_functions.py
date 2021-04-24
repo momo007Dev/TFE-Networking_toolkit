@@ -25,6 +25,8 @@ vlan_dict = dict()
         #---Page 2_2---#
 srv1_dhcp_dict = dict()
 srv1_dns_list = list()
+srv2_dhcp_dict = dict()
+srv2_dns_list = list()
 #--------------END------------------#
 
 def add_host_to_table(table, name, host): # Used when user clicks "add" btn
@@ -854,37 +856,62 @@ def save_changes_p2_2():
         "S2" : s2_dict,
         "S3" : s3_dict
     }
-    # ---SRV1---
-    global srv1_dhcp_dict, srv1_dns_list
-    srv1_dhcp_dict.clear()
-    srv1_dns_list.clear()
-
-    # "pool_name" (unique) : ["start_ip", "cidr", "gateway"]
-    table = exam_page.E_p2_2_srv1_tableDhcp
+    #---SERVERS (SRV1 SRV2)---#
+    global srv1_dhcp_dict, srv1_dns_list, srv2_dhcp_dict, srv2_dns_list
+    srv1_dhcp_dict.clear(), srv1_dns_list.clear()
+    srv2_dhcp_dict.clear(), srv2_dns_list.clear()
+        #---dhcp---#
+    table = exam_page.E_p2_2_srv1_tableDhcp # "pool_name" (unique) : ["start_ip", "cidr", "gateway"]
     rowCount = table.rowCount()
     for x in range(rowCount):
         srv1_dhcp_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(subnet_functions.getMaskFromSlash(str(table.item(x, 2).text()))), str(table.item(x, 3).text())]
 
-    #srv1_dns_list = ["rr_name + rr_type + rr_value", ...]
-    table = exam_page.E_p2_2_srv1_tableDns
+    table = exam_page.E_p2_2_srv2_tableDhcp # "pool_name" (unique) : ["start_ip", "cidr", "gateway"]
+    rowCount = table.rowCount()
+    for x in range(rowCount):
+        srv2_dhcp_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(subnet_functions.getMaskFromSlash(str(table.item(x, 2).text()))), str(table.item(x, 3).text())]
+
+        #---dns---#
+    table = exam_page.E_p2_2_srv1_tableDns #srv1_dns_list = ["rr_name + rr_type + rr_value", ...]
     rowCount = table.rowCount()
     for x in range(rowCount):
         srv1_dns_list.append(str(table.item(x, 0).text()) + " " + str(table.item(x, 1).text()) + " " + str(table.item(x, 2).text()))
 
+    table = exam_page.E_p2_2_srv2_tableDns #srv1_dns_list = ["rr_name + rr_type + rr_value", ...]
+    rowCount = table.rowCount()
+    for x in range(rowCount):
+        srv1_dns_list.append(str(table.item(x, 0).text()) + " " + str(table.item(x, 1).text()) + " " + str(table.item(x, 2).text()))
+
+    global srv1_dict, srv2_dict, server_dict
     srv1_dict = {
-        "main": [exam_page.E_p2_2_srv1_gb1_editHostname.text(), exam_page.E_p2_2_srv1_gb1_editIp.text(), exam_page.E_p2_2_srv1_gb1_comboCidr.currentText(), exam_page.E_p2_2_srv1_gb1_editGateway.text(), exam_page.E_p2_2_srv1_gb1_editDns.text() if (len(exam_page.E_p2_2_srv1_gb1_editDns.text()) > 1) else ""],
+        "main": [exam_page.E_p2_2_srv1_gb1_editHostname.text(), exam_page.E_p2_2_srv1_gb1_editIp.text(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_2_srv1_gb1_comboCidr.currentText())), exam_page.E_p2_2_srv1_gb1_editGateway.text(), exam_page.E_p2_2_srv1_gb1_editDns.text() if (len(exam_page.E_p2_2_srv1_gb1_editDns.text()) > 1) else ""],
         "dns": srv1_dns_list,
         "dhcp": srv1_dhcp_dict
+    }
+
+    srv2_dict = {
+        "main": [exam_page.E_p2_2_srv2_gb1_editHostname.text(), exam_page.E_p2_2_srv2_gb1_editIp.text(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_2_srv2_gb1_comboCidr.currentText())), exam_page.E_p2_2_srv2_gb1_editGateway.text(), exam_page.E_p2_2_srv2_gb1_editDns.text() if (len(exam_page.E_p2_2_srv2_gb1_editDns.text()) > 1) else ""],
+        "dns": srv2_dns_list,
+        "dhcp": srv2_dhcp_dict
+    }
+    server_dict = {
+        "srv1" : srv1_dict,
+        "srv2" : srv2_dict
     }
 
     print("----CLIENT data----")
     for a in client_dict.keys():
         print(str(a) + " : " + str(client_dict.get(a)))
 
-    print("-----NEXT-----")
+    print("-----SRV1 data-----")
     for x,y in srv1_dict.items():
         print(x,y)
-    #generate_solution_text_v2()
+
+    print("-----SRV2 data-----")
+    for x,y in srv2_dict.items():
+        print(x,y)
+
+    generate_solution_text_v2()
 
 def generate_solution_text_v2():
     generate_solution_client()
@@ -954,8 +981,40 @@ def generate_solution_client():
 
 #TODO
 def generate_solution_server():
-    pass
+    dict_keys = list(server_dict.keys())
+    for x in dict_keys:
+        print("---DEBUG---")
+        print(x)
+        print("---DEBUG---")
+        output = "----------------\n"
+        output += "   " + server_dict.get(x).get("main")[0] + "   \n"
+        output += "----------------\n"
+        output += "IP : " + server_dict.get(x).get("main")[1] + "\n"
+        output += "Mask : " + server_dict.get(x).get("main")[2] + "\n"
+        output += "Gateway : " + server_dict.get(x).get("main")[3] + "\n"
+        if (len(server_dict.get(x).get("main")[4]) > 4):
+            output += "Dns : " + server_dict.get(x).get("main")[4] + "\n"
 
+        if (len(server_dict.get(x).get("dns")) > 0):
+            output += "\n"
+            output += "---DNS--- \n"
+            for a in server_dict.get(x).get("dns"):
+                output += a + "\n"
+            output += "\n"
+
+        if (len(server_dict.get(x).get("dhcp")) > 0):
+            output += "\n"
+            output += "---DHCP--- \n"
+            for b in server_dict.get(x).get("dhcp").keys():
+                output += str(b) + " : \n"
+                output += "   -" + str(server_dict.get(x).get("dhcp").get(b)[0]) + "\n"
+                output += "   -" + str(server_dict.get(x).get("dhcp").get(b)[1]) + "\n"
+                output += "   -" + str(server_dict.get(x).get("dhcp").get(b)[2]) + "\n"
+                output += "\n"
+            output += "\n"
+
+        with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
+            f.write(output)
 
 def check_if_switch_has_a_native_vlan(dict, native):
     vlan_used = set()

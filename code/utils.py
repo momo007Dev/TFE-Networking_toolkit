@@ -117,6 +117,7 @@ class blueprintFunctions:
     def fillComboCidr2 (combo):
         for i in reversed(range(0,31)):
             combo.addItem("/" + str(i))
+            combo.setCurrentIndex(6)
 
     def mkTable (table, geometry, style, col, row, small_size = False):
         table.setGeometry(geometry)
