@@ -1644,7 +1644,7 @@ def setupUiExam(self):
 
     global E_p2_2_srv1_gb1_editGateway
     E_p2_2_srv1_gb1_editGateway = QtWidgets.QLineEdit(self.E_p2_2_srv1_gb1)
-    classBlueprint.mkLineEdit(E_p2_2_srv1_gb1_editGateway, QtCore.QRect(115, 110, 181, 31), 15, "192.168.10.254")
+    classBlueprint.mkLineEdit(E_p2_2_srv1_gb1_editGateway, QtCore.QRect(115, 110, 181, 31), 15, "192.168.20.254")
     E_p2_2_srv1_gb1_editGateway.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);;")
 
     self.E_p2_2_srv1_gb1_labelDns = QtWidgets.QLabel(self.E_p2_2_srv1_gb1)
@@ -1799,7 +1799,7 @@ def setupUiExam(self):
 
     global E_p2_2_srv2_gb1_editGateway
     E_p2_2_srv2_gb1_editGateway = QtWidgets.QLineEdit(self.E_p2_2_srv2_gb1)
-    classBlueprint.mkLineEdit(E_p2_2_srv2_gb1_editGateway, QtCore.QRect(115, 110, 181, 31), 15, "192.168.10.254")
+    classBlueprint.mkLineEdit(E_p2_2_srv2_gb1_editGateway, QtCore.QRect(115, 110, 181, 31), 15, "192.168.20.254")
     E_p2_2_srv2_gb1_editGateway.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);;")
 
     self.E_p2_2_srv2_gb1_labelDns = QtWidgets.QLabel(self.E_p2_2_srv2_gb1)
@@ -1916,9 +1916,6 @@ def setupUiExam(self):
     E_p2_2_srv2_tableDhcp.setColumnWidth(2, 100)
     E_p2_2_srv2_tableDhcp.setColumnWidth(3, 85)
 
-
-
-
     p2_2_tabwidget.addTab(p2_2_tabwidget_tab1, "   S1   ")
     p2_2_tabwidget.addTab(p2_2_tabwidget_tab2, "   S2   ")
     p2_2_tabwidget.addTab(p2_2_tabwidget_tab3, "   S3   ")
@@ -1928,6 +1925,295 @@ def setupUiExam(self):
     p2_2_tabwidget.setObjectName("p2_2_tabwidget")
 
     self.stackedWidget_2.addWidget(self.page_2_2)
+
+    #---------------------
+    # P2_3 : SWITCH L3
+    #---------------------
+
+    self.page_2_3 = QtWidgets.QWidget()
+    self.page_2_3.setObjectName("page_2_3")
+
+    p2_3_tabwidget = QtWidgets.QTabWidget(self.page_2_3)
+    p2_3_tabwidget.setGeometry(QtCore.QRect(10, 20, 881, 521))
+    font = QtGui.QFont()
+    font.setBold(True)
+    font.setWeight(75)
+    p2_3_tabwidget.setFont(font)
+    p2_3_tabwidget_tab1 = QtWidgets.QWidget()
+    p2_3_tabwidget_tab2 = QtWidgets.QWidget()
+
+        #---Tab Interface---#
+    self.E_p2_3_int_img = QtWidgets.QLabel(p2_3_tabwidget_tab1)
+    classBlueprint.mkLabPic(self.E_p2_3_int_img, QtCore.QRect(590, 308, 281, 181), QtGui.QPixmap("./img/schema2-swl3.png"), True)
+
+    self.E_p2_3_int_labelHostname = QtWidgets.QLabel(p2_3_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_3_int_labelHostname, QtCore.QRect(10, 10, 121, 31), "Hostname :")
+
+    global E_p2_3_int_editHostname
+    E_p2_3_int_editHostname = QtWidgets.QLineEdit(p2_3_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_3_int_editHostname, QtCore.QRect(140, 10, 141, 31), 10, "SWL3")
+    E_p2_3_int_editHostname.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_3_int_A_label = QtWidgets.QLabel(p2_3_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_3_int_A_label, QtCore.QRect(10, 60, 151, 31), "Interface (a) :")
+
+    global E_p2_3_int_A_comboInterface
+    E_p2_3_int_A_comboInterface = QtWidgets.QComboBox(p2_3_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_3_int_A_comboInterface, QtCore.QRect(170, 60, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_3_int_A_comboInterface)
+
+    global E_p2_3_int_A_description
+    E_p2_3_int_A_description = QtWidgets.QLineEdit(p2_3_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_3_int_A_description, QtCore.QRect(300, 60, 181, 31), 20, "To S3")
+    E_p2_3_int_A_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_3_int_B_label = QtWidgets.QLabel(p2_3_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_3_int_B_label, QtCore.QRect(10, 110, 151, 31), "Interface (b) :")
+
+    global E_p2_3_int_B_comboInterface
+    E_p2_3_int_B_comboInterface = QtWidgets.QComboBox(p2_3_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_3_int_B_comboInterface, QtCore.QRect(170, 110, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_3_int_B_comboInterface)
+    E_p2_3_int_B_comboInterface.setCurrentIndex(E_p2_3_int_B_comboInterface.count() -1)
+
+    global E_p2_3_int_B_ip
+    E_p2_3_int_B_ip = QtWidgets.QLineEdit(p2_3_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_3_int_B_ip, QtCore.QRect(300, 110, 181, 31), 15, "192.168.60.1")
+    E_p2_3_int_B_ip.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    global E_p2_3_int_B_comboCidr
+    E_p2_3_int_B_comboCidr = QtWidgets.QComboBox(p2_3_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_3_int_B_comboCidr, QtCore.QRect(490, 110, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr2(E_p2_3_int_B_comboCidr)
+    E_p2_3_int_B_comboCidr.setCurrentIndex(14)
+
+    global E_p2_3_int_B_description
+    E_p2_3_int_B_description = QtWidgets.QLineEdit(p2_3_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_3_int_B_description, QtCore.QRect(570, 110, 181, 31), 20, "To R1")
+    E_p2_3_int_B_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_3_int_C_label = QtWidgets.QLabel(p2_3_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_3_int_C_label, QtCore.QRect(10, 160, 151, 31), "Interface (c) :")
+
+    global E_p2_3_int_C_comboInterface
+    E_p2_3_int_C_comboInterface = QtWidgets.QComboBox(p2_3_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_3_int_C_comboInterface, QtCore.QRect(170, 160, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_3_int_C_comboInterface)
+    E_p2_3_int_C_comboInterface.setCurrentIndex(E_p2_3_int_B_comboInterface.count() - 2)
+
+    global E_p2_3_int_C_ip
+    E_p2_3_int_C_ip = QtWidgets.QLineEdit(p2_3_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_3_int_C_ip, QtCore.QRect(300, 160, 181, 31), 15, "200.0.0.1")
+    E_p2_3_int_C_ip.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    global E_p2_3_int_C_comboCidr
+    E_p2_3_int_C_comboCidr = QtWidgets.QComboBox(p2_3_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_3_int_C_comboCidr, QtCore.QRect(490, 160, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr2(E_p2_3_int_C_comboCidr)
+    E_p2_3_int_C_comboCidr.setCurrentIndex(14)
+
+    global E_p2_3_int_C_description
+    E_p2_3_int_C_description = QtWidgets.QLineEdit(p2_3_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_3_int_C_description, QtCore.QRect(570, 160, 181, 31), 20, "To R2")
+    E_p2_3_int_C_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+        #---Tab Routing---#
+
+    E_p2_3_rou_radioOspf = QtWidgets.QRadioButton(p2_3_tabwidget_tab2)
+    classBlueprint.mkRadio(E_p2_3_rou_radioOspf, QtCore.QRect(290, 10, 91, 20), True, "OSPF")
+    E_p2_3_rou_radioOspf.toggled.connect(lambda: hide_groupbox_ospf_rip(self.E_p2_3_rou_gb1, self.E_p2_3_rou_gb2, self.E_p2_3_rou_gb3))
+
+    E_p2_3_rou_radioRip = QtWidgets.QRadioButton(p2_3_tabwidget_tab2)
+    classBlueprint.mkRadio(E_p2_3_rou_radioRip, QtCore.QRect(420, 10, 121, 21), False, "RIP(v2)")
+    E_p2_3_rou_radioRip.toggled.connect(lambda: hide_groupbox_ospf_rip(self.E_p2_3_rou_gb1, self.E_p2_3_rou_gb2, self.E_p2_3_rou_gb3))
+
+            #---GB1---#
+    self.E_p2_3_rou_gb1 = QtWidgets.QGroupBox(p2_3_tabwidget_tab2)
+    classBlueprint.mkGroupBox(self.E_p2_3_rou_gb1, QtCore.QRect(20, 43, 301, 81), "")
+
+    self.E_p2_3_rou_gb1_labelProcess = QtWidgets.QLabel(self.E_p2_3_rou_gb1)
+    classBlueprint.mkLabel(self.E_p2_3_rou_gb1_labelProcess, QtCore.QRect(5, 10, 161, 21), "OSPF Process Id :", True)
+
+    global E_p2_3_rou_gb1_editProcess
+    E_p2_3_rou_gb1_editProcess = QtWidgets.QLineEdit(self.E_p2_3_rou_gb1)
+    classBlueprint.mkLineEdit(E_p2_3_rou_gb1_editProcess, QtCore.QRect(205, 10, 60, 31), 2, "1")
+    E_p2_3_rou_gb1_editProcess.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
+
+    self.E_p2_3_rou_gb1_labelBandwidth = QtWidgets.QLabel(self.E_p2_3_rou_gb1)
+    classBlueprint.mkLabel(self.E_p2_3_rou_gb1_labelBandwidth, QtCore.QRect(5, 50, 201, 21), "Reference Bandwidth :", True)
+
+    global E_p2_3_rou_gb1_editBandwidth
+    E_p2_3_rou_gb1_editBandwidth = QtWidgets.QLineEdit(self.E_p2_3_rou_gb1)
+    classBlueprint.mkLineEdit(E_p2_3_rou_gb1_editBandwidth, QtCore.QRect(205, 45, 91, 31), 6, "1000")
+    E_p2_3_rou_gb1_editBandwidth.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
+
+            #---GB2---#
+    self.E_p2_3_rou_gb2 = QtWidgets.QGroupBox(p2_3_tabwidget_tab2)
+    classBlueprint.mkGroupBox(self.E_p2_3_rou_gb2, QtCore.QRect(20, 130, 371, 91), "")
+
+    self.E_p2_3_rou_gb2_labelNetwork = QtWidgets.QLabel(self.E_p2_3_rou_gb2)
+    classBlueprint.mkLabel(self.E_p2_3_rou_gb2_labelNetwork, QtCore.QRect(10, 10, 91, 21), "Network :", True)
+
+    global E_p2_3_rou_gb2_editNetwork
+    E_p2_3_rou_gb2_editNetwork = QtWidgets.QLineEdit(self.E_p2_3_rou_gb2)
+    classBlueprint.mkLineEdit(E_p2_3_rou_gb2_editNetwork, QtCore.QRect(100, 10, 181, 31), 15, "192.168.10.0")
+    E_p2_3_rou_gb2_editNetwork.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    global E_p2_3_rou_gb2_comboNetwork
+    E_p2_3_rou_gb2_comboNetwork = QtWidgets.QComboBox(self.E_p2_3_rou_gb2)
+    classBlueprint.mkCombo(E_p2_3_rou_gb2_comboNetwork, QtCore.QRect(290, 10, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr2(E_p2_3_rou_gb2_comboNetwork)
+
+    self.E_p2_3_rou_gb2_labelArea = QtWidgets.QLabel(self.E_p2_3_rou_gb2)
+    classBlueprint.mkLabel(self.E_p2_3_rou_gb2_labelArea, QtCore.QRect(10, 50, 81, 21), "Area n° :", True)
+
+    global E_p2_3_rou_gb2_editArea
+    E_p2_3_rou_gb2_editArea = QtWidgets.QLineEdit(self.E_p2_3_rou_gb2)
+    classBlueprint.mkLineEdit(E_p2_3_rou_gb2_editArea, QtCore.QRect(100, 50, 60, 31), 2, "0")
+    E_p2_3_rou_gb2_editArea.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
+
+    self.E_p2_3_rou_gb2_add = QtWidgets.QPushButton(self.E_p2_3_rou_gb2)
+    classBlueprint.mkBtn(self.E_p2_3_rou_gb2_add, QtCore.QRect(210, 50, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+
+    self.E_p2_3_rou_gb2_clear = QtWidgets.QPushButton(self.E_p2_3_rou_gb2)
+    classBlueprint.mkBtn(self.E_p2_3_rou_gb2_clear, QtCore.QRect(290, 50, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+
+            #---GB3---#
+    self.E_p2_3_rou_gb3 = QtWidgets.QGroupBox(p2_3_tabwidget_tab2)
+    classBlueprint.mkGroupBox(self.E_p2_3_rou_gb3, QtCore.QRect(400, 40, 451, 51), "")
+    self.E_p2_3_rou_gb3.hide()
+
+    self.E_p2_3_rou_gb3_labelNetwork = QtWidgets.QLabel(self.E_p2_3_rou_gb3)
+    classBlueprint.mkLabel(self.E_p2_3_rou_gb3_labelNetwork, QtCore.QRect(10, 10, 91, 21), "Network :", True)
+
+    global E_p2_3_rou_gb3_editNetwork
+    E_p2_3_rou_gb3_editNetwork = QtWidgets.QLineEdit(self.E_p2_3_rou_gb3)
+    classBlueprint.mkLineEdit(E_p2_3_rou_gb3_editNetwork, QtCore.QRect(100, 10, 181, 31), 15, "192.168.10.0")
+    E_p2_3_rou_gb3_editNetwork.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    self.E_p2_3_rou_gb3_add = QtWidgets.QPushButton(self.E_p2_3_rou_gb3)
+    classBlueprint.mkBtn(self.E_p2_3_rou_gb3_add, QtCore.QRect(290, 10, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+
+    self.E_p2_3_rou_gb3_clear = QtWidgets.QPushButton(self.E_p2_3_rou_gb3)
+    classBlueprint.mkBtn(self.E_p2_3_rou_gb3_clear, QtCore.QRect(370, 10, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+
+            #---GB4---#
+    self.E_p2_3_rou_gb4 = QtWidgets.QGroupBox(p2_3_tabwidget_tab2)
+    classBlueprint.mkGroupBox(self.E_p2_3_rou_gb4, QtCore.QRect(400, 100, 451, 51), "")
+
+    self.E_p2_3_rou_gb4_labelInterface = QtWidgets.QLabel(self.E_p2_3_rou_gb4)
+    classBlueprint.mkLabel(self.E_p2_3_rou_gb4_labelInterface, QtCore.QRect(5, 13, 161, 21), "Passive-Interface :", True)
+
+    global E_p2_3_rou_gb4_comboInterface
+    E_p2_3_rou_gb4_comboInterface = QtWidgets.QComboBox(self.E_p2_3_rou_gb4)
+    classBlueprint.mkCombo(E_p2_3_rou_gb4_comboInterface, QtCore.QRect(170, 10, 115, 30),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntSwitch(E_p2_3_rou_gb4_comboInterface)
+
+    self.E_p2_3_rou_gb4_add = QtWidgets.QPushButton(self.E_p2_3_rou_gb4)
+    classBlueprint.mkBtn(self.E_p2_3_rou_gb4_add, QtCore.QRect(290, 10, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+
+    self.E_p2_3_rou_gb4_clear = QtWidgets.QPushButton(self.E_p2_3_rou_gb4)
+    classBlueprint.mkBtn(self.E_p2_3_rou_gb4_clear, QtCore.QRect(370, 10, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+
+            #---GB5---#
+    self.E_p2_3_rou_gb5 = QtWidgets.QGroupBox(p2_3_tabwidget_tab2)
+    classBlueprint.mkGroupBox(self.E_p2_3_rou_gb5, QtCore.QRect(400, 160, 451, 145), "Static Routing", True)
+
+    self.E_p2_3_rou_gb5_labelSubnet = QtWidgets.QLabel(self.E_p2_3_rou_gb5)
+    classBlueprint.mkLabel(self.E_p2_3_rou_gb5_labelSubnet, QtCore.QRect(5, 30, 81, 31), "Subnet :", True)
+
+    global E_p2_3_rou_gb5_editSubnet
+    E_p2_3_rou_gb5_editSubnet = QtWidgets.QLineEdit(self.E_p2_3_rou_gb5)
+    classBlueprint.mkLineEdit(E_p2_3_rou_gb5_editSubnet, QtCore.QRect(80, 30, 171, 31), 15, "0.0.0.0")
+    E_p2_3_rou_gb5_editSubnet.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    global E_p2_3_rou_gb5_comboSubnet
+    E_p2_3_rou_gb5_comboSubnet = QtWidgets.QComboBox(self.E_p2_3_rou_gb5)
+    classBlueprint.mkCombo(E_p2_3_rou_gb5_comboSubnet, QtCore.QRect(260, 30, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr2(E_p2_3_rou_gb5_comboSubnet)
+    E_p2_3_rou_gb5_comboSubnet.setCurrentIndex(E_p2_3_rou_gb5_comboSubnet.count() - 1)
+
+    self.E_p2_3_rou_gb5_labelHop = QtWidgets.QLabel(self.E_p2_3_rou_gb5)
+    classBlueprint.mkLabel(self.E_p2_3_rou_gb5_labelHop, QtCore.QRect(5, 70, 251, 31), "Next hop / output interface :", True)
+
+    global E_p2_3_rou_gb5_comboHop
+    E_p2_3_rou_gb5_comboHop = QtWidgets.QComboBox(self.E_p2_3_rou_gb5)
+    classBlueprint.mkCombo(E_p2_3_rou_gb5_comboHop, QtCore.QRect(260, 70, 181, 31),
+                           "color: rgb(0, 85, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 85, 255);")
+
+    self.E_p2_3_rou_gb5_add = QtWidgets.QPushButton(self.E_p2_3_rou_gb5)
+    classBlueprint.mkBtn(self.E_p2_3_rou_gb5_add, QtCore.QRect(290, 107, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+
+    self.E_p2_3_rou_gb5_clear = QtWidgets.QPushButton(self.E_p2_3_rou_gb5)
+    classBlueprint.mkBtn(self.E_p2_3_rou_gb5_clear, QtCore.QRect(370, 107, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+
+    # Table 1 (OSPF / RIP)
+    global E_p2_3_rou_table1
+    E_p2_3_rou_table1 = QtWidgets.QTableWidget(p2_3_tabwidget_tab2)
+    classBlueprint.mkTable(E_p2_3_rou_table1, QtCore.QRect(10, 345, 481, 141), "background-color: rgb(255, 170, 0);", 4, 0)
+    classBlueprint.addDataTable(E_p2_3_rou_table1, 0, "Protocol")
+    classBlueprint.addDataTable(E_p2_3_rou_table1, 1, "Network")
+    classBlueprint.addDataTable(E_p2_3_rou_table1, 2, "Wildcard (OSPF)")
+    classBlueprint.addDataTable(E_p2_3_rou_table1, 3, "Area (OSPF)")
+    E_p2_3_rou_table1.setColumnWidth(0, 70)
+    E_p2_3_rou_table1.setColumnWidth(1, 150)
+    E_p2_3_rou_table1.setColumnWidth(2, 150)
+    E_p2_3_rou_table1.setColumnWidth(3, 100)
+
+    # Table 2 (Static routing)
+    global E_p2_3_rou_table2
+    E_p2_3_rou_table2 = QtWidgets.QTableWidget(p2_3_tabwidget_tab2)
+    classBlueprint.mkTable(E_p2_3_rou_table2, QtCore.QRect(500, 345, 221, 141), "background-color: rgb(0, 170, 127);", 1, 0)
+    classBlueprint.addDataTable(E_p2_3_rou_table2, 0, "Static Routing Data")
+    E_p2_3_rou_table2.setColumnWidth(0, 200)
+
+    # Table 3 (Passive Interface)
+    global E_p2_3_rou_table3
+    E_p2_3_rou_table3 = QtWidgets.QTableWidget(p2_3_tabwidget_tab2)
+    classBlueprint.mkTable(E_p2_3_rou_table3, QtCore.QRect(730, 345, 141, 141), "background-color: rgb(170, 170, 255);", 1, 0)
+    classBlueprint.addDataTable(E_p2_3_rou_table3, 0, "Passive Interface")
+
+
+    p2_3_tabwidget.addTab(p2_3_tabwidget_tab1, "   Interface   ")
+    p2_3_tabwidget.addTab(p2_3_tabwidget_tab2, "   Routing   ")
+    p2_3_tabwidget.setObjectName("p2_3_tabwidget")
+
+    self.stackedWidget_2.addWidget(self.page_2_3)
 
     #---END OF PAGE--#
 
@@ -1945,6 +2231,7 @@ def setupUiExam(self):
 
     E_btn_1_2.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(4))
     E_btn_1_3.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(5))
+    E_btn_1_4.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(6))
 
     self.E_save.clicked.connect(lambda: exam_functions.save_changes(self.stackedWidget_2))
     self.E_p2_gb_add.clicked.connect(lambda: exam_functions.add_host_to_table(E_p2_table, self.E_p2_gb_editLan, E_p2_gb_editHost))
@@ -2109,3 +2396,13 @@ def setupUiExam(self):
     def restore_checkbox(): # When "clear"
         p2_1_gb_check.setChecked(False)
         p2_1_gb_check.setVisible(True)
+
+    def hide_groupbox_ospf_rip(gb1, gb2, gb3):
+        if (E_p2_3_rou_radioOspf.isChecked()):
+            gb1.show()
+            gb2.show()
+            gb3.hide()
+        else:
+            gb1.hide()
+            gb2.hide()
+            gb3.show()

@@ -104,14 +104,20 @@ def save_changes(stacked_widget):
         global security_enabled
         security_enabled = True
 
-    elif (current_index == 4):
+    elif (current_index == 4): # Page 2_1 : VLANS
         if not (exam_page.E_p2_1_table.rowCount() == 0):
+            exam_page.E_btn_1_3.setVisible(True)
             save_changes_p2_1(exam_page.E_p2_1_table)
         else:
             utils.blueprintFunctions.mkWarningMsg("Data Error", "<b><span style=color:'red'>Table</b></span> is <b><span style=color:'blue'>empty</span></b> !")
 
-    elif (current_index == 5):
+    elif (current_index == 5): # Page 2_2 : Switch L2, PCs and Servers
+        exam_page.E_btn_1_4.setVisible(True)
         save_changes_p2_2()
+
+    elif (current_index == 6): # Page 2_3 : Switch L3
+        import os
+        save_changes_p2_3()
 
 #-----------------------------------------------------------------------------#
 # Function used when press "save changes" within main configuration (page 2)  #
@@ -712,7 +718,6 @@ def save_changes_p2_1(table):
     for x, y in vlan_dict.items():
         print(x, y)
 
-    exam_page.E_btn_1_3.setVisible(True)
     populate_vlan_in_combo(exam_page.E_p2_2_s1_isVlan_combo, True)
     populate_vlan_in_combo(exam_page.E_p2_2_s1_comboA_vlan, False)
     populate_vlan_in_combo(exam_page.E_p2_2_s1_comboB_vlan, False)
@@ -846,7 +851,7 @@ def save_changes_p2_2():
         "a" : ["F0/24", "Access", "Vlan 10", "description"],
         "b" : ["G0/2", "Trunk", "/", "description"],
         "c" : ["WAN", "1st IP", "mask", "description"],
-        "d" : ["LAN C", "Last IP", "mask", "description"]
+        "d" : ["F0/24", "Access", "Vlan 40", "description"]
     }
     """
 
@@ -903,6 +908,10 @@ def save_changes_p2_2():
     for a in client_dict.keys():
         print(str(a) + " : " + str(client_dict.get(a)))
 
+    print("-----S3 data-----")
+    for x,y in s3_dict.items():
+        print(x,y)
+
     print("-----SRV1 data-----")
     for x,y in srv1_dict.items():
         print(x,y)
@@ -911,7 +920,42 @@ def save_changes_p2_2():
     for x,y in srv2_dict.items():
         print(x,y)
 
-    generate_solution_text_v2()
+    #generate_solution_text_v2()
+
+def save_changes_p2_3():
+    global swl3_dict
+    swl3_dict = {
+       "name" : [exam_page.E_p2_3_int_editHostname.text()],
+        "a" : [exam_page.E_p2_3_int_A_comboInterface.currentText(), exam_page.E_p2_3_int_A_description.text()],
+        "b" : [exam_page.E_p2_3_int_B_comboInterface.currentText(), exam_page.E_p2_3_int_B_ip.text(), exam_page.E_p2_3_int_B_comboCidr.currentText(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_3_int_B_comboCidr.currentText())), exam_page.E_p2_3_int_B_description.text()],
+        "c" : [exam_page.E_p2_3_int_C_comboInterface.currentText(), exam_page.E_p2_3_int_C_ip.text(), exam_page.E_p2_3_int_C_comboCidr.currentText(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_3_int_C_comboCidr.currentText())), exam_page.E_p2_3_int_C_description.text()]
+    }
+    print("-----SWL3 data-----")
+    for x,y in swl3_dict.items():
+        print(x,y)
+
+    print("---INTERFACE OUTPUT")
+    print("hostname " + str(swl3_dict.get("name")[0]))
+    print("int " + str(swl3_dict.get("a")[0]))
+    print("   switchport trunk encapsulation dot1q")
+    print("   switchport mode trunk")
+    print("int " + str(swl3_dict.get("b")[0]))
+    print("   no switchport")
+    print("   ip add " + str(swl3_dict.get("b")[1]) + " " + str(swl3_dict.get("b")[3]))
+    print("int " + str(swl3_dict.get("c")[0]))
+    print("   no switchport")
+    print("   ip add " + str(swl3_dict.get("c")[1]) + " " + str(swl3_dict.get("c")[3]))
+
+    # vlan_dict 10: ["IT", "192.168.10.0", "/24", "255.255.255.0", "192.168.10.254", "192.168.20.11", "Yes"]
+    vlan_used = get_vlan_used_by_a_switch(s3_dict)
+    for z in vlan_used:
+        print("vlan " + str(z))
+        print("   name " + str(vlan_dict.get(z)[0]))
+        print("int vlan" + str(z))
+        print("   ip add " + str(vlan_dict.get(z)[4]) + " " + str(vlan_dict.get(z)[3]))
+        if not (vlan_dict.get(z)[5] == "No"):
+            print("   ip helper-address " + str(vlan_dict.get(z)[5]))
+
 
 def generate_solution_text_v2():
     generate_solution_client()
@@ -979,13 +1023,9 @@ def generate_solution_client():
         with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
             f.write(output)
 
-#TODO
 def generate_solution_server():
     dict_keys = list(server_dict.keys())
     for x in dict_keys:
-        print("---DEBUG---")
-        print(x)
-        print("---DEBUG---")
         output = "----------------\n"
         output += "   " + server_dict.get(x).get("main")[0] + "   \n"
         output += "----------------\n"
@@ -1016,18 +1056,19 @@ def generate_solution_server():
         with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
             f.write(output)
 
-def check_if_switch_has_a_native_vlan(dict, native):
+def get_vlan_used_by_a_switch(dict):
     vlan_used = set()
     vlan_used.clear()
-    # Fetchs all possible vlans associated with any interface and inject vlan number in "vlan_used" set
-    if not (dict.get("is_part_of_a_vlan")[0] == "/"):
+    if not (dict.get("is_part_of_a_vlan")[0] == "No"):
         vlan_used.add(dict.get("is_part_of_a_vlan")[0])
     int_keys = list(dict.keys())[2:]
     for a in int_keys:
         if (dict.get(a)[1] == "Access"):
             vlan_used.add(dict.get(a)[2].split(" ")[1])
+    return vlan_used
 
-    # Checks if the native vlan is part of vlan_used set
+def check_if_switch_has_a_native_vlan(dict, native):
+    vlan_used = get_vlan_used_by_a_switch(dict)
     if (native in vlan_used):
         return True
 

@@ -752,7 +752,7 @@ Generator</string>
        <string notr="true">background-color: rgb(173, 173, 173);</string>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="page_1">
        <widget class="QLabel" name="E_p1_label">
@@ -4818,7 +4818,7 @@ background-color: rgb(255, 255, 255);</string>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>4</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="s1">
          <attribute name="title">
@@ -8350,7 +8350,7 @@ color: rgb(255, 0, 255)</string>
 color: rgb(255, 0, 0);</string>
            </property>
            <property name="text">
-            <string>192.168.10.254</string>
+            <string>192.168.20.254</string>
            </property>
            <property name="maxLength">
             <number>15</number>
@@ -10162,7 +10162,7 @@ background-color: rgb(255, 255, 255);</string>
 color: rgb(255, 0, 0);</string>
            </property>
            <property name="text">
-            <string>192.168.10.254</string>
+            <string>192.168.20.254</string>
            </property>
            <property name="maxLength">
             <number>15</number>
@@ -10464,13 +10464,13 @@ color: rgb(255, 0, 255)</string>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="SWL3_Int">
          <attribute name="title">
           <string>Interfaces</string>
          </attribute>
-         <widget class="QLabel" name="E_p2_2_s3_img_2">
+         <widget class="QLabel" name="E_p2_3_int_img">
           <property name="geometry">
            <rect>
             <x>590</x>
@@ -10514,7 +10514,7 @@ color: rgb(255, 0, 255)</string>
 color: rgb(255, 0, 255)</string>
           </property>
           <property name="text">
-           <string>To LAN B</string>
+           <string>To R1</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -10788,7 +10788,7 @@ background-color: rgb(255, 255, 255);</string>
           </property>
           <item>
            <property name="text">
-            <string>/24</string>
+            <string>/30</string>
            </property>
           </item>
          </widget>
@@ -10832,7 +10832,7 @@ background-color: rgb(255, 255, 255);</string>
 color: rgb(0, 85, 255);</string>
           </property>
           <property name="text">
-           <string>192.168.10.0</string>
+           <string>192.168.60.1</string>
           </property>
           <property name="maxLength">
            <number>15</number>
@@ -10881,7 +10881,7 @@ color: rgb(0, 85, 255);</string>
 color: rgb(0, 85, 255);</string>
           </property>
           <property name="text">
-           <string>192.168.10.0</string>
+           <string>200.0.0.1</string>
           </property>
           <property name="maxLength">
            <number>15</number>
@@ -10931,7 +10931,7 @@ background-color: rgb(255, 255, 255);</string>
           </property>
           <item>
            <property name="text">
-            <string>/24</string>
+            <string>/30</string>
            </property>
           </item>
          </widget>
@@ -10957,7 +10957,7 @@ background-color: rgb(255, 255, 255);</string>
 color: rgb(255, 0, 255)</string>
           </property>
           <property name="text">
-           <string>To LAN B</string>
+           <string>To R2</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -10968,6 +10968,1187 @@ color: rgb(255, 0, 255)</string>
          <attribute name="title">
           <string>Routing</string>
          </attribute>
+         <widget class="QGroupBox" name="E_p2_3_rou_gb3">
+          <property name="geometry">
+           <rect>
+            <x>330</x>
+            <y>43</y>
+            <width>451</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLineEdit" name="E_p2_3_rou_gb3_editNetwork">
+           <property name="geometry">
+            <rect>
+             <x>100</x>
+             <y>10</y>
+             <width>181</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>181</horstretch>
+             <verstretch>31</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>10.10.99.1</string>
+           </property>
+           <property name="maxLength">
+            <number>15</number>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="E_p2_3_rou_gb3_labelNetwork">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>91</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>true</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>Network :</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="E_p2_3_rou_gb3_add">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>290</x>
+             <y>10</y>
+             <width>71</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 25, 136);</string>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="E_p2_3_rou_gb3_clear">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>370</x>
+             <y>10</y>
+             <width>71</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(0, 255, 0);</string>
+           </property>
+           <property name="text">
+            <string>Clear</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QRadioButton" name="E_p2_3_rou_radioRip">
+          <property name="geometry">
+           <rect>
+            <x>420</x>
+            <y>10</y>
+            <width>71</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="text">
+           <string>RIP</string>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="E_p2_3_rou_gb2">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>130</y>
+            <width>371</width>
+            <height>91</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLineEdit" name="E_p2_3_rou_gb2_editNetwork">
+           <property name="geometry">
+            <rect>
+             <x>100</x>
+             <y>10</y>
+             <width>181</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>181</horstretch>
+             <verstretch>31</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>10.10.99.1</string>
+           </property>
+           <property name="maxLength">
+            <number>15</number>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="E_p2_3_rou_gb2_labelNetwork">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>91</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>true</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>Network :</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="E_p2_3_rou_gb2_comboNetwork">
+           <property name="geometry">
+            <rect>
+             <x>290</x>
+             <y>10</y>
+             <width>70</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>70</horstretch>
+             <verstretch>30</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>70</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>70</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>/30</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QPushButton" name="E_p2_3_rou_gb2_add">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>210</x>
+             <y>50</y>
+             <width>71</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 25, 136);</string>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="E_p2_3_rou_gb2_labelArea">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>50</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>true</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>Area n° :</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="E_p2_3_rou_gb2_editArea">
+           <property name="geometry">
+            <rect>
+             <x>100</x>
+             <y>50</y>
+             <width>60</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 0);</string>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+           <property name="maxLength">
+            <number>2</number>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="E_p2_3_rou_gb2_clear">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>290</x>
+             <y>50</y>
+             <width>71</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(0, 255, 0);</string>
+           </property>
+           <property name="text">
+            <string>Clear</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="E_p2_3_rou_gb4">
+          <property name="geometry">
+           <rect>
+            <x>400</x>
+            <y>100</y>
+            <width>451</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="E_p2_3_rou_gb4_labelInterface">
+           <property name="geometry">
+            <rect>
+             <x>5</x>
+             <y>13</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>true</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>Passive-Interface :</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="E_p2_3_rou_gb4_comboInterface">
+           <property name="geometry">
+            <rect>
+             <x>170</x>
+             <y>10</y>
+             <width>115</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>115</horstretch>
+             <verstretch>30</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>115</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>115</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>G1/0/24</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QPushButton" name="E_p2_3_rou_gb4_add">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>290</x>
+             <y>10</y>
+             <width>71</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 25, 136);</string>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="E_p2_3_rou_gb4_clear">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>370</x>
+             <y>10</y>
+             <width>71</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(0, 255, 0);</string>
+           </property>
+           <property name="text">
+            <string>Clear</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QRadioButton" name="E_p2_3_rou_radioOspf">
+          <property name="geometry">
+           <rect>
+            <x>290</x>
+            <y>10</y>
+            <width>91</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="text">
+           <string>OSPF</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="E_p2_3_rou_table3">
+          <property name="geometry">
+           <rect>
+            <x>730</x>
+            <y>345</y>
+            <width>141</width>
+            <height>141</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(170, 170, 255);</string>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAsNeeded</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::NoSelection</enum>
+          </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <row>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Passive-Interface</string>
+           </property>
+          </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string>F0/24</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QGroupBox" name="E_p2_3_rou_gb1">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>43</y>
+            <width>301</width>
+            <height>81</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="E_p2_3_rou_gb1_labelProcess">
+           <property name="geometry">
+            <rect>
+             <x>5</x>
+             <y>10</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>true</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>OSPF Process Id :</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="E_p2_3_rou_gb1_editProcess">
+           <property name="geometry">
+            <rect>
+             <x>205</x>
+             <y>10</y>
+             <width>60</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 0);</string>
+           </property>
+           <property name="text">
+            <string>10</string>
+           </property>
+           <property name="maxLength">
+            <number>2</number>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="E_p2_3_rou_gb1_editBandwidth">
+           <property name="geometry">
+            <rect>
+             <x>205</x>
+             <y>45</y>
+             <width>91</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 0);</string>
+           </property>
+           <property name="text">
+            <string>1000</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="E_p2_3_rou_gb1_labelBandwidth">
+           <property name="geometry">
+            <rect>
+             <x>5</x>
+             <y>50</y>
+             <width>201</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>true</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>Reference Bandwidth :</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QTableWidget" name="E_p2_3_rou_table1">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>345</y>
+            <width>481</width>
+            <height>141</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 170, 127);</string>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAsNeeded</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::NoSelection</enum>
+          </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <row>
+           <property name="text">
+            <string>1</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>6</pointsize>
+            </font>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Protocol</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>6</pointsize>
+            </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Network</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>6</pointsize>
+            </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Wildcard (ospf)</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>6</pointsize>
+            </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Area (ospf)</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>6</pointsize>
+            </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Id (ospf)</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>6</pointsize>
+            </font>
+           </property>
+          </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string>OSPF</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+          </item>
+          <item row="0" column="1">
+           <property name="text">
+            <string>255.255.255.255</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+          </item>
+          <item row="0" column="2">
+           <property name="text">
+            <string>255.255.255.255</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+          </item>
+          <item row="0" column="3">
+           <property name="text">
+            <string>1</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+          </item>
+          <item row="0" column="4">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+          </item>
+         </widget>
+         <widget class="QGroupBox" name="E_p2_3_rou_gb5">
+          <property name="geometry">
+           <rect>
+            <x>400</x>
+            <y>160</y>
+            <width>445</width>
+            <height>145</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>false</underline>
+           </font>
+          </property>
+          <property name="title">
+           <string>Static Routing</string>
+          </property>
+          <widget class="QLineEdit" name="E_p2_3_rou_gb5_editSubnet">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>30</y>
+             <width>171</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+           </property>
+           <property name="text">
+            <string>0.0.0.0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="E_p2_3_rou_gb5_labelSubnet">
+           <property name="geometry">
+            <rect>
+             <x>5</x>
+             <y>30</y>
+             <width>81</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>true</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>Subnet :</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="E_p2_3_rou_gb5_labelHop">
+           <property name="geometry">
+            <rect>
+             <x>5</x>
+             <y>70</y>
+             <width>261</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>true</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>Next hop / output interface :</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="E_p2_3_rou_gb5_comboHop">
+           <property name="geometry">
+            <rect>
+             <x>260</x>
+             <y>70</y>
+             <width>181</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>9</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);
+selection-background-color: rgb(204,255,255);
+selection-color: rgb(85, 170, 0);</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>G0/2</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>G0/1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>F0/24</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>200.0.0.1</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QComboBox" name="E_p2_3_rou_gb5_comboSubnet">
+           <property name="geometry">
+            <rect>
+             <x>260</x>
+             <y>30</y>
+             <width>70</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>70</horstretch>
+             <verstretch>30</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>70</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>70</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(85, 170, 0);
+background-color: rgb(255, 255, 255);</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>/30</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QPushButton" name="E_p2_3_rou_gb5_add">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>290</x>
+             <y>107</y>
+             <width>71</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 25, 136);</string>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="E_p2_3_rou_gb5_clear">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>370</x>
+             <y>107</y>
+             <width>71</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(0, 255, 0);</string>
+           </property>
+           <property name="text">
+            <string>Clear</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QTableWidget" name="E_p2_3_rou_table2">
+          <property name="geometry">
+           <rect>
+            <x>500</x>
+            <y>345</y>
+            <width>221</width>
+            <height>141</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(0, 170, 127);</string>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAsNeeded</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::NoSelection</enum>
+          </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <row>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Static Routing Data</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+          </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string>ip route 0.0.0.0 0.0.0.0 s0/0/1</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>6</pointsize>
+            </font>
+           </property>
+          </item>
+         </widget>
         </widget>
        </widget>
       </widget>

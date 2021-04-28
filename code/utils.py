@@ -96,6 +96,17 @@ class blueprintFunctions:
         check.setObjectName(str(check))
         check.setText(text)
 
+    def mkRadio (rad, geometry, checked, text, small_size = False):
+        rad.setGeometry(geometry)
+        if (small_size is True):
+            rad.setFont(font_label2)
+        else:
+            rad.setFont(font_label)
+        rad.setLayoutDirection(QtCore.Qt.RightToLeft)
+        rad.setChecked(checked)
+        rad.setObjectName(str(rad))
+        rad.setText(text)
+
     def mkWarningMsg(title, text):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Warning)
