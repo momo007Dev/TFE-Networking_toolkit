@@ -14,6 +14,8 @@ vlan_subnet_set = set()
 vlan_name_set = set()
 dhcp_pool_name_set_srv1 = set()
 dhcp_pool_name_set_srv2 = set()
+
+passive_int_swl3 = list()
 #--------------END------------------#
 
 def setupUiExam(self):
@@ -1997,7 +1999,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboCidr2(E_p2_3_int_B_comboCidr)
-    E_p2_3_int_B_comboCidr.setCurrentIndex(14)
+    E_p2_3_int_B_comboCidr.setCurrentIndex(0)
 
     global E_p2_3_int_B_description
     E_p2_3_int_B_description = QtWidgets.QLineEdit(p2_3_tabwidget_tab1)
@@ -2030,7 +2032,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
     classBlueprint.fillComboCidr2(E_p2_3_int_C_comboCidr)
-    E_p2_3_int_C_comboCidr.setCurrentIndex(14)
+    E_p2_3_int_C_comboCidr.setCurrentIndex(0)
 
     global E_p2_3_int_C_description
     E_p2_3_int_C_description = QtWidgets.QLineEdit(p2_3_tabwidget_tab1)
@@ -2098,9 +2100,11 @@ def setupUiExam(self):
 
     self.E_p2_3_rou_gb2_add = QtWidgets.QPushButton(self.E_p2_3_rou_gb2)
     classBlueprint.mkBtn(self.E_p2_3_rou_gb2_add, QtCore.QRect(210, 50, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p2_3_rou_gb2_add.clicked.connect(lambda: add_routing_to_table())
 
     self.E_p2_3_rou_gb2_clear = QtWidgets.QPushButton(self.E_p2_3_rou_gb2)
     classBlueprint.mkBtn(self.E_p2_3_rou_gb2_clear, QtCore.QRect(290, 50, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_3_rou_gb2_clear.clicked.connect(lambda: clear_routing_table())
 
             #---GB3---#
     self.E_p2_3_rou_gb3 = QtWidgets.QGroupBox(p2_3_tabwidget_tab2)
@@ -2117,9 +2121,11 @@ def setupUiExam(self):
 
     self.E_p2_3_rou_gb3_add = QtWidgets.QPushButton(self.E_p2_3_rou_gb3)
     classBlueprint.mkBtn(self.E_p2_3_rou_gb3_add, QtCore.QRect(290, 10, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p2_3_rou_gb3_add.clicked.connect(lambda: add_routing_to_table())
 
     self.E_p2_3_rou_gb3_clear = QtWidgets.QPushButton(self.E_p2_3_rou_gb3)
     classBlueprint.mkBtn(self.E_p2_3_rou_gb3_clear, QtCore.QRect(370, 10, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_3_rou_gb3_clear.clicked.connect(lambda: clear_routing_table())
 
             #---GB4---#
     self.E_p2_3_rou_gb4 = QtWidgets.QGroupBox(p2_3_tabwidget_tab2)
@@ -2135,13 +2141,14 @@ def setupUiExam(self):
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
-    classBlueprint.fillComboIntSwitch(E_p2_3_rou_gb4_comboInterface)
 
     self.E_p2_3_rou_gb4_add = QtWidgets.QPushButton(self.E_p2_3_rou_gb4)
     classBlueprint.mkBtn(self.E_p2_3_rou_gb4_add, QtCore.QRect(290, 10, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p2_3_rou_gb4_add.clicked.connect(lambda: add_passive_interface_to_table())
 
     self.E_p2_3_rou_gb4_clear = QtWidgets.QPushButton(self.E_p2_3_rou_gb4)
     classBlueprint.mkBtn(self.E_p2_3_rou_gb4_clear, QtCore.QRect(370, 10, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_3_rou_gb4_clear.clicked.connect(lambda: clear_passive_interface_table())
 
             #---GB5---#
     self.E_p2_3_rou_gb5 = QtWidgets.QGroupBox(p2_3_tabwidget_tab2)
@@ -2178,14 +2185,16 @@ def setupUiExam(self):
 
     self.E_p2_3_rou_gb5_add = QtWidgets.QPushButton(self.E_p2_3_rou_gb5)
     classBlueprint.mkBtn(self.E_p2_3_rou_gb5_add, QtCore.QRect(290, 107, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p2_3_rou_gb5_add.clicked.connect(lambda: add_static_routing_to_table())
 
     self.E_p2_3_rou_gb5_clear = QtWidgets.QPushButton(self.E_p2_3_rou_gb5)
     classBlueprint.mkBtn(self.E_p2_3_rou_gb5_clear, QtCore.QRect(370, 107, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_3_rou_gb5_clear.clicked.connect(lambda: clear_static_routing_table())
 
     # Table 1 (OSPF / RIP)
     global E_p2_3_rou_table1
     E_p2_3_rou_table1 = QtWidgets.QTableWidget(p2_3_tabwidget_tab2)
-    classBlueprint.mkTable(E_p2_3_rou_table1, QtCore.QRect(10, 345, 481, 141), "background-color: rgb(255, 170, 0);", 4, 0)
+    classBlueprint.mkTable(E_p2_3_rou_table1, QtCore.QRect(10, 315, 481, 171), "background-color: rgb(255, 170, 0);", 4, 0)
     classBlueprint.addDataTable(E_p2_3_rou_table1, 0, "Protocol")
     classBlueprint.addDataTable(E_p2_3_rou_table1, 1, "Network")
     classBlueprint.addDataTable(E_p2_3_rou_table1, 2, "Wildcard (OSPF)")
@@ -2198,14 +2207,14 @@ def setupUiExam(self):
     # Table 2 (Static routing)
     global E_p2_3_rou_table2
     E_p2_3_rou_table2 = QtWidgets.QTableWidget(p2_3_tabwidget_tab2)
-    classBlueprint.mkTable(E_p2_3_rou_table2, QtCore.QRect(500, 345, 221, 141), "background-color: rgb(0, 170, 127);", 1, 0)
+    classBlueprint.mkTable(E_p2_3_rou_table2, QtCore.QRect(500, 315, 221, 171), "background-color: rgb(0, 170, 127);", 1, 0, True)
     classBlueprint.addDataTable(E_p2_3_rou_table2, 0, "Static Routing Data")
     E_p2_3_rou_table2.setColumnWidth(0, 200)
 
     # Table 3 (Passive Interface)
     global E_p2_3_rou_table3
     E_p2_3_rou_table3 = QtWidgets.QTableWidget(p2_3_tabwidget_tab2)
-    classBlueprint.mkTable(E_p2_3_rou_table3, QtCore.QRect(730, 345, 141, 141), "background-color: rgb(170, 170, 255);", 1, 0)
+    classBlueprint.mkTable(E_p2_3_rou_table3, QtCore.QRect(730, 315, 141, 171), "background-color: rgb(170, 170, 255);", 1, 0)
     classBlueprint.addDataTable(E_p2_3_rou_table3, 0, "Passive Interface")
 
 
@@ -2213,7 +2222,10 @@ def setupUiExam(self):
     p2_3_tabwidget.addTab(p2_3_tabwidget_tab2, "   Routing   ")
     p2_3_tabwidget.setObjectName("p2_3_tabwidget")
 
+    p2_3_tabwidget.currentChanged.connect(lambda: fill_combo_passive_interface_swl3())
+
     self.stackedWidget_2.addWidget(self.page_2_3)
+
 
     #---END OF PAGE--#
 
@@ -2321,10 +2333,7 @@ def setupUiExam(self):
                 hide_checkbox()
 
     def clear_vlan_table():
-        x = E_p2_1_table.rowCount()
-        while (E_p2_1_table.rowCount() > 0):
-            E_p2_1_table.removeRow(x)
-            x -= 1
+        exam_functions.clear_any_table(E_p2_1_table)
         vlan_name_set.clear()
         vlan_set.clear()
         vlan_subnet_set.clear()
@@ -2378,15 +2387,99 @@ def setupUiExam(self):
             dhcp_pool_set.add(pool_name)
 
     def clear_dns_dhcp_table(table, type, srv_num): # type = "DNS" or "DHCP" | srv_num = "srv1" or "srv2"
-        x = table.rowCount()
-        while (table.rowCount() > 0):
-            table.removeRow(x)
-            x -= 1
+        exam_functions.clear_any_table(table)
         if (type == "DHCP"):
             if (srv_num == "srv1"):
                 dhcp_pool_name_set_srv1.clear()
             else:
                 dhcp_pool_name_set_srv2.clear()
+
+    def add_routing_to_table(): # Used for GB2 and GB3 in SWL3 routing page when clicked on "Add" btn
+        protocol = ""
+        network = ""
+        item3 = QTableWidgetItem("/")
+        item4 = QTableWidgetItem("/")
+        E_p2_3_rou_gb1_editProcess.setDisabled(True)
+        E_p2_3_rou_gb1_editBandwidth.setDisabled(True)
+
+        if (E_p2_3_rou_radioOspf.isChecked()):
+            protocol = "OSPF"
+            network = E_p2_3_rou_gb2_editNetwork.text()
+            cidr_ospf = E_p2_3_rou_gb2_comboNetwork.currentText()
+            wildcard_ospf = str(subnet_functions.getWildcardFromMask(str(subnet_functions.getMaskFromSlash(cidr_ospf))))
+            area_ospf = E_p2_3_rou_gb2_editArea.text()
+            item3 = QTableWidgetItem(wildcard_ospf)
+            item4 = QTableWidgetItem(area_ospf)
+
+        elif (E_p2_3_rou_radioRip.isChecked()):
+            protocol = "RIP(v2)"
+            network = E_p2_3_rou_gb3_editNetwork.text()
+
+        lastrow = E_p2_3_rou_table1.rowCount()
+        E_p2_3_rou_table1.insertRow(lastrow)
+        item1 = QTableWidgetItem(protocol)
+        item2 = QTableWidgetItem(network)
+        E_p2_3_rou_table1.setItem(lastrow, 0, item1)
+        E_p2_3_rou_table1.setItem(lastrow, 1, item2)
+        E_p2_3_rou_table1.setItem(lastrow, 2, item3)
+        E_p2_3_rou_table1.setItem(lastrow, 3, item4)
+
+    def clear_routing_table():
+        E_p2_3_rou_gb1_editProcess.setDisabled(False)
+        E_p2_3_rou_gb1_editBandwidth.setDisabled(False)
+        exam_functions.clear_any_table(E_p2_3_rou_table1)
+
+    def add_passive_interface_to_table():
+        if (E_p2_3_rou_gb4_comboInterface.count() > 0):
+            interface = E_p2_3_rou_gb4_comboInterface.currentText()
+            lastrow = E_p2_3_rou_table3.rowCount()
+            E_p2_3_rou_table3.insertRow(lastrow)
+            item1 = QTableWidgetItem(interface)
+            E_p2_3_rou_table3.setItem(lastrow, 0, item1)
+            E_p2_3_rou_gb4_comboInterface.removeItem(E_p2_3_rou_gb4_comboInterface.currentIndex())
+
+    def clear_passive_interface_table():
+        exam_functions.clear_any_table(E_p2_3_rou_table3)
+        for p in passive_int_swl3:
+            E_p2_3_rou_gb4_comboInterface.addItem(p)
+
+    def add_static_routing_to_table():
+        network = E_p2_3_rou_gb5_editSubnet.text()
+        mask = subnet_functions.getMaskFromSlash(E_p2_3_rou_gb5_comboSubnet.currentText())
+        interface = E_p2_3_rou_gb5_comboHop.currentText()
+        data = "ip route " + str(network) + " " + str(mask) + " " + str(interface)
+        lastrow = E_p2_3_rou_table2.rowCount()
+        E_p2_3_rou_table2.insertRow(lastrow)
+        item1 = QTableWidgetItem(data)
+        E_p2_3_rou_table2.setItem(lastrow, 0, item1)
+
+    def clear_static_routing_table():
+        exam_functions.clear_any_table(E_p2_3_rou_table2)
+
+    def fill_combo_passive_interface_swl3(): # Used for "passive-interface" combo AND "next hop" combo
+        if (p2_3_tabwidget.currentIndex() == 1):
+            E_p2_3_rou_gb4_comboInterface.clear()
+            E_p2_3_rou_gb4_comboInterface.addItem(E_p2_3_int_A_comboInterface.currentText())
+            E_p2_3_rou_gb4_comboInterface.addItem(E_p2_3_int_B_comboInterface.currentText())
+            E_p2_3_rou_gb4_comboInterface.addItem(E_p2_3_int_C_comboInterface.currentText())
+
+            for a in exam_functions.get_vlan_used_by_a_switch(exam_functions.s3_dict):
+                E_p2_3_rou_gb4_comboInterface.addItem("Vlan " + str(a))
+
+            E_p2_3_rou_gb5_comboHop.clear()
+            E_p2_3_rou_gb5_comboHop.addItem(E_p2_3_int_B_comboInterface.currentText())
+            E_p2_3_rou_gb5_comboHop.addItem(E_p2_3_int_C_comboInterface.currentText())
+
+            available_ip_int_b = generate_usable_ip_from_network_and_cidr(E_p2_3_int_B_ip.text(), E_p2_3_int_B_comboCidr.currentText())
+            available_ip_int_b.remove(E_p2_3_int_B_ip.text())
+            available_ip_int_c = generate_usable_ip_from_network_and_cidr(E_p2_3_int_C_ip.text(), E_p2_3_int_C_comboCidr.currentText())
+            available_ip_int_c.remove(E_p2_3_int_C_ip.text())
+
+            for y in available_ip_int_b: E_p2_3_rou_gb5_comboHop.addItem(y)
+            for z in available_ip_int_c: E_p2_3_rou_gb5_comboHop.addItem(z)
+
+            global passive_int_swl3
+            passive_int_swl3 = [E_p2_3_rou_gb4_comboInterface.itemText(i) for i in range(E_p2_3_rou_gb4_comboInterface.count())]
 
     def hide_checkbox(): # When "add"
         if (p2_1_gb_check.isChecked()):
@@ -2398,6 +2491,7 @@ def setupUiExam(self):
         p2_1_gb_check.setVisible(True)
 
     def hide_groupbox_ospf_rip(gb1, gb2, gb3):
+        clear_routing_table()
         if (E_p2_3_rou_radioOspf.isChecked()):
             gb1.show()
             gb2.show()

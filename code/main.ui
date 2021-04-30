@@ -4818,7 +4818,7 @@ background-color: rgb(255, 255, 255);</string>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>5</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="s1">
          <attribute name="title">
@@ -11541,9 +11541,9 @@ background-color: rgb(255, 255, 255);</string>
           <property name="geometry">
            <rect>
             <x>730</x>
-            <y>345</y>
+            <y>315</y>
             <width>141</width>
-            <height>141</height>
+            <height>171</height>
            </rect>
           </property>
           <property name="font">
@@ -11713,9 +11713,9 @@ color: rgb(255, 0, 0);</string>
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>345</y>
+            <y>315</y>
             <width>481</width>
-            <height>141</height>
+            <height>171</height>
            </rect>
           </property>
           <property name="font">
@@ -11754,6 +11754,11 @@ color: rgb(255, 0, 0);</string>
             </font>
            </property>
           </row>
+          <row>
+           <property name="text">
+            <string>2</string>
+           </property>
+          </row>
           <column>
            <property name="text">
             <string>Protocol</string>
@@ -11787,16 +11792,6 @@ color: rgb(255, 0, 0);</string>
           <column>
            <property name="text">
             <string>Area (ospf)</string>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>6</pointsize>
-            </font>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Id (ospf)</string>
            </property>
            <property name="font">
             <font>
@@ -11844,14 +11839,24 @@ color: rgb(255, 0, 0);</string>
             </font>
            </property>
           </item>
-          <item row="0" column="4">
+          <item row="1" column="0">
            <property name="text">
-            <string/>
+            <string>RIP(v2)</string>
            </property>
-           <property name="font">
-            <font>
-             <pointsize>8</pointsize>
-            </font>
+          </item>
+          <item row="1" column="1">
+           <property name="text">
+            <string>192.168.50.0</string>
+           </property>
+          </item>
+          <item row="1" column="2">
+           <property name="text">
+            <string>/</string>
+           </property>
+          </item>
+          <item row="1" column="3">
+           <property name="text">
+            <string>/</string>
            </property>
           </item>
          </widget>
@@ -12092,9 +12097,9 @@ background-color: rgb(255, 255, 255);</string>
           <property name="geometry">
            <rect>
             <x>500</x>
-            <y>345</y>
+            <y>315</y>
             <width>221</width>
-            <height>141</height>
+            <height>171</height>
            </rect>
           </property>
           <property name="font">

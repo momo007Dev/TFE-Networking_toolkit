@@ -956,6 +956,74 @@ def save_changes_p2_3():
         if not (vlan_dict.get(z)[5] == "No"):
             print("   ip helper-address " + str(vlan_dict.get(z)[5]))
 
+    """
+    table = exam_page.E_p2_2_srv1_tableDhcp # "pool_name" (unique) : ["start_ip", "cidr", "gateway"]
+    rowCount = table.rowCount()
+    for x in range(rowCount):
+        srv1_dhcp_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(subnet_functions.getMaskFromSlash(str(table.item(x, 2).text()))), str(table.item(x, 3).text())]
+
+    """
+    passive_int_list = get_list_from_table(exam_page.E_p2_3_rou_table3)
+    static_routing_list = get_list_from_table(exam_page.E_p2_3_rou_table2)
+
+    swl3_routing_dict = { # 0: [Protocol, network, wildcard, area]
+        "ospf": [exam_page.E_p2_3_rou_gb1_editProcess.text(), exam_page.E_p2_3_rou_gb1_editBandwidth.text()],
+        "passive_int" : passive_int_list,
+        "static" : static_routing_list
+    }
+    table = exam_page.E_p2_3_rou_table1
+    rowCount = table.rowCount()
+    count = 0
+    for x in range(rowCount):
+        swl3_routing_dict[count] = [str(table.item(x, 0).text()), str(table.item(x, 1).text()), str(table.item(x, 2).text()), str(table.item(x, 3).text())]
+        count +=1
+
+    print("-----SWL3 ROUTING DATA-----")
+    for x,y in swl3_routing_dict.items():
+        print(x,y)
+
+    print("-----ROUTING OUTPUT-----")
+    for y in swl3_routing_dict.get("static"):
+        print(y)
+
+    print("")
+    int_keys = list(swl3_routing_dict.keys())[3:]
+    protocol_is_ospf = True
+    if (swl3_routing_dict.get(0)[0] == "OSPF"):
+        protocol_is_ospf = True
+        print("router ospf " + str(swl3_routing_dict.get("ospf")[0]))
+        print("   auto-cost reference-bandwidth " + str(swl3_routing_dict.get("ospf")[1]))
+    else:
+        protocol_is_ospf = False
+        print("router rip")
+        print("   version 2")
+
+    for z in swl3_routing_dict.get("passive_int"):
+        print("   passive-interface " + str(z))
+
+    for a in int_keys:
+        if (protocol_is_ospf):
+            print("   network " + str(swl3_routing_dict.get(a)[1]) + " " + str(swl3_routing_dict.get(a)[2]) + " area " + str(swl3_routing_dict.get(a)[3]))
+        elif (protocol_is_ospf == False):
+            print("   network " + str(swl3_routing_dict.get(a)[1]))
+
+    print("   default-information originate ! Pour les routes par défauts")
+    print("   redistribute static ! Pour les routes statiques")
+
+
+
+    """
+    router ospf 1
+   auto-cost reference-bandwidth 10000
+   passive-interface Vlan40
+   passive-interface Vlan50
+   network 172.17.0.0 0.0.0.3 area 0
+   network 172.17.40.0 0.0.0.255 area 0
+   network 172.17.50.0 0.0.0.255 area 0
+   network 172.17.0.4 0.0.0.3 area 0
+   default-information originate ! Pour les routes par défauts
+   redistribute static ! Pour les routes statiques
+    """
 
 def generate_solution_text_v2():
     generate_solution_client()
@@ -1073,3 +1141,17 @@ def check_if_switch_has_a_native_vlan(dict, native):
         return True
 
     return False
+
+def clear_any_table(table):
+    x = table.rowCount()
+    while (table.rowCount() > 0):
+        table.removeRow(x)
+        x -= 1
+
+def get_list_from_table(table): # Returns a list with all data from a table, only takes fisrt colum !!
+    some_list = list()
+    rowCount = table.rowCount()
+    for x in range(rowCount):
+        some_list.append(str(table.item(x, 0).text()))
+
+    return some_list
