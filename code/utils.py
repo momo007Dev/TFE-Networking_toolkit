@@ -27,9 +27,12 @@ class blueprintFunctions:
             if (os.path.exists(tab[i])):
                 os.remove(tab[i])
 
-    def mkBtn (btn, geometry, style, text):
+    def mkBtn (btn, geometry, style, text, small_size = False):
         btn.setGeometry(geometry)
-        btn.setFont(font_btn)
+        if (small_size is True):
+            btn.setFont(font_btn2)
+        else:
+            btn.setFont(font_btn)
         btn.setStyleSheet(style)
         btn.setObjectName(str(btn))
         btn.setText(text)
@@ -214,6 +217,11 @@ font_btn = QtGui.QFont()
 font_btn.setPointSize(10)
 font_btn.setBold(True)
 font_btn.setWeight(75)
+
+font_btn2 = QtGui.QFont()
+font_btn2.setPointSize(9)
+font_btn2.setBold(True)
+font_btn2.setWeight(75)
 
 font_label = QtGui.QFont()
 font_label.setPointSize(12)

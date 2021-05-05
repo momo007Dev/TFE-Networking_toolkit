@@ -16,6 +16,8 @@ dhcp_pool_name_set_srv1 = set()
 dhcp_pool_name_set_srv2 = set()
 
 passive_int_swl3 = list()
+passive_int_r1 = list()
+acl_number = 1
 #--------------END------------------#
 
 def setupUiExam(self):
@@ -68,7 +70,7 @@ def setupUiExam(self):
 
     global E_btn_1_3
     E_btn_1_3 = QtWidgets.QPushButton(self.Exam)
-    classBlueprint.mkBtn(E_btn_1_3, QtCore.QRect(315, 47, 135, 50), "background-color: rgb(255, 255, 127);", "(3) PCs and\nSwitchs")
+    classBlueprint.mkBtn(E_btn_1_3, QtCore.QRect(315, 47, 135, 50), "background-color: rgb(255, 255, 127);", "(3) PCs, Switchs\nand Servers", True)
     E_btn_1_3.setVisible(False)
 
     global E_btn_1_4
@@ -2043,11 +2045,11 @@ def setupUiExam(self):
 
     E_p2_3_rou_radioOspf = QtWidgets.QRadioButton(p2_3_tabwidget_tab2)
     classBlueprint.mkRadio(E_p2_3_rou_radioOspf, QtCore.QRect(290, 10, 91, 20), True, "OSPF")
-    E_p2_3_rou_radioOspf.toggled.connect(lambda: hide_groupbox_ospf_rip(self.E_p2_3_rou_gb1, self.E_p2_3_rou_gb2, self.E_p2_3_rou_gb3))
+    E_p2_3_rou_radioOspf.toggled.connect(lambda: hide_groupbox_ospf_rip(self.E_p2_3_rou_gb1, self.E_p2_3_rou_gb2, self.E_p2_3_rou_gb3, E_p2_3_rou_radioOspf))
 
     E_p2_3_rou_radioRip = QtWidgets.QRadioButton(p2_3_tabwidget_tab2)
     classBlueprint.mkRadio(E_p2_3_rou_radioRip, QtCore.QRect(420, 10, 121, 21), False, "RIP(v2)")
-    E_p2_3_rou_radioRip.toggled.connect(lambda: hide_groupbox_ospf_rip(self.E_p2_3_rou_gb1, self.E_p2_3_rou_gb2, self.E_p2_3_rou_gb3))
+    E_p2_3_rou_radioRip.toggled.connect(lambda: hide_groupbox_ospf_rip(self.E_p2_3_rou_gb1, self.E_p2_3_rou_gb2, self.E_p2_3_rou_gb3, E_p2_3_rou_radioOspf))
 
             #---GB1---#
     self.E_p2_3_rou_gb1 = QtWidgets.QGroupBox(p2_3_tabwidget_tab2)
@@ -2226,6 +2228,353 @@ def setupUiExam(self):
 
     self.stackedWidget_2.addWidget(self.page_2_3)
 
+    #---------------------
+    # P2_4 : Routers
+    #---------------------
+
+    self.page_2_4 = QtWidgets.QWidget()
+    self.page_2_4.setObjectName("page_2_4")
+
+    p2_4_tabwidget = QtWidgets.QTabWidget(self.page_2_4)
+    p2_4_tabwidget.setGeometry(QtCore.QRect(10, 20, 881, 521))
+    font = QtGui.QFont()
+    font.setBold(True)
+    font.setWeight(75)
+    p2_4_tabwidget.setFont(font)
+    p2_4_tabwidget_tab1 = QtWidgets.QWidget()
+    p2_4_tabwidget_tab2 = QtWidgets.QWidget()
+    p2_4_tabwidget_tab3 = QtWidgets.QWidget()
+    p2_4_tabwidget_tab4 = QtWidgets.QWidget()
+    p2_4_tabwidget_tab5 = QtWidgets.QWidget()
+    p2_4_tabwidget_tab6 = QtWidgets.QWidget()
+
+        #---R1 - Main Configuration---#
+    self.E_p2_4_R1_Main_img = QtWidgets.QLabel(p2_4_tabwidget_tab1)
+    classBlueprint.mkLabPic(self.E_p2_4_R1_Main_img, QtCore.QRect(590, 308, 281, 181), QtGui.QPixmap("./img/schema2-r1.png"), True)
+
+    self.E_p2_4_R1_Main_labelHostname = QtWidgets.QLabel(p2_4_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Main_labelHostname, QtCore.QRect(10, 10, 121, 31), "Hostname :")
+
+    global E_p2_4_R1_Main_editHostname
+    E_p2_4_R1_Main_editHostname = QtWidgets.QLineEdit(p2_4_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Main_editHostname, QtCore.QRect(140, 10, 141, 31), 10, "R1")
+    E_p2_4_R1_Main_editHostname.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_4_R1_Main_int_A_label = QtWidgets.QLabel(p2_4_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Main_int_A_label, QtCore.QRect(10, 60, 151, 31), "Interface (a) :")
+
+    global E_p2_4_R1_Main_int_A_comboInterface
+    E_p2_4_R1_Main_int_A_comboInterface = QtWidgets.QComboBox(p2_4_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_4_R1_Main_int_A_comboInterface, QtCore.QRect(170, 60, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntRouter(E_p2_4_R1_Main_int_A_comboInterface)
+
+    global E_p2_4_R1_Main_int_A_ip
+    E_p2_4_R1_Main_int_A_ip = QtWidgets.QLineEdit(p2_4_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Main_int_A_ip, QtCore.QRect(300, 60, 181, 31), 15, "192.168.60.1")
+    E_p2_4_R1_Main_int_A_ip.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    global E_p2_4_R1_Main_int_A_comboCidr
+    E_p2_4_R1_Main_int_A_comboCidr = QtWidgets.QComboBox(p2_4_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_4_R1_Main_int_A_comboCidr, QtCore.QRect(490, 60, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr2(E_p2_4_R1_Main_int_A_comboCidr)
+    E_p2_4_R1_Main_int_A_comboCidr.setCurrentIndex(0)
+
+    global E_p2_4_R1_Main_int_A_description
+    E_p2_4_R1_Main_int_A_description = QtWidgets.QLineEdit(p2_4_tabwidget_tab1)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Main_int_A_description, QtCore.QRect(570, 60, 181, 31), 20, "To SWL3")
+    E_p2_4_R1_Main_int_A_description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    self.E_p2_4_R1_Main_int_B_label = QtWidgets.QLabel(p2_4_tabwidget_tab1)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Main_int_B_label, QtCore.QRect(10, 110, 151, 31), "Interface (b) :")
+
+    global E_p2_4_R1_Main_int_B_comboInterface
+    E_p2_4_R1_Main_int_B_comboInterface = QtWidgets.QComboBox(p2_4_tabwidget_tab1)
+    classBlueprint.mkCombo(E_p2_4_R1_Main_int_B_comboInterface, QtCore.QRect(170, 110, 121, 31),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    classBlueprint.fillComboIntRouter(E_p2_4_R1_Main_int_B_comboInterface)
+
+    global E_p2_4_R1_Main_checkSsh
+    E_p2_4_R1_Main_checkSsh = QtWidgets.QCheckBox(p2_4_tabwidget_tab1)
+    classBlueprint.mkCheck(E_p2_4_R1_Main_checkSsh, QtCore.QRect(10, 150, 81, 31), False, "SSH ?")
+    E_p2_4_R1_Main_checkSsh.toggled.connect(lambda: hide_ssh_groupbox())
+
+    # (Groupbox SSH)
+    E_p2_4_R1_Main_gb1 = QtWidgets.QGroupBox(p2_4_tabwidget_tab1)
+    classBlueprint.mkGroupBox(E_p2_4_R1_Main_gb1, QtCore.QRect(10, 200, 571, 281), "SSH")
+    E_p2_4_R1_Main_gb1.hide()
+
+    self.E_p2_4_R1_Main_gb1_labelDns = QtWidgets.QLabel(E_p2_4_R1_Main_gb1)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Main_gb1_labelDns, QtCore.QRect(10, 30, 121, 31), "DNS Domain :", True)
+
+    global E_p2_4_R1_Main_gb1_editDns
+    E_p2_4_R1_Main_gb1_editDns = QtWidgets.QLineEdit(E_p2_4_R1_Main_gb1)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Main_gb1_editDns, QtCore.QRect(140, 30, 230, 31), 22, "formation.local")
+    E_p2_4_R1_Main_gb1_editDns.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
+
+    global E_p2_4_R1_Main_gb1_editUsername
+    E_p2_4_R1_Main_gb1_editUsername = QtWidgets.QLineEdit(E_p2_4_R1_Main_gb1)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Main_gb1_editUsername, QtCore.QRect(10, 70, 211, 31), 18, "username")
+    E_p2_4_R1_Main_gb1_editUsername.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 170, 0);")
+
+    global E_p2_4_R1_Main_gb1_editPassword
+    E_p2_4_R1_Main_gb1_editPassword = QtWidgets.QLineEdit(E_p2_4_R1_Main_gb1)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Main_gb1_editPassword, QtCore.QRect(230, 70, 221, 31), 18, "password")
+    E_p2_4_R1_Main_gb1_editPassword.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 127);")
+
+    self.E_p2_4_R1_Main_gb1_labelHost = QtWidgets.QLabel(E_p2_4_R1_Main_gb1)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Main_gb1_labelHost, QtCore.QRect(10, 110, 191, 31), "Allow Host / Subnet :", True)
+
+    global E_p2_4_R1_Main_gb1_editHost
+    E_p2_4_R1_Main_gb1_editHost = QtWidgets.QLineEdit(E_p2_4_R1_Main_gb1)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Main_gb1_editHost, QtCore.QRect(210, 110, 181, 31), 15, "192.168.60.1")
+    E_p2_4_R1_Main_gb1_editHost.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    global E_p2_4_R1_Main_gb1_comboHost
+    E_p2_4_R1_Main_gb1_comboHost = QtWidgets.QComboBox(E_p2_4_R1_Main_gb1)
+    classBlueprint.mkCombo(E_p2_4_R1_Main_gb1_comboHost, QtCore.QRect(400, 110, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr(E_p2_4_R1_Main_gb1_comboHost)
+
+    self.E_p2_4_R1_Main_gb1_add = QtWidgets.QPushButton(E_p2_4_R1_Main_gb1)
+    classBlueprint.mkBtn(self.E_p2_4_R1_Main_gb1_add, QtCore.QRect(485, 110, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p2_4_R1_Main_gb1_add.clicked.connect(lambda: add_ssh_data_to_table())
+
+    self.E_p2_4_R1_Main_gb1_clear = QtWidgets.QPushButton(E_p2_4_R1_Main_gb1)
+    classBlueprint.mkBtn(self.E_p2_4_R1_Main_gb1_clear, QtCore.QRect(485, 70, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_4_R1_Main_gb1_clear.clicked.connect(lambda: clear_ssh_table())
+
+    global E_p2_4_R1_Main_gb1_table
+    E_p2_4_R1_Main_gb1_table = QtWidgets.QTableWidget(E_p2_4_R1_Main_gb1)
+    classBlueprint.mkTable(E_p2_4_R1_Main_gb1_table, QtCore.QRect(10, 150, 481, 121), "background-color: rgb(255, 170, 0);", 1, 0)
+    classBlueprint.addDataTable(E_p2_4_R1_Main_gb1_table, 0, "Allowed Host / Subnet ACL")
+    E_p2_4_R1_Main_gb1_table.setColumnWidth(0, 450)
+
+    E_p2_4_R1_Main_note = QtWidgets.QTextEdit(p2_4_tabwidget_tab1)
+    E_p2_4_R1_Main_note.setGeometry(QtCore.QRect(510, 105, 361, 101))
+    E_p2_4_R1_Main_note.setStyleSheet("background-color: rgb(255, 255, 0);")
+    E_p2_4_R1_Main_note.setObjectName("E_p2_4_R1_Main_note")
+    E_p2_4_R1_Main_note.setHtml( "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                       "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                       "p, li { white-space: pre-wrap; }\n"
+                                       "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
+                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">------------------</p>\n"
+                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600; text-decoration: underline;\">SSH NOTE</span></p>\n"
+                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">------------------</p>\n"
+                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; text-decoration: underline;\">PS </span><span style=\" font-size:8pt;\">: </span><span style=\" font-size:8pt; font-weight:600; color:#ff0000;\">To add a host, CIDR must be = &quot;/32&quot;</span></p>\n"
+                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; text-decoration: underline;\">ACL logic</span><span style=\" font-size:8pt;\"> : </span><span style=\" font-size:8pt; font-weight:600; color:#55aa00;\">Deny all excepts allowed hosts / subnets</span></p></body></html>")
+    E_p2_4_R1_Main_note.setReadOnly(True)
+    E_p2_4_R1_Main_note.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
+    E_p2_4_R1_Main_note.hide()
+
+        #---END---#
+        #---R1 - Routing---#
+    E_p2_4_R1_Rou_radioOspf = QtWidgets.QRadioButton(p2_4_tabwidget_tab2)
+    classBlueprint.mkRadio(E_p2_4_R1_Rou_radioOspf, QtCore.QRect(290, 10, 91, 20), True, "OSPF")
+    E_p2_4_R1_Rou_radioOspf.toggled.connect(lambda: hide_groupbox_ospf_rip(E_p2_4_R1_Rou_gb1, E_p2_4_R1_Rou_gb2, E_p2_4_R1_Rou_gb3, E_p2_4_R1_Rou_radioOspf))
+
+    E_p2_4_R1_Rou_radioRip = QtWidgets.QRadioButton(p2_4_tabwidget_tab2)
+    classBlueprint.mkRadio(E_p2_4_R1_Rou_radioRip, QtCore.QRect(420, 10, 121, 21), False, "RIP(v2)")
+    E_p2_4_R1_Rou_radioRip.toggled.connect(lambda: hide_groupbox_ospf_rip(E_p2_4_R1_Rou_gb1, E_p2_4_R1_Rou_gb2, E_p2_4_R1_Rou_gb3, E_p2_4_R1_Rou_radioOspf))
+
+    # ---GB1---#
+    E_p2_4_R1_Rou_gb1 = QtWidgets.QGroupBox(p2_4_tabwidget_tab2)
+    classBlueprint.mkGroupBox(E_p2_4_R1_Rou_gb1, QtCore.QRect(20, 43, 301, 81), "")
+
+    self.E_p2_4_R1_Rou_gb1_labelProcess = QtWidgets.QLabel(E_p2_4_R1_Rou_gb1)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Rou_gb1_labelProcess, QtCore.QRect(5, 10, 161, 21), "OSPF Process Id :", True)
+
+    global E_p2_4_R1_Rou_gb1_editProcess
+    E_p2_4_R1_Rou_gb1_editProcess = QtWidgets.QLineEdit(E_p2_4_R1_Rou_gb1)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Rou_gb1_editProcess, QtCore.QRect(205, 10, 60, 31), 2, "1")
+    E_p2_4_R1_Rou_gb1_editProcess.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
+
+    self.E_p2_4_R1_Rou_gb1_labelBandwidth = QtWidgets.QLabel(E_p2_4_R1_Rou_gb1)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Rou_gb1_labelBandwidth, QtCore.QRect(5, 50, 201, 21), "Reference Bandwidth :", True)
+
+    global E_p2_4_R1_Rou_gb1_editBandwidth
+    E_p2_4_R1_Rou_gb1_editBandwidth = QtWidgets.QLineEdit(E_p2_4_R1_Rou_gb1)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Rou_gb1_editBandwidth, QtCore.QRect(205, 45, 91, 31), 6, "1000")
+    E_p2_4_R1_Rou_gb1_editBandwidth.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
+
+    # ---GB2---#
+    E_p2_4_R1_Rou_gb2 = QtWidgets.QGroupBox(p2_4_tabwidget_tab2)
+    classBlueprint.mkGroupBox(E_p2_4_R1_Rou_gb2, QtCore.QRect(20, 130, 371, 91), "")
+
+    self.E_p2_4_R1_Rou_gb2_labelNetwork = QtWidgets.QLabel(E_p2_4_R1_Rou_gb2)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Rou_gb2_labelNetwork, QtCore.QRect(10, 10, 91, 21), "Network :", True)
+
+    global E_p2_4_R1_Rou_gb2_editNetwork
+    E_p2_4_R1_Rou_gb2_editNetwork = QtWidgets.QLineEdit(E_p2_4_R1_Rou_gb2)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Rou_gb2_editNetwork, QtCore.QRect(100, 10, 181, 31), 15, "192.168.10.0")
+    E_p2_4_R1_Rou_gb2_editNetwork.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    global E_p2_4_R1_Rou_gb2_comboNetwork
+    E_p2_4_R1_Rou_gb2_comboNetwork = QtWidgets.QComboBox(E_p2_4_R1_Rou_gb2)
+    classBlueprint.mkCombo(E_p2_4_R1_Rou_gb2_comboNetwork, QtCore.QRect(290, 10, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr2(E_p2_4_R1_Rou_gb2_comboNetwork)
+
+    self.E_p2_4_R1_Rou_gb2_labelArea = QtWidgets.QLabel(E_p2_4_R1_Rou_gb2)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Rou_gb2_labelArea, QtCore.QRect(10, 50, 81, 21), "Area n° :", True)
+
+    global E_p2_4_R1_Rou_gb2_editArea
+    E_p2_4_R1_Rou_gb2_editArea = QtWidgets.QLineEdit(E_p2_4_R1_Rou_gb2)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Rou_gb2_editArea, QtCore.QRect(100, 50, 60, 31), 2, "0")
+    E_p2_4_R1_Rou_gb2_editArea.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
+
+    self.E_p2_4_R1_Rou_gb2_add = QtWidgets.QPushButton(E_p2_4_R1_Rou_gb2)
+    classBlueprint.mkBtn(self.E_p2_4_R1_Rou_gb2_add, QtCore.QRect(210, 50, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p2_4_R1_Rou_gb2_add.clicked.connect(lambda: add_routing_to_table())
+
+    self.E_p2_4_R1_Rou_gb2_clear = QtWidgets.QPushButton(E_p2_4_R1_Rou_gb2)
+    classBlueprint.mkBtn(self.E_p2_4_R1_Rou_gb2_clear, QtCore.QRect(290, 50, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_4_R1_Rou_gb2_clear.clicked.connect(lambda: clear_routing_table())
+
+    # ---GB3---#
+    E_p2_4_R1_Rou_gb3 = QtWidgets.QGroupBox(p2_4_tabwidget_tab2)
+    classBlueprint.mkGroupBox(E_p2_4_R1_Rou_gb3, QtCore.QRect(400, 40, 451, 51), "")
+    E_p2_4_R1_Rou_gb3.hide()
+
+    self.E_p2_4_R1_Rou_gb3_labelNetwork = QtWidgets.QLabel(E_p2_4_R1_Rou_gb3)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Rou_gb3_labelNetwork, QtCore.QRect(10, 10, 91, 21), "Network :", True)
+
+    global E_p2_4_R1_Rou_gb3_editNetwork
+    E_p2_4_R1_Rou_gb3_editNetwork = QtWidgets.QLineEdit(E_p2_4_R1_Rou_gb3)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Rou_gb3_editNetwork, QtCore.QRect(100, 10, 181, 31), 15, "192.168.10.0")
+    E_p2_4_R1_Rou_gb3_editNetwork.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    self.E_p2_4_R1_Rou_gb3_add = QtWidgets.QPushButton(E_p2_4_R1_Rou_gb3)
+    classBlueprint.mkBtn(self.E_p2_4_R1_Rou_gb3_add, QtCore.QRect(290, 10, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p2_4_R1_Rou_gb3_add.clicked.connect(lambda: add_routing_to_table())
+
+    self.E_p2_4_R1_Rou_gb3_clear = QtWidgets.QPushButton(E_p2_4_R1_Rou_gb3)
+    classBlueprint.mkBtn(self.E_p2_4_R1_Rou_gb3_clear, QtCore.QRect(370, 10, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_4_R1_Rou_gb3_clear.clicked.connect(lambda: clear_routing_table())
+
+    # ---GB4---#
+    E_p2_4_R1_Rou_gb4 = QtWidgets.QGroupBox(p2_4_tabwidget_tab2)
+    classBlueprint.mkGroupBox(E_p2_4_R1_Rou_gb4, QtCore.QRect(400, 100, 451, 51), "")
+
+    self.E_p2_4_R1_Rou_gb4_labelInterface = QtWidgets.QLabel(E_p2_4_R1_Rou_gb4)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Rou_gb4_labelInterface, QtCore.QRect(5, 13, 161, 21), "Passive-Interface :",
+                           True)
+
+    global E_p2_4_R1_Rou_gb4_comboInterface
+    E_p2_4_R1_Rou_gb4_comboInterface = QtWidgets.QComboBox(E_p2_4_R1_Rou_gb4)
+    classBlueprint.mkCombo(E_p2_4_R1_Rou_gb4_comboInterface, QtCore.QRect(170, 10, 115, 30),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+
+    self.E_p2_4_R1_Rou_gb4_add = QtWidgets.QPushButton(E_p2_4_R1_Rou_gb4)
+    classBlueprint.mkBtn(self.E_p2_4_R1_Rou_gb4_add, QtCore.QRect(290, 10, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p2_4_R1_Rou_gb4_add.clicked.connect(lambda: add_passive_interface_to_table())
+
+    self.E_p2_4_R1_Rou_gb4_clear = QtWidgets.QPushButton(E_p2_4_R1_Rou_gb4)
+    classBlueprint.mkBtn(self.E_p2_4_R1_Rou_gb4_clear, QtCore.QRect(370, 10, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_4_R1_Rou_gb4_clear.clicked.connect(lambda: clear_passive_interface_table())
+
+    # ---GB5---#
+    E_p2_4_R1_Rou_gb5 = QtWidgets.QGroupBox(p2_4_tabwidget_tab2)
+    classBlueprint.mkGroupBox(E_p2_4_R1_Rou_gb5, QtCore.QRect(400, 160, 451, 145), "Static Routing", True)
+
+    self.E_p2_4_R1_Rou_gb5_labelSubnet = QtWidgets.QLabel(E_p2_4_R1_Rou_gb5)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Rou_gb5_labelSubnet, QtCore.QRect(5, 30, 81, 31), "Subnet :", True)
+
+    global E_p2_4_R1_Rou_gb5_editSubnet
+    E_p2_4_R1_Rou_gb5_editSubnet = QtWidgets.QLineEdit(E_p2_4_R1_Rou_gb5)
+    classBlueprint.mkLineEdit(E_p2_4_R1_Rou_gb5_editSubnet, QtCore.QRect(80, 30, 171, 31), 15, "0.0.0.0")
+    E_p2_4_R1_Rou_gb5_editSubnet.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    global E_p2_4_R1_Rou_gb5_comboSubnet
+    E_p2_4_R1_Rou_gb5_comboSubnet = QtWidgets.QComboBox(E_p2_4_R1_Rou_gb5)
+    classBlueprint.mkCombo(E_p2_4_R1_Rou_gb5_comboSubnet, QtCore.QRect(260, 30, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr2(E_p2_4_R1_Rou_gb5_comboSubnet)
+    E_p2_4_R1_Rou_gb5_comboSubnet.setCurrentIndex(E_p2_4_R1_Rou_gb5_comboSubnet.count() - 1)
+
+    self.E_p2_4_R1_Rou_gb5_labelHop = QtWidgets.QLabel(E_p2_4_R1_Rou_gb5)
+    classBlueprint.mkLabel(self.E_p2_4_R1_Rou_gb5_labelHop, QtCore.QRect(5, 70, 251, 31), "Next hop / output interface :", True)
+
+    global E_p2_4_R1_Rou_gb5_comboHop
+    E_p2_4_R1_Rou_gb5_comboHop = QtWidgets.QComboBox(E_p2_4_R1_Rou_gb5)
+    classBlueprint.mkCombo(E_p2_4_R1_Rou_gb5_comboHop, QtCore.QRect(260, 70, 181, 31),
+                           "color: rgb(0, 85, 255); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(0, 85, 255);")
+
+    self.E_p2_4_R1_Rou_gb5_add = QtWidgets.QPushButton(E_p2_4_R1_Rou_gb5)
+    classBlueprint.mkBtn(self.E_p2_4_R1_Rou_gb5_add, QtCore.QRect(290, 107, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p2_4_R1_Rou_gb5_add.clicked.connect(lambda: add_static_routing_to_table())
+
+    self.E_p2_4_R1_Rou_gb5_clear = QtWidgets.QPushButton(E_p2_4_R1_Rou_gb5)
+    classBlueprint.mkBtn(self.E_p2_4_R1_Rou_gb5_clear, QtCore.QRect(370, 107, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_4_R1_Rou_gb5_clear.clicked.connect(lambda: clear_static_routing_table())
+
+    # Table 1 (OSPF / RIP)
+    global E_p2_4_R1_Rou_table1
+    E_p2_4_R1_Rou_table1 = QtWidgets.QTableWidget(p2_4_tabwidget_tab2)
+    classBlueprint.mkTable(E_p2_4_R1_Rou_table1, QtCore.QRect(10, 315, 481, 171), "background-color: rgb(255, 170, 0);", 4, 0)
+    classBlueprint.addDataTable(E_p2_4_R1_Rou_table1, 0, "Protocol")
+    classBlueprint.addDataTable(E_p2_4_R1_Rou_table1, 1, "Network")
+    classBlueprint.addDataTable(E_p2_4_R1_Rou_table1, 2, "Wildcard (OSPF)")
+    classBlueprint.addDataTable(E_p2_4_R1_Rou_table1, 3, "Area (OSPF)")
+    E_p2_4_R1_Rou_table1.setColumnWidth(0, 70)
+    E_p2_4_R1_Rou_table1.setColumnWidth(1, 150)
+    E_p2_4_R1_Rou_table1.setColumnWidth(2, 150)
+    E_p2_4_R1_Rou_table1.setColumnWidth(3, 100)
+
+    # Table 2 (Static routing)
+    global E_p2_4_R1_Rou_table2
+    E_p2_4_R1_Rou_table2 = QtWidgets.QTableWidget(p2_4_tabwidget_tab2)
+    classBlueprint.mkTable(E_p2_4_R1_Rou_table2, QtCore.QRect(500, 315, 221, 171), "background-color: rgb(0, 170, 127);", 1, 0, True)
+    classBlueprint.addDataTable(E_p2_4_R1_Rou_table2, 0, "Static Routing Data")
+    E_p2_4_R1_Rou_table2.setColumnWidth(0, 200)
+
+    # Table 3 (Passive Interface)
+    global E_p2_4_R1_Rou_table3
+    E_p2_4_R1_Rou_table3 = QtWidgets.QTableWidget(p2_4_tabwidget_tab2)
+    classBlueprint.mkTable(E_p2_4_R1_Rou_table3, QtCore.QRect(730, 315, 141, 171), "background-color: rgb(170, 170, 255);", 1, 0)
+    classBlueprint.addDataTable(E_p2_4_R1_Rou_table3, 0, "Passive Interface")
+
+
+        #---END---#
+
+
+
+    p2_4_tabwidget.addTab(p2_4_tabwidget_tab1, "R1 - Main Configuration")
+    p2_4_tabwidget.addTab(p2_4_tabwidget_tab2, "R1 - Routing")
+    p2_4_tabwidget.addTab(p2_4_tabwidget_tab3, "R2 - Main Configuration")
+    p2_4_tabwidget.addTab(p2_4_tabwidget_tab4, "R2 - Routing")
+    p2_4_tabwidget.addTab(p2_4_tabwidget_tab5, "R2 - NAT")
+    p2_4_tabwidget.addTab(p2_4_tabwidget_tab6, "   ISP   ")
+    p2_4_tabwidget.setObjectName("p2_3_tabwidget")
+
+    p2_4_tabwidget.currentChanged.connect(lambda: fill_combo_passive_interface_r1())
+
+    self.stackedWidget_2.addWidget(self.page_2_4)
 
     #---END OF PAGE--#
 
@@ -2244,6 +2593,7 @@ def setupUiExam(self):
     E_btn_1_2.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(4))
     E_btn_1_3.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(5))
     E_btn_1_4.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(6))
+    E_btn_1_5.clicked.connect(lambda: self.stackedWidget_2.setCurrentIndex(7))
 
     self.E_save.clicked.connect(lambda: exam_functions.save_changes(self.stackedWidget_2))
     self.E_p2_gb_add.clicked.connect(lambda: exam_functions.add_host_to_table(E_p2_table, self.E_p2_gb_editLan, E_p2_gb_editHost))
@@ -2282,6 +2632,9 @@ def setupUiExam(self):
         E_btn_5.setVisible(False)
         E_btn_1_2.setVisible(False)
         E_btn_1_3.setVisible(False)
+        E_btn_1_4.setVisible(False)
+        E_btn_1_5.setVisible(False)
+        E_btn_1_6.setVisible(False)
 
     def reset_stylesheet_topologie_imgs():
         self.E_p1_img1.setStyleSheet("")
@@ -2394,67 +2747,117 @@ def setupUiExam(self):
             else:
                 dhcp_pool_name_set_srv2.clear()
 
-    def add_routing_to_table(): # Used for GB2 and GB3 in SWL3 routing page when clicked on "Add" btn
-        protocol = ""
-        network = ""
-        item3 = QTableWidgetItem("/")
-        item4 = QTableWidgetItem("/")
-        E_p2_3_rou_gb1_editProcess.setDisabled(True)
-        E_p2_3_rou_gb1_editBandwidth.setDisabled(True)
+    def add_routing_to_table():  # Used for GB2 and GB3 in SWL3 routing page when clicked on "Add" btn
+        protocol, network = "", ""
+        item3, item4 = QTableWidgetItem("/"), QTableWidgetItem("/")
+        edit_process, edit_bandwidth, rad_rip, network_rip, rad_ospf, network_ospf, slash_ospf, ospf_area, table = "", "", "", "", "", "", "", "", ""
 
-        if (E_p2_3_rou_radioOspf.isChecked()):
+        if (self.stackedWidget_2.currentIndex() == 6):  # Page 2_3
+            edit_process = E_p2_3_rou_gb1_editProcess; edit_bandwidth = E_p2_3_rou_gb1_editBandwidth
+            rad_rip = E_p2_3_rou_radioRip; network_rip = E_p2_3_rou_gb3_editNetwork
+            rad_ospf = E_p2_3_rou_radioOspf; network_ospf = E_p2_3_rou_gb2_editNetwork
+            slash_ospf = E_p2_3_rou_gb2_comboNetwork; ospf_area = E_p2_3_rou_gb2_editArea; table = E_p2_3_rou_table1
+
+        elif (self.stackedWidget_2.currentIndex() == 7):  # Page 2_4 (routers)
+            edit_process = E_p2_4_R1_Rou_gb1_editProcess; edit_bandwidth = E_p2_4_R1_Rou_gb1_editBandwidth
+            rad_rip = E_p2_4_R1_Rou_radioRip; network_rip = E_p2_4_R1_Rou_gb3_editNetwork
+            rad_ospf = E_p2_4_R1_Rou_radioOspf; network_ospf = E_p2_4_R1_Rou_gb2_editNetwork
+            slash_ospf = E_p2_4_R1_Rou_gb2_comboNetwork; ospf_area = E_p2_4_R1_Rou_gb2_editArea; table = E_p2_4_R1_Rou_table1
+
+        edit_process.setDisabled(True)
+        edit_bandwidth.setDisabled(True)
+
+        if (rad_ospf.isChecked()):
             protocol = "OSPF"
-            network = E_p2_3_rou_gb2_editNetwork.text()
-            cidr_ospf = E_p2_3_rou_gb2_comboNetwork.currentText()
+            network = network_ospf.text()
+            cidr_ospf = slash_ospf.currentText()
             wildcard_ospf = str(subnet_functions.getWildcardFromMask(str(subnet_functions.getMaskFromSlash(cidr_ospf))))
-            area_ospf = E_p2_3_rou_gb2_editArea.text()
+            area_ospf = ospf_area.text()
             item3 = QTableWidgetItem(wildcard_ospf)
             item4 = QTableWidgetItem(area_ospf)
 
-        elif (E_p2_3_rou_radioRip.isChecked()):
+        elif (rad_rip.isChecked()):
             protocol = "RIP(v2)"
-            network = E_p2_3_rou_gb3_editNetwork.text()
+            network = network_rip.text()
 
-        lastrow = E_p2_3_rou_table1.rowCount()
-        E_p2_3_rou_table1.insertRow(lastrow)
+        lastrow = table.rowCount()
+        table.insertRow(lastrow)
         item1 = QTableWidgetItem(protocol)
         item2 = QTableWidgetItem(network)
-        E_p2_3_rou_table1.setItem(lastrow, 0, item1)
-        E_p2_3_rou_table1.setItem(lastrow, 1, item2)
-        E_p2_3_rou_table1.setItem(lastrow, 2, item3)
-        E_p2_3_rou_table1.setItem(lastrow, 3, item4)
+        table.setItem(lastrow, 0, item1)
+        table.setItem(lastrow, 1, item2)
+        table.setItem(lastrow, 2, item3)
+        table.setItem(lastrow, 3, item4)
 
     def clear_routing_table():
-        E_p2_3_rou_gb1_editProcess.setDisabled(False)
-        E_p2_3_rou_gb1_editBandwidth.setDisabled(False)
-        exam_functions.clear_any_table(E_p2_3_rou_table1)
+        if (self.stackedWidget_2.currentIndex() == 6): # Page 2_3
+            edit_process = E_p2_3_rou_gb1_editProcess
+            edit_bandwidth = E_p2_3_rou_gb1_editBandwidth
+            table = E_p2_3_rou_table1
+        elif (self.stackedWidget_2.currentIndex() == 7): # Page 2_4 (routers)
+            edit_process = E_p2_4_R1_Rou_gb1_editProcess
+            edit_bandwidth = E_p2_4_R1_Rou_gb1_editBandwidth
+            table = E_p2_4_R1_Rou_table1
+
+        edit_process.setDisabled(False)
+        edit_bandwidth.setDisabled(False)
+        exam_functions.clear_any_table(table)
 
     def add_passive_interface_to_table():
-        if (E_p2_3_rou_gb4_comboInterface.count() > 0):
-            interface = E_p2_3_rou_gb4_comboInterface.currentText()
-            lastrow = E_p2_3_rou_table3.rowCount()
-            E_p2_3_rou_table3.insertRow(lastrow)
+        if (self.stackedWidget_2.currentIndex() == 6):  # Page 2_3
+            combo_int = E_p2_3_rou_gb4_comboInterface
+            table = E_p2_3_rou_table3
+
+        elif (self.stackedWidget_2.currentIndex() == 7):  # Page 2_4 (routers)
+            combo_int = E_p2_4_R1_Rou_gb4_comboInterface
+            table = E_p2_4_R1_Rou_table3
+
+        if (combo_int.count() > 0):
+            interface = combo_int.currentText()
+            lastrow = table.rowCount()
+            table.insertRow(lastrow)
             item1 = QTableWidgetItem(interface)
-            E_p2_3_rou_table3.setItem(lastrow, 0, item1)
-            E_p2_3_rou_gb4_comboInterface.removeItem(E_p2_3_rou_gb4_comboInterface.currentIndex())
+            table.setItem(lastrow, 0, item1)
+            combo_int.removeItem(combo_int.currentIndex())
 
     def clear_passive_interface_table():
-        exam_functions.clear_any_table(E_p2_3_rou_table3)
-        for p in passive_int_swl3:
-            E_p2_3_rou_gb4_comboInterface.addItem(p)
+        if (self.stackedWidget_2.currentIndex() == 6):  # Page 2_3
+            combo_int = E_p2_3_rou_gb4_comboInterface
+            table = E_p2_3_rou_table3
+            my_list = passive_int_swl3
+        elif (self.stackedWidget_2.currentIndex() == 7):  # Page 2_4 (routers)
+            combo_int = E_p2_4_R1_Rou_gb4_comboInterface
+            table = E_p2_4_R1_Rou_table3
+            my_list = passive_int_r1
+
+        exam_functions.clear_any_table(table)
+        combo_int.clear()
+        for p in my_list:
+            combo_int.addItem(p)
 
     def add_static_routing_to_table():
-        network = E_p2_3_rou_gb5_editSubnet.text()
-        mask = subnet_functions.getMaskFromSlash(E_p2_3_rou_gb5_comboSubnet.currentText())
-        interface = E_p2_3_rou_gb5_comboHop.currentText()
+        if (self.stackedWidget_2.currentIndex() == 6):  # Page 2_3
+            network = E_p2_3_rou_gb5_editSubnet.text()
+            mask = subnet_functions.getMaskFromSlash(E_p2_3_rou_gb5_comboSubnet.currentText())
+            interface = E_p2_3_rou_gb5_comboHop.currentText()
+            table = E_p2_3_rou_table2
+        elif (self.stackedWidget_2.currentIndex() == 7):  # Page 2_4 (routers)
+            network = E_p2_4_R1_Rou_gb5_editSubnet.text()
+            mask = subnet_functions.getMaskFromSlash(E_p2_4_R1_Rou_gb5_comboSubnet.currentText())
+            interface = E_p2_4_R1_Rou_gb5_comboHop.currentText()
+            table = E_p2_4_R1_Rou_table2
+
         data = "ip route " + str(network) + " " + str(mask) + " " + str(interface)
-        lastrow = E_p2_3_rou_table2.rowCount()
-        E_p2_3_rou_table2.insertRow(lastrow)
+        lastrow = table.rowCount()
+        table.insertRow(lastrow)
         item1 = QTableWidgetItem(data)
-        E_p2_3_rou_table2.setItem(lastrow, 0, item1)
+        table.setItem(lastrow, 0, item1)
 
     def clear_static_routing_table():
-        exam_functions.clear_any_table(E_p2_3_rou_table2)
+        if (self.stackedWidget_2.currentIndex() == 6):  # Page 2_3
+            exam_functions.clear_any_table(E_p2_3_rou_table2)
+        elif (self.stackedWidget_2.currentIndex() == 7):  # Page 2_4 (routers)
+            exam_functions.clear_any_table(E_p2_4_R1_Rou_table2)
 
     def fill_combo_passive_interface_swl3(): # Used for "passive-interface" combo AND "next hop" combo
         if (p2_3_tabwidget.currentIndex() == 1):
@@ -2481,6 +2884,35 @@ def setupUiExam(self):
             global passive_int_swl3
             passive_int_swl3 = [E_p2_3_rou_gb4_comboInterface.itemText(i) for i in range(E_p2_3_rou_gb4_comboInterface.count())]
 
+    def fill_combo_passive_interface_r1():
+        int_a = E_p2_4_R1_Main_int_A_comboInterface
+        int_b = E_p2_4_R1_Main_int_B_comboInterface
+        combo_passive_int = E_p2_4_R1_Rou_gb4_comboInterface
+
+        if (p2_4_tabwidget.currentIndex() == 1): # R1_routing
+            E_p2_4_R1_Rou_gb4_comboInterface.clear()
+            E_p2_4_R1_Rou_gb4_comboInterface.addItem(E_p2_4_R1_Main_int_A_comboInterface.currentText())
+            E_p2_4_R1_Rou_gb4_comboInterface.addItem(E_p2_4_R1_Main_int_B_comboInterface.currentText())
+
+            s1_vlans = exam_functions.get_vlan_used_by_a_switch(exam_functions.s1_dict)
+            s2_vlans = exam_functions.get_vlan_used_by_a_switch(exam_functions.s2_dict)
+            s1_and_s2_vlans = s1_vlans.union(s2_vlans)
+            for a in s1_and_s2_vlans:
+                E_p2_4_R1_Rou_gb4_comboInterface.addItem("Vlan " + str(a))
+
+            E_p2_4_R1_Rou_gb5_comboHop.clear()
+            E_p2_4_R1_Rou_gb5_comboHop.addItem(E_p2_4_R1_Main_int_A_comboInterface.currentText())
+            E_p2_4_R1_Rou_gb5_comboHop.addItem(E_p2_4_R1_Main_int_B_comboInterface.currentText())
+
+            available_ip_int_a = generate_usable_ip_from_network_and_cidr(E_p2_4_R1_Main_int_A_ip.text(),
+                                                                          E_p2_4_R1_Main_int_A_comboCidr.currentText())
+            available_ip_int_a.remove(E_p2_4_R1_Main_int_A_ip.text())
+
+            for y in available_ip_int_a: E_p2_4_R1_Rou_gb5_comboHop.addItem(y)
+
+            global passive_int_r1
+            passive_int_r1 = [E_p2_4_R1_Rou_gb4_comboInterface.itemText(i) for i in range(E_p2_4_R1_Rou_gb4_comboInterface.count())]
+
     def hide_checkbox(): # When "add"
         if (p2_1_gb_check.isChecked()):
             p2_1_gb_check.setChecked(False)
@@ -2490,9 +2922,9 @@ def setupUiExam(self):
         p2_1_gb_check.setChecked(False)
         p2_1_gb_check.setVisible(True)
 
-    def hide_groupbox_ospf_rip(gb1, gb2, gb3):
+    def hide_groupbox_ospf_rip(gb1, gb2, gb3, rad_ospf):
         clear_routing_table()
-        if (E_p2_3_rou_radioOspf.isChecked()):
+        if (rad_ospf.isChecked()):
             gb1.show()
             gb2.show()
             gb3.hide()
@@ -2500,3 +2932,46 @@ def setupUiExam(self):
             gb1.hide()
             gb2.hide()
             gb3.show()
+
+    def hide_ssh_groupbox():
+        if (E_p2_4_R1_Main_checkSsh.isChecked()):
+            E_p2_4_R1_Main_gb1.show()
+            E_p2_4_R1_Main_note.show()
+        else:
+            E_p2_4_R1_Main_gb1.hide()
+            E_p2_4_R1_Main_note.hide()
+
+    def add_ssh_data_to_table():
+        global acl_number
+        dns = E_p2_4_R1_Main_gb1_editDns
+        username = E_p2_4_R1_Main_gb1_editUsername
+        password = E_p2_4_R1_Main_gb1_editPassword
+        subnet = E_p2_4_R1_Main_gb1_editHost.text()
+        cidr = E_p2_4_R1_Main_gb1_comboHost.currentText()
+        table = E_p2_4_R1_Main_gb1_table
+        if (cidr == "/32"):
+            data = "access-list " + str(acl_number) + " permit host " + str(subnet)
+        else:
+            data = "access-list " + str(acl_number) + " permit " + str(subnet) + " " + str(exam_functions.getWildcardFromMask(str(exam_functions.getMaskFromSlash(cidr))))
+
+        lastrow = table.rowCount()
+        table.insertRow(lastrow)
+        item1 = QTableWidgetItem(data)
+        table.setItem(lastrow, 0, item1)
+        acl_number += 1
+        dns.setDisabled(True)
+        username.setDisabled(True)
+        password.setDisabled(True)
+
+    def clear_ssh_table():
+        global acl_number
+        acl_number = 1
+        dns = E_p2_4_R1_Main_gb1_editDns
+        username = E_p2_4_R1_Main_gb1_editUsername
+        password = E_p2_4_R1_Main_gb1_editPassword
+        table = E_p2_4_R1_Main_gb1_table
+
+        dns.setDisabled(False)
+        username.setDisabled(False)
+        password.setDisabled(False)
+        exam_functions.clear_any_table(table)

@@ -27,6 +27,10 @@ srv1_dhcp_dict = dict()
 srv1_dns_list = list()
 srv2_dhcp_dict = dict()
 srv2_dns_list = list()
+
+        #---Page 2_3---#
+swl3_dict = dict()
+swl3_routing_dict = dict()
 #--------------END------------------#
 
 def add_host_to_table(table, name, host): # Used when user clicks "add" btn
@@ -116,7 +120,7 @@ def save_changes(stacked_widget):
         save_changes_p2_2()
 
     elif (current_index == 6): # Page 2_3 : Switch L3
-        import os
+        exam_page.E_btn_1_5.setVisible(True)
         save_changes_p2_3()
 
 #-----------------------------------------------------------------------------#
@@ -382,6 +386,7 @@ def generate_solution_text():
     # ----------------------------------------------------------#
     # Function that generates the "yaml" file for packet tracer #
     # ----------------------------------------------------------#
+
 def generate_solution_packet_tracer():
     global packet_tracer_stuct
     packet_tracer_stuct = {
@@ -904,23 +909,10 @@ def save_changes_p2_2():
         "srv2" : srv2_dict
     }
 
-    print("----CLIENT data----")
-    for a in client_dict.keys():
-        print(str(a) + " : " + str(client_dict.get(a)))
-
-    print("-----S3 data-----")
-    for x,y in s3_dict.items():
-        print(x,y)
-
-    print("-----SRV1 data-----")
-    for x,y in srv1_dict.items():
-        print(x,y)
-
-    print("-----SRV2 data-----")
-    for x,y in srv2_dict.items():
-        print(x,y)
-
-    #generate_solution_text_v2()
+    #TODO
+    #generate_solution_client()
+    #generate_solution_switch()
+    #generate_solution_server()
 
 def save_changes_p2_3():
     global swl3_dict
@@ -930,31 +922,6 @@ def save_changes_p2_3():
         "b" : [exam_page.E_p2_3_int_B_comboInterface.currentText(), exam_page.E_p2_3_int_B_ip.text(), exam_page.E_p2_3_int_B_comboCidr.currentText(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_3_int_B_comboCidr.currentText())), exam_page.E_p2_3_int_B_description.text()],
         "c" : [exam_page.E_p2_3_int_C_comboInterface.currentText(), exam_page.E_p2_3_int_C_ip.text(), exam_page.E_p2_3_int_C_comboCidr.currentText(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_3_int_C_comboCidr.currentText())), exam_page.E_p2_3_int_C_description.text()]
     }
-    print("-----SWL3 data-----")
-    for x,y in swl3_dict.items():
-        print(x,y)
-
-    print("---INTERFACE OUTPUT")
-    print("hostname " + str(swl3_dict.get("name")[0]))
-    print("int " + str(swl3_dict.get("a")[0]))
-    print("   switchport trunk encapsulation dot1q")
-    print("   switchport mode trunk")
-    print("int " + str(swl3_dict.get("b")[0]))
-    print("   no switchport")
-    print("   ip add " + str(swl3_dict.get("b")[1]) + " " + str(swl3_dict.get("b")[3]))
-    print("int " + str(swl3_dict.get("c")[0]))
-    print("   no switchport")
-    print("   ip add " + str(swl3_dict.get("c")[1]) + " " + str(swl3_dict.get("c")[3]))
-
-    # vlan_dict 10: ["IT", "192.168.10.0", "/24", "255.255.255.0", "192.168.10.254", "192.168.20.11", "Yes"]
-    vlan_used = get_vlan_used_by_a_switch(s3_dict)
-    for z in vlan_used:
-        print("vlan " + str(z))
-        print("   name " + str(vlan_dict.get(z)[0]))
-        print("int vlan" + str(z))
-        print("   ip add " + str(vlan_dict.get(z)[4]) + " " + str(vlan_dict.get(z)[3]))
-        if not (vlan_dict.get(z)[5] == "No"):
-            print("   ip helper-address " + str(vlan_dict.get(z)[5]))
 
     """
     table = exam_page.E_p2_2_srv1_tableDhcp # "pool_name" (unique) : ["start_ip", "cidr", "gateway"]
@@ -966,6 +933,7 @@ def save_changes_p2_3():
     passive_int_list = get_list_from_table(exam_page.E_p2_3_rou_table3)
     static_routing_list = get_list_from_table(exam_page.E_p2_3_rou_table2)
 
+    global swl3_routing_dict
     swl3_routing_dict = { # 0: [Protocol, network, wildcard, area]
         "ospf": [exam_page.E_p2_3_rou_gb1_editProcess.text(), exam_page.E_p2_3_rou_gb1_editBandwidth.text()],
         "passive_int" : passive_int_list,
@@ -978,57 +946,8 @@ def save_changes_p2_3():
         swl3_routing_dict[count] = [str(table.item(x, 0).text()), str(table.item(x, 1).text()), str(table.item(x, 2).text()), str(table.item(x, 3).text())]
         count +=1
 
-    print("-----SWL3 ROUTING DATA-----")
-    for x,y in swl3_routing_dict.items():
-        print(x,y)
-
-    print("-----ROUTING OUTPUT-----")
-    for y in swl3_routing_dict.get("static"):
-        print(y)
-
-    print("")
-    int_keys = list(swl3_routing_dict.keys())[3:]
-    protocol_is_ospf = True
-    if (swl3_routing_dict.get(0)[0] == "OSPF"):
-        protocol_is_ospf = True
-        print("router ospf " + str(swl3_routing_dict.get("ospf")[0]))
-        print("   auto-cost reference-bandwidth " + str(swl3_routing_dict.get("ospf")[1]))
-    else:
-        protocol_is_ospf = False
-        print("router rip")
-        print("   version 2")
-
-    for z in swl3_routing_dict.get("passive_int"):
-        print("   passive-interface " + str(z))
-
-    for a in int_keys:
-        if (protocol_is_ospf):
-            print("   network " + str(swl3_routing_dict.get(a)[1]) + " " + str(swl3_routing_dict.get(a)[2]) + " area " + str(swl3_routing_dict.get(a)[3]))
-        elif (protocol_is_ospf == False):
-            print("   network " + str(swl3_routing_dict.get(a)[1]))
-
-    print("   default-information originate ! Pour les routes par défauts")
-    print("   redistribute static ! Pour les routes statiques")
-
-
-
-    """
-    router ospf 1
-   auto-cost reference-bandwidth 10000
-   passive-interface Vlan40
-   passive-interface Vlan50
-   network 172.17.0.0 0.0.0.3 area 0
-   network 172.17.40.0 0.0.0.255 area 0
-   network 172.17.50.0 0.0.0.255 area 0
-   network 172.17.0.4 0.0.0.3 area 0
-   default-information originate ! Pour les routes par défauts
-   redistribute static ! Pour les routes statiques
-    """
-
-def generate_solution_text_v2():
-    generate_solution_client()
-    generate_solution_switch()
-    generate_solution_server()
+    # TODO
+    #generate_solution_swl3()
 
 def generate_solution_switch():
     native = get_native_vlan(vlan_dict)
@@ -1123,6 +1042,68 @@ def generate_solution_server():
 
         with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
             f.write(output)
+
+def generate_solution_swl3():
+    output = "----------------\n"
+    output += "   " + str(swl3_dict.get("name")[0]) + "   \n"
+    output += "----------------\n"
+
+    output += "hostname " + str(swl3_dict.get("name")[0]) + "\n"
+    output += "ip routing \n"
+    output += "\n"
+    output += "int " + str(swl3_dict.get("a")[0]) + "\n"
+    output += "   switchport trunk encapsulation dot1q \n"
+    output += "   switchport mode trunk \n"
+    output += "\n"
+    output += "int " + str(swl3_dict.get("b")[0]) + "\n"
+    output += "   no switchport \n"
+    output += "   ip add " + str(swl3_dict.get("b")[1]) + " " + str(swl3_dict.get("b")[3]) + "\n"
+    output += "\n"
+    output += "int " + str(swl3_dict.get("c")[0]) + "\n"
+    output += "   no switchport \n"
+    output += "   ip add " + str(swl3_dict.get("c")[1]) + " " + str(swl3_dict.get("c")[3]) + "\n"
+    output += "\n"
+
+    vlan_used = get_vlan_used_by_a_switch(s3_dict)
+    for z in vlan_used:
+        output += "vlan " + str(z) + "\n"
+        output += "   name " + str(vlan_dict.get(z)[0]) + "\n"
+        output += "\n"
+        output += "int vlan" + str(z) + "\n"
+        output += "   ip add " + str(vlan_dict.get(z)[4]) + " " + str(vlan_dict.get(z)[3]) + "\n"
+        if not (vlan_dict.get(z)[5] == "No"):
+            output += "   ip helper-address " + str(vlan_dict.get(z)[5]) + "\n"
+        output += "\n"
+
+    int_keys = list(swl3_routing_dict.keys())[3:]
+    protocol_is_ospf = True
+    if (swl3_routing_dict.get(0)[0] == "OSPF"):
+        protocol_is_ospf = True
+        output += "router ospf " + str(swl3_routing_dict.get("ospf")[0]) + "\n"
+        output += "   auto-cost reference-bandwidth " + str(swl3_routing_dict.get("ospf")[1]) + "\n"
+    else:
+        protocol_is_ospf = False
+        output += "router rip \n"
+        output +="   version 2 \n"
+
+    for z in swl3_routing_dict.get("passive_int"):
+        output += "   passive-interface " + str(z) + "\n"
+
+    for a in int_keys:
+        if (protocol_is_ospf):
+            output += "   network " + str(swl3_routing_dict.get(a)[1]) + " " + str(swl3_routing_dict.get(a)[2]) + " area " + str(swl3_routing_dict.get(a)[3]) + "\n"
+        elif (protocol_is_ospf == False):
+            output += "   network " + str(swl3_routing_dict.get(a)[1]) + "\n"
+
+    output += "   default-information originate ! Pour les routes par défauts \n"
+    output += "   redistribute static ! Pour les routes statiques \n"
+    output += "\n"
+
+    output += "end" + "\n"
+    output += "wr" + "\n"
+
+    with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
+        f.write(output)
 
 def get_vlan_used_by_a_switch(dict):
     vlan_used = set()
