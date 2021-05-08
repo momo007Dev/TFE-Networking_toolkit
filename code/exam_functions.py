@@ -31,6 +31,11 @@ srv2_dns_list = list()
         #---Page 2_3---#
 swl3_dict = dict()
 swl3_routing_dict = dict()
+
+        #---Page 2_4---#
+r1_dict : dict()
+r1_routing_dict = dict()
+r1_ssh_dict = dict()
 #--------------END------------------#
 
 def add_host_to_table(table, name, host): # Used when user clicks "add" btn
@@ -120,8 +125,18 @@ def save_changes(stacked_widget):
         save_changes_p2_2()
 
     elif (current_index == 6): # Page 2_3 : Switch L3
-        exam_page.E_btn_1_5.setVisible(True)
-        save_changes_p2_3()
+        if not (exam_page.E_p2_3_rou_table1.rowCount() == 0):
+            exam_page.E_btn_1_5.setVisible(True)
+            save_changes_p2_3()
+        else:
+            utils.blueprintFunctions.mkWarningMsg("Routing Check", "<b><span style=color:'red'>No routing </b></span> <b><span style=color:'blue'>data</b></span> has been <b>entered</b> !")
+
+    elif (current_index == 7): # Page 2_4 : Routers
+        if not (exam_page.E_p2_4_R1_Rou_table1.rowCount() == 0):
+            exam_page.E_btn_1_6.setVisible(True)
+            save_changes_p2_4()
+        else:
+            utils.blueprintFunctions.mkWarningMsg("Routing Check", "<b><span style=color:'red'>No routing </b></span> <b><span style=color:'blue'>data</b></span> has been <b>entered</b> !")
 
 #-----------------------------------------------------------------------------#
 # Function used when press "save changes" within main configuration (page 2)  #
@@ -769,7 +784,6 @@ def populate_gateway_combo(combo_part_of_vlan, combo_switch, label_switch): # Ap
         combo_switch.setVisible(False)
         label_switch.setVisible(False)
 
-
 def generate_usable_ip_from_network_and_cidr(subnet, cidr):
     usable_ip_list = list()
     network = subnet + cidr
@@ -909,10 +923,9 @@ def save_changes_p2_2():
         "srv2" : srv2_dict
     }
 
-    #TODO
-    #generate_solution_client()
-    #generate_solution_switch()
-    #generate_solution_server()
+    generate_solution_client()
+    generate_solution_switch()
+    generate_solution_server()
 
 def save_changes_p2_3():
     global swl3_dict
@@ -923,13 +936,6 @@ def save_changes_p2_3():
         "c" : [exam_page.E_p2_3_int_C_comboInterface.currentText(), exam_page.E_p2_3_int_C_ip.text(), exam_page.E_p2_3_int_C_comboCidr.currentText(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_3_int_C_comboCidr.currentText())), exam_page.E_p2_3_int_C_description.text()]
     }
 
-    """
-    table = exam_page.E_p2_2_srv1_tableDhcp # "pool_name" (unique) : ["start_ip", "cidr", "gateway"]
-    rowCount = table.rowCount()
-    for x in range(rowCount):
-        srv1_dhcp_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(subnet_functions.getMaskFromSlash(str(table.item(x, 2).text()))), str(table.item(x, 3).text())]
-
-    """
     passive_int_list = get_list_from_table(exam_page.E_p2_3_rou_table3)
     static_routing_list = get_list_from_table(exam_page.E_p2_3_rou_table2)
 
@@ -946,8 +952,42 @@ def save_changes_p2_3():
         swl3_routing_dict[count] = [str(table.item(x, 0).text()), str(table.item(x, 1).text()), str(table.item(x, 2).text()), str(table.item(x, 3).text())]
         count +=1
 
-    # TODO
-    #generate_solution_swl3()
+    generate_solution_swl3()
+
+def save_changes_p2_4():
+    global r1_dict, r1_routing_dict, r1_ssh_dict
+
+    r1_dict = {
+        "name": [exam_page.E_p2_4_R1_Main_editHostname.text()],
+        "a": [exam_page.E_p2_4_R1_Main_int_A_comboInterface.currentText(), exam_page.E_p2_4_R1_Main_int_A_ip.text(), exam_page.E_p2_4_R1_Main_int_A_comboCidr.currentText(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_4_R1_Main_int_A_comboCidr.currentText())), exam_page.E_p2_4_R1_Main_int_A_description.text()],
+        "b": [exam_page.E_p2_3_int_B_comboInterface.currentText()]
+    }
+    # New SSH DATA Strcuture HERE
+    r1_ssh_list = get_list_from_table(exam_page.E_p2_4_R1_Main_gb1_table)
+
+    r1_ssh_dict = {
+        "domain" : exam_page.E_p2_4_R1_Main_gb1_editDns.text(),
+        "username" : exam_page.E_p2_4_R1_Main_gb1_editUsername.text(),
+        "password" : exam_page.E_p2_4_R1_Main_gb1_editPassword.text(),
+        "allowed-host" : r1_ssh_list
+    }
+
+    passive_int_list = get_list_from_table(exam_page.E_p2_4_R1_Rou_table3)
+    static_routing_list = get_list_from_table(exam_page.E_p2_4_R1_Rou_table2)
+
+    r1_routing_dict = {  # 0: [Protocol, network, wildcard, area]
+        "ospf": [exam_page.E_p2_4_R1_Rou_gb1_editProcess.text(), exam_page.E_p2_4_R1_Rou_gb1_editBandwidth.text()],
+        "passive_int": passive_int_list,
+        "static": static_routing_list
+    }
+    table = exam_page.E_p2_4_R1_Rou_table1
+    rowCount = table.rowCount()
+    count = 0
+    for x in range(rowCount):
+        r1_routing_dict[count] = [str(table.item(x, 0).text()), str(table.item(x, 1).text()), str(table.item(x, 2).text()), str(table.item(x, 3).text())]
+        count += 1
+
+    generate_solution_r1()
 
 def generate_solution_switch():
     native = get_native_vlan(vlan_dict)
@@ -977,6 +1017,12 @@ def generate_solution_switch():
             else:
                 output += "   switchport mode trunk" + "\n"
                 output += "\n"
+
+        vlan_used = get_vlan_used_by_a_switch(switch_dict.get(x))
+        for z in vlan_used:
+            output += "vlan " + str(z) + "\n"
+            output += "   name " + str(vlan_dict.get(z)[0]) + "\n"
+            output += "\n"
 
         index = switch_dict.get(x).get("is_part_of_a_vlan")
         if (len(index) == 4):
@@ -1052,14 +1098,17 @@ def generate_solution_swl3():
     output += "ip routing \n"
     output += "\n"
     output += "int " + str(swl3_dict.get("a")[0]) + "\n"
+    output += "   description " + str(swl3_dict.get("a")[1]) + "\n"
     output += "   switchport trunk encapsulation dot1q \n"
     output += "   switchport mode trunk \n"
     output += "\n"
     output += "int " + str(swl3_dict.get("b")[0]) + "\n"
+    output += "   description " + str(swl3_dict.get("b")[4]) + "\n"
     output += "   no switchport \n"
     output += "   ip add " + str(swl3_dict.get("b")[1]) + " " + str(swl3_dict.get("b")[3]) + "\n"
     output += "\n"
     output += "int " + str(swl3_dict.get("c")[0]) + "\n"
+    output += "   description " + str(swl3_dict.get("c")[4]) + "\n"
     output += "   no switchport \n"
     output += "   ip add " + str(swl3_dict.get("c")[1]) + " " + str(swl3_dict.get("c")[3]) + "\n"
     output += "\n"
@@ -1075,29 +1124,51 @@ def generate_solution_swl3():
             output += "   ip helper-address " + str(vlan_dict.get(z)[5]) + "\n"
         output += "\n"
 
-    int_keys = list(swl3_routing_dict.keys())[3:]
-    protocol_is_ospf = True
-    if (swl3_routing_dict.get(0)[0] == "OSPF"):
-        protocol_is_ospf = True
-        output += "router ospf " + str(swl3_routing_dict.get("ospf")[0]) + "\n"
-        output += "   auto-cost reference-bandwidth " + str(swl3_routing_dict.get("ospf")[1]) + "\n"
-    else:
-        protocol_is_ospf = False
-        output += "router rip \n"
-        output +="   version 2 \n"
+    output = build_routing_txt_solution(swl3_routing_dict, output)
 
-    for z in swl3_routing_dict.get("passive_int"):
-        output += "   passive-interface " + str(z) + "\n"
+    output += "end" + "\n"
+    output += "wr" + "\n"
 
-    for a in int_keys:
-        if (protocol_is_ospf):
-            output += "   network " + str(swl3_routing_dict.get(a)[1]) + " " + str(swl3_routing_dict.get(a)[2]) + " area " + str(swl3_routing_dict.get(a)[3]) + "\n"
-        elif (protocol_is_ospf == False):
-            output += "   network " + str(swl3_routing_dict.get(a)[1]) + "\n"
+    with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
+        f.write(output)
 
-    output += "   default-information originate ! Pour les routes par défauts \n"
-    output += "   redistribute static ! Pour les routes statiques \n"
+def generate_solution_r1():
+    output = "----------------\n"
+    output += "   " + str(r1_dict.get("name")[0]) + "   \n"
+    output += "----------------\n"
+
+    output += "hostname " + str(r1_dict.get("name")[0]) + "\n"
     output += "\n"
+    if (exam_page.E_p2_4_R1_Main_checkSsh.isChecked()):
+        output += "username " + r1_ssh_dict.get("username") + " secret " + r1_ssh_dict.get("password") + "\n"
+        output += "ip domain-name " + r1_ssh_dict.get("domain") + "\n"
+        output += "crypto key generate rsa general-keys modulus 1024 \n"
+        output += "\n"
+        for q in r1_ssh_dict.get("allowed-host"):
+            output += str(q) + "\n"
+        output += "\n"
+
+    output += "int " + str(r1_dict.get("a")[0]) + "\n"
+    output += "   description " + str(r1_dict.get("a")[4]) + "\n"
+    output += "   ip add " + str(r1_dict.get("a")[1]) + " " + str(r1_dict.get("a")[3]) + "\n"
+    output += "\n"
+
+    vlan_used_s1 = get_vlan_used_by_a_switch(s1_dict)
+    vlan_used_s2 = get_vlan_used_by_a_switch(s2_dict)
+    vlan_used = vlan_used_s1.union(vlan_used_s2)
+    int_b = str(r1_dict.get("b")[0]) + "."
+    for z in vlan_used:
+        output += "int " + int_b + str(z) + "\n"
+        if (str(vlan_dict.get(z)[6]) == "Yes"):
+            output += "   encapsulation dot1Q " + str(z) + " native \n"
+        else:
+            output += "   encapsulation dot1Q " + str(z) + "\n"
+        output += "   ip add " + str(vlan_dict.get(z)[4]) + " " + str(vlan_dict.get(z)[3]) + "\n"
+        if not (vlan_dict.get(z)[5] == "No"):
+            output += "   ip helper-address " + str(vlan_dict.get(z)[5]) + "\n"
+        output += "\n"
+
+    output = build_routing_txt_solution(r1_routing_dict, output)
 
     output += "end" + "\n"
     output += "wr" + "\n"
@@ -1136,3 +1207,32 @@ def get_list_from_table(table): # Returns a list with all data from a table, onl
         some_list.append(str(table.item(x, 0).text()))
 
     return some_list
+
+def build_routing_txt_solution(device_routing_dict, output):
+    int_keys = list(device_routing_dict.keys())[3:]
+
+    protocol_is_ospf = True
+    if (device_routing_dict.get(0)[0] == "OSPF"):
+        protocol_is_ospf = True
+        output += "router ospf " + str(device_routing_dict.get("ospf")[0]) + "\n"
+        output += "   auto-cost reference-bandwidth " + str(device_routing_dict.get("ospf")[1]) + "\n"
+    else:
+        protocol_is_ospf = False
+        output += "router rip \n"
+        output += "   version 2 \n"
+
+    for z in device_routing_dict.get("passive_int"):
+        output += "   passive-interface " + str(z) + "\n"
+
+    for a in int_keys:
+        if (protocol_is_ospf):
+            output += "   network " + str(device_routing_dict.get(a)[1]) + " " + str(
+                device_routing_dict.get(a)[2]) + " area " + str(device_routing_dict.get(a)[3]) + "\n"
+        elif (protocol_is_ospf == False):
+            output += "   network " + str(device_routing_dict.get(a)[1]) + "\n"
+
+    output += "   default-information originate ! Pour les routes par défauts \n"
+    output += "   redistribute static ! Pour les routes statiques \n"
+    output += "\n"
+
+    return output
