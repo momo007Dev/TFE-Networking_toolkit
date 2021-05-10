@@ -735,8 +735,6 @@ def save_changes_p2_1(table):
     rowCount = table.rowCount()
     for x in range(rowCount):
         vlan_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(table.item(x, 2).text()).split("(")[1][:-1], str(table.item(x, 2).text()).split("(")[0][:-1], str(table.item(x, 3).text()), str(table.item(x, 4).text()), str(table.item(x, 5).text()), str(table.item(x, 6).text())]
-    for x, y in vlan_dict.items():
-        print(x, y)
 
     populate_vlan_in_combo(exam_page.E_p2_2_s1_isVlan_combo, True)
     populate_vlan_in_combo(exam_page.E_p2_2_s1_comboA_vlan, False)
