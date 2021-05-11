@@ -118,6 +118,30 @@ class blueprintFunctions:
         msg.setWindowTitle(title)
         msg.exec()
 
+    def build_about_popup(self):
+        import webbrowser
+        msgBox = QMessageBox()
+        msgBox.setWindowIcon(QtGui.QIcon("img/about.png"))
+        msgBox.setWindowTitle("About")
+        data = "<h2>Networking Toolkit</h2>"
+        data += "Application used to facilitate the generation <br>of exams (Packet Tracer) via an easy-to-use GUI."
+        data += "<ul>"
+        data += "<li><b><u>Version</b></u> : <span style='color:green'><b>1.0</span></b></li>"
+        data += "<li><b><u>Os</b></u> : <span style='color:blue'><b>Windows 10</span></b></li>"
+        data += "<li><b><u>Python</b></u> : <b><span style='color:red'>" + str(
+            platform.python_version()) + "</span></b></li></ul>"
+        data += "<b><i>© Morgan Valentin. All rights reserved.</b></i>"
+        msgBox.setTextFormat(1) # Sets data to html type
+        msgBox.setText(data)
+        msgBox.setIcon(QMessageBox.Information)
+
+        github_btn = msgBox.addButton('View project on github', QMessageBox.YesRole)
+        github_btn.clicked.disconnect()
+        github_btn.clicked.connect(lambda: webbrowser.open('https://github.com/momo007Dev/TFE-Networking_toolkit'))
+        cancelBtn = msgBox.addButton('Close this window', QMessageBox.RejectRole)
+
+        msgBox.exec_()
+
     # ---------------------------
     # Fills combo with /32 => /0
     #----------------------------

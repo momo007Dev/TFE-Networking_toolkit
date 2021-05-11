@@ -16528,6 +16528,28 @@ background-color: rgb(255, 255, 255);</string>
            </property>
           </item>
          </widget>
+         <widget class="QLabel" name="E_p2_4_R2_Main_img_3">
+          <property name="geometry">
+           <rect>
+            <x>590</x>
+            <y>308</y>
+            <width>281</width>
+            <height>181</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>img/schema2-isp.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
         </widget>
        </widget>
       </widget>
