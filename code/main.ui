@@ -752,7 +752,7 @@ Generator</string>
        <string notr="true">background-color: rgb(173, 173, 173);</string>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_1">
        <widget class="QLabel" name="E_p1_label">
@@ -854,7 +854,7 @@ Generator</string>
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>img/schema4_lock.png</pixmap>
+          <pixmap>img/schema3_lock.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>

@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from netaddr import IPNetwork
+from netaddr import IPNetwork, IPAddress
 import math, socket, ipaddress
 
 import utils
@@ -17,6 +17,9 @@ def getMaskFromSlash(cidr):
         subnet = "192.168.0.0" + "/" + str(cidr)
     ip = IPNetwork(subnet)
     return ip.netmask
+
+def getCidrFromMask(mask):
+    return str(IPAddress(mask).netmask_bits())
 
 #------------------------------------------------------------------------------------------------------#
 # Takes a mask in argument (eg: "0.0.0.0") and returns the wildcard  equivalent (eg:"255.255.255.255") #

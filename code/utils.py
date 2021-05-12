@@ -9,6 +9,8 @@ import os, platform
 # This class contains blueprint functions that allows quick build of gui objects #
 #--------------------------------------------------------------------------------#
 
+version_number = 1.2
+
 class blueprintFunctions:
 
     def getCurrentOS():
@@ -126,7 +128,7 @@ class blueprintFunctions:
         data = "<h2>Networking Toolkit</h2>"
         data += "Application used to facilitate the generation <br>of exams (Packet Tracer) via an easy-to-use GUI."
         data += "<ul>"
-        data += "<li><b><u>Version</b></u> : <span style='color:green'><b>1.0</span></b></li>"
+        data += "<li><b><u>Version</b></u> : <span style='color:green'><b>" + str(version_number) + "</span></b></li>"
         data += "<li><b><u>Os</b></u> : <span style='color:blue'><b>Windows 10</span></b></li>"
         data += "<li><b><u>Python</b></u> : <b><span style='color:red'>" + str(
             platform.python_version()) + "</span></b></li></ul>"
@@ -229,8 +231,25 @@ class blueprintFunctions:
                     n1 += 1
 
     def fillComboStaticRoute(combo_route, combo_r1_int, combo_isp_ip):
+        combo_route.clear()
         combo_route.addItem(combo_r1_int.currentText())
         combo_route.addItem(combo_isp_ip.currentText())
+
+    def format_output_interface(text):
+        if (text[0] == "G"):
+            string = "GigabitEthernet" + str(text[1:])
+            return string
+        elif (text[0] == "F"):
+            string = "FastEthernet" + str(text[1:])
+            return string
+        elif (text[0] == "S"):
+            string = "Serial" + str(text[1:])
+            return string
+        elif (text[0] == "E"):
+            string = "Ethernet" + str(text[1:])
+            return string
+        else:
+            return text
 
     #--------END----------------------------#
 

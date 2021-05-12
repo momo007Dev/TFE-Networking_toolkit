@@ -18,6 +18,7 @@ lan_names_set = list()
 devices_dict = dict() # PC1-2-3/S1-2/ISP
 router_dict = dict() # R1
 security_enabled = False
+static_route_exam_level_1 = ""
 
         #---Page 2_1---#
 vlan_dict = dict()
@@ -56,14 +57,11 @@ def add_host_to_table(table, name, host): # Used when user clicks "add" btn
         table.setItem(lastrow, 1, item2)
 
 def clear_table(table): # Used when user clicks "clear" btn
-    x = table.rowCount()
-    while (table.rowCount() > 0):
-        table.removeRow(x)
-        x -= 1
-
+    clear_any_table(table)
     lan_names_set.clear()
     vlsm_dict = dict()
     clear_combo_network()
+    exam_page.E_btn_3.setVisible(False)
 
 def sort_hosts(table):
     rowCount = table.rowCount()
@@ -89,10 +87,14 @@ def save_changes(stacked_widget):
     if (current_index == 1): # Page 2
         if (utils.blueprintFunctions.checkIp(exam_page.E_p2_editLan.text()) is False or utils.blueprintFunctions.checkIp(exam_page.E_p2_editWan.text()) is False):
             utils.blueprintFunctions.mkWarningMsg("Ip Check","<b><span style=color:'red'>Ip</b></span> <b>format</b> not respected !")
+
+        elif(exam_page.E_p2_table.rowCount() == 0):
+            utils.blueprintFunctions.mkWarningMsg("Data Error", "<b><span style=color:'red'>Table</b></span> is <b><span style=color:'blue'>empty</span></b> !")
+            exam_page.E_btn_3.setVisible(False)
+
         else:
             save_changes_p2()
             exam_page.E_btn_3.setVisible(True)
-
 
     elif (current_index == 2): # Page 3
         r1_int_1 = exam_page.E_p3_gb2_comboR1Interface1.currentText()
@@ -391,7 +393,8 @@ def generate_solution_text():
 
     if (exam_page.E_p4_gb3_check.isChecked()):
         output += "ip route " + exam_page.E_p4_gb3_edit1.text() + " " + exam_page.E_p4_gb3_edit2.text() + " " + exam_page.E_p4_gb3_combo.currentText()  + "\n"
-
+        global static_route_exam_level_1
+        static_route_exam_level_1 = exam_page.E_p4_gb3_edit1.text() + "-" + subnet_functions.getCidrFromMask(exam_page.E_p4_gb3_edit2.text()) + "-" + utils.blueprintFunctions.format_output_interface(exam_page.E_p4_gb3_combo.currentText())
     output += "end" + "\n"
     output += "wr" + "\n"
 
@@ -604,11 +607,11 @@ def generate_solution_packet_tracer():
                         "Mask": router_dict[str(list(router_dict.keys())[4])][2]
                     },
                 },
-                #"Routes" : {
-                #  "Static Routes" : {
-                #      "Route0" : "0.0.0.0-0-Serial0/0/1-0-1" 0.0.0.0-0-GigabitEthernet0/1-0-1
-                #  }
-                #},
+                "Routes" : {
+                  "Static Routes" : {
+                      "Route0" : static_route_exam_level_1
+                  }
+                },
                 "User Names": {  # SSH
                     "Username": exam_page.E_p4_gb2_1_editUsername.text() + " " + exam_page.E_p4_gb2_1_editPassword.text()
                 },

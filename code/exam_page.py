@@ -9,6 +9,8 @@ from exam_functions import *
 classBlueprint = utils.blueprintFunctions
 
 #-------GLOBAL VARIABLES------------#
+exam_level_1_only = True # Allows to force level 1 only
+
 vlan_set = set()
 vlan_subnet_set = set()
 vlan_name_set = set()
@@ -131,6 +133,16 @@ def setupUiExam(self):
     self.E_p1_img3 = QtWidgets.QLabel(self.frame)
     classBlueprint.mkLabPic(self.E_p1_img3, QtCore.QRect(445, 5, 371, 481), QtGui.QPixmap("./img/schema3_lock.png"), True)
     self.E_p1_img3.mousePressEvent = lambda _: exam_functions.show_selected_topology(self.E_p1_img3, self.E_p1_img1, self.E_p1_img2, self.E_p1_img3, E_btn_2, E_btn_1_2, True)
+
+            #---ONLY LEVEL 1 EXAM---#
+    if (exam_page.exam_level_1_only == True):
+        self.E_p1_img2 = QtWidgets.QLabel(self.frame)
+        classBlueprint.mkLabPic(self.E_p1_img2, QtCore.QRect(5, 210, 421, 281), QtGui.QPixmap("./img/schema2_lock.png"), True)
+        self.E_p1_img2.mousePressEvent = lambda _: exam_functions.show_selected_topology(self.E_p1_img2, self.E_p1_img1, self.E_p1_img2, self.E_p1_img3, E_btn_2, E_btn_1_2, True)
+    else:
+        self.E_p1_img2 = QtWidgets.QLabel(self.frame)
+        classBlueprint.mkLabPic(self.E_p1_img2, QtCore.QRect(5, 210, 421, 281), QtGui.QPixmap("./img/schema2.png"), True)
+        self.E_p1_img2.mousePressEvent = lambda _: exam_functions.show_selected_topology(self.E_p1_img2, self.E_p1_img1, self.E_p1_img2, self.E_p1_img3, E_btn_2, E_btn_1_2, False)
 
     self.stackedWidget_2.addWidget(self.page_1)
 
@@ -496,6 +508,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntRouter(E_p3_gb2_comboR1Interface2)
+    E_p3_gb2_comboR1Interface2.setCurrentIndex(1)
 
     global E_p3_gb2_comboR1Subnet2
     E_p3_gb2_comboR1Subnet2 = QtWidgets.QComboBox(self.E_p3_gb2)
@@ -778,12 +791,12 @@ def setupUiExam(self):
 
     global E_p4_gb3_edit1
     E_p4_gb3_edit1 = QtWidgets.QLineEdit(self.E_p4_gb3)
-    classBlueprint.mkLineEdit(E_p4_gb3_edit1, QtCore.QRect(110, 30, 171, 31), 22, "0.0.0.0")
+    classBlueprint.mkLineEdit(E_p4_gb3_edit1, QtCore.QRect(110, 30, 171, 31), 15, "0.0.0.0")
     E_p4_gb3_edit1.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
     global E_p4_gb3_edit2
     E_p4_gb3_edit2 = QtWidgets.QLineEdit(self.E_p4_gb3)
-    classBlueprint.mkLineEdit(E_p4_gb3_edit2, QtCore.QRect(110, 80, 171, 31), 22, "0.0.0.0")
+    classBlueprint.mkLineEdit(E_p4_gb3_edit2, QtCore.QRect(110, 80, 171, 31), 15, "0.0.0.0")
     E_p4_gb3_edit2.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 0, 255);")
 
     global E_p4_gb3_combo
@@ -3445,7 +3458,6 @@ def setupUiExam(self):
             E_p2_4_R2_Main_gb1_editUsername.setDisabled(True)
             E_p2_4_R2_Main_gb1_editPassword.setDisabled(True)
 
-
     def clear_ssh_table():
         if (p2_4_tabwidget.currentIndex() == 0):
             global acl_number_r1
@@ -3463,3 +3475,9 @@ def setupUiExam(self):
             E_p2_4_R2_Main_gb1_editPassword.setDisabled(False)
             exam_functions.clear_any_table(E_p2_4_R2_Main_gb1_table)
 
+    def enable_only_level_1_exam(img):
+        # If enabled, change img to img_locked and add that popup + red rectangle...
+        if (exam_page.Exam_level_1_only == True):
+            print("TRUE")
+        else:
+            print("FALSE")
