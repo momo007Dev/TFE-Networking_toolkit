@@ -9,7 +9,7 @@ from exam_functions import *
 classBlueprint = utils.blueprintFunctions
 
 #-------GLOBAL VARIABLES------------#
-exam_level_1_only = True # Allows to force level 1 only
+exam_level_1_only = False # Allows to force level 1 only
 
 vlan_set = set()
 vlan_subnet_set = set()
@@ -19,9 +19,8 @@ dhcp_pool_name_set_srv2 = set()
 
 passive_int_swl3 = list()
 passive_int_r1 = list()
-acl_number_r1 = 1
-acl_number_r2 = 1
 passive_int_r2 = list()
+r2_port_redirection_list = list()
 #--------------END------------------#
 
 def setupUiExam(self):
@@ -91,6 +90,7 @@ def setupUiExam(self):
     E_btn_1_6 = QtWidgets.QPushButton(self.Exam)
     classBlueprint.mkBtn(E_btn_1_6, QtCore.QRect(755, 47, 135, 50), "background-color: rgb(255, 170, 255);", "(6) Generate\nmy exam !")
     E_btn_1_6.setVisible(False)
+    E_btn_1_6.clicked.connect(lambda: exam_functions.generate_solution_text_v2())
     #-----------------#
 
     self.E_home = QtWidgets.QPushButton(self.Exam)
@@ -881,7 +881,7 @@ def setupUiExam(self):
     classBlueprint.mkCheck(p2_1_gb_check, QtCore.QRect(5, 220, 131, 31), False, "Is native ?")
 
     self.p2_1_gb_add = QtWidgets.QPushButton(self.p2_1_gb)
-    classBlueprint.mkBtn(self.p2_1_gb_add, QtCore.QRect(370, 220, 101, 31), "background-color: rgb(255, 255, 0);", "Add")
+    classBlueprint.mkBtn(self.p2_1_gb_add, QtCore.QRect(370, 220, 101, 31), "background-color: rgb(255, 25, 136);", "Add")
     self.p2_1_gb_add.clicked.connect(lambda: add_vlan_to_table())
 
     self.p2_1_gb_clear = QtWidgets.QPushButton(self.p2_1_gb)
@@ -2318,6 +2318,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntRouter(E_p2_4_R1_Main_int_B_comboInterface)
+    E_p2_4_R1_Main_int_B_comboInterface.setCurrentIndex(1)
 
     global E_p2_4_R1_Main_checkSsh
     E_p2_4_R1_Main_checkSsh = QtWidgets.QCheckBox(p2_4_tabwidget_tab1)
@@ -2379,7 +2380,7 @@ def setupUiExam(self):
     E_p2_4_R1_Main_gb1_table.setColumnWidth(0, 450)
 
     E_p2_4_R1_Main_note = QtWidgets.QTextEdit(p2_4_tabwidget_tab1)
-    E_p2_4_R1_Main_note.setGeometry(QtCore.QRect(510, 105, 361, 101))
+    E_p2_4_R1_Main_note.setGeometry(QtCore.QRect(500, 96, 371, 112))
     E_p2_4_R1_Main_note.setStyleSheet("background-color: rgb(255, 255, 0);")
     E_p2_4_R1_Main_note.setObjectName("E_p2_4_R1_Main_note")
     E_p2_4_R1_Main_note.setHtml( "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -2390,7 +2391,8 @@ def setupUiExam(self):
                                        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600; text-decoration: underline;\">SSH NOTE</span></p>\n"
                                        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">------------------</p>\n"
                                        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; text-decoration: underline;\">PS </span><span style=\" font-size:8pt;\">: </span><span style=\" font-size:8pt; font-weight:600; color:#ff0000;\">To add a host, CIDR must be = &quot;/32&quot;</span></p>\n"
-                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; text-decoration: underline;\">ACL logic</span><span style=\" font-size:8pt;\"> : </span><span style=\" font-size:8pt; font-weight:600; color:#55aa00;\">Deny all excepts allowed hosts / subnets</span></p></body></html>")
+                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; text-decoration: underline;\">ACL logic</span><span style=\" font-size:8pt;\"> : </span><span style=\" font-size:8pt; font-weight:600; color:#55aa00;\">Deny all excepts allowed hosts / subnets</span></p>\n"
+                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;\">PPS</span><span style=\" font-size:8pt; font-weight:600; color:#55aa00;\"> : </span><span style=\" font-size:8pt; font-weight:600; color:#0000ff;\">There's only 1 ACL !</span></p></body></html>")
     E_p2_4_R1_Main_note.setReadOnly(True)
     E_p2_4_R1_Main_note.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
     E_p2_4_R1_Main_note.hide()
@@ -2585,7 +2587,7 @@ def setupUiExam(self):
 
     global E_p2_4_R2_Main_editHostname
     E_p2_4_R2_Main_editHostname = QtWidgets.QLineEdit(p2_4_tabwidget_tab3)
-    classBlueprint.mkLineEdit(E_p2_4_R2_Main_editHostname, QtCore.QRect(140, 10, 141, 31), 10, "R1")
+    classBlueprint.mkLineEdit(E_p2_4_R2_Main_editHostname, QtCore.QRect(140, 10, 141, 31), 10, "R2")
     E_p2_4_R2_Main_editHostname.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
     self.E_p2_4_R2_Main_int_A_label = QtWidgets.QLabel(p2_4_tabwidget_tab3)
@@ -2631,6 +2633,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntRouter(E_p2_4_R2_Main_int_B_comboInterface)
+    E_p2_4_R2_Main_int_B_comboInterface.setCurrentIndex(1)
 
     global E_p2_4_R2_Main_int_B_ip
     E_p2_4_R2_Main_int_B_ip = QtWidgets.QLineEdit(p2_4_tabwidget_tab3)
@@ -2715,15 +2718,18 @@ def setupUiExam(self):
     E_p2_4_R2_Main_note.setGeometry(QtCore.QRect(510, 120, 361, 101))
     E_p2_4_R2_Main_note.setStyleSheet("background-color: rgb(255, 255, 0);")
     E_p2_4_R2_Main_note.setObjectName("E_p2_4_R1_Main_note")
-    E_p2_4_R2_Main_note.setHtml( "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                       "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                       "p, li { white-space: pre-wrap; }\n"
-                                       "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
-                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">------------------</p>\n"
-                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600; text-decoration: underline;\">SSH NOTE</span></p>\n"
-                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">------------------</p>\n"
-                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; text-decoration: underline;\">PS </span><span style=\" font-size:8pt;\">: </span><span style=\" font-size:8pt; font-weight:600; color:#ff0000;\">To add a host, CIDR must be = &quot;/32&quot;</span></p>\n"
-                                       "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; text-decoration: underline;\">ACL logic</span><span style=\" font-size:8pt;\"> : </span><span style=\" font-size:8pt; font-weight:600; color:#55aa00;\">Deny all excepts allowed hosts / subnets</span></p></body></html>")
+    E_p2_4_R2_Main_note.setHtml(
+        "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        "p, li { white-space: pre-wrap; }\n"
+        "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">------------------</p>\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600; text-decoration: underline;\">SSH NOTE</span></p>\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">------------------</p>\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; text-decoration: underline;\">PS </span><span style=\" font-size:8pt;\">: </span><span style=\" font-size:8pt; font-weight:600; color:#ff0000;\">To add a host, CIDR must be = &quot;/32&quot;</span></p>\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; text-decoration: underline;\">ACL logic</span><span style=\" font-size:8pt;\"> : </span><span style=\" font-size:8pt; font-weight:600; color:#55aa00;\">Deny all excepts allowed hosts / subnets</span></p>\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;\">PPS</span><span style=\" font-size:8pt; font-weight:600; color:#55aa00;\"> : </span><span style=\" font-size:8pt; font-weight:600; color:#0000ff;\">There's only 1 ACL !</span></p></body></html>")
+
     E_p2_4_R2_Main_note.setReadOnly(True)
     E_p2_4_R2_Main_note.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
     E_p2_4_R2_Main_note.hide()
@@ -2907,6 +2913,106 @@ def setupUiExam(self):
     classBlueprint.mkTable(E_p2_4_R2_Rou_table3, QtCore.QRect(730, 315, 141, 171), "background-color: rgb(170, 170, 255);", 1, 0)
     classBlueprint.addDataTable(E_p2_4_R2_Rou_table3, 0, "Passive Interface")
 
+    # ---END---#
+    # ---R2 - NAT---#
+    self.E_p2_4_R2_Nat_img = QtWidgets.QLabel(p2_4_tabwidget_tab5)
+    classBlueprint.mkLabPic(self.E_p2_4_R2_Nat_img, QtCore.QRect(590, 5, 281, 181), QtGui.QPixmap("./img/schema2-r2.png"), True)
+
+        #---GB1---#
+    E_p2_4_R2_Nat_gb1 = QtWidgets.QGroupBox(p2_4_tabwidget_tab5)
+    classBlueprint.mkGroupBox(E_p2_4_R2_Nat_gb1, QtCore.QRect(10, 20, 575, 111), "Authorized Trafic - NAT")
+
+    self.E_p2_4_R2_Nat_gb1_labelHost = QtWidgets.QLabel(E_p2_4_R2_Nat_gb1)
+    classBlueprint.mkLabel(self.E_p2_4_R2_Nat_gb1_labelHost, QtCore.QRect(10, 30, 211, 31), "Allowed Host / Subnet :", True)
+
+    global E_p2_4_R2_Nat_gb1_editHost
+    E_p2_4_R2_Nat_gb1_editHost = QtWidgets.QLineEdit(E_p2_4_R2_Nat_gb1)
+    classBlueprint.mkLineEdit(E_p2_4_R2_Nat_gb1_editHost, QtCore.QRect(230, 30, 181, 31), 15, "192.168.10.0")
+    E_p2_4_R2_Nat_gb1_editHost.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    global E_p2_4_R2_Nat_gb1_comboHost
+    E_p2_4_R2_Nat_gb1_comboHost = QtWidgets.QComboBox(E_p2_4_R2_Nat_gb1)
+    classBlueprint.mkCombo(E_p2_4_R2_Nat_gb1_comboHost, QtCore.QRect(420, 30, 70, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr(E_p2_4_R2_Nat_gb1_comboHost)
+
+    self.E_p2_4_R2_Nat_gb1_add = QtWidgets.QPushButton(E_p2_4_R2_Nat_gb1)
+    classBlueprint.mkBtn(self.E_p2_4_R2_Nat_gb1_add, QtCore.QRect(498, 30, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p2_4_R2_Nat_gb1_add.clicked.connect(lambda: add_nat_rules_to_table())
+
+    self.E_p2_4_R2_Rou_gb5_clear = QtWidgets.QPushButton(E_p2_4_R2_Nat_gb1)
+    classBlueprint.mkBtn(self.E_p2_4_R2_Rou_gb5_clear, QtCore.QRect(498, 70, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_4_R2_Rou_gb5_clear.clicked.connect(lambda: exam_functions.clear_any_table(E_p2_4_R2_Nat_table_1))
+
+        #---GB2---#
+    E_p2_4_R2_Nat_gb2 = QtWidgets.QGroupBox(p2_4_tabwidget_tab5)
+    classBlueprint.mkGroupBox(E_p2_4_R2_Nat_gb2, QtCore.QRect(10, 185, 851, 111), "Port redirection - NAT")
+
+    self.E_p2_4_R2_Nat_gb2_label = QtWidgets.QLabel(E_p2_4_R2_Nat_gb2)
+    classBlueprint.mkLabel(self.E_p2_4_R2_Nat_gb2_label, QtCore.QRect(60, 30, 691, 31), "(Protocol) / (Internal IP) / Internal Port) / (Redirection IP) / (Redirection Port)", True)
+
+    global E_p2_4_R2_Nat_gb2_comboProtocol
+    E_p2_4_R2_Nat_gb2_comboProtocol = QtWidgets.QComboBox(E_p2_4_R2_Nat_gb2)
+    classBlueprint.mkCombo(E_p2_4_R2_Nat_gb2_comboProtocol, QtCore.QRect(5, 70, 70, 30),
+                           "color: rgb(255, 0, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(255, 0, 0);")
+    E_p2_4_R2_Nat_gb2_comboProtocol.addItem("TCP")
+    E_p2_4_R2_Nat_gb2_comboProtocol.addItem("UDP")
+    E_p2_4_R2_Nat_gb2_comboProtocol.currentIndexChanged.connect(lambda: combo_tcp_udp_onchange_update_ports())
+
+    global E_p2_4_R2_Nat_gb2_editIp1
+    E_p2_4_R2_Nat_gb2_editIp1 = QtWidgets.QLineEdit(E_p2_4_R2_Nat_gb2)
+    classBlueprint.mkLineEdit(E_p2_4_R2_Nat_gb2_editIp1, QtCore.QRect(80, 70, 181, 31), 15, "192.168.10.11")
+    E_p2_4_R2_Nat_gb2_editIp1.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    global E_p2_4_R2_Nat_gb2_comboPort1
+    E_p2_4_R2_Nat_gb2_comboPort1 = QtWidgets.QComboBox(E_p2_4_R2_Nat_gb2)
+    classBlueprint.mkCombo(E_p2_4_R2_Nat_gb2_comboPort1, QtCore.QRect(265, 70, 150, 30),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboPortTcp(E_p2_4_R2_Nat_gb2_comboPort1)
+    E_p2_4_R2_Nat_gb2_comboPort1.currentIndexChanged.connect(lambda: combo_port_onchange_update_redirect_port())
+
+    global E_p2_4_R2_Nat_gb2_editIp2
+    E_p2_4_R2_Nat_gb2_editIp2 = QtWidgets.QLineEdit(E_p2_4_R2_Nat_gb2)
+    classBlueprint.mkLineEdit(E_p2_4_R2_Nat_gb2_editIp2, QtCore.QRect(420, 70, 181, 31), 15, "200.0.0.1")
+    E_p2_4_R2_Nat_gb2_editIp2.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    global E_p2_4_R2_Nat_gb2_editPort
+    E_p2_4_R2_Nat_gb2_editPort = QtWidgets.QLineEdit(E_p2_4_R2_Nat_gb2)
+    classBlueprint.mkLineEdit(E_p2_4_R2_Nat_gb2_editPort, QtCore.QRect(610, 70, 70, 31), 4, "20")
+    E_p2_4_R2_Nat_gb2_editPort.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);")
+
+    self.E_p2_4_R2_Nat_gb2_add = QtWidgets.QPushButton(E_p2_4_R2_Nat_gb2)
+    classBlueprint.mkBtn(self.E_p2_4_R2_Nat_gb2_add, QtCore.QRect(690, 70, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p2_4_R2_Nat_gb2_add.clicked.connect(lambda: add_nat_port_redirection_to_table())
+
+    self.E_p2_4_R2_Nat_gb2_clear = QtWidgets.QPushButton(E_p2_4_R2_Nat_gb2)
+    classBlueprint.mkBtn(self.E_p2_4_R2_Nat_gb2_clear, QtCore.QRect(770, 70, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p2_4_R2_Nat_gb2_clear.clicked.connect(lambda: clear_nat_port_redirection_table())
+
+    # Table 1 (NAT Subnet allowed)
+    global E_p2_4_R2_Nat_table_1
+    E_p2_4_R2_Nat_table_1 = QtWidgets.QTableWidget(p2_4_tabwidget_tab5)
+    classBlueprint.mkTable(E_p2_4_R2_Nat_table_1, QtCore.QRect(10, 310, 421, 171), "background-color: rgb(255, 170, 0);", 1, 0)
+    classBlueprint.addDataTable(E_p2_4_R2_Nat_table_1, 0, "Allowed Host / Subnet ACL")
+    E_p2_4_R2_Nat_table_1.setColumnWidth(0, 380)
+
+    # Table 2 (NAT Port redirection)
+    global E_p2_4_R2_Nat_table_2
+    E_p2_4_R2_Nat_table_2 = QtWidgets.QTableWidget(p2_4_tabwidget_tab5)
+    classBlueprint.mkTable(E_p2_4_R2_Nat_table_2, QtCore.QRect(440, 310, 431, 171), "background-color: rgb(170, 170, 255);", 1, 0)
+    classBlueprint.addDataTable(E_p2_4_R2_Nat_table_2, 0, "Port Redirection")
+    E_p2_4_R2_Nat_table_2.setColumnWidth(0, 400)
+
+    # ---END---#
         #---ISP---#
     self.E_p2_4_Isp_Main_img = QtWidgets.QLabel(p2_4_tabwidget_tab6)
     classBlueprint.mkLabPic(self.E_p2_4_Isp_Main_img, QtCore.QRect(590, 308, 281, 181), QtGui.QPixmap("./img/schema2-isp.png"), True)
@@ -2962,6 +3068,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntRouter(E_p2_4_Isp_Main_int_B_comboInterface)
+    E_p2_4_Isp_Main_int_B_comboInterface.setCurrentIndex(1)
 
     global E_p2_4_Isp_Main_int_B_ip
     E_p2_4_Isp_Main_int_B_ip = QtWidgets.QLineEdit(p2_4_tabwidget_tab6)
@@ -3423,53 +3530,42 @@ def setupUiExam(self):
 
     def add_ssh_data_to_table():
         if (p2_4_tabwidget.currentIndex() == 0):
-            global acl_number_r1
             if (E_p2_4_R1_Main_gb1_comboHost.currentText() == "/32"):
-                data = "access-list " + str(acl_number_r1) + " permit host " + str(E_p2_4_R1_Main_gb1_editHost.text())
+                data = "access-list 1 permit host " + str(E_p2_4_R1_Main_gb1_editHost.text())
             else:
-                data = "access-list " + str(acl_number_r1) + " permit " + str(E_p2_4_R1_Main_gb1_editHost.text()) + " " + str(
+                data = "access-list 1 permit " + str(E_p2_4_R1_Main_gb1_editHost.text()) + " " + str(
                     exam_functions.getWildcardFromMask(str(exam_functions.getMaskFromSlash(E_p2_4_R1_Main_gb1_comboHost.currentText()))))
 
             lastrow = E_p2_4_R1_Main_gb1_table.rowCount()
             E_p2_4_R1_Main_gb1_table.insertRow(lastrow)
             item1 = QTableWidgetItem(data)
             E_p2_4_R1_Main_gb1_table.setItem(lastrow, 0, item1)
-            acl_number_r1 += 1
             E_p2_4_R1_Main_gb1_editDns.setDisabled(True)
             E_p2_4_R1_Main_gb1_editUsername.setDisabled(True)
             E_p2_4_R1_Main_gb1_editPassword.setDisabled(True)
 
         elif (p2_4_tabwidget.currentIndex() == 2):
-            global acl_number_r2
             if (E_p2_4_R2_Main_gb1_comboHost.currentText() == "/32"):
-                data = "access-list " + str(acl_number_r2) + " permit host " + str(E_p2_4_R2_Main_gb1_editHost.text())
+                data = "access-list 1 permit host " + str(E_p2_4_R2_Main_gb1_editHost.text())
             else:
-                data = "access-list " + str(acl_number_r2) + " permit " + str(
-                    E_p2_4_R2_Main_gb1_editHost.text()) + " " + str(
-                    exam_functions.getWildcardFromMask(
-                        str(exam_functions.getMaskFromSlash(E_p2_4_R2_Main_gb1_comboHost.currentText()))))
+                data = "access-list 1 permit " + str(E_p2_4_R2_Main_gb1_editHost.text()) + " " + str(exam_functions.getWildcardFromMask(str(exam_functions.getMaskFromSlash(E_p2_4_R2_Main_gb1_comboHost.currentText()))))
 
             lastrow = E_p2_4_R2_Main_gb1_table.rowCount()
             E_p2_4_R2_Main_gb1_table.insertRow(lastrow)
             item1 = QTableWidgetItem(data)
             E_p2_4_R2_Main_gb1_table.setItem(lastrow, 0, item1)
-            acl_number_r2 += 1
             E_p2_4_R2_Main_gb1_editDns.setDisabled(True)
             E_p2_4_R2_Main_gb1_editUsername.setDisabled(True)
             E_p2_4_R2_Main_gb1_editPassword.setDisabled(True)
 
     def clear_ssh_table():
         if (p2_4_tabwidget.currentIndex() == 0):
-            global acl_number_r1
-            acl_number_r1 = 1
             E_p2_4_R1_Main_gb1_editDns.setDisabled(False)
             E_p2_4_R1_Main_gb1_editUsername.setDisabled(False)
             E_p2_4_R1_Main_gb1_editPassword.setDisabled(False)
             exam_functions.clear_any_table(E_p2_4_R1_Main_gb1_table)
 
         elif (p2_4_tabwidget.currentIndex() == 2):
-            global acl_number_r2
-            acl_number_r2 = 1
             E_p2_4_R2_Main_gb1_editDns.setDisabled(False)
             E_p2_4_R2_Main_gb1_editUsername.setDisabled(False)
             E_p2_4_R2_Main_gb1_editPassword.setDisabled(False)
@@ -3481,3 +3577,55 @@ def setupUiExam(self):
             print("TRUE")
         else:
             print("FALSE")
+
+    def combo_tcp_udp_onchange_update_ports():
+        if (E_p2_4_R2_Nat_gb2_comboProtocol.currentIndex() == 0): # TCP
+            E_p2_4_R2_Nat_gb2_comboPort1.clear()
+            classBlueprint.fillComboPortTcp(E_p2_4_R2_Nat_gb2_comboPort1)
+        elif (E_p2_4_R2_Nat_gb2_comboProtocol.currentIndex() == 1): # UDP
+            E_p2_4_R2_Nat_gb2_comboPort1.clear()
+            classBlueprint.fillComboPortUdp(E_p2_4_R2_Nat_gb2_comboPort1)
+
+    def combo_port_onchange_update_redirect_port():
+        current_port = E_p2_4_R2_Nat_gb2_comboPort1.currentText()
+        port = current_port.split(" ")[0]
+        E_p2_4_R2_Nat_gb2_editPort.setText(port)
+
+    def add_nat_rules_to_table():
+
+        subnet = E_p2_4_R2_Nat_gb1_editHost.text()
+        cidr = E_p2_4_R2_Nat_gb1_comboHost.currentText()
+        table = E_p2_4_R2_Nat_table_1
+
+        if (cidr == "/32"):
+            data = "access-list 1 permit host " + str(subnet)
+        else:
+            data = "access-list 1 permit " + str(subnet) + " " + str(exam_functions.getWildcardFromMask(str(exam_functions.getMaskFromSlash(cidr))))
+
+        lastrow = table.rowCount()
+        table.insertRow(lastrow)
+        item1 = QTableWidgetItem(data)
+        table.setItem(lastrow, 0, item1)
+
+    def add_nat_port_redirection_to_table():
+
+        protocol = E_p2_4_R2_Nat_gb2_comboProtocol.currentText()
+        internal_ip = E_p2_4_R2_Nat_gb2_editIp1.text()
+        internal_port = E_p2_4_R2_Nat_gb2_comboPort1.currentText().split(" ")[0]
+        redirect_ip = E_p2_4_R2_Nat_gb2_editIp2.text()
+        redirect_port = E_p2_4_R2_Nat_gb2_editPort.text()
+        table = E_p2_4_R2_Nat_table_2
+
+        data2 = "ip nat inside source static " + str(protocol) + " " + str(internal_ip) + " " + str(internal_port) + " " + str(redirect_ip) + " " + str(redirect_port)
+        r2_port_redirection_list.append(data2)
+
+        data = "(" + str(protocol) + ") " + str(internal_ip) + " (" + str(internal_port) + ") => " + str(redirect_ip) + " (" + str(redirect_port) + ")"
+
+        lastrow = table.rowCount()
+        table.insertRow(lastrow)
+        item1 = QTableWidgetItem(data)
+        table.setItem(lastrow, 0, item1)
+
+    def clear_nat_port_redirection_table():
+        r2_port_redirection_list.clear()
+        exam_functions.clear_any_table(E_p2_4_R2_Nat_table_2)

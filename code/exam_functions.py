@@ -37,6 +37,11 @@ swl3_routing_dict = dict()
 r1_dict : dict()
 r1_routing_dict = dict()
 r1_ssh_dict = dict()
+r2_dict : dict()
+r2_routing_dict = dict()
+r2_ssh_dict = dict()
+r2_nat_list = list()
+isp_dict = dict()
 #--------------END------------------#
 
 def add_host_to_table(table, name, host): # Used when user clicks "add" btn
@@ -924,10 +929,6 @@ def save_changes_p2_2():
         "srv2" : srv2_dict
     }
 
-    generate_solution_client()
-    generate_solution_switch()
-    generate_solution_server()
-
 def save_changes_p2_3():
     global swl3_dict
     swl3_dict = {
@@ -952,8 +953,6 @@ def save_changes_p2_3():
     for x in range(rowCount):
         swl3_routing_dict[count] = [str(table.item(x, 0).text()), str(table.item(x, 1).text()), str(table.item(x, 2).text()), str(table.item(x, 3).text())]
         count +=1
-
-    generate_solution_swl3()
 
 def save_changes_p2_4():
     global r1_dict, r1_routing_dict, r1_ssh_dict
@@ -988,7 +987,63 @@ def save_changes_p2_4():
         r1_routing_dict[count] = [str(table.item(x, 0).text()), str(table.item(x, 1).text()), str(table.item(x, 2).text()), str(table.item(x, 3).text())]
         count += 1
 
-    generate_solution_r1()
+    # R2
+    global r2_dict, r2_routing_dict, r2_ssh_dict, r2_nat_list
+
+    r2_dict = {
+        "name": [exam_page.E_p2_4_R2_Main_editHostname.text()],
+        "a": [exam_page.E_p2_4_R2_Main_int_A_comboInterface.currentText(), exam_page.E_p2_4_R2_Main_int_A_ip.text(),
+              exam_page.E_p2_4_R2_Main_int_A_comboCidr.currentText(),
+              str(subnet_functions.getMaskFromSlash(exam_page.E_p2_4_R2_Main_int_A_comboCidr.currentText())),
+              exam_page.E_p2_4_R2_Main_int_A_description.text()],
+        "b": [exam_page.E_p2_4_R2_Main_int_B_comboInterface.currentText(), exam_page.E_p2_4_R2_Main_int_B_ip.text(),
+              exam_page.E_p2_4_R2_Main_int_B_comboCidr.currentText(),
+              str(subnet_functions.getMaskFromSlash(exam_page.E_p2_4_R2_Main_int_B_comboCidr.currentText())),
+              exam_page.E_p2_4_R2_Main_int_B_description.text()]
+    }
+
+    r2_ssh_list = get_list_from_table(exam_page.E_p2_4_R2_Main_gb1_table)
+
+    r2_ssh_dict = {
+        "domain": exam_page.E_p2_4_R2_Main_gb1_editDns.text(),
+        "username": exam_page.E_p2_4_R2_Main_gb1_editUsername.text(),
+        "password": exam_page.E_p2_4_R2_Main_gb1_editPassword.text(),
+        "allowed-host": r2_ssh_list
+    }
+
+    passive_int_list = get_list_from_table(exam_page.E_p2_4_R2_Rou_table3)
+    static_routing_list = get_list_from_table(exam_page.E_p2_4_R2_Rou_table2)
+
+    r2_routing_dict = {  # 0: [Protocol, network, wildcard, area]
+        "ospf": [exam_page.E_p2_4_R2_Rou_gb1_editProcess.text(), exam_page.E_p2_4_R2_Rou_gb1_editBandwidth.text()],
+        "passive_int": passive_int_list,
+        "static": static_routing_list
+    }
+    table = exam_page.E_p2_4_R2_Rou_table1
+    rowCount = table.rowCount()
+    count = 0
+    for x in range(rowCount):
+        r2_routing_dict[count] = [str(table.item(x, 0).text()), str(table.item(x, 1).text()),
+                                  str(table.item(x, 2).text()), str(table.item(x, 3).text())]
+        count += 1
+
+    # NEW NAT lists
+    r2_nat_list = get_list_from_table(exam_page.E_p2_4_R2_Nat_table_1)
+
+    # ISP
+    global isp_dict
+
+    isp_dict = {
+        "name": [exam_page.E_p2_4_Isp_Main_editHostname.text()],
+        "a": [exam_page.E_p2_4_Isp_Main_int_A_comboInterface.currentText(), exam_page.E_p2_4_Isp_Main_int_A_ip.text(),
+              exam_page.E_p2_4_Isp_Main_int_A_comboCidr.currentText(),
+              str(subnet_functions.getMaskFromSlash(exam_page.E_p2_4_Isp_Main_int_A_comboCidr.currentText())),
+              exam_page.E_p2_4_Isp_Main_int_A_description.text()],
+        "b": [exam_page.E_p2_4_Isp_Main_int_B_comboInterface.currentText(), exam_page.E_p2_4_Isp_Main_int_B_ip.text(),
+              exam_page.E_p2_4_Isp_Main_int_B_comboCidr.currentText(),
+              str(subnet_functions.getMaskFromSlash(exam_page.E_p2_4_Isp_Main_int_B_comboCidr.currentText())),
+              exam_page.E_p2_4_Isp_Main_int_B_description.text()]
+    }
 
 def generate_solution_switch():
     native = get_native_vlan(vlan_dict)
@@ -1140,14 +1195,24 @@ def generate_solution_r1():
 
     output += "hostname " + str(r1_dict.get("name")[0]) + "\n"
     output += "\n"
+
     if (exam_page.E_p2_4_R1_Main_checkSsh.isChecked()):
         output += "username " + r1_ssh_dict.get("username") + " secret " + r1_ssh_dict.get("password") + "\n"
         output += "ip domain-name " + r1_ssh_dict.get("domain") + "\n"
-        output += "crypto key generate rsa general-keys modulus 1024 \n"
+        output += "crypto key generate rsa general-keys modulus 1024\n"
         output += "\n"
+        count = len(r1_ssh_dict.get("allowed-host"))
         for q in r1_ssh_dict.get("allowed-host"):
             output += str(q) + "\n"
+            print(q)
         output += "\n"
+
+        if (count >0):
+            output += "line vty 0 4\n"
+            output += "   access-class 1 in\n"
+            output += "   login local\n"
+            output += "   transport input ssh\n"
+            output += "\n"
 
     output += "int " + str(r1_dict.get("a")[0]) + "\n"
     output += "   description " + str(r1_dict.get("a")[4]) + "\n"
@@ -1161,7 +1226,7 @@ def generate_solution_r1():
     for z in vlan_used:
         output += "int " + int_b + str(z) + "\n"
         if (str(vlan_dict.get(z)[6]) == "Yes"):
-            output += "   encapsulation dot1Q " + str(z) + " native \n"
+            output += "   encapsulation dot1Q " + str(z) + " native\n"
         else:
             output += "   encapsulation dot1Q " + str(z) + "\n"
         output += "   ip add " + str(vlan_dict.get(z)[4]) + " " + str(vlan_dict.get(z)[3]) + "\n"
@@ -1170,6 +1235,82 @@ def generate_solution_r1():
         output += "\n"
 
     output = build_routing_txt_solution(r1_routing_dict, output)
+
+    output += "end" + "\n"
+    output += "wr" + "\n"
+
+    with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
+        f.write(output)
+
+def generate_solution_r2():
+    output = "----------------\n"
+    output += "   " + str(r2_dict.get("name")[0]) + "   \n"
+    output += "----------------\n"
+
+    output += "hostname " + str(r2_dict.get("name")[0]) + "\n"
+    output += "\n"
+
+    if (exam_page.E_p2_4_R2_Main_checkSsh.isChecked()):
+        output += "username " + r2_ssh_dict.get("username") + " secret " + r2_ssh_dict.get("password") + "\n"
+        output += "ip domain-name " + r2_ssh_dict.get("domain") + "\n"
+        output += "crypto key generate rsa general-keys modulus 1024\n"
+        output += "\n"
+        count = len(r2_ssh_dict.get("allowed-host"))
+        for q in r2_ssh_dict.get("allowed-host"):
+            output += str(q) + "\n"
+        output += "\n"
+
+        if (count >0):
+            output += "line vty 0 4\n"
+            output += "   access-class 1 in\n"
+            output += "   login local\n"
+            output += "   transport input ssh\n"
+            output += "\n"
+
+    output += "int " + str(r2_dict.get("a")[0]) + "\n"
+    output += "   description " + str(r2_dict.get("a")[4]) + "\n"
+    output += "   ip add " + str(r2_dict.get("a")[1]) + " " + str(r2_dict.get("a")[3]) + "\n"
+    output += "\n"
+
+    output += "int " + str(r2_dict.get("b")[0]) + "\n"
+    output += "   description " + str(r2_dict.get("b")[4]) + "\n"
+    output += "   ip add " + str(r2_dict.get("b")[1]) + " " + str(r2_dict.get("b")[3]) + "\n"
+    output += "\n"
+
+    output = build_routing_txt_solution(r2_routing_dict, output)
+
+    output += "!---NAT---\n"
+    for a in r2_nat_list:
+        output += str(a) + "\n"
+    output += "\n"
+
+    for b in exam_page.r2_port_redirection_list:
+        output += str(b) + "\n"
+    output += "\n"
+
+    output += "end" + "\n"
+    output += "wr" + "\n"
+
+    with open(str(utils.blueprintFunctions.getDesktopPath()) + "/solution_v2.txt", "a") as f:
+        f.write(output)
+
+def generate_solution_isp():
+    output = "----------------\n"
+    output += "   " + str(isp_dict.get("name")[0]) + "   \n"
+    output += "----------------\n"
+
+    output += "hostname " + str(isp_dict.get("name")[0]) + "\n"
+    output += "\n"
+
+    output += "int " + str(isp_dict.get("a")[0]) + "\n"
+    output += "   description " + str(isp_dict.get("a")[4]) + "\n"
+    output += "   ip add " + str(isp_dict.get("a")[1]) + " " + str(isp_dict.get("a")[3]) + "\n"
+    output += "\n"
+
+    output += "int " + str(isp_dict.get("b")[0]) + "\n"
+    output += "   description " + str(isp_dict.get("b")[4]) + "\n"
+    output += "   ip add " + str(isp_dict.get("b")[1]) + " " + str(isp_dict.get("b")[3]) + "\n"
+    output += "\n"
 
     output += "end" + "\n"
     output += "wr" + "\n"
@@ -1237,3 +1378,15 @@ def build_routing_txt_solution(device_routing_dict, output):
     output += "\n"
 
     return output
+
+def generate_solution_text_v2():
+    generate_solution_client()
+    generate_solution_switch()
+    generate_solution_server()
+    generate_solution_swl3()
+    generate_solution_r1()
+    generate_solution_r2()
+    generate_solution_isp()
+
+def generate_solution_packet_tracer_v2():
+    pass

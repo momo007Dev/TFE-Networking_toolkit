@@ -251,6 +251,23 @@ class blueprintFunctions:
         else:
             return text
 
+    def fillComboPortTcp(combo):
+        combo.addItem("20 (FTP)")
+        combo.addItem("21 (FTP)")
+        combo.addItem("22 (SSH)")
+        combo.addItem("23 (Telnet)")
+        combo.addItem("25 (SMTP)")
+        combo.addItem("80 (HTTP)")
+        combo.addItem("110 (POP3)")
+        combo.addItem("115 (SFTP)")
+        combo.addItem("143 (IMAP)")
+        combo.addItem("443 (HTTPS)")
+
+    def fillComboPortUdp(combo):
+        combo.addItem("53 (DNS)")
+        combo.addItem("69 (TFTP)")
+        combo.addItem("123 (NTP)")
+
     #--------END----------------------------#
 
 #----------------
