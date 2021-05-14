@@ -7,25 +7,28 @@
 
 ### Release
 
-* Version ***1.0*** : [release_windows.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/release/release_windows.zip)
+* Version ***1.0*** : [release_windows_v1.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.0.zip)
+* Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip)
+> ***PS : Cette première version peut générer des examens de 1ère et inclus également un simplificateur de calcul de sous-réseau et VLSM. Disponible uniquement pour Windows***
 
-> ***PS : Cette première version peut générer des examens de 1ère et inclu également un simplificateur de calcul de sous-réseau et VLSM. Disponible uniquement pour Windows (pour l'instant)***
+---
 
-**Vérification de l'intégrité du fichier :**
+### Vérification de l'intégrité du fichier :
 
 Nom du fichier | hash sha1 associé
 ---------|----------
- release_windows.zip | 16b9e0554c76446aebab74f721991816aafa6492
+ release_windows_v1.0.zip | 2f7677315ed1412290d8318b9d17e308f580d369
+ release_windows_v1.2.zip | 3b8b4821e52105fd6737129626b17d7b59a05e40
 
 **Comment générer un hash sha1 sous windows ?**
 
 1. Télécharger le fichier sur votre machine.
 2. Ouvrir l'explorateur de fichier windows et aller dans le dossier où se situe le fichier téléchargé (généralement "Téléchargement")
 3. Maintenir la touche "Maj" ("shift" en anglais) + faire un click droit avec la souris et sélectionner "Ouvrir powershell ici"
-4. Taper la commande "***```certutil -hashfile release_windows.zip```***"
-   * Sans argument, il optera pour le sha1 qui fera l'affaire pour ce petit programme de TFE.
+4. Taper la commande "***```certutil -hashfile nom_du_fichier```***"
 5. Vérifier si le hash correspond à celui mis dans le tableau ci-dessus. 
 
+> ***PS : Si le hash est différent (donc les données ont été altérées = possible virus), ne l'ouvrez surtout pas.***
 ---
 
 ## Table des matières
@@ -152,3 +155,7 @@ Plateforme | Langage (programmation) | Librairie ?
 
 * [Générer un hash sha1/md5 sous windows](https://www.lifewire.com/validate-md5-checksum-file-4037391)
 * [Documentation des composants graphiques de la librairie "PyQT5"](https://doc.qt.io/qt-5/)
+* [Site pour avoir des logos/icônes](https://www.flaticon.com/)
+* [QT Designer - Outil pour faire le design de l'application](https://build-system.fman.io/qt-designer-download)
+* [Pycharm - IDE Python pour coder](https://www.jetbrains.com/pycharm/)
+* [Cheat-sheet pour les calculs de sous-réseau](https://nsrc.org/workshops/2009/summer/presentations/day3/subnetting.pdf)
