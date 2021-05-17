@@ -2,7 +2,7 @@
 
 * [Procédures d'installation](#procédures-d'installation)
 * [Utilisation](#utilisation)
-  * [Générateur d'examens de niveau 1](#Générateur-d'examens-de-niveau-1)
+  * [Générateur examens de niveau 1](#Générateur-d'examens-de-niveau-1)
     * Choisir la topologie
     * (2) Main Configuration
     * (3) Connectivity
@@ -15,9 +15,8 @@
 1. Aller sur le repos GitHub du projet : [github](https://github.com/momo007Dev/TFE-Networking_toolkit)
 
 2. Téléchargez la dernière version :
-  * Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip)
-
-  * > :warning: Cette version inclus **UNIQUEMENT** le générateur d'examen de niveau 1 !
+   * Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip)
+   * > :warning: Cette version inclus **UNIQUEMENT** le générateur d'examen de niveau 1 !
 
 3. (Optionnel) Vérifier l'intégralité du fichier [Voir section du github](https://github.com/momo007Dev/TFE-Networking_toolkit#v%C3%A9rification-de-lint%C3%A9grit%C3%A9-du-fichier-)
 
@@ -33,16 +32,16 @@
 
 ## Utilisation
 
-![](img\maquette.png)
+<img src="img\maquette.png" />
 
 ### Générateur d'examens de niveau 1
 
-#### 1. ddd
+#### 1. Choisir la topologie
 > PS : Une seule topologie est actuellement disponible.	
 
-<img src="img\img1.png" style="zoom: 50%;" />
+<img src="img\img1.png" width="450" height="370" />
 
-<img src="img\img2.png" style="zoom:50%;" />
+<img src="img\img2.png" width="450" height="370" />
 
 * Une fois la topologie sélectionnée, celle-ci se voit encadré en rouge et un bouton apparaît.
 * Cliquer sur le bouton pour continuer.
@@ -51,7 +50,7 @@
 
 ####  2. "(2) Main Configuration"
 
-<img src="img\img3.png" style="zoom:67%;" />
+<img src="img\img3.png" width="620" height="502" />
 
 * **(1) : C'est le schéma du réseau.**
 
@@ -95,7 +94,7 @@
 
 ####  3. "(3) Connectivity"
 
-<img src="img\img4.png" style="zoom: 67%;" />
+<img src="img\img4.png" width="609" height="499" />
 
 - **(1)** : Représente les champs pour mettre le nom d'hôtes des différentes machines (Hostname).
 
@@ -136,7 +135,7 @@
 
 ####  4. "(4) Addons"
 
-<img src="img\img5.png" style="zoom:67%;" />
+<img src="img\img5.png" width="607" height="492" />
 
 * **(0)** : Il faut bien cliquer sur le bouton "(4) Addons" qui signifie "suppléments".
 
@@ -503,7 +502,7 @@ Network:
 
 ### Calculatrice réseau
 
-<img src="img\img6.png" style="zoom:67%;" />
+<img src="img\img6.png" width="601" height="494" />
 
 * **(1)** : En fonction du CIDR, va générer en (2) :
 

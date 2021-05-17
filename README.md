@@ -138,7 +138,7 @@ Plateforme | Langage (programmation) | Librairie ?
 
 ## Organisation et trello
 
-<img src="img/trello.png" alt="Image du trello" style="zoom:67%;" />
+<img src="img/trello.png" />
 
 * [Lien vers trello](https://trello.com/b/ywBg35gv/tfe)
 
@@ -146,7 +146,7 @@ Plateforme | Langage (programmation) | Librairie ?
 
 ## Mocup
 
-<img src="img/mocup.png" alt="Image de l'application" style="zoom:67%;" />
+<img src="img/mocup.png" width="450" height="370" />
 
 ---
 
