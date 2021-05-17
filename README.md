@@ -5,10 +5,17 @@
 
 ---
 
+### Manuel d'utilisation
+
+* [Version Markdown sur github](User_manual_v1.md)
+* [Version PDF](User_manual_v1_pdf)
+
+---
+
 ### Release
 
 * Version ***1.0*** : [release_windows_v1.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.0.zip)
-* Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip)
+* Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip) - Dernière version !
 > ***PS : Cette première version peut générer des examens de 1ère et inclus également un simplificateur de calcul de sous-réseau et VLSM. Disponible uniquement pour Windows***
 
 ---
@@ -38,14 +45,14 @@ Nom du fichier | hash sha1 associé
 - [Division en modules](#division-en-modules)
   * [Premier module](#premier-module)
   * [Second module](#second-module)
-  * [Troisieme module](#troisieme-module)
-  * [Fonctionnalite bonus](#fonctionnalite-bonus)
+  * [Troisiéme module](#troisième-module)
+  * [Fonctionnalités bonus](#fonctionnalités-bonus)
 - [Aspect technique](#aspect-technique)
 - [Organisation et trello](#organisation-et-trello)
 - [Mocup](#mocup)
-- [Demo](#demo)
+- [Démo](#démo)
   * [Demo de la partie subneting utilities](#demo-de-la-partie-subneting-utilities)
-
+- [Souces utilisées](#Sources utilisées)
 ---
 
 ## Description du projet
@@ -83,7 +90,7 @@ Le premier module consiste en la mise en place d'un générateur de commandes re
 ### Second module
 
 Le deuxième module consiste à mettre en place un générateur d'examen (blanc ou pas).
-Idéalement, celui-ci génèra une topologie (schéma réseau), ainsi que toutes les commandes nécessaires permettant de résoudre l'examen généré. Il faudra ensuite l'encoder dans **`Packet Tracer`** si le professeur souhaite utiliser ce programme comme examen pour les étudiants.
+Idéalement, celui-ci génèrera une topologie (schéma réseau), ainsi que toutes les commandes nécessaires permettant de résoudre l'examen généré. Il faudra ensuite l'encoder dans **`Packet Tracer`** si le professeur souhaite utiliser ce programme comme examen pour les étudiants.
 
 L'idée serait de proposé un "template" (une base) comprenant un schéma du réseau avec déjà des liaisons faites (Exemple : Un Pc relié à un switch et un switch relié à un routeur,...).
 
@@ -95,7 +102,7 @@ BONUS : Intégrer une sorte d'aide pour insérer dans Packet Tracer.
 
 ---
 
-### Troisieme module
+### Troisième module
 
 Ce dernier module est similaire à une calculatrice : il permettra de faciliter les calculs de **`VLSM`** et de calculs de sous-réseau.
 
@@ -105,11 +112,11 @@ Pour les calculs de sous-réseau :
 
 ---
 
-### Fonctionnalite bonus
+### Fonctionnalités bonus
 
-> Correspond au boutton "Configuration Editor" dans le mocup en fin de page.
+> Correspond au bouton "Configuration Editor" dans le mocup en fin de page.
 
-Cette fonctionnalitée consiste en une sorte d'IDE pour les configurations faites par le programme. 
+Cette fonctionnalité consiste en une sorte d'IDE pour les configurations faites par le programme. 
 
 Entre autre, permet de :
 * **Visualiser les configurations** faites par le programme.
@@ -125,13 +132,13 @@ Plateforme | Langage (programmation) | Librairie ?
 ---------|----------|---------
  **Application de bureau** | **`Python`** | **`PyQt`** => Librairie permettant de mettre en place des GUI plus belle.
 
-> ***Ce programme sera disponible sur windows et linux.***
+> ***Ce programme disponible et utilisable sous Windows via un exécutable***
 
 ---
 
 ## Organisation et trello
 
-![Image du trello](code/img/trello.png)
+<img src="img/trello.png" alt="Image du trello" style="zoom:67%;" />
 
 * [Lien vers trello](https://trello.com/b/ywBg35gv/tfe)
 
@@ -139,15 +146,15 @@ Plateforme | Langage (programmation) | Librairie ?
 
 ## Mocup
 
-![Image de l'application](code/img/mocup.png)
+<img src="img/mocup.png" alt="Image de l'application" style="zoom:67%;" />
 
 ---
 
-## Demo
+## Démo
 
-### Demo de la partie subneting utilities
+### Démo de la partie subneting utilities
 
-![](code/img/demo_subnet.gif)
+![](img/demo_subnet.gif)
 
 ---
 
