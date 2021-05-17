@@ -1,6 +1,14 @@
 # Manuel d'utilisation du programme
 
-[TOC]
+* [Procédures d'installation](#procédures-d'installation)
+* [Utilisation](#utilisation)
+  * [Générateur d'examens de niveau 1](#Générateur-d'examens-de-niveau-1)
+    * Choisir la topologie
+    * (2) Main Configuration
+    * (3) Connectivity
+    * (4) Addons
+    * (5) Fichiers Générés
+  * [Calculatrice réseau](#calculatrice-réseau)
 
 ## Procédures d'installation
 
@@ -25,16 +33,16 @@
 
 ## Utilisation
 
-![](C:\@Projet\TFE-Networking_toolkit\img\maquette.png)
+![](img\maquette.png)
 
 ### Générateur d'examens de niveau 1
 
-#### 1. Choisir la topologie
+#### 1. ddd
 > PS : Une seule topologie est actuellement disponible.	
 
-<img src="C:\@Projet\TFE-Networking_toolkit\img\img1.png" style="zoom: 50%;" />
+<img src="img\img1.png" style="zoom: 50%;" />
 
-<img src="C:\@Projet\TFE-Networking_toolkit\img\img2.png" style="zoom:50%;" />
+<img src="img\img2.png" style="zoom:50%;" />
 
 * Une fois la topologie sélectionnée, celle-ci se voit encadré en rouge et un bouton apparaît.
 * Cliquer sur le bouton pour continuer.
@@ -43,7 +51,7 @@
 
 ####  2. "(2) Main Configuration"
 
-<img src="C:\@Projet\TFE-Networking_toolkit\img\img3.png" style="zoom:67%;" />
+<img src="img\img3.png" style="zoom:67%;" />
 
 * **(1) : C'est le schéma du réseau.**
 
@@ -87,7 +95,7 @@
 
 ####  3. "(3) Connectivity"
 
-<img src="C:\@Projet\TFE-Networking_toolkit\img\img4.png" style="zoom: 67%;" />
+<img src="img\img4.png" style="zoom: 67%;" />
 
 - **(1)** : Représente les champs pour mettre le nom d'hôtes des différentes machines (Hostname).
 
@@ -128,7 +136,7 @@
 
 ####  4. "(4) Addons"
 
-<img src="C:\@Projet\TFE-Networking_toolkit\img\img5.png" style="zoom:67%;" />
+<img src="img\img5.png" style="zoom:67%;" />
 
 * **(0)** : Il faut bien cliquer sur le bouton "(4) Addons" qui signifie "suppléments".
 
@@ -493,9 +501,9 @@ Network:
 
 <div style="page-break-after: always;"></div>
 
-### Calculatrice Réseau
+### Calculatrice réseau
 
-<img src="C:\@Projet\TFE-Networking_toolkit\img\img6.png" style="zoom:67%;" />
+<img src="img\img6.png" style="zoom:67%;" />
 
 * **(1)** : En fonction du CIDR, va générer en (2) :
 

@@ -7,8 +7,8 @@
 
 ### Manuel d'utilisation
 
-* [Version Markdown sur github](User_manual_v1.md)
-* [Version PDF](User_manual_v1_pdf)
+* [Version Markdown sur github](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/User_manual_v1.md)
+* [Version PDF](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v1.pdf)
 
 ---
 
@@ -51,8 +51,8 @@ Nom du fichier | hash sha1 associé
 - [Organisation et trello](#organisation-et-trello)
 - [Mocup](#mocup)
 - [Démo](#démo)
-  * [Demo de la partie subneting utilities](#demo-de-la-partie-subneting-utilities)
-- [Souces utilisées](#Sources utilisées)
+  * [Démo de la partie subneting utilities](#démo-de-la-partie-subneting-utilities)
+- [Souces utilisées](#sources-utilisées)
 ---
 
 ## Description du projet
