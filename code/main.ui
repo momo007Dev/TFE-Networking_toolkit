@@ -752,7 +752,7 @@ Generator</string>
        <string notr="true">background-color: rgb(173, 173, 173);</string>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page_1">
        <widget class="QLabel" name="E_p1_label">
@@ -2254,7 +2254,7 @@ selection-color: rgb(0, 0, 255);</string>
 color: rgb(255, 0, 255)</string>
          </property>
          <property name="text">
-          <string>To LAN A</string>
+          <string>To LAN B</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -2699,7 +2699,7 @@ color: rgb(255, 0, 255)</string>
 color: rgb(255, 0, 255)</string>
          </property>
          <property name="text">
-          <string>To LAN A</string>
+          <string>To R1</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -2792,7 +2792,7 @@ selection-color: rgb(0, 0, 255);</string>
 color: rgb(255, 0, 255)</string>
          </property>
          <property name="text">
-          <string>To LAN A</string>
+          <string>To ISP</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -2937,7 +2937,7 @@ selection-color: rgb(0, 0, 255);</string>
 color: rgb(255, 0, 255)</string>
          </property>
          <property name="text">
-          <string>To LAN A</string>
+          <string>To PC3</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -3082,7 +3082,7 @@ selection-color: rgb(0, 0, 255);</string>
 color: rgb(255, 0, 255)</string>
          </property>
          <property name="text">
-          <string>To LAN A</string>
+          <string>To LAN B</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

@@ -9,7 +9,7 @@ from exam_functions import *
 classBlueprint = utils.blueprintFunctions
 
 #-------GLOBAL VARIABLES------------#
-exam_level_1_only = False # Allows to force level 1 only
+exam_level_1_only = True # Allows to force level 1 only
 
 vlan_set = set()
 vlan_subnet_set = set()
@@ -438,7 +438,7 @@ def setupUiExam(self):
 
     global E_p3_gb2_editS2Description
     E_p3_gb2_editS2Description = QtWidgets.QLineEdit(self.E_p3_gb2)
-    classBlueprint.mkLineEdit(E_p3_gb2_editS2Description, QtCore.QRect(690, 69, 185, 31), 20, "To LAN A")
+    classBlueprint.mkLineEdit(E_p3_gb2_editS2Description, QtCore.QRect(690, 69, 185, 31), 20, "To LAN B")
     E_p3_gb2_editS2Description.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
     E_p3_gb2_comboS2Subnet.currentIndexChanged.connect(lambda: exam_functions.on_change_dropdown_network(E_p3_gb2_comboS2Subnet, E_p3_gb2_comboS2Rule))
@@ -530,7 +530,7 @@ def setupUiExam(self):
 
     global E_p3_gb2_editR1Description2
     E_p3_gb2_editR1Description2 = QtWidgets.QLineEdit(self.E_p3_gb2)
-    classBlueprint.mkLineEdit(E_p3_gb2_editR1Description2, QtCore.QRect(690, 154, 185, 31), 20, "To LAN A")
+    classBlueprint.mkLineEdit(E_p3_gb2_editR1Description2, QtCore.QRect(690, 154, 185, 31), 20, "To LAN B")
     E_p3_gb2_editR1Description2.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
     E_p3_gb2_comboR1Subnet2.currentIndexChanged.connect(lambda: exam_functions.on_change_dropdown_network(E_p3_gb2_comboR1Subnet2, E_p3_gb2_comboR1Rule2))
@@ -569,7 +569,7 @@ def setupUiExam(self):
 
     global E_p3_gb2_editR1Description3
     E_p3_gb2_editR1Description3 = QtWidgets.QLineEdit(self.E_p3_gb2)
-    classBlueprint.mkLineEdit(E_p3_gb2_editR1Description3, QtCore.QRect(690, 189, 185, 31), 20, "To LAN A")
+    classBlueprint.mkLineEdit(E_p3_gb2_editR1Description3, QtCore.QRect(690, 189, 185, 31), 20, "To ISP")
     E_p3_gb2_editR1Description3.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
     E_p3_gb2_comboR1Subnet3.currentIndexChanged.connect(lambda: exam_functions.on_change_dropdown_network(E_p3_gb2_comboR1Subnet3, E_p3_gb2_comboR1Rule3))
@@ -607,7 +607,7 @@ def setupUiExam(self):
 
     global E_p3_gb2_editR1Description4
     E_p3_gb2_editR1Description4 = QtWidgets.QLineEdit(self.E_p3_gb2)
-    classBlueprint.mkLineEdit(E_p3_gb2_editR1Description4, QtCore.QRect(690, 225, 185, 31), 20, "To LAN A")
+    classBlueprint.mkLineEdit(E_p3_gb2_editR1Description4, QtCore.QRect(690, 225, 185, 31), 20, "To PC3")
     E_p3_gb2_editR1Description4.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
     E_p3_gb2_comboR1Subnet4.currentIndexChanged.connect(lambda: exam_functions.on_change_dropdown_network(E_p3_gb2_comboR1Subnet4, E_p3_gb2_comboR1Rule4))
@@ -659,11 +659,10 @@ def setupUiExam(self):
 
     global E_p3_gb2_editISPDescription
     E_p3_gb2_editISPDescription = QtWidgets.QLineEdit(self.E_p3_gb2)
-    classBlueprint.mkLineEdit(E_p3_gb2_editISPDescription, QtCore.QRect(690, 274, 185, 31), 20, "To LAN A")
+    classBlueprint.mkLineEdit(E_p3_gb2_editISPDescription, QtCore.QRect(690, 274, 185, 31), 20, "To R1")
     E_p3_gb2_editISPDescription.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
     E_p3_gb2_comboISPSubnet.currentIndexChanged.connect(lambda: exam_functions.on_change_dropdown_network(E_p3_gb2_comboISPSubnet, E_p3_gb2_comboISPRule))
-
     self.stackedWidget_2.addWidget(self.page_3)
 
     #---------------------

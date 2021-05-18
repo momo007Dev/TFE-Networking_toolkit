@@ -17,7 +17,12 @@ vlsm_dict = dict()
 lan_names_set = list()
 devices_dict = dict() # PC1-2-3/S1-2/ISP
 router_dict = dict() # R1
+
+        #---Page 4---#
 security_enabled = False
+r1_security = list()
+sw_security = list()
+static_routing = list()
 static_route_exam_level_1 = ""
 
         #---Page 2_1---#
@@ -114,11 +119,9 @@ def save_changes(stacked_widget):
             else:
                 save_changes_p3()
                 exam_page.E_btn_4.setVisible(True)
-                exam_page.E_btn_5.setVisible(True)
 
     elif (current_index == 3): # Page 4 (Addons/Security)
-        global security_enabled
-        security_enabled = True
+        save_changes_p4()
 
     elif (current_index == 4): # Page 2_1 : VLANS
         if not (exam_page.E_p2_1_table.rowCount() == 0):
@@ -258,6 +261,28 @@ def save_changes_p3():
         print(str(z) + " : " + str(devices_dict.get(z)))
     """
 
+def save_changes_p4():
+    global r1_security, sw_security, static_routing
+    # secret, console, encryption, ssh, user, pass, banner
+    r1_security = [exam_page.E_p4_gb1_editSecret.text(), exam_page.E_p4_gb1_editPassword.text(), exam_page.E_p4_gb1_checkEncryption.isChecked(), exam_page.E_p4_gb1_checkSsh.isChecked(), exam_page.E_p4_gb1_1_editUsername.text(), exam_page.E_p4_gb1_1_editPassword.text(), exam_page.E_p4_gb1_editBanner.text()]
+    sw_security = [exam_page.E_p4_gb2_editSecret.text(), exam_page.E_p4_gb2_editPassword.text(), exam_page.E_p4_gb2_checkEncryption.isChecked(), exam_page.E_p4_gb2_checkSsh.isChecked(), exam_page.E_p4_gb2_1_editUsername.text(), exam_page.E_p4_gb2_1_editPassword.text(), exam_page.E_p4_gb2_editBanner.text()]
+
+    # IP, Mask, Next_hop, Add
+    static_routing = [exam_page.E_p4_gb3_edit1.text(), exam_page.E_p4_gb3_edit2.text(), exam_page.E_p4_gb3_combo.currentText(), exam_page.E_p4_gb3_check.isChecked()]
+
+    if (r1_security[3] is True):
+        if (len(r1_security[4]) < 1 or len(r1_security[5]) < 1):
+            utils.blueprintFunctions.mkWarningMsg("Data Error", "<b><span style=color:'red'>(R1) Username / Password</b></span> cannot be <b><span style=color:'blue'>empty</span></b> !")
+            return False
+    elif (sw_security[3] is True):
+        if (len(sw_security[4]) < 1 or len(sw_security[5]) < 1):
+            utils.blueprintFunctions.mkWarningMsg("Data Error", "<b><span style=color:'red'>(Switchs) Username / Password</b></span> cannot be <b><span style=color:'blue'>empty</span></b> !")
+            return False
+
+    global security_enabled
+    security_enabled = True
+    exam_page.E_btn_5.setVisible(True)
+
 def generate_my_exam():
     generate_solution_text()
     generate_solution_packet_tracer()
@@ -296,39 +321,40 @@ def generate_solution_text():
                 output += "conf t" + "\n"
                 output += "host " + c[0] + "\n"
                 if (security_enabled is True):
-                    output += "enable secret " + exam_page.E_p4_gb2_editSecret.text() + "\n"
+                    output += "enable secret " + sw_security[0] + "\n"
                     output += "\n"
-                    output += "banner motd #" + exam_page.E_p4_gb2_editBanner.text() + "#" + "\n"
+                    output += "banner motd #" + sw_security[6] + "#" + "\n"
                 output += "\n"
 
-                if (security_enabled is True and exam_page.E_p4_gb2_checkSsh.isChecked()):
+                if (security_enabled is True and sw_security[3] is True):
                     output += "ip domain-name " + dns + "\n"
                     output += "crypto key generate rsa general-keys modulus 1024" + "\n"
-                    output += "username " + exam_page.E_p4_gb2_1_editUsername.text() + " password " + exam_page.E_p4_gb2_1_editPassword.text() + "\n"
+                    output += "username " + sw_security[4] + " password " + sw_security[5] + "\n"
                     output += "\n"
 
                 if (security_enabled is True):
                     output += "line console 0" + "\n"
-                    output += "   password " + exam_page.E_p4_gb2_editPassword.text()  + "\n"
+                    output += "   password " + sw_security[1]  + "\n"
                     output += "   login" + "\n"
                     output += "exit" + "\n"
                     output += "\n"
 
-                    if (security_enabled is True and exam_page.E_p4_gb2_checkSsh.isChecked()):
+                    if (security_enabled is True and sw_security[3] is True):
                         output += "line vty 0 15" + "\n"
-                        output += "   password " + exam_page.E_p4_gb2_editPassword.text() + "\n"
+                        output += "   password " + sw_security[1] + "\n"
                         output += "   transport input ssh" + "\n"
                         output += "   login local" + "\n"
                         output += "exit" + "\n"
                         output += "\n"
 
-                    output += "line vty 0 15" + "\n"
-                    output += "   password " + exam_page.E_p4_gb2_editPassword.text() + "\n"
-                    output += "   login" + "\n"
-                    output += "exit" + "\n"
-                    output += "\n"
+                    else:
+                        output += "line vty 0 15" + "\n"
+                        output += "   password " + sw_security[1] + "\n"
+                        output += "   login" + "\n"
+                        output += "exit" + "\n"
+                        output += "\n"
 
-                if (security_enabled is True and exam_page.E_p4_gb2_checkEncryption.isChecked()):
+                if (security_enabled is True and sw_security[2] is True):
                     output += "service password-encryption" + "\n"
                     output += "\n"
 
@@ -340,6 +366,8 @@ def generate_solution_text():
                 output += "\n"
 
                 output += "ip default-gateway " + c[5] + "\n"
+
+                output += "\n"
                 output += "end" + "\n"
                 output += "wr" + "\n"
 
@@ -351,39 +379,40 @@ def generate_solution_text():
     output += "conf t" + "\n"
     output += "host " + str(list(router_dict.get("name"))[0]) + "\n"
     if (security_enabled is True):
-        output += "enable secret " + exam_page.E_p4_gb1_editSecret.text() + "\n"
+        output += "enable secret " + r1_security[0] + "\n"
         output += "\n"
-        output += "banner motd #" + exam_page.E_p4_gb1_editBanner.text() + "#" + "\n"
+        output += "banner motd #" + r1_security[6] + "#" + "\n"
     output += "\n"
 
-    if (security_enabled is True and exam_page.E_p4_gb1_checkSsh.isChecked()):
+    if (security_enabled is True and r1_security[3] is True):
         output += "ip domain-name " + dns + "\n"
         output += "crypto key generate rsa general-keys modulus 1024" + "\n"
-        output += "username " + exam_page.E_p4_gb1_1_editUsername.text() + " password " + exam_page.E_p4_gb1_1_editPassword.text() + "\n"
+        output += "username " + r1_security[4] + " password " + r1_security[5] + "\n"
         output += "\n"
 
     if (security_enabled is True):
         output += "line console 0" + "\n"
-        output += "   password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
+        output += "   password " + r1_security[1] + "\n"
         output += "   login" + "\n"
         output += "exit" + "\n"
         output += "\n"
 
-        if (security_enabled is True and exam_page.E_p4_gb1_checkSsh.isChecked()):
+        if (security_enabled is True and r1_security[3] is True):
             output += "line vty 0 4" + "\n"
-            output += "   password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
+            output += "   password " + r1_security[1] + "\n"
             output += "   transport input ssh" + "\n"
             output += "   login local" + "\n"
             output += "exit" + "\n"
             output += "\n"
 
-        output += "line vty 0 15" + "\n"
-        output += "   password " + exam_page.E_p4_gb1_editPassword.text() + "\n"
-        output += "   login" + "\n"
-        output += "exit" + "\n"
-        output += "\n"
+        else:
+            output += "line vty 0 4" + "\n"
+            output += "   password " + r1_security[1] + "\n"
+            output += "   login" + "\n"
+            output += "exit" + "\n"
+            output += "\n"
 
-    if (security_enabled is True and exam_page.E_p4_gb1_checkEncryption.isChecked()):
+    if (security_enabled is True and r1_security[2] is True):
         output += "service password-encryption" + "\n"
         output += "\n"
 
@@ -396,10 +425,12 @@ def generate_solution_text():
             output += "exit" + "\n"
             output += "\n"
 
-    if (exam_page.E_p4_gb3_check.isChecked()):
-        output += "ip route " + exam_page.E_p4_gb3_edit1.text() + " " + exam_page.E_p4_gb3_edit2.text() + " " + exam_page.E_p4_gb3_combo.currentText()  + "\n"
+    if (static_routing[3] is True):
+        output += "ip route " + static_routing[0] + " " + static_routing[1] + " " + static_routing[2]  + "\n"
         global static_route_exam_level_1
-        static_route_exam_level_1 = exam_page.E_p4_gb3_edit1.text() + "-" + subnet_functions.getCidrFromMask(exam_page.E_p4_gb3_edit2.text()) + "-" + utils.blueprintFunctions.format_output_interface(exam_page.E_p4_gb3_combo.currentText())
+        static_route_exam_level_1 = static_routing[0] + "-" + subnet_functions.getCidrFromMask(static_routing[1]) + "-" + utils.blueprintFunctions.format_output_interface(static_routing[2]) + "-0-1"
+
+    output += "\n"
     output += "end" + "\n"
     output += "wr" + "\n"
 
@@ -454,16 +485,16 @@ def generate_solution_packet_tracer():
                 }
             },
             devices_dict.get("S1")[0]: {
-                "Banner MOTD" : exam_page.E_p4_gb2_editBanner.text(),
+                "Banner MOTD" : sw_security[6],
                 "Console Line": {
                     "Login": 1,
-                    "Password": exam_page.E_p4_gb2_editPassword.text()
+                    "Password": sw_security[1]
                 },
                 "Default Gateway": devices_dict.get("S1")[5],
                 "DNS" : {
                     "Ip Domain Name" : dns
                 },
-                "Enable Secret": exam_page.E_p4_gb2_editSecret.text(),
+                "Enable Secret": sw_security[0],
                 "Host Name": devices_dict.get("S1")[0],
                 "Ports": {
                     "F0/1": {
@@ -485,7 +516,7 @@ def generate_solution_packet_tracer():
                     },
                 },
                 "User Names" : { # SSH
-                    "Username" : exam_page.E_p4_gb2_1_editUsername.text() + " " + exam_page.E_p4_gb2_1_editPassword.text()
+                    "Username" : sw_security[4] + " " + sw_security[5]
                 },
                 "Security" : { # SSH
                     "Crypto Key Set" : "Check this case",
@@ -496,27 +527,27 @@ def generate_solution_packet_tracer():
                 "VTY Lines": {
                     "VTY Line 0": {
                         "Login": 2, # SSH
-                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Password": sw_security[1],
                         "Transport Input": 2  # SSH
                     },
                     "VTY Line 15": {
                         "Login": 2, # SSH
-                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Password": sw_security[1],
                         "Transport Input" : 2 # SSH
                     }
                 }
             }, # ---S2---
             devices_dict.get("S2")[0]: {
-                "Banner MOTD": exam_page.E_p4_gb2_editBanner.text(),
+                "Banner MOTD": sw_security[6],
                 "Console Line": {
                     "Login": 1,
-                    "Password": exam_page.E_p4_gb2_editPassword.text()
+                    "Password": sw_security[1]
                 },
                 "Default Gateway": devices_dict.get("S2")[5],
                 "DNS": {
                     "Ip Domain Name": dns
                 },
-                "Enable Secret": exam_page.E_p4_gb2_editSecret.text(),
+                "Enable Secret": sw_security[0],
                 "Host Name": devices_dict.get("S2")[0],
                 "Ports": {
                     "F0/1": {
@@ -538,7 +569,7 @@ def generate_solution_packet_tracer():
                     },
                 },
                 "User Names": {  # SSH
-                    "Username": exam_page.E_p4_gb2_1_editUsername.text() + " " + exam_page.E_p4_gb2_1_editPassword.text()
+                    "Username": sw_security[4] + " " + sw_security[5]
                 },
                 "Security": {  # SSH
                     "Crypto Key Set": "Check this case",
@@ -549,26 +580,26 @@ def generate_solution_packet_tracer():
                 "VTY Lines": {
                     "VTY Line 0": {
                         "Login": 2,  # SSH
-                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Password": sw_security[1],
                         "Transport Input": 2  # SSH
                     },
                     "VTY Line 15": {
                         "Login": 2,  # SSH
-                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Password": sw_security[1],
                         "Transport Input": 2  # SSH
                     }
                 }
             }, # ---R1---
             str(list(router_dict.get("name"))[0]): {
-                "Banner MOTD": exam_page.E_p4_gb1_editBanner.text(),
+                "Banner MOTD": r1_security[6],
                 "Console Line": {
                     "Login": 1,
-                    "Password": exam_page.E_p4_gb1_editPassword.text()
+                    "Password": r1_security[1]
                 },
                 "DNS": {
                     "Ip Domain Name": dns
                 },
-                "Enable Secret": exam_page.E_p4_gb1_editSecret.text(),
+                "Enable Secret": r1_security[0],
                 "Host Name": str(list(router_dict.get("name"))[0]),
                 "Ports": {
                     str(list(router_dict.keys())[1]): { # F0/0
@@ -618,7 +649,7 @@ def generate_solution_packet_tracer():
                   }
                 },
                 "User Names": {  # SSH
-                    "Username": exam_page.E_p4_gb2_1_editUsername.text() + " " + exam_page.E_p4_gb2_1_editPassword.text()
+                    "Username": r1_security[4] + " " + r1_security[5]
                 },
                 "Security": {  # SSH
                     "Crypto Key Set": "Check this case",
@@ -629,31 +660,34 @@ def generate_solution_packet_tracer():
                 "VTY Lines": {
                     "VTY Line 0": {
                         "Login": 2,  # SSH
-                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Password": r1_security[1],
                         "Transport Input": 2  # SSH
                     },
                     "VTY Line 15": {
                         "Login": 2,  # SSH
-                        "Password": exam_page.E_p4_gb2_editPassword.text(),
+                        "Password": r1_security[1],
                         "Transport Input": 2  # SSH
                     }
                 }
             }
         }
     }
-    if not (exam_page.E_p4_gb2_checkSsh.isChecked()): # If SSH is DISABLED on switchs
+    if (sw_security[3] is False): # If SSH is DISABLED on switchs
         disable_ssh_output_packet_tracer(devices_dict.get("S1")[0])
         disable_ssh_output_packet_tracer(devices_dict.get("S2")[0])
 
-    if not (exam_page.E_p4_gb2_checkEncryption.isChecked()): # If password-encryption is DISABLED on switchs
+    if (sw_security[2] is False): # If password-encryption is DISABLED on switchs
         del packet_tracer_stuct["Network"]["S1"]["Service Password Encryption"]
         del packet_tracer_stuct["Network"]["S2"]["Service Password Encryption"]
 
-    if not (exam_page.E_p4_gb1_checkSsh.isChecked()):  # If SSH is DISABLED on R1
+    if (r1_security[3] is False):  # If SSH is DISABLED on R1
         disable_ssh_output_packet_tracer(str(list(router_dict.get("name"))[0]))
 
-    if not (exam_page.E_p4_gb1_checkEncryption.isChecked()):  # If password-encryption is DISABLED on R1
+    if (r1_security[2] is False):  # If password-encryption is DISABLED on R1
         del packet_tracer_stuct["Network"][str(list(router_dict.get("name"))[0])]["Service Password Encryption"]
+
+    if (static_routing[3] is False): # If no static routes - delete the "Routes" bloc
+        del packet_tracer_stuct["Network"]["R1"]["Routes"]
 
     with open(str(utils.blueprintFunctions.getDesktopPath()) + "/packet-tracer.yaml", "a") as f:
         yaml.dump(packet_tracer_stuct, f)
@@ -686,6 +720,8 @@ def build_combo_network(): # Called when user clicks "(3) Connectivity"
         exam_page.E_p3_gb2_comboR1Rule2.setCurrentIndex(3)
         exam_page.E_p3_gb2_comboR1Rule3.setCurrentIndex(3)
         exam_page.E_p3_gb2_comboR1Rule4.setCurrentIndex(3)
+
+    exam_page.E_p3_gb2_comboISPSubnet.setCurrentIndex(exam_page.E_p3_gb2_comboISPSubnet.count() -1)
 
 def clear_combo_network():
     exam_page.E_p3_gb1_comboPc1Subnet.clear()

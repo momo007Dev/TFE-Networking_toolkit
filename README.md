@@ -15,8 +15,21 @@
 ### Release
 
 * Version ***1.0*** : [release_windows_v1.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.0.zip)
-* Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip) - Dernière version !
-> ***PS : Cette première version peut générer des examens de 1ère et inclus également un simplificateur de calcul de sous-réseau et VLSM. Disponible uniquement pour Windows***
+* Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip)
+* Version ***1.4*** : [release_windows_v1.4.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.4.zip) - ***Dernière version !***
+> ***PS : Ces premières versions peuvent générer des examens de 1ère et incluent également un simplificateur de calcul de sous-réseau et VLSM. Disponible uniquement pour Windows***
+>
+> **:warning:Les versions commençant par "`1.x`" contiennent uniquement les examens de niveau 1 !**
+>
+> **:warning:Les versions commençant par "`2.x`" contiendront toutes les fonctionnalités.**
+
+#### Problèmes Connues
+
+| Version | Où se situe le problème                    | Description du problème                                      | Solution                                                     |
+| ------- | ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **1.2** | Page "`(3) Connectivity`"                  | Les valeurs par défauts des descriptions des interfaces sont toujours les mêmes. | ***Sera corrigé dans la prochaine version***.                |
+| **1.2** | Fichier de sortie : "`packet-tracer.yaml`" | Au niveau de la route statique, il manque "-0-1" à la fin pour que **Packet Tracer** la prenne en compte. | ***Sera corrigé dans la prochaine version***.                |
+| **1.2** | Page "`(4) Addons`"                        | Après avoir sauvegarder les données de la page 3, le bouton "`(5) Generate my exam !`"est déjà visible. | Il faudra d'abord passer par la page "`(4) Addons`" et sauvegarder avant de pouvoir générer l'examen. ***Sera corrigé dans la prochaine version***. |
 
 ---
 
@@ -26,6 +39,7 @@ Nom du fichier | hash sha1 associé
 ---------|----------
  release_windows_v1.0.zip | 2f7677315ed1412290d8318b9d17e308f580d369
  release_windows_v1.2.zip | 3b8b4821e52105fd6737129626b17d7b59a05e40
+ release_windows_v1.4.zip | 8c0a6e78f2746a66930f85804e6217500d8fd533 
 
 **Comment générer un hash sha1 sous windows ?**
 
@@ -166,3 +180,4 @@ Plateforme | Langage (programmation) | Librairie ?
 * [QT Designer - Outil pour faire le design de l'application](https://build-system.fman.io/qt-designer-download)
 * [Pycharm - IDE Python pour coder](https://www.jetbrains.com/pycharm/)
 * [Cheat-sheet pour les calculs de sous-réseau](https://nsrc.org/workshops/2009/summer/presentations/day3/subnetting.pdf)
+* [Typora - IDE pour Markdown](https://typora.io/#windows)
