@@ -283,7 +283,7 @@ def save_changes_p4():
     security_enabled = True
     exam_page.E_btn_5.setVisible(True)
 
-def generate_my_exam():
+def generate_exam_v1():
     generate_solution_text()
     generate_solution_packet_tracer()
 
@@ -901,14 +901,14 @@ def save_changes_p2_2():
         "PC3" : [exam_page.E_p2_2_clients_gb5_pc3.text(), "dhcp"] if (exam_page.E_p2_2_clients_gb3_dhcp_check.isChecked()) else [exam_page.E_p2_2_clients_gb5_pc3.text(), exam_page.E_p2_2_clients_gb3_ip.text(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_2_clients_gb3_cidr.currentText())), exam_page.E_p2_2_clients_gb3_gateway.text(), exam_page.E_p2_2_clients_gb3_dns.text()],
         "PC4" : [exam_page.E_p2_2_clients_gb5_pc4.text(), "dhcp"] if (exam_page.E_p2_2_clients_gb4_dhcp_check.isChecked()) else [exam_page.E_p2_2_clients_gb5_pc4.text(), exam_page.E_p2_2_clients_gb4_ip.text(), str(subnet_functions.getMaskFromSlash(exam_page.E_p2_2_clients_gb4_cidr.currentText())), exam_page.E_p2_2_clients_gb4_gateway.text(), exam_page.E_p2_2_clients_gb4_dns.text()],
     }
-    # "PC1" : ["hostname", "IP", "cidr", "gateway", "dns"]
+    # "PC1" : ["hostname", "IP", "mask", "gateway", "dns"]
     # "PC1" : [exam_page.E_p2_2_clients_gb5_pc1.text(), exam_page.E_p2_2_clients_gb1_ip.text(), exam_page.E_p2_2_clients_gb1_cidr.currentText(), exam_page.E_p2_2_clients_gb1_gateway.text(), exam_page.E_p2_2_clients_gb1_dns.text()]
 
 
     """
     S1 = {
        "name" : ["S1"],
-       "is_part_of_a_vlan" : ["10", "192.168.99.2", "255.255.255.0", "192.168.99.1"]
+       "is_part_of_a_vlan" : ["10", "192.168.99.2", "255.255.255.0", "192.168.99.1"] ou ["No"]
         "a" : ["F0/24", "Access", "Vlan 10", "description"],
         "b" : ["G0/2", "Trunk", "/", "description"],
         "c" : ["WAN", "1st IP", "mask", "description"],
@@ -1240,7 +1240,6 @@ def generate_solution_r1():
         count = len(r1_ssh_dict.get("allowed-host"))
         for q in r1_ssh_dict.get("allowed-host"):
             output += str(q) + "\n"
-            print(q)
         output += "\n"
 
         if (count >0):
@@ -1315,7 +1314,8 @@ def generate_solution_r2():
 
     output = build_routing_txt_solution(r2_routing_dict, output)
 
-    output += "!---NAT---\n"
+    if (len(r2_nat_list) > 0):
+        output += "!---NAT---\n"
     for a in r2_nat_list:
         output += str(a) + "\n"
     output += "\n"
@@ -1413,6 +1413,12 @@ def build_routing_txt_solution(device_routing_dict, output):
     output += "   redistribute static ! Pour les routes statiques \n"
     output += "\n"
 
+    if (len(device_routing_dict.get("static")) > 0):
+        output += "\n"
+        for n in device_routing_dict.get("static"):
+            output += str(n) + "\n"
+        output += "\n"
+
     return output
 
 def generate_solution_text_v2():
@@ -1425,4 +1431,407 @@ def generate_solution_text_v2():
     generate_solution_isp()
 
 def generate_solution_packet_tracer_v2():
-    pass
+    pool_dhcp_srv1 = dict()
+    for x in srv1_dhcp_dict.keys():
+        pool_dhcp_srv1[x] = {
+            "Default Gateway": srv1_dhcp_dict.get(x)[2],
+            "DNS Server IP": "",
+            "Max User": "Check this case",
+            "Name": x,
+            "Start IP Address": srv1_dhcp_dict.get(x)[0],
+            "Subnet Mask": srv1_dhcp_dict.get(x)[1]
+        }
+
+    pool_dhcp_srv2 = dict()
+    for x in srv2_dhcp_dict.keys():
+        pool_dhcp_srv2[x] = {
+            "Default Gateway": srv2_dhcp_dict.get(x)[2],
+            "DNS Server IP": "",
+            "Max User": "Check this case",
+            "Name": x,
+            "Start IP Address": srv2_dhcp_dict.get(x)[0],
+            "Subnet Mask": srv2_dhcp_dict.get(x)[1]
+        }
+
+    srv1_dns_pool = dict()
+    for x in srv1_dns_list:
+        srv1_dns_pool[x.split()[0]] = {
+            str(x.split()[1]) + " Records": {
+                x.split()[2]: ""
+            }
+        }
+
+    srv2_dns_pool = dict()
+    for x in srv2_dns_list:
+        srv2_dns_pool[x.split()[0]] = {
+            str(x.split()[1]) + " Records": {
+                x.split()[2]: ""
+            }
+        }
+
+    #---S1---#
+    s1_ports = dict()
+    int_keys = list(s1_dict.keys())[2:]
+    native = get_native_vlan(vlan_dict)
+    for x in int_keys:
+        if (s1_dict.get(x)[1] == "Access"):
+            s1_ports[s1_dict.get(x)[0]] = {
+                "Access VLAN": int(str(s1_dict.get(x)[2]).split()[1])
+            }
+        elif (s1_dict.get(x)[1] == "Trunk"):
+            if (check_if_switch_has_a_native_vlan(s1_dict, native) is True):
+                s1_ports[s1_dict.get(x)[0]] = {
+                    "Native VLAN": int(native),
+                    "Port Mode": 0
+                }
+            else:
+                s1_ports[s1_dict.get(x)[0]] = {
+                    "Port Mode": 0
+                }
+    if not (s1_dict.get("is_part_of_a_vlan")[0] == "No"):
+        string = "VLAN " + str(s1_dict.get("is_part_of_a_vlan")[0])
+        s1_ports[string] = {
+            "IP Address": s1_dict.get("is_part_of_a_vlan")[1],
+            "Subnet Mask": s1_dict.get("is_part_of_a_vlan")[2]
+        }
+    s1_vlans = dict()
+    s1_used_vlans = get_vlan_used_by_a_switch(s1_dict)
+
+    for x in s1_used_vlans:
+        string = "VLAN " + str(x)
+        s1_vlans[string] = {
+            "VLAN Name": vlan_dict.get(x)[0]
+        }
+
+    #---S2---#
+    s2_ports = dict()
+    int_keys = list(s2_dict.keys())[2:]
+    native = get_native_vlan(vlan_dict)
+    for x in int_keys:
+        if (s2_dict.get(x)[1] == "Access"):
+            s2_ports[s2_dict.get(x)[0]] = {
+                "Access VLAN": int(str(s2_dict.get(x)[2]).split()[1])
+            }
+        elif (s2_dict.get(x)[1] == "Trunk"):
+            if (check_if_switch_has_a_native_vlan(s2_dict, native) is True):
+                s2_ports[s2_dict.get(x)[0]] = {
+                    "Native VLAN": int(native),
+                    "Port Mode": 0
+                }
+            else:
+                s2_ports[s2_dict.get(x)[0]] = {
+                    "Port Mode": 0
+                }
+    if not (s2_dict.get("is_part_of_a_vlan")[0] == "No"):
+        string = "VLAN " + str(s2_dict.get("is_part_of_a_vlan")[0])
+        s2_ports[string] = {
+            "IP Address": s2_dict.get("is_part_of_a_vlan")[1],
+            "Subnet Mask": s2_dict.get("is_part_of_a_vlan")[2]
+        }
+    s2_vlans = dict()
+    s2_used_vlans = get_vlan_used_by_a_switch(s2_dict)
+
+    for x in s2_used_vlans:
+        string = "VLAN " + str(x)
+        s2_vlans[string] = {
+            "VLAN Name": vlan_dict.get(x)[0]
+        }
+
+    #---S3---#
+    s3_ports = dict()
+    int_keys = list(s3_dict.keys())[2:]
+    native = get_native_vlan(vlan_dict)
+    for x in int_keys:
+        if (s3_dict.get(x)[1] == "Access"):
+            s3_ports[s3_dict.get(x)[0]] = {
+                "Access VLAN": int(str(s3_dict.get(x)[2]).split()[1])
+            }
+        elif (s3_dict.get(x)[1] == "Trunk"):
+            if (check_if_switch_has_a_native_vlan(s3_dict, native) is True):
+                s3_ports[s3_dict.get(x)[0]] = {
+                    "Native VLAN": int(native),
+                    "Port Mode": 0
+                }
+            else:
+                s3_ports[s3_dict.get(x)[0]] = {
+                    "Port Mode": 0
+                }
+    if not (s3_dict.get("is_part_of_a_vlan")[0] == "No"):
+        string = "VLAN " + str(s3_dict.get("is_part_of_a_vlan")[0])
+        s3_ports[string] = {
+            "IP Address": s3_dict.get("is_part_of_a_vlan")[1],
+            "Subnet Mask": s3_dict.get("is_part_of_a_vlan")[2]
+        }
+    s3_vlans = dict()
+    s3_used_vlans = get_vlan_used_by_a_switch(s3_dict)
+
+    for x in s3_used_vlans:
+        string = "VLAN " + str(x)
+        s3_vlans[string] = {
+            "VLAN Name": vlan_dict.get(x)[0]
+        }
+
+    #---SWL3---#
+    swl3_vlans = dict()
+    swl3_ports = {
+        swl3_dict.get("a")[0]: {
+            "Port Mode": 0,
+            "Trunk Encapsulation": 1
+        },
+        swl3_dict.get("b")[0]: {
+            "IP Address": swl3_dict.get("b")[1],
+            "Subnet Mask": swl3_dict.get("b")[3],
+            "Switchport": 0
+        },
+        swl3_dict.get("c")[0]: {
+            "IP Address": swl3_dict.get("c")[1],
+            "Subnet Mask": swl3_dict.get("c")[3],
+            "Switchport": 0
+        }
+    }
+    swl3_used_vlans = get_vlan_used_by_a_switch(s3_dict)
+    for x in swl3_used_vlans:
+        string = "VLAN " + str(x)
+        swl3_vlans[string] = {
+            "VLAN Name": vlan_dict.get(x)[0]
+        }
+
+        if not (vlan_dict.get(x)[5] == "No"):
+            swl3_ports[string] = {
+                "IP Address": vlan_dict.get(x)[4],
+                "Subnet Mask": vlan_dict.get(x)[3],
+                "Helper Addresses" : vlan_dict.get(x)[5]
+            }
+        else:
+            swl3_ports[string] = {
+                "IP Address": vlan_dict.get(x)[4],
+                "Subnet Mask": vlan_dict.get(x)[3]
+            }
+
+    swl3_static_dict = dict()
+    count = 0
+    for z in swl3_routing_dict.get("static"):
+        string = "Route" + str(count)
+        swl3_static_dict[string] = z
+        count +=1
+
+    count = 0
+    int_keys = list(swl3_routing_dict.keys())[3:]
+    swl3_network_dict = dict()
+    for p in int_keys:
+        string = "Route" + str(count)
+        if (swl3_routing_dict.get(p)[0] == "OSPF"): # OSPF
+            swl3_network_dict[string] = str(swl3_routing_dict.get(p)[1]) + " " + str(swl3_routing_dict.get(p)[2]) + " " + str(swl3_routing_dict.get(p)[3])
+        else: # RIP
+            swl3_network_dict[string] = swl3_routing_dict.get(p)[1]
+        count +=1
+
+    swl3_passive_dict = dict()
+    for o in swl3_routing_dict.get("passive_int"):
+        string = utils.blueprintFunctions.format_output_interface(o)
+        swl3_passive_dict[o] = 1
+
+    global packet_tracer_stuct_v2
+    packet_tracer_stuct_v2 = {
+        "Network": {
+             client_dict.get("PC1")[0]: {
+                "Default Gateway": "DHCP" if (client_dict.get("PC1")[1] == "dhcp") else client_dict.get("PC1")[3],
+                "DNS Server IP": "DHCP" if (client_dict.get("PC1")[1] == "dhcp") else client_dict.get("PC1")[4],
+                "Ports": {
+                    "F0": {
+                        "IP": "DHCP" if (client_dict.get("PC1")[1] == "dhcp") else client_dict.get("PC1")[1],
+                        "Link": {
+                            "Connects to": "F0/1",
+                            "Type": "0 0"
+                        },
+                        "Mask": "DHCP" if (client_dict.get("PC1")[1] == "dhcp") else client_dict.get("PC1")[2]
+                    }
+                }
+            },
+            client_dict.get("PC2")[0]: {
+                "Default Gateway": "DHCP" if (client_dict.get("PC2")[1] == "dhcp") else client_dict.get("PC2")[3],
+                "DNS Server IP": "DHCP" if (client_dict.get("PC2")[1] == "dhcp") else client_dict.get("PC2")[4],
+                "Ports": {
+                    "F0": {
+                        "IP": "DHCP" if (client_dict.get("PC2")[1] == "dhcp") else client_dict.get("PC2")[1],
+                        "Link": {
+                            "Connects to": "F0/1",
+                            "Type": "0 0"
+                        },
+                        "Mask": "DHCP" if (client_dict.get("PC2")[1] == "dhcp") else client_dict.get("PC2")[2]
+                    }
+                }
+            },
+            client_dict.get("PC3")[0]: {
+                "Default Gateway": "DHCP" if (client_dict.get("PC3")[1] == "dhcp") else client_dict.get("PC3")[3],
+                "DNS Server IP": "DHCP" if (client_dict.get("PC3")[1] == "dhcp") else client_dict.get("PC3")[4],
+                "Ports": {
+                    "F0": {
+                        "IP": "DHCP" if (client_dict.get("PC3")[1] == "dhcp") else client_dict.get("PC3")[1],
+                        "Link": {
+                            "Connects to": "F0/1",
+                            "Type": "0 0"
+                        },
+                        "Mask": "DHCP" if (client_dict.get("PC3")[1] == "dhcp") else client_dict.get("PC3")[2]
+                    }
+                }
+            },
+            client_dict.get("PC4")[0]: {
+                "Default Gateway": "DHCP" if (client_dict.get("PC4")[1] == "dhcp") else client_dict.get("PC4")[3],
+                "DNS Server IP": "DHCP" if (client_dict.get("PC4")[1] == "dhcp") else client_dict.get("PC4")[4],
+                "Ports": {
+                    "F0": {
+                        "IP": "DHCP" if (client_dict.get("PC4")[1] == "dhcp") else client_dict.get("PC4")[1],
+                        "Link": {
+                            "Connects to": "F0/1",
+                            "Type": "0 0"
+                        },
+                        "Mask": "DHCP" if (client_dict.get("PC4")[1] == "dhcp") else client_dict.get("PC4")[2]
+                    }
+                }
+            }, #--SRV1--#
+            srv1_dict.get("main")[0]: {
+                "Default Gateway": srv1_dict.get("main")[3],
+                "DHCP Server List" : { # Disparait si pas de server dhcp
+                    "DHCP Server" : {
+                        "DHCP Enable" : 1,
+                        "Pools" : pool_dhcp_srv1
+                    }
+                },
+                "DNS Server" : { # Disparait si pas de server dns
+                    "DNS Enable" : 1,
+                    "Resource Records" : srv1_dns_pool
+                },
+                "DNS Server IP" : srv1_dict.get("main")[4], # If empty => Must delete this line
+                "Ports": {
+                    "F0": {
+                        "IP Address": srv1_dict.get("main")[1],
+                        "Subnet Mask": srv1_dict.get("main")[2]
+                    }
+                }
+            }, #--SRV2--#
+            srv2_dict.get("main")[0]: {
+                "Default Gateway": srv2_dict.get("main")[3],
+                "DHCP Server List": {  # Disparait si pas de server dhcp
+                    "DHCP Server": {
+                        "DHCP Enable": 1,
+                        "Pools": pool_dhcp_srv2
+                    }
+                },
+                "DNS Server": {  # Disparait si pas de server dns
+                    "DNS Enable": 1,
+                    "Resource Records": srv2_dns_pool
+                },
+                "DNS Server IP": srv2_dict.get("main")[4],  # If empty => Must delete this line
+                "Ports": {
+                    "F0": {
+                        "IP Address": srv2_dict.get("main")[1],
+                        "Subnet Mask": srv2_dict.get("main")[2]
+                    }
+                }
+            }, #---S1---#
+            s1_dict.get("name")[0]:{
+                "Default Gateway": s1_dict.get("is_part_of_a_vlan")[3] if not (s1_dict.get("is_part_of_a_vlan")[0] == "No") else "/",
+                "Host Name": s1_dict.get("name")[0],
+                "Ports": s1_ports,
+                "VLANS": s1_vlans
+            }, #---S2---#
+            s2_dict.get("name")[0]: {
+                "Default Gateway": s2_dict.get("is_part_of_a_vlan")[3] if not (s2_dict.get("is_part_of_a_vlan")[0] == "No") else "/",
+                "Host Name": s2_dict.get("name")[0],
+                "Ports": s2_ports,
+                "VLANS": s2_vlans
+            }, #---S3---#
+            s3_dict.get("name")[0]: {
+                "Default Gateway": s3_dict.get("is_part_of_a_vlan")[3] if not (s3_dict.get("is_part_of_a_vlan")[0] == "No") else "/",
+                "Host Name": s3_dict.get("name")[0],
+                "Ports": s3_ports,
+                "VLANS": s3_vlans
+            }, #---SWL3---#
+            swl3_dict.get("name")[0]:{
+                "Host Name": swl3_dict.get("name")[0],
+                "OSPF":{
+                    "Process Id " + str(swl3_routing_dict.get("ospf")[0]): {
+                        "Auto Cost": swl3_routing_dict.get("ospf")[1],
+                        "Default Information": 1,
+                        "Networks" : swl3_network_dict,
+                        "Passive Interface": swl3_passive_dict
+                    }
+                },
+                "RIP":{
+                    "Default Information Originate": 1,
+                    "Networks": swl3_network_dict,
+                    "Passive Interface": swl3_passive_dict
+                },
+                "Ports": swl3_ports,
+                "Routes":{
+                    "IP Routing":1,
+                    "Static Routes": swl3_static_dict
+                },
+                "VLANS": swl3_vlans
+            }
+
+        }
+    }
+
+    if (bool(pool_dhcp_srv1) is False): # If srv1 no dhcp server
+        del packet_tracer_stuct_v2["Network"][srv1_dict.get("main")[0]]["DHCP Server List"]
+
+    if (bool(pool_dhcp_srv2) is False): # If srv2 no dhcp server
+        del packet_tracer_stuct_v2["Network"][srv2_dict.get("main")[0]]["DHCP Server List"]
+
+    if (bool(srv1_dns_pool) is False): # if srv1 no dns server
+        del packet_tracer_stuct_v2["Network"][srv1_dict.get("main")[0]]["DNS Server"]
+
+    if (bool(srv2_dns_pool) is False): # if srv2 no dns server
+        del packet_tracer_stuct_v2["Network"][srv2_dict.get("main")[0]]["DNS Server"]
+
+    remove_dns_from_output()
+
+    if (packet_tracer_stuct_v2["Network"][s1_dict.get("name")[0]]["Default Gateway"] == "/"):
+        del packet_tracer_stuct_v2["Network"][s1_dict.get("name")[0]]["Default Gateway"]
+
+    if (packet_tracer_stuct_v2["Network"][s2_dict.get("name")[0]]["Default Gateway"] == "/"):
+        del packet_tracer_stuct_v2["Network"][s2_dict.get("name")[0]]["Default Gateway"]
+
+    if (packet_tracer_stuct_v2["Network"][s3_dict.get("name")[0]]["Default Gateway"] == "/"):
+        del packet_tracer_stuct_v2["Network"][s3_dict.get("name")[0]]["Default Gateway"]
+
+    if (swl3_routing_dict.get(0)[0] == "OSPF"): # Delete RIP bloc
+        del packet_tracer_stuct_v2["Network"][swl3_dict.get("name")[0]]["RIP"]
+    else: # Delete OSPF bloc
+        del packet_tracer_stuct_v2["Network"][swl3_dict.get("name")[0]]["OSPF"]
+
+    with open(str(utils.blueprintFunctions.getDesktopPath()) + "/packet-tracer_v2.yaml", "a") as f:
+        yaml.dump(packet_tracer_stuct_v2, f)
+
+def remove_dns_from_output():
+    if (client_dict.get("PC1")[1] == "dhcp"):
+        packet_tracer_stuct_v2["Network"][client_dict.get("PC1")[0]]["DNS Server IP"] = "DHCP"
+    elif(len(client_dict.get("PC1")[4]) < 1):
+        del packet_tracer_stuct_v2["Network"][client_dict.get("PC1")[0]]["DNS Server IP"]
+
+    if (client_dict.get("PC2")[1] == "dhcp"):
+        packet_tracer_stuct_v2["Network"][client_dict.get("PC2")[0]]["DNS Server IP"] = "DHCP"
+    elif(len(client_dict.get("PC2")[4]) < 1):
+        del packet_tracer_stuct_v2["Network"][client_dict.get("PC2")[0]]["DNS Server IP"]
+
+    if (client_dict.get("PC3")[1] == "dhcp"):
+        packet_tracer_stuct_v2["Network"][client_dict.get("PC3")[0]]["DNS Server IP"] = "DHCP"
+    elif(len(client_dict.get("PC3")[4]) < 1):
+        del packet_tracer_stuct_v2["Network"][client_dict.get("PC3")[0]]["DNS Server IP"]
+
+    if (client_dict.get("PC4")[1] == "dhcp"):
+        packet_tracer_stuct_v2["Network"][client_dict.get("PC4")[0]]["DNS Server IP"] = "DHCP"
+    elif(len(client_dict.get("PC4")[4]) < 1):
+        del packet_tracer_stuct_v2["Network"][client_dict.get("PC4")[0]]["DNS Server IP"]
+
+    if (len(srv1_dict.get("main")[4]) < 1): # SRV1
+        del packet_tracer_stuct_v2["Network"][srv1_dict.get("main")[0]]["DNS Server IP"]
+
+    if (len(srv2_dict.get("main")[4]) < 1): # SRV2
+        del packet_tracer_stuct_v2["Network"][srv2_dict.get("main")[0]]["DNS Server IP"]
+
+def generate_exam_v2():
+    generate_solution_text_v2()
+    generate_solution_packet_tracer_v2()

@@ -9,7 +9,7 @@ from exam_functions import *
 classBlueprint = utils.blueprintFunctions
 
 #-------GLOBAL VARIABLES------------#
-exam_level_1_only = True # Allows to force level 1 only
+exam_level_1_only = False # Allows to force level 1 only
 
 vlan_set = set()
 vlan_subnet_set = set()
@@ -90,7 +90,7 @@ def setupUiExam(self):
     E_btn_1_6 = QtWidgets.QPushButton(self.Exam)
     classBlueprint.mkBtn(E_btn_1_6, QtCore.QRect(755, 47, 135, 50), "background-color: rgb(255, 170, 255);", "(6) Generate\nmy exam !")
     E_btn_1_6.setVisible(False)
-    E_btn_1_6.clicked.connect(lambda: exam_functions.generate_solution_text_v2())
+    E_btn_1_6.clicked.connect(lambda: exam_functions.generate_exam_v2())
     #-----------------#
 
     self.E_home = QtWidgets.QPushButton(self.Exam)
@@ -952,6 +952,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntSwitch(E_p2_2_s1_comboA_interface)
+    E_p2_2_s1_comboA_interface.setCurrentIndex(23)
 
     global E_p2_2_s1_comboA_access
     E_p2_2_s1_comboA_access = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
@@ -989,6 +990,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntSwitch(E_p2_2_s1_comboB_interface)
+    E_p2_2_s1_comboB_interface.setCurrentIndex(22)
 
     global E_p2_2_s1_comboB_access
     E_p2_2_s1_comboB_access = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
@@ -1026,6 +1028,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntSwitch(E_p2_2_s1_comboC_interface)
+    E_p2_2_s1_comboC_interface.setCurrentIndex(25)
 
     global E_p2_2_s1_comboC_access
     E_p2_2_s1_comboC_access = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
@@ -1064,6 +1067,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntSwitch(E_p2_2_s1_comboD_interface)
+    E_p2_2_s1_comboD_interface.setCurrentIndex(24)
 
     global E_p2_2_s1_comboD_access
     E_p2_2_s1_comboD_access = QtWidgets.QComboBox(p2_2_tabwidget_tab1)
@@ -1138,6 +1142,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntSwitch(E_p2_2_s2_comboA_interface)
+    E_p2_2_s2_comboA_interface.setCurrentIndex(25)
 
     global E_p2_2_s2_comboA_access
     E_p2_2_s2_comboA_access = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
@@ -1177,6 +1182,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntSwitch(E_p2_2_s2_comboB_interface)
+    E_p2_2_s2_comboB_interface.setCurrentIndex(23)
 
     global E_p2_2_s2_comboB_access
     E_p2_2_s2_comboB_access = QtWidgets.QComboBox(p2_2_tabwidget_tab2)
@@ -1249,6 +1255,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntSwitch(E_p2_2_s3_comboA_interface)
+    E_p2_2_s3_comboA_interface.setCurrentIndex(23)
 
     global E_p2_2_s3_comboA_access
     E_p2_2_s3_comboA_access = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
@@ -1285,6 +1292,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntSwitch(E_p2_2_s3_comboB_interface)
+    E_p2_2_s3_comboB_interface.setCurrentIndex(22)
 
     global E_p2_2_s3_comboB_access
     E_p2_2_s3_comboB_access = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
@@ -1322,6 +1330,7 @@ def setupUiExam(self):
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(255, 0, 0);")
     classBlueprint.fillComboIntSwitch(E_p2_2_s3_comboC_interface)
+    E_p2_2_s3_comboC_interface.setCurrentIndex(25)
 
     global E_p2_2_s3_comboC_access
     E_p2_2_s3_comboC_access = QtWidgets.QComboBox(p2_2_tabwidget_tab3)
@@ -1455,16 +1464,9 @@ def setupUiExam(self):
 
     global E_p2_2_clients_gb2_dhcp_check
     E_p2_2_clients_gb2_dhcp_check = QtWidgets.QCheckBox(self.E_p2_2_clients_gb2)
-    classBlueprint.mkCheck(E_p2_2_clients_gb2_dhcp_check, QtCore.QRect(150, 70, 91, 20), False, "DHCP ?", True)
-    E_p2_2_clients_gb2_dhcp_check.stateChanged.connect(lambda: exam_functions.pc_dhcp_hide(E_p2_2_clients_gb2_dhcp_check,
-                                                                                           self.E_p2_2_clients_gb2_ip_label,
-                                                                                           E_p2_2_clients_gb2_ip,
-                                                                                           self.E_p2_2_clients_gb2_gateway_label,
-                                                                                           E_p2_2_clients_gb2_gateway,
-                                                                                           self.E_p2_2_clients_gb2_cidr_label,
-                                                                                           E_p2_2_clients_gb2_cidr,
-                                                                                           self.E_p2_2_clients_gb2_dns_label,
-                                                                                           E_p2_2_clients_gb2_dns))
+    classBlueprint.mkCheck(E_p2_2_clients_gb2_dhcp_check, QtCore.QRect(150, 70, 91, 20), True, "DHCP ?", True)
+    E_p2_2_clients_gb2_dhcp_check.stateChanged.connect(lambda: exam_functions.pc_dhcp_hide(E_p2_2_clients_gb2_dhcp_check, self.E_p2_2_clients_gb2_ip_label, E_p2_2_clients_gb2_ip, self.E_p2_2_clients_gb2_gateway_label, E_p2_2_clients_gb2_gateway, self.E_p2_2_clients_gb2_cidr_label, E_p2_2_clients_gb2_cidr, self.E_p2_2_clients_gb2_dns_label, E_p2_2_clients_gb2_dns))
+
 
     self.E_p2_2_clients_gb2_gateway_label = QtWidgets.QLabel(self.E_p2_2_clients_gb2)
     classBlueprint.mkLabel(self.E_p2_2_clients_gb2_gateway_label, QtCore.QRect(230, 30, 91, 25), "Gateway :", True)
@@ -1481,6 +1483,13 @@ def setupUiExam(self):
     E_p2_2_clients_gb2_dns = QtWidgets.QLineEdit(self.E_p2_2_clients_gb2)
     classBlueprint.mkLineEdit(E_p2_2_clients_gb2_dns, QtCore.QRect(322, 65, 181, 31), 15, "192.168.20.11")
     E_p2_2_clients_gb2_dns.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 85, 255);")
+
+    #------------------------Already hides PC2------------------------#
+    exam_functions.pc_dhcp_hide(E_p2_2_clients_gb2_dhcp_check, self.E_p2_2_clients_gb2_ip_label, E_p2_2_clients_gb2_ip,
+                                self.E_p2_2_clients_gb2_gateway_label, E_p2_2_clients_gb2_gateway,
+                                self.E_p2_2_clients_gb2_cidr_label, E_p2_2_clients_gb2_cidr,
+                                self.E_p2_2_clients_gb2_dns_label, E_p2_2_clients_gb2_dns)
+    #-----------------------------------------------------------------#
 
     # Groupbox PC3
     self.E_p2_2_clients_gb3 = QtWidgets.QGroupBox(p2_2_tabwidget_tab4)
@@ -3125,7 +3134,7 @@ def setupUiExam(self):
     self.E_save.clicked.connect(lambda: exam_functions.save_changes(self.stackedWidget_2))
     self.E_p2_gb_add.clicked.connect(lambda: exam_functions.add_host_to_table(E_p2_table, self.E_p2_gb_editLan, E_p2_gb_editHost))
     self.E_p2_gb_clear.clicked.connect(lambda: exam_functions.clear_table(E_p2_table))
-    E_btn_5.clicked.connect(lambda: exam_functions.generate_my_exam())
+    E_btn_5.clicked.connect(lambda: exam_functions.generate_exam_v1())
 
     E_btn_2.clicked.connect(lambda: self.E_save.setVisible(True))
     E_btn_1_2.clicked.connect(lambda: self.E_save.setVisible(True))
