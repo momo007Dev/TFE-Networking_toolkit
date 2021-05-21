@@ -15,7 +15,7 @@
 1. Aller sur le repos GitHub du projet : [github](https://github.com/momo007Dev/TFE-Networking_toolkit)
 
 2. Téléchargez la dernière version :
-   * Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip)
+   * Version ***1.4*** : [release_windows_v1.4.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.4.zip)
    * > :warning: Cette version inclus **UNIQUEMENT** le générateur d'examen de niveau 1 !
 
 3. (Optionnel) Vérifier l'intégralité du fichier [Voir section du github](https://github.com/momo007Dev/TFE-Networking_toolkit#v%C3%A9rification-de-lint%C3%A9grit%C3%A9-du-fichier-)
