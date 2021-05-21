@@ -8,7 +8,7 @@
 ### Manuel d'utilisation
 
 * [Version Markdown sur github](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/User_manual_v1.md)
-* [Version PDF](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v1.pdf)
+* [Version PDF](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v1_2.pdf)
 
 ---
 
