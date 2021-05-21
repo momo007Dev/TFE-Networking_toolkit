@@ -3606,9 +3606,9 @@ def setupUiExam(self):
         table = E_p2_4_R2_Nat_table_1
 
         if (cidr == "/32"):
-            data = "access-list 1 permit host " + str(subnet)
+            data = "access-list 2 permit host " + str(subnet)
         else:
-            data = "access-list 1 permit " + str(subnet) + " " + str(exam_functions.getWildcardFromMask(str(exam_functions.getMaskFromSlash(cidr))))
+            data = "access-list 2 permit " + str(subnet) + " " + str(exam_functions.getWildcardFromMask(str(exam_functions.getMaskFromSlash(cidr))))
 
         lastrow = table.rowCount()
         table.insertRow(lastrow)

@@ -845,7 +845,7 @@ def hide_if_trunk_selected(combo_trunk, combo_to_hide):
 
 def get_native_vlan(dict): # Returns the vlan which has a "native" in it
     for x, y in dict.items():
-        if (y[4] == "Yes"):
+        if (y[6] == "Yes"):
             return str(x)
     return "/"
 
@@ -1305,11 +1305,13 @@ def generate_solution_r2():
     output += "int " + str(r2_dict.get("a")[0]) + "\n"
     output += "   description " + str(r2_dict.get("a")[4]) + "\n"
     output += "   ip add " + str(r2_dict.get("a")[1]) + " " + str(r2_dict.get("a")[3]) + "\n"
+    output += "   ip nat inside\n"
     output += "\n"
 
     output += "int " + str(r2_dict.get("b")[0]) + "\n"
     output += "   description " + str(r2_dict.get("b")[4]) + "\n"
     output += "   ip add " + str(r2_dict.get("b")[1]) + " " + str(r2_dict.get("b")[3]) + "\n"
+    output += "   ip nat outside\n"
     output += "\n"
 
     output = build_routing_txt_solution(r2_routing_dict, output)
@@ -1572,7 +1574,6 @@ def generate_solution_packet_tracer_v2():
         }
 
     #---SWL3---#
-    swl3_vlans = dict()
     swl3_ports = {
         swl3_dict.get("a")[0]: {
             "Port Mode": 0,
@@ -1589,6 +1590,7 @@ def generate_solution_packet_tracer_v2():
             "Switchport": 0
         }
     }
+    swl3_vlans = dict()
     swl3_used_vlans = get_vlan_used_by_a_switch(s3_dict)
     for x in swl3_used_vlans:
         string = "VLAN " + str(x)
@@ -1630,6 +1632,148 @@ def generate_solution_packet_tracer_v2():
     for o in swl3_routing_dict.get("passive_int"):
         string = utils.blueprintFunctions.format_output_interface(o)
         swl3_passive_dict[o] = 1
+
+    #---R1---#
+    r1_acl_list = list()
+    for a in r1_ssh_dict.get("allowed-host"):
+        splitted = a.split()
+        string = ""
+        for x in splitted[2:]:
+            string += x + " "
+        r1_acl_list.append(string)
+
+    count = 0
+    int_keys = list(r1_routing_dict.keys())[3:]
+    r1_network_dict = dict()
+    for p in int_keys:
+        string = "Route" + str(count)
+        if (r1_routing_dict.get(p)[0] == "OSPF"): # OSPF
+            r1_network_dict[string] = str(r1_routing_dict.get(p)[1]) + " " + str(r1_routing_dict.get(p)[2]) + " " + str(r1_routing_dict.get(p)[3])
+        else: # RIP
+            r1_network_dict[string] = r1_routing_dict.get(p)[1]
+        count +=1
+
+    r1_passive_dict = dict()
+    for o in r1_routing_dict.get("passive_int"):
+        string = utils.blueprintFunctions.format_output_interface(o)
+        r1_passive_dict[o] = 1
+
+    r1_ports = {
+        r1_dict.get("a")[0]: {
+            "IP Address": r1_dict.get("a")[1],
+            "Port Status": 1,
+            "Subnet Mask": r1_dict.get("a")[3],
+        },
+        r1_dict.get("b")[0]: {
+            "Port Status": 1
+        }
+    }
+    native = get_native_vlan(vlan_dict)
+    r1_used_vlans_1 = get_vlan_used_by_a_switch(s1_dict)
+    r1_used_vlans_2 = get_vlan_used_by_a_switch(s2_dict)
+    r1_used_vlans = r1_used_vlans_1.union(r1_used_vlans_2)
+
+    r1_int_b = str(r1_dict.get("b")[0]) + "."
+    for x in r1_used_vlans:
+        string = r1_int_b + str(x)
+
+        if not (native in r1_used_vlans): # No Native vlan
+            if not (vlan_dict.get(x)[5] == "No"):
+                r1_ports[string] = {
+                    "802.1Q": {
+                        "VLAN ID": int(x)
+                    },
+                    "IP Address": vlan_dict.get(x)[4],
+                    "Subnet Mask": vlan_dict.get(x)[3],
+                    "Helper Addresses": vlan_dict.get(x)[5]
+                }
+            else:
+                r1_ports[string] = {
+                    "802.1Q": {
+                        "VLAN ID": int(x)
+                    },
+                    "IP Address": vlan_dict.get(x)[4],
+                    "Subnet Mask": vlan_dict.get(x)[3]
+                }
+        else: # Native VLAN
+            if not (vlan_dict.get(x)[5] == "No"):
+                r1_ports[string] = {
+                    "802.1Q": {
+                        "Native VLAN": int(native),
+                        "VLAN ID": int(x)
+                    },
+                    "IP Address": vlan_dict.get(x)[4],
+                    "Subnet Mask": vlan_dict.get(x)[3],
+                    "Helper Addresses": vlan_dict.get(x)[5]
+                }
+            else:
+                r1_ports[string] = {
+                    "802.1Q": {
+                        "Native VLAN": int(native),
+                        "VLAN ID": int(x)
+                    },
+                    "IP Address": vlan_dict.get(x)[4],
+                    "Subnet Mask": vlan_dict.get(x)[3]
+                }
+    r1_static_dict = dict()
+    count = 0
+    for z in r1_routing_dict.get("static"):
+        string = "Route" + str(count)
+        r1_static_dict[string] = z
+        count +=1
+
+    #---R2---#
+    r2_acl_list = list()
+    for a in r2_ssh_dict.get("allowed-host"):
+        splitted = a.split()
+        string = ""
+        for x in splitted[2:]:
+            string += x + " "
+        r2_acl_list.append(string)
+
+    count = 0
+    int_keys = list(r2_routing_dict.keys())[3:]
+    r2_network_dict = dict()
+    for p in int_keys:
+        string = "Route" + str(count)
+        if (r2_routing_dict.get(p)[0] == "OSPF"): # OSPF
+            r2_network_dict[string] = str(r2_routing_dict.get(p)[1]) + " " + str(r2_routing_dict.get(p)[2]) + " " + str(r2_routing_dict.get(p)[3])
+        else: # RIP
+            r2_network_dict[string] = r2_routing_dict.get(p)[1]
+        count +=1
+
+    r2_passive_dict = dict()
+    for o in r2_routing_dict.get("passive_int"):
+        string = utils.blueprintFunctions.format_output_interface(o)
+        r2_passive_dict[o] = 1
+
+    r2_static_dict = dict()
+    count = 0
+    for z in r1_routing_dict.get("static"):
+        string = "Route" + str(count)
+        r2_static_dict[string] = z
+        count +=1
+
+    count = 0
+    r2_nat_source_list = dict()
+    for a in r2_nat_list:
+        splitted = a.split()
+        string = ""
+        for x in splitted[2:]:
+            string += x + " "
+        r2_nat_source_list[count] = string
+        count += 1
+
+    count = 0
+    r2_nat_port_dict = dict()
+    for a in exam_page.r2_port_redirection_list:
+        splitted = a.split()
+        string = ""
+        for x in splitted[5:]:
+            string += x + " "
+        r2_nat_port_dict[count] = string
+        count += 1
+
 
     global packet_tracer_stuct_v2
     packet_tracer_stuct_v2 = {
@@ -1752,7 +1896,7 @@ def generate_solution_packet_tracer_v2():
                 "Host Name": swl3_dict.get("name")[0],
                 "OSPF":{
                     "Process Id " + str(swl3_routing_dict.get("ospf")[0]): {
-                        "Auto Cost": swl3_routing_dict.get("ospf")[1],
+                        "Auto Cost": int(swl3_routing_dict.get("ospf")[1]),
                         "Default Information": 1,
                         "Networks" : swl3_network_dict,
                         "Passive Interface": swl3_passive_dict
@@ -1769,8 +1913,114 @@ def generate_solution_packet_tracer_v2():
                     "Static Routes": swl3_static_dict
                 },
                 "VLANS": swl3_vlans
+            }, #---R1---#
+            r1_dict.get("name")[0]:{
+                "ACL":{ # If No ACL => Delete this
+                    1: r1_acl_list
+                },
+                "DNS":{
+                    "IP Domain Name" : r1_ssh_dict.get("domain")
+                },
+                "Host Name" : r1_dict.get("name")[0],
+                "OSPF":{
+                    "Process Id " + str(r1_routing_dict.get("ospf")[0]): {
+                        "Auto Cost": int(r1_routing_dict.get("ospf")[1]),
+                        "Default Information": 1,
+                        "Networks": r1_network_dict,
+                        "Passive Interface": r1_passive_dict
+                    }
+                },
+                "RIP":{
+                    "Default Information Originate": 1,
+                    "Networks": r1_network_dict,
+                    "Passive Interface": r1_passive_dict
+                },
+                "Routes": {
+                    "Static Routes": r1_static_dict
+                },
+                "Ports": r1_ports,
+                "User Names":{ # If SSH is not used => Delete this bloc
+                    "Username": "Check this case"
+                },
+                "Security": {  # SSH
+                    "Crypto Key Set": "Check this case",
+                    "Modulus Bits": 1024
+                },
+                "VTY Lines": {
+                    "VTY Line 0": {
+                        "Access Control In": 1,
+                        "Login": 2,  # SSH
+                        "Transport Input": 2  # SSH
+                    },
+                    "VTY Line 4": {
+                        "Access Control In": 1,
+                        "Login": 2,  # SSH
+                        "Transport Input": 2  # SSH
+                    }
+                }
+            }, #---R2---#
+            r2_dict.get("name")[0]: {
+                "ACL": {  # If No ACL => Delete this
+                    1: r2_acl_list
+                },
+                "DNS": {
+                    "IP Domain Name": r2_ssh_dict.get("domain")
+                },
+                "Host Name": r2_dict.get("name")[0],
+                "NAT":{
+                    "Inside Source List": r2_nat_source_list,
+                    "Inside Source Static": r2_nat_port_dict
+                },
+                "OSPF": {
+                    "Process Id " + str(r2_routing_dict.get("ospf")[0]): {
+                        "Auto Cost": int(r2_routing_dict.get("ospf")[1]),
+                        "Default Information": 1,
+                        "Networks": r2_network_dict,
+                        "Passive Interface": r2_passive_dict
+                    }
+                },
+                "RIP": {
+                    "Default Information Originate": 1,
+                    "Networks": r2_network_dict,
+                    "Passive Interface": r2_passive_dict
+                },
+                "Routes": {
+                    "Static Routes": r2_static_dict
+                },
+                "Ports": {
+                    r2_dict.get("a")[0] :{
+                        "IP Address": r2_dict.get("a")[1],
+                        "NAT Mode": 1, # NAT Inside
+                        "Port Status": 1,
+                        "Subnet Mask": r2_dict.get("a")[3]
+                    },
+                    r2_dict.get("b")[0]: {
+                        "IP Address": r2_dict.get("b")[1],
+                        "NAT Mode": 2, # NAT Outside
+                        "Port Status": 1,
+                        "Subnet Mask": r2_dict.get("b")[3]
+                    }
+                },
+                "User Names": {  # If SSH is not used => Delete this bloc
+                    "Username": "Check this case"
+                },
+                "Security": {  # SSH
+                    "Crypto Key Set": "Check this case",
+                    "Modulus Bits": 1024
+                },
+                "VTY Lines": {
+                    "VTY Line 0": {
+                        "Access Control In": 1,
+                        "Login": 2,  # SSH
+                        "Transport Input": 2  # SSH
+                    },
+                    "VTY Line 4": {
+                        "Access Control In": 1,
+                        "Login": 2,  # SSH
+                        "Transport Input": 2  # SSH
+                    }
+                }
             }
-
         }
     }
 
@@ -1799,8 +2049,50 @@ def generate_solution_packet_tracer_v2():
 
     if (swl3_routing_dict.get(0)[0] == "OSPF"): # Delete RIP bloc
         del packet_tracer_stuct_v2["Network"][swl3_dict.get("name")[0]]["RIP"]
+    else:
+        del packet_tracer_stuct_v2["Network"][swl3_dict.get("name")[0]]["OSPF"] # Delete OSPF bloc
+
+    if (r1_routing_dict.get(0)[0] == "OSPF"): # Delete RIP bloc
+        del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["RIP"]
     else: # Delete OSPF bloc
-        del packet_tracer_stuct_v2["Network"][swl3_dict.get("name")[0]]["OSPF"]
+        del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["OSPF"]
+
+    # Removes acl list if empty (R1) :
+    if (len(r1_acl_list) < 1):
+        del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["ACL"]
+        del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["VTY Lines"]["VTY Line 0"]["Access Control In"]
+        del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["VTY Lines"]["VTY Line 4"]["Access Control In"]
+
+    # If SSH is NOT Used (R1) :
+    if not (exam_page.E_p2_4_R1_Main_checkSsh.isChecked()):
+        del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["VTY Lines"]
+        del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["Security"]
+        del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["User Names"]
+        del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["DNS"]
+
+    # Removes acl list if empty (R2) :
+    if (len(r2_acl_list) < 1):
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["ACL"]
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["VTY Lines"]["VTY Line 0"]["Access Control In"]
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["VTY Lines"]["VTY Line 4"]["Access Control In"]
+
+    # If SSH is NOT Used (R2) :
+    if not (exam_page.E_p2_4_R2_Main_checkSsh.isChecked()):
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["VTY Lines"]
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["Security"]
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["User Names"]
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["DNS"]
+
+    if (r2_routing_dict.get(0)[0] == "OSPF"): # Delete RIP bloc
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["RIP"]
+    else: # Delete OSPF bloc
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["OSPF"]
+
+    if (len(r2_nat_source_list) < 1): # If nat source list is empty : delete bloc ["Inside Source List"]
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["NAT"]["Inside Source List"]
+
+    if (len(r2_nat_port_dict) < 1): # If nat source list is empty : delete bloc ["Inside Source Static"]
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["NAT"]["Inside Source Static"]
 
     with open(str(utils.blueprintFunctions.getDesktopPath()) + "/packet-tracer_v2.yaml", "a") as f:
         yaml.dump(packet_tracer_stuct_v2, f)
