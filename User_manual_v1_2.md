@@ -22,7 +22,7 @@
 
 4. Extraire les fichiers :
 
-	* > Vous devriez avoir 1 dossier `img` contenant les images du programme et le programme sous format executable (`.exe`).
+	* > Vous devriez avoir 1 dossier `img` contenant les images du programme et le programme sous format exécutable (`.exe`).
 
 6. Double cliquer sur l'exécutable pour démarrer le programme.
 
