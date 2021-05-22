@@ -7,14 +7,18 @@
 
 ### Manuel d'utilisation
 
-* [Version Markdown sur github](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/User_manual_v1.md)
-* [Version PDF](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v1_2.pdf)
+* **Générateur d'examen de niveau 1** :
+  * [Version Markdown sur github](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/User_manual_v1_2.md)
+  * [Version PDF](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v1_2.pdf)
+* **Générateur d'examen de niveau 2 :**
+  * [Version Markdown sur github](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/User_manual_v2_0.md)
+  * [Version PDF](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v2_0.pdf)
 
 ---
 
 ### Release
 
-* **Générateur d'examen de niveau 1**:
+* **Générateur d'examen de niveau 1 **:
   * Version ***1.0*** : [release_windows_v1.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.0.zip)
   * Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip)
   * Version ***1.4*** : [release_windows_v1.4.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.4.zip)

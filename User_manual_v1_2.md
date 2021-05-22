@@ -3,7 +3,7 @@
 * [Procédures d'installation](#procédures-d'installation)
 * [Utilisation](#utilisation)
   * [Générateur examens de niveau 1](#Générateur-d'examens-de-niveau-1)
-    * Choisir la topologie
+    * (1) Choisir la topologie
     * (2) Main Configuration
     * (3) Connectivity
     * (4) Addons
@@ -15,8 +15,8 @@
 1. Aller sur le repos GitHub du projet : [github](https://github.com/momo007Dev/TFE-Networking_toolkit)
 
 2. Téléchargez la dernière version :
-   * Version ***1.4*** : [release_windows_v1.4.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.4.zip)
-   * > :warning: Cette version inclus **UNIQUEMENT** le générateur d'examen de niveau 1 !
+
+> :warning:Prenez bien une version commençant par "`1.x`"
 
 3. (Optionnel) Vérifier l'intégralité du fichier [Voir section du github](https://github.com/momo007Dev/TFE-Networking_toolkit#v%C3%A9rification-de-lint%C3%A9grit%C3%A9-du-fichier-)
 
@@ -504,24 +504,24 @@ Network:
 
 <img src="img\img6.png" width="601" height="494" />
 
-* **(1)** : En fonction du CIDR, va générer en (2) :
+* **(1) : En fonction du CIDR, va générer en (2) :**
 
   * Le masque de sous-réseau
   * Le masque de sous réseau inversé
   * Le nombre d'adresses IP disponibles (et utilisables)
 
-* **(3)** : Mettre le réseau et le CIDR correspondant (va permettre des calculs de VLSM)
+* **(3) : Mettre le réseau et le CIDR correspondant (va permettre des calculs de VLSM)**
 
-* **(4)** : Mettre le nombre d'hôtes souhaité et à chaque fois cliquer sur "Add" pour ajouter un nombre d'hôte dans la table.
+* **(4) : Mettre le nombre d'hôtes souhaité et à chaque fois cliquer sur "Add" pour ajouter un nombre d'hôte dans la table.**
 
   * > Par exemple, j'ai mis 50 puis "Add", 100 puis "Add" et enfin 3 et "Add" afin d'avoir 50-100-3 dans la table.
     >
     > PS : L'ordre n'a pas d'importance, le programme s'occupe de remettre dans l'ordre les nombres et de mener à bien les calculs de VLSM.
 
-* **(5)** : La table des hôtes - permet d'avoir un visuel sur ce que le programme va prendre en compte.
+* **(5) : La table des hôtes - permet d'avoir un visuel sur ce que le programme va prendre en compte.**
 
-* **(6)** : En appuyant sur ce bouton, cela va démarrer le calcul de VLSM et injecter la solution dans la table (7).
+* **(6) : En appuyant sur ce bouton, cela va démarrer le calcul de VLSM et injecter la solution dans la table (7).**
 
   * > Fonction caché : En appuyant une 2ème fois sur le bouton, va nettoyer la table.
 
-* **(7)** : La table VLSM contenant la solution du calcul de VLSM.
+* **(7) : La table VLSM contenant la solution du calcul de VLSM.**
