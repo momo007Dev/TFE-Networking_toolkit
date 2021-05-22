@@ -7,7 +7,7 @@
 
 ### Manuel d'utilisation
 
-* **Générateur d'examen de niveau 1** :
+* **Générateur d'examen de niveau 1 :**
   * [Version Markdown sur github](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/User_manual_v1_2.md)
   * [Version PDF](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v1_2.pdf)
 * **Générateur d'examen de niveau 2 :**
@@ -18,11 +18,11 @@
 
 ### Release
 
-* **Générateur d'examen de niveau 1 **:
+* **Générateur d'examen de niveau 1 ** :
   * Version ***1.0*** : [release_windows_v1.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.0.zip)
   * Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip)
   * Version ***1.4*** : [release_windows_v1.4.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.4.zip)
-  * Version ***1.6*** :  [release_windows_v1.6.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.6.zip) - ***Dernière version !***
+  * Version ***1.6*** :  [release_windows_v1.6.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.6.zip)
 > ***PS : Ces premières versions peuvent générer des examens de 1ère et incluent également un simplificateur de calcul de sous-réseau et VLSM. Disponible uniquement pour Windows***
 >
 > **:warning:Les versions commençant par "`1.x`" contiennent uniquement les examens de niveau 1 !**
@@ -30,17 +30,20 @@
 > **:warning:Les versions commençant par "`2.x`" contiendront toutes les fonctionnalités.**
 
 * **Générateur d'examen de niveau 2** :
-  * Version ***2.0*** : [release_windows_v2.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v2.0.zip)
+  * Version ***2.0*** : [release_windows_v2.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v2.0.zip) - ***Dernière version !***
 
 #### Problèmes Connues
 
-| Version | Où se situe le problème                    | Description du problème                                      | Solution                                                     |
-| ------- | ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **1.2** | Page "`(3) Connectivity`"                  | Les valeurs par défauts des descriptions des interfaces sont toujours les mêmes. | ~~***Sera corrigé dans la prochaine version***.~~ ***Corrigé ! (v1.4)*** |
-| **1.2** | Fichier de sortie : "`packet-tracer.yaml`" | Au niveau de la route statique, il manque "-0-1" à la fin pour que **Packet Tracer** la prenne en compte. | ~~***Sera corrigé dans la prochaine version***.~~ ***Corrigé ! (v1.4)*** |
-| **1.2** | Page "`(4) Addons`"                        | Après avoir sauvegarder les données de la page 3, le bouton "`(5) Generate my exam !`"est déjà visible. | ~~Il faudra d'abord passer par la page "`(4) Addons`" et sauvegarder avant de pouvoir générer l'examen. ***Sera corrigé dans la prochaine version***.~~ ***Corrigé ! (v1.4)*** |
-| **1.4** | Fichier de sortie : "`packet-tracer.yaml`" | Manque les descriptions des interfaces des switchs.          | ~~***Sera corrigé prochainement.***~~ ***Corrigé ! (v1.6)*** |
-| **1.4** | Page "`About`"                             | Le numéro de version n'est pas à jour (toujours sur **1.2**). | ~~Un bouton permettant de télécharger directement le manuel d'utilisation sera ajouté également. ***Sera corrigé prochainement.***~~ ***Corrigé ! (v1.6)*** |
+| Version | Où se situe le problème                                      | Description du problème                                      | Solution                                                     |
+| ------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **1.2** | Page "`(3) Connectivity`"                                    | Les valeurs par défauts des descriptions des interfaces sont toujours les mêmes. | ~~***Sera corrigé dans la prochaine version***.~~ ***Corrigé ! (v1.4)*** |
+| **1.2** | Fichier de sortie : "`packet-tracer.yaml`"                   | Au niveau de la route statique, il manque "-0-1" à la fin pour que **Packet Tracer** la prenne en compte. | ~~***Sera corrigé dans la prochaine version***.~~ ***Corrigé ! (v1.4)*** |
+| **1.2** | Page "`(4) Addons`"                                          | Après avoir sauvegarder les données de la page 3, le bouton "`(5) Generate my exam !`"est déjà visible. | ~~Il faudra d'abord passer par la page "`(4) Addons`" et sauvegarder avant de pouvoir générer l'examen. ***Sera corrigé dans la prochaine version***.~~ ***Corrigé ! (v1.4)*** |
+| **1.4** | Fichier de sortie : "`packet-tracer.yaml`"                   | Manque les descriptions des interfaces des switchs.          | ~~***Sera corrigé prochainement.***~~ ***Corrigé ! (v1.6)*** |
+| **1.4** | Page "`About`"                                               | Le numéro de version n'est pas à jour (toujours sur **1.2**). | ~~Un bouton permettant de télécharger directement le manuel d'utilisation sera ajouté également. ***Sera corrigé prochainement.***~~ ***Corrigé ! (v1.6)*** |
+| **2.0** | (***Examen de niveau 2***) Page "`(3) Pcs, Switchs and Servers`", onglet Servers. | Il manque un champ "DNS" au niveau des pool DHCP. Dans le pool, il devrait être possible d'indiquer le serveur DNS que les clients prendront en compte. | Il faudra ajouté un champ DNS au niveau des 2 serveurs + ajouter le résultat dans les 2 fichiers de sorties (solution et Packet Tracer). ***Sera corrigé prochainement.*** |
+| **2.0** | (***Examen de niveau 2***) Fichier de sortie : "`packet-tracer.yaml`" | Les différentes zones OSPF ne sont pas prises en compte (champs "`Area`") dans le fichier de sortie Packet Tracer. | ***sera corrigé prochainement.***                            |
+| **2.0** | (***Examen de niveau 2***) Fichier de sortie : "`packet-tracer.yaml`" | Presque la totalité des descriptions des interfaces ne sont PAS pris en compte dans le fichier de sortie Packet Tracer. | ***sera corrigé prochainement.***                            |
 
 ---
 
