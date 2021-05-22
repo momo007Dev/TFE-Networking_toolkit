@@ -502,8 +502,9 @@ def generate_solution_packet_tracer():
                             "Connects to F0": "True",
                             "Type": "0 0"
                         }
-                    }, # ---S1---
+                    },
                     devices_dict.get("S1")[1]: {
+                        "Description": devices_dict.get("S1")[6],
                         "Link to " + str(list(router_dict.get("name"))[0]): {
                             "Connects to " + str(list(router_dict.keys())[1]): "True",
                             "Type": "0 0"
@@ -557,6 +558,7 @@ def generate_solution_packet_tracer():
                         }
                     },
                     devices_dict.get("S2")[1]: {
+                        "Description": devices_dict.get("S2")[6],
                         "Link to " + str(list(router_dict.get("name"))[0]): {
                             "Connects to " + str(list(router_dict.keys())[2]): "True",
                             "Type": "0 0"
@@ -2018,6 +2020,21 @@ def generate_solution_packet_tracer_v2():
                         "Access Control In": 1,
                         "Login": 2,  # SSH
                         "Transport Input": 2  # SSH
+                    }
+                }
+            }, #---ISP---#
+            isp_dict.get("name")[0]: {
+                "Host Name": isp_dict.get("name")[0],
+                "Ports": {
+                    isp_dict.get("a")[0] :{
+                        "IP Address": isp_dict.get("a")[1],
+                        "Port Status": 1,
+                        "Subnet Mask": isp_dict.get("a")[3]
+                    },
+                    isp_dict.get("b")[0]: {
+                        "IP Address": isp_dict.get("b")[1],
+                        "Port Status": 1,
+                        "Subnet Mask": isp_dict.get("b")[3]
                     }
                 }
             }

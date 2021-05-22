@@ -9,7 +9,7 @@ import os, platform
 # This class contains blueprint functions that allows quick build of gui objects #
 #--------------------------------------------------------------------------------#
 
-version_number = 1.2
+version_number = 2.0
 
 class blueprintFunctions:
 
@@ -123,6 +123,7 @@ class blueprintFunctions:
     def build_about_popup(self):
         import webbrowser
         msgBox = QMessageBox()
+        #msgBox.setStyleSheet("background-color: rgb(147, 147, 147);")
         msgBox.setWindowIcon(QtGui.QIcon("img/about.png"))
         msgBox.setWindowTitle("About")
         data = "<h2>Networking Toolkit</h2>"
@@ -138,9 +139,24 @@ class blueprintFunctions:
         msgBox.setIcon(QMessageBox.Information)
 
         github_btn = msgBox.addButton('View project on github', QMessageBox.YesRole)
+        github_btn.setStyleSheet("background-color: rgb(85, 255, 255);")
+        github_btn.setFont(font_btn3)
         github_btn.clicked.disconnect()
         github_btn.clicked.connect(lambda: webbrowser.open('https://github.com/momo007Dev/TFE-Networking_toolkit'))
-        cancelBtn = msgBox.addButton('Close this window', QMessageBox.RejectRole)
+
+        get_manual_btn = msgBox.addButton('Download the user manual', QMessageBox.YesRole)
+        get_manual_btn.clicked.disconnect()
+        get_manual_btn.setStyleSheet("background-color: rgb(85, 255, 127);")
+        get_manual_btn.setFont(font_btn3)
+
+        if (str(version_number)[0] == "1"):
+            get_manual_btn.clicked.connect(lambda: webbrowser.open('https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v1_2.pdf'))
+        elif (str(version_number)[0] == "2"):
+            get_manual_btn.clicked.connect(lambda: webbrowser.open('https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v2_0.pdf'))
+
+        close_btn = msgBox.addButton('Close this window', QMessageBox.RejectRole)
+        close_btn.setStyleSheet("background-color: rgb(255, 179, 179);")
+        close_btn.setFont(font_btn3)
 
         msgBox.exec_()
 
@@ -282,6 +298,10 @@ font_btn2 = QtGui.QFont()
 font_btn2.setPointSize(9)
 font_btn2.setBold(True)
 font_btn2.setWeight(75)
+
+font_btn3 = QtGui.QFont()
+font_btn3.setPointSize(8)
+font_btn3.setBold(True)
 
 font_label = QtGui.QFont()
 font_label.setPointSize(12)
