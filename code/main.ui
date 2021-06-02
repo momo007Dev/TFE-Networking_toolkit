@@ -752,7 +752,7 @@ Generator</string>
        <string notr="true">background-color: rgb(173, 173, 173);</string>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="page_1">
        <widget class="QLabel" name="E_p1_label">
@@ -4818,7 +4818,7 @@ background-color: rgb(255, 255, 255);</string>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="s1">
          <attribute name="title">
@@ -8847,7 +8847,7 @@ selection-color: rgb(85, 170, 0);</string>
            <rect>
             <x>10</x>
             <y>320</y>
-            <width>491</width>
+            <width>495</width>
             <height>161</height>
            </rect>
           </property>
@@ -8861,31 +8861,10 @@ selection-color: rgb(85, 170, 0);</string>
           <property name="title">
            <string>SRV1 - DHCP</string>
           </property>
-          <widget class="QLabel" name="E_p2_2_srv1_gb3_labelName">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>35</y>
-             <width>101</width>
-             <height>21</height>
-            </rect>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-             <underline>true</underline>
-            </font>
-           </property>
-           <property name="text">
-            <string>Pool Name :</string>
-           </property>
-          </widget>
           <widget class="QLineEdit" name="E_p2_2_srv1_gb3_editName">
            <property name="geometry">
             <rect>
-             <x>115</x>
+             <x>10</x>
              <y>30</y>
              <width>181</width>
              <height>31</height>
@@ -9168,6 +9147,76 @@ background-color: rgb(255, 255, 255);</string>
            </property>
            <property name="text">
             <string>Clear</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="E_p2_2_srv1_gb3_editDns">
+           <property name="geometry">
+            <rect>
+             <x>310</x>
+             <y>30</y>
+             <width>181</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>181</horstretch>
+             <verstretch>31</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+           </property>
+           <property name="text">
+            <string>192.168.20.11</string>
+           </property>
+           <property name="maxLength">
+            <number>15</number>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="E_p2_2_srv1_gb3_labelDns">
+           <property name="geometry">
+            <rect>
+             <x>197</x>
+             <y>35</y>
+             <width>111</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>true</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>DNS Server :</string>
            </property>
           </widget>
          </widget>
@@ -9608,7 +9657,7 @@ selection-color: rgb(85, 170, 0);</string>
            <rect>
             <x>10</x>
             <y>320</y>
-            <width>491</width>
+            <width>495</width>
             <height>161</height>
            </rect>
           </property>
@@ -9622,76 +9671,6 @@ selection-color: rgb(85, 170, 0);</string>
           <property name="title">
            <string>SRV1 - DHCP</string>
           </property>
-          <widget class="QLabel" name="E_p2_2_srv2_gb3_labelName">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>35</y>
-             <width>101</width>
-             <height>21</height>
-            </rect>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-             <underline>true</underline>
-            </font>
-           </property>
-           <property name="text">
-            <string>Pool Name :</string>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="E_p2_2_srv2_gb3_editName">
-           <property name="geometry">
-            <rect>
-             <x>115</x>
-             <y>30</y>
-             <width>181</width>
-             <height>31</height>
-            </rect>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>181</horstretch>
-             <verstretch>31</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>180</width>
-             <height>31</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>181</width>
-             <height>31</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Verdana</family>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 85, 255)</string>
-           </property>
-           <property name="text">
-            <string>POOL-VLAN30</string>
-           </property>
-           <property name="maxLength">
-            <number>15</number>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
           <widget class="QLineEdit" name="E_p2_2_srv2_gb3_editIp">
            <property name="geometry">
             <rect>
@@ -9929,6 +9908,125 @@ background-color: rgb(255, 255, 255);</string>
            </property>
            <property name="text">
             <string>Clear</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="E_p2_2_srv2_gb3_labelDns">
+           <property name="geometry">
+            <rect>
+             <x>197</x>
+             <y>35</y>
+             <width>111</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>true</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>DNS Server :</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="E_p2_2_srv2_gb3_editName">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>181</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>181</horstretch>
+             <verstretch>31</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 85, 255)</string>
+           </property>
+           <property name="text">
+            <string>POOL-VLAN30</string>
+           </property>
+           <property name="maxLength">
+            <number>15</number>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="E_p2_2_srv2_gb3_editDns">
+           <property name="geometry">
+            <rect>
+             <x>310</x>
+             <y>30</y>
+             <width>181</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>181</horstretch>
+             <verstretch>31</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 255)</string>
+           </property>
+           <property name="text">
+            <string>192.168.20.11</string>
+           </property>
+           <property name="maxLength">
+            <number>15</number>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </widget>
@@ -12168,7 +12266,7 @@ background-color: rgb(255, 255, 255);</string>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>5</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="R1_Main">
          <attribute name="title">

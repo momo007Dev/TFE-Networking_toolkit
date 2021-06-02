@@ -1,4 +1,4 @@
-# TFE-Networking_toolkit
+# (TFE) Networking Toolkit : Boite à outil permettant de générer facilement des examens pour Packet Tracer.
 
 * **Coach TFE** : **_Madame Masson_**
 * **Etudiant** : **_Morgan Valentin_**
@@ -18,7 +18,7 @@
 
 ### Release
 
-* **Générateur d'examen de niveau 1 ** :
+* **Générateur d'examen de niveau 1 :**
   * Version ***1.0*** : [release_windows_v1.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.0.zip)
   * Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip)
   * Version ***1.4*** : [release_windows_v1.4.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.4.zip)
@@ -29,7 +29,7 @@
 >
 > **:warning:Les versions commençant par "`2.x`" contiendront toutes les fonctionnalités.**
 
-* **Générateur d'examen de niveau 2** :
+* **Générateur d'examen de niveau 2 :**
   * Version ***2.0*** : [release_windows_v2.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v2.0.zip) - ***Dernière version !***
 
 #### Problèmes Connues
@@ -41,9 +41,11 @@
 | **1.2** | Page "`(4) Addons`"                                          | Après avoir sauvegarder les données de la page 3, le bouton "`(5) Generate my exam !`"est déjà visible. | ~~Il faudra d'abord passer par la page "`(4) Addons`" et sauvegarder avant de pouvoir générer l'examen. ***Sera corrigé dans la prochaine version***.~~ ***Corrigé ! (v1.4)*** |
 | **1.4** | Fichier de sortie : "`packet-tracer.yaml`"                   | Manque les descriptions des interfaces des switchs.          | ~~***Sera corrigé prochainement.***~~ ***Corrigé ! (v1.6)*** |
 | **1.4** | Page "`About`"                                               | Le numéro de version n'est pas à jour (toujours sur **1.2**). | ~~Un bouton permettant de télécharger directement le manuel d'utilisation sera ajouté également. ***Sera corrigé prochainement.***~~ ***Corrigé ! (v1.6)*** |
+| **1.6** | **Nouvelle Fonctionnalité.**                                 | Le client aimerait pouvoir ajouter plusieurs routes statiques (pour l'instant, le programme ne prends qu'une seule route). | ***Cette fonctionnalité sera ajouté prochainement.***        |
 | **2.0** | (***Examen de niveau 2***) Page "`(3) Pcs, Switchs and Servers`", onglet Servers. | Il manque un champ "DNS" au niveau des pool DHCP. Dans le pool, il devrait être possible d'indiquer le serveur DNS que les clients prendront en compte. | Il faudra ajouté un champ DNS au niveau des 2 serveurs + ajouter le résultat dans les 2 fichiers de sorties (solution et Packet Tracer). ***Sera corrigé prochainement.*** |
-| **2.0** | (***Examen de niveau 2***) Fichier de sortie : "`packet-tracer.yaml`" | Les différentes zones OSPF ne sont pas prises en compte (champs "`Area`") dans le fichier de sortie Packet Tracer. | ***sera corrigé prochainement.***                            |
-| **2.0** | (***Examen de niveau 2***) Fichier de sortie : "`packet-tracer.yaml`" | Presque la totalité des descriptions des interfaces ne sont PAS pris en compte dans le fichier de sortie Packet Tracer. | ***sera corrigé prochainement.***                            |
+| **2.0** | (***Examen de niveau 2***) Fichier de sortie : "`packet-tracer.yaml`" | Les différentes zones OSPF ne sont pas prises en compte (champs "`Area`") dans le fichier de sortie Packet Tracer. | ***Sera corrigé prochainement.***                            |
+| **2.0** | (***Examen de niveau 2***) Fichier de sortie : "`packet-tracer.yaml`" | Presque la totalité des descriptions des interfaces ne sont PAS pris en compte dans le fichier de sortie Packet Tracer. | ***Sera corrigé prochainement.***                            |
+| **2.0** | (***Examen de niveau 2***) Fichier de sortie : "`packet-tracer.yaml`" | Les routes statiques ne respectent pas le format de Packet Tracer. | ***Sera corrigé prochainement.***                            |
 
 ---
 

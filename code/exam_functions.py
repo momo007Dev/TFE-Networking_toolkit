@@ -929,15 +929,15 @@ def save_changes_p2_2():
     srv1_dhcp_dict.clear(), srv1_dns_list.clear()
     srv2_dhcp_dict.clear(), srv2_dns_list.clear()
         #---dhcp---#
-    table = exam_page.E_p2_2_srv1_tableDhcp # "pool_name" (unique) : ["start_ip", "cidr", "gateway"]
+    table = exam_page.E_p2_2_srv1_tableDhcp # "pool_name" (unique) : ["start_ip", "cidr", "gateway", "dns"]
     rowCount = table.rowCount()
     for x in range(rowCount):
-        srv1_dhcp_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(subnet_functions.getMaskFromSlash(str(table.item(x, 2).text()))), str(table.item(x, 3).text())]
+        srv1_dhcp_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(subnet_functions.getMaskFromSlash(str(table.item(x, 2).text()))), str(table.item(x, 3).text()),  str(table.item(x, 4).text())]
 
-    table = exam_page.E_p2_2_srv2_tableDhcp # "pool_name" (unique) : ["start_ip", "cidr", "gateway"]
+    table = exam_page.E_p2_2_srv2_tableDhcp # "pool_name" (unique) : ["start_ip", "cidr", "gateway", "dns"]
     rowCount = table.rowCount()
     for x in range(rowCount):
-        srv2_dhcp_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(subnet_functions.getMaskFromSlash(str(table.item(x, 2).text()))), str(table.item(x, 3).text())]
+        srv2_dhcp_dict[str(table.item(x, 0).text())] = [str(table.item(x, 1).text()), str(subnet_functions.getMaskFromSlash(str(table.item(x, 2).text()))), str(table.item(x, 3).text()), str(table.item(x, 4).text())]
 
         #---dns---#
     table = exam_page.E_p2_2_srv1_tableDns #srv1_dns_list = ["rr_name + rr_type + rr_value", ...]
@@ -1174,9 +1174,10 @@ def generate_solution_server():
             output += "---DHCP--- \n"
             for b in server_dict.get(x).get("dhcp").keys():
                 output += str(b) + " : \n"
-                output += "   -" + str(server_dict.get(x).get("dhcp").get(b)[0]) + "\n"
-                output += "   -" + str(server_dict.get(x).get("dhcp").get(b)[1]) + "\n"
-                output += "   -" + str(server_dict.get(x).get("dhcp").get(b)[2]) + "\n"
+                output += "   -(Start Ip) " + str(server_dict.get(x).get("dhcp").get(b)[0]) + "\n"
+                output += "   -(Mask) " + str(server_dict.get(x).get("dhcp").get(b)[1]) + "\n"
+                output += "   -(Gateway) " + str(server_dict.get(x).get("dhcp").get(b)[2]) + "\n"
+                output += "   -(DNS) " + str(server_dict.get(x).get("dhcp").get(b)[3]) + "\n"
                 output += "\n"
             output += "\n"
 
@@ -1439,7 +1440,7 @@ def generate_solution_packet_tracer_v2():
     for x in srv1_dhcp_dict.keys():
         pool_dhcp_srv1[x] = {
             "Default Gateway": srv1_dhcp_dict.get(x)[2],
-            "DNS Server IP": "",
+            "DNS Server IP": srv1_dhcp_dict.get(x)[3],
             "Max User": "Check this case",
             "Name": x,
             "Start IP Address": srv1_dhcp_dict.get(x)[0],
@@ -1450,7 +1451,7 @@ def generate_solution_packet_tracer_v2():
     for x in srv2_dhcp_dict.keys():
         pool_dhcp_srv2[x] = {
             "Default Gateway": srv2_dhcp_dict.get(x)[2],
-            "DNS Server IP": "",
+            "DNS Server IP": srv2_dhcp_dict.get(x)[3],
             "Max User": "Check this case",
             "Name": x,
             "Start IP Address": srv2_dhcp_dict.get(x)[0],
@@ -1616,7 +1617,9 @@ def generate_solution_packet_tracer_v2():
     count = 0
     for z in swl3_routing_dict.get("static"):
         string = "Route" + str(count)
-        swl3_static_dict[string] = z
+        splitted = z.split()
+        text = splitted[2] + "-" + subnet_functions.getCidrFromMask(splitted[3]) + "-" + utils.blueprintFunctions.format_output_interface(splitted[4]) + "-0-1"
+        swl3_static_dict[string] = text
         count +=1
 
     count = 0
@@ -1721,7 +1724,9 @@ def generate_solution_packet_tracer_v2():
     count = 0
     for z in r1_routing_dict.get("static"):
         string = "Route" + str(count)
-        r1_static_dict[string] = z
+        splitted = z.split()
+        text = splitted[2] + "-" + subnet_functions.getCidrFromMask(splitted[3]) + "-" + utils.blueprintFunctions.format_output_interface(splitted[4]) + "-0-1"
+        r1_static_dict[string] = text
         count +=1
 
     #---R2---#
@@ -1751,9 +1756,11 @@ def generate_solution_packet_tracer_v2():
 
     r2_static_dict = dict()
     count = 0
-    for z in r1_routing_dict.get("static"):
+    for z in r2_routing_dict.get("static"):
         string = "Route" + str(count)
-        r2_static_dict[string] = z
+        splitted = z.split()
+        text = splitted[2] + "-" + subnet_functions.getCidrFromMask(splitted[3]) + "-" + utils.blueprintFunctions.format_output_interface(splitted[4]) + "-0-1"
+        r2_static_dict[string] = text
         count +=1
 
     count = 0
