@@ -23,7 +23,7 @@ security_enabled = False
 r1_security = list()
 sw_security = list()
 static_routing = list()
-static_route_exam_level_1 = ""
+static_routing_level_1 = ""
 
         #---Page 2_1---#
 vlan_dict = dict()
@@ -262,13 +262,13 @@ def save_changes_p3():
     """
 
 def save_changes_p4():
-    global r1_security, sw_security, static_routing
+    global r1_security, sw_security, static_routing_level_1
     # secret, console, encryption, ssh, user, pass, banner
     r1_security = [exam_page.E_p4_gb1_editSecret.text(), exam_page.E_p4_gb1_editPassword.text(), exam_page.E_p4_gb1_checkEncryption.isChecked(), exam_page.E_p4_gb1_checkSsh.isChecked(), exam_page.E_p4_gb1_1_editUsername.text(), exam_page.E_p4_gb1_1_editPassword.text(), exam_page.E_p4_gb1_editBanner.text()]
     sw_security = [exam_page.E_p4_gb2_editSecret.text(), exam_page.E_p4_gb2_editPassword.text(), exam_page.E_p4_gb2_checkEncryption.isChecked(), exam_page.E_p4_gb2_checkSsh.isChecked(), exam_page.E_p4_gb2_1_editUsername.text(), exam_page.E_p4_gb2_1_editPassword.text(), exam_page.E_p4_gb2_editBanner.text()]
 
     # IP, Mask, Next_hop, Add
-    static_routing = [exam_page.E_p4_gb3_edit1.text(), exam_page.E_p4_gb3_edit2.text(), exam_page.E_p4_gb3_combo.currentText(), exam_page.E_p4_gb3_check.isChecked()]
+    static_routing_level_1 = get_list_from_table(exam_page.E_p4_gb3_table)
 
     if (r1_security[3] is True):
         if (len(r1_security[4]) < 1 or len(r1_security[5]) < 1):
@@ -425,10 +425,9 @@ def generate_solution_text():
             output += "exit" + "\n"
             output += "\n"
 
-    if (static_routing[3] is True):
-        output += "ip route " + static_routing[0] + " " + static_routing[1] + " " + static_routing[2]  + "\n"
-        global static_route_exam_level_1
-        static_route_exam_level_1 = static_routing[0] + "-" + subnet_functions.getCidrFromMask(static_routing[1]) + "-" + utils.blueprintFunctions.format_output_interface(static_routing[2]) + "-0-1"
+    if (len(static_routing_level_1) > 0):
+        for a in static_routing_level_1:
+            output += str(a) + "\n"
 
     output += "\n"
     output += "end" + "\n"
@@ -442,6 +441,16 @@ def generate_solution_text():
     # ----------------------------------------------------------#
 
 def generate_solution_packet_tracer():
+
+    r1_static_dict = dict()
+    count = 0
+    for z in static_routing_level_1:
+        string = "Route" + str(count)
+        splitted = z.split()
+        text = splitted[2] + "-" + subnet_functions.getCidrFromMask(splitted[3]) + "-" + utils.blueprintFunctions.format_output_interface(splitted[4]) + "-0-1"
+        r1_static_dict[string] = text
+        count +=1
+
     global packet_tracer_stuct
     packet_tracer_stuct = {
         "Network": {
@@ -645,10 +654,8 @@ def generate_solution_packet_tracer():
                         "Mask": router_dict[str(list(router_dict.keys())[4])][2]
                     },
                 },
-                "Routes" : {
-                  "Static Routes" : {
-                      "Route0" : static_route_exam_level_1
-                  }
+                "Routes" : { #static_routing_level_1
+                  "Static Routes" : r1_static_dict
                 },
                 "User Names": {  # SSH
                     "Username": r1_security[4] + " " + r1_security[5]
@@ -688,7 +695,7 @@ def generate_solution_packet_tracer():
     if (r1_security[2] is False):  # If password-encryption is DISABLED on R1
         del packet_tracer_stuct["Network"][str(list(router_dict.get("name"))[0])]["Service Password Encryption"]
 
-    if (static_routing[3] is False): # If no static routes - delete the "Routes" bloc
+    if (len(static_routing_level_1) < 1): # If no static routes - delete the "Routes" bloc
         del packet_tracer_stuct["Network"]["R1"]["Routes"]
 
     with open(str(utils.blueprintFunctions.getDesktopPath()) + "/packet-tracer.yaml", "a") as f:
@@ -1481,16 +1488,19 @@ def generate_solution_packet_tracer_v2():
     for x in int_keys:
         if (s1_dict.get(x)[1] == "Access"):
             s1_ports[s1_dict.get(x)[0]] = {
-                "Access VLAN": int(str(s1_dict.get(x)[2]).split()[1])
+                "Access VLAN": int(str(s1_dict.get(x)[2]).split()[1]),
+                "Description": str(s1_dict.get(x)[3])
             }
         elif (s1_dict.get(x)[1] == "Trunk"):
             if (check_if_switch_has_a_native_vlan(s1_dict, native) is True):
                 s1_ports[s1_dict.get(x)[0]] = {
+                    "Description": str(s1_dict.get(x)[3]),
                     "Native VLAN": int(native),
                     "Port Mode": 0
                 }
             else:
                 s1_ports[s1_dict.get(x)[0]] = {
+                    "Description": str(s1_dict.get(x)[3]),
                     "Port Mode": 0
                 }
     if not (s1_dict.get("is_part_of_a_vlan")[0] == "No"):
@@ -1515,16 +1525,19 @@ def generate_solution_packet_tracer_v2():
     for x in int_keys:
         if (s2_dict.get(x)[1] == "Access"):
             s2_ports[s2_dict.get(x)[0]] = {
-                "Access VLAN": int(str(s2_dict.get(x)[2]).split()[1])
+                "Access VLAN": int(str(s2_dict.get(x)[2]).split()[1]),
+                "Description": str(s2_dict.get(x)[3])
             }
         elif (s2_dict.get(x)[1] == "Trunk"):
             if (check_if_switch_has_a_native_vlan(s2_dict, native) is True):
                 s2_ports[s2_dict.get(x)[0]] = {
+                    "Description": str(s2_dict.get(x)[3]),
                     "Native VLAN": int(native),
                     "Port Mode": 0
                 }
             else:
                 s2_ports[s2_dict.get(x)[0]] = {
+                    "Description": str(s2_dict.get(x)[3]),
                     "Port Mode": 0
                 }
     if not (s2_dict.get("is_part_of_a_vlan")[0] == "No"):
@@ -1549,16 +1562,19 @@ def generate_solution_packet_tracer_v2():
     for x in int_keys:
         if (s3_dict.get(x)[1] == "Access"):
             s3_ports[s3_dict.get(x)[0]] = {
-                "Access VLAN": int(str(s3_dict.get(x)[2]).split()[1])
+                "Access VLAN": int(str(s3_dict.get(x)[2]).split()[1]),
+                "Description": str(s3_dict.get(x)[3])
             }
         elif (s3_dict.get(x)[1] == "Trunk"):
             if (check_if_switch_has_a_native_vlan(s3_dict, native) is True):
                 s3_ports[s3_dict.get(x)[0]] = {
+                    "Description": str(s3_dict.get(x)[3]),
                     "Native VLAN": int(native),
                     "Port Mode": 0
                 }
             else:
                 s3_ports[s3_dict.get(x)[0]] = {
+                    "Description": str(s3_dict.get(x)[3]),
                     "Port Mode": 0
                 }
     if not (s3_dict.get("is_part_of_a_vlan")[0] == "No"):
@@ -1579,15 +1595,18 @@ def generate_solution_packet_tracer_v2():
     #---SWL3---#
     swl3_ports = {
         swl3_dict.get("a")[0]: {
+            "Description": swl3_dict.get("a")[1],
             "Port Mode": 0,
             "Trunk Encapsulation": 1
         },
         swl3_dict.get("b")[0]: {
+            "Description": swl3_dict.get("b")[4],
             "IP Address": swl3_dict.get("b")[1],
             "Subnet Mask": swl3_dict.get("b")[3],
             "Switchport": 0
         },
         swl3_dict.get("c")[0]: {
+            "Description": swl3_dict.get("c")[4],
             "IP Address": swl3_dict.get("c")[1],
             "Subnet Mask": swl3_dict.get("c")[3],
             "Switchport": 0
@@ -1638,6 +1657,11 @@ def generate_solution_packet_tracer_v2():
         string = utils.blueprintFunctions.format_output_interface(o)
         swl3_passive_dict[o] = 1
 
+    swl3_ospf_area_dict = dict()
+    for p in exam_page.ospf_area_set_swl3:
+        string = "Area " + p
+        swl3_ospf_area_dict[string] = str(p)
+
     #---R1---#
     r1_acl_list = list()
     for a in r1_ssh_dict.get("allowed-host"):
@@ -1665,6 +1689,7 @@ def generate_solution_packet_tracer_v2():
 
     r1_ports = {
         r1_dict.get("a")[0]: {
+            "Description": r1_dict.get("a")[4],
             "IP Address": r1_dict.get("a")[1],
             "Port Status": 1,
             "Subnet Mask": r1_dict.get("a")[3],
@@ -1729,6 +1754,11 @@ def generate_solution_packet_tracer_v2():
         r1_static_dict[string] = text
         count +=1
 
+    r1_ospf_area_dict = dict()
+    for p in exam_page.ospf_area_set_r1:
+        string = "Area " + p
+        r1_ospf_area_dict[string] = str(p)
+
     #---R2---#
     r2_acl_list = list()
     for a in r2_ssh_dict.get("allowed-host"):
@@ -1782,6 +1812,11 @@ def generate_solution_packet_tracer_v2():
             string += x + " "
         r2_nat_port_dict[count] = string
         count += 1
+
+    r2_ospf_area_dict = dict()
+    for p in exam_page.ospf_area_set_r2:
+        string = "Area " + p
+        r2_ospf_area_dict[string] = str(p)
 
 
     global packet_tracer_stuct_v2
@@ -1905,6 +1940,7 @@ def generate_solution_packet_tracer_v2():
                 "Host Name": swl3_dict.get("name")[0],
                 "OSPF":{
                     "Process Id " + str(swl3_routing_dict.get("ospf")[0]): {
+                        "Area": swl3_ospf_area_dict,
                         "Auto Cost": int(swl3_routing_dict.get("ospf")[1]),
                         "Default Information": 1,
                         "Networks" : swl3_network_dict,
@@ -1933,6 +1969,7 @@ def generate_solution_packet_tracer_v2():
                 "Host Name" : r1_dict.get("name")[0],
                 "OSPF":{
                     "Process Id " + str(r1_routing_dict.get("ospf")[0]): {
+                        "Area" : r1_ospf_area_dict,
                         "Auto Cost": int(r1_routing_dict.get("ospf")[1]),
                         "Default Information": 1,
                         "Networks": r1_network_dict,
@@ -1982,6 +2019,7 @@ def generate_solution_packet_tracer_v2():
                 },
                 "OSPF": {
                     "Process Id " + str(r2_routing_dict.get("ospf")[0]): {
+                        "Area": r2_ospf_area_dict,
                         "Auto Cost": int(r2_routing_dict.get("ospf")[1]),
                         "Default Information": 1,
                         "Networks": r2_network_dict,
@@ -1998,12 +2036,14 @@ def generate_solution_packet_tracer_v2():
                 },
                 "Ports": {
                     r2_dict.get("a")[0] :{
+                        "Description": r2_dict.get("a")[4],
                         "IP Address": r2_dict.get("a")[1],
                         "NAT Mode": 1, # NAT Inside
                         "Port Status": 1,
                         "Subnet Mask": r2_dict.get("a")[3]
                     },
                     r2_dict.get("b")[0]: {
+                        "Description": r2_dict.get("b")[4],
                         "IP Address": r2_dict.get("b")[1],
                         "NAT Mode": 2, # NAT Outside
                         "Port Status": 1,
@@ -2034,11 +2074,13 @@ def generate_solution_packet_tracer_v2():
                 "Host Name": isp_dict.get("name")[0],
                 "Ports": {
                     isp_dict.get("a")[0] :{
+                        "Description": isp_dict.get("a")[4],
                         "IP Address": isp_dict.get("a")[1],
                         "Port Status": 1,
                         "Subnet Mask": isp_dict.get("a")[3]
                     },
                     isp_dict.get("b")[0]: {
+                        "Description": isp_dict.get("b")[4],
                         "IP Address": isp_dict.get("b")[1],
                         "Port Status": 1,
                         "Subnet Mask": isp_dict.get("b")[3]

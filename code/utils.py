@@ -246,11 +246,6 @@ class blueprintFunctions:
                         n2 += 1
                     n1 += 1
 
-    def fillComboStaticRoute(combo_route, combo_r1_int, combo_isp_ip):
-        combo_route.clear()
-        combo_route.addItem(combo_r1_int.currentText())
-        combo_route.addItem(combo_isp_ip.currentText())
-
     def format_output_interface(text):
         if (text[0] == "G"):
             string = "GigabitEthernet" + str(text[1:])

@@ -21,6 +21,10 @@ passive_int_swl3 = list()
 passive_int_r1 = list()
 passive_int_r2 = list()
 r2_port_redirection_list = list()
+
+ospf_area_set_swl3 = set()
+ospf_area_set_r1 = set()
+ospf_area_set_r2 = set()
 #--------------END------------------#
 
 def setupUiExam(self):
@@ -777,38 +781,56 @@ def setupUiExam(self):
 
     # Groupbox Static routing
     self.E_p4_gb3 = QtWidgets.QGroupBox(self.page_4)
-    classBlueprint.mkGroupBox(self.E_p4_gb3, QtCore.QRect(600, 250, 291, 281), "Static Route ?", True)
+    classBlueprint.mkGroupBox(self.E_p4_gb3, QtCore.QRect(585, 230, 310, 311), "Static Route ?")
 
-    self.E_p4_gb3_label1 = QtWidgets.QLabel(self.E_p4_gb3)
-    classBlueprint.mkLabel(self.E_p4_gb3_label1, QtCore.QRect(10, 30, 41, 31), "IP :", True)
+    global E_p4_gb3_editSubnet
+    E_p4_gb3_editSubnet = QtWidgets.QLineEdit(self.E_p4_gb3)
+    classBlueprint.mkLineEdit(E_p4_gb3_editSubnet, QtCore.QRect(10, 40, 171, 31), 15, "0.0.0.0")
+    E_p4_gb3_editSubnet.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
 
-    self.E_p4_gb3_label2 = QtWidgets.QLabel(self.E_p4_gb3)
-    classBlueprint.mkLabel(self.E_p4_gb3_label2, QtCore.QRect(10, 80, 61, 31), "Mask :", True)
-
-    self.E_p4_gb3_label3 = QtWidgets.QLabel(self.E_p4_gb3)
-    classBlueprint.mkLabel(self.E_p4_gb3_label3, QtCore.QRect(10, 130, 261, 31), "Next hop / output interface :", True)
-
-    global E_p4_gb3_edit1
-    E_p4_gb3_edit1 = QtWidgets.QLineEdit(self.E_p4_gb3)
-    classBlueprint.mkLineEdit(E_p4_gb3_edit1, QtCore.QRect(110, 30, 171, 31), 15, "0.0.0.0")
-    E_p4_gb3_edit1.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 0, 255);")
-
-    global E_p4_gb3_edit2
-    E_p4_gb3_edit2 = QtWidgets.QLineEdit(self.E_p4_gb3)
-    classBlueprint.mkLineEdit(E_p4_gb3_edit2, QtCore.QRect(110, 80, 171, 31), 15, "0.0.0.0")
-    E_p4_gb3_edit2.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(0, 0, 255);")
-
-    global E_p4_gb3_combo
-    E_p4_gb3_combo = QtWidgets.QComboBox(self.E_p4_gb3)
-    classBlueprint.mkCombo(E_p4_gb3_combo, QtCore.QRect(50, 180, 181, 31),
+    global E_p4_gb3_comboCidr
+    E_p4_gb3_comboCidr = QtWidgets.QComboBox(self.E_p4_gb3)
+    classBlueprint.mkCombo(E_p4_gb3_comboCidr, QtCore.QRect(190, 40, 70, 30),
                            "color: rgb(85, 170, 0); "
                            "background-color: rgb(255, 255, 255); "
                            "selection-background-color: rgb(204,255,255); "
                            "selection-color: rgb(85, 170, 0);")
+    classBlueprint.fillComboCidr2(E_p4_gb3_comboCidr)
 
-    global E_p4_gb3_check
-    E_p4_gb3_check = QtWidgets.QCheckBox(self.E_p4_gb3)
-    classBlueprint.mkCheck(E_p4_gb3_check, QtCore.QRect(50, 250, 191, 20), True, "Add a static route ?", True)
+    self.E_p4_gb3_label3 = QtWidgets.QLabel(self.E_p4_gb3)
+    classBlueprint.mkLabel(self.E_p4_gb3_label3, QtCore.QRect(10, 80, 261, 31), "Next hop / output interface :", True)
+
+    global E_p4_gb3_comboOutput
+    E_p4_gb3_comboOutput = QtWidgets.QComboBox(self.E_p4_gb3)
+    classBlueprint.mkCombo(E_p4_gb3_comboOutput, QtCore.QRect(10, 120, 181, 31),
+                           "color: rgb(85, 170, 0); "
+                           "background-color: rgb(255, 255, 255); "
+                           "selection-background-color: rgb(204,255,255); "
+                           "selection-color: rgb(85, 170, 0);")
+    E_p4_gb3_comboOutput.currentIndexChanged.connect(lambda: combo_hop_invisible())
+
+    # Champ de saisie afficher temporairement
+    global E_p4_gb3_editOutput
+    E_p4_gb3_editOutput = QtWidgets.QLineEdit(self.E_p4_gb3)
+    classBlueprint.mkLineEdit(E_p4_gb3_editOutput, QtCore.QRect(10, 120, 181, 31), 15, "200.0.0.2")
+    E_p4_gb3_editOutput.setStyleSheet("background-color: rgb(255, 255, 255); color: rgb(255, 170, 0);")
+    E_p4_gb3_editOutput.setVisible(False)
+
+    # E_p4_gb3_check -deleted
+
+    self.E_p4_gb3_add = QtWidgets.QPushButton(self.E_p4_gb3)
+    classBlueprint.mkBtn(self.E_p4_gb3_add, QtCore.QRect(230, 120, 71, 31), "background-color: rgb(255, 25, 136);", "Add")
+    self.E_p4_gb3_add.clicked.connect(lambda: add_static_routing_to_table_level_1())
+
+    self.E_p4_gb3_clear = QtWidgets.QPushButton(self.E_p4_gb3)
+    classBlueprint.mkBtn(self.E_p4_gb3_clear, QtCore.QRect(230, 160, 71, 31), "background-color: rgb(0, 255, 0);", "Clear")
+    self.E_p4_gb3_clear.clicked.connect(lambda: clear_static_routing_table_level_1())
+
+    global E_p4_gb3_table
+    E_p4_gb3_table = QtWidgets.QTableWidget(self.E_p4_gb3)
+    classBlueprint.mkTable(E_p4_gb3_table, QtCore.QRect(5, 200, 300, 101), "background-color: rgb(0, 170, 127);", 1, 0)
+    classBlueprint.addDataTable(E_p4_gb3_table, 0, "Static Routing Data")
+    E_p4_gb3_table.setColumnWidth(0, 280)
 
     self.stackedWidget_2.addWidget(self.page_4)
 
@@ -3153,9 +3175,28 @@ def setupUiExam(self):
     E_btn_2.clicked.connect(lambda: self.E_save.setVisible(True))
     E_btn_1_2.clicked.connect(lambda: self.E_save.setVisible(True))
     E_btn_3.clicked.connect(lambda: exam_page.build_combo_network())
-    E_btn_4.clicked.connect(lambda: utils.blueprintFunctions.fillComboStaticRoute(E_p4_gb3_combo, E_p3_gb2_comboR1Interface3, E_p3_gb2_comboISPRule))
+    E_btn_4.clicked.connect(lambda: fillComboStaticRoute(E_p4_gb3_comboOutput))
 
     self.stackedWidget_2.currentChanged.connect(lambda: hide_save_btn())
+
+    def fillComboStaticRoute(combo_route):
+        combo_route.clear()
+        combo_route.addItem(exam_page.E_p3_gb2_comboR1Interface1.currentText())
+        combo_route.addItem(exam_page.E_p3_gb2_comboR1Interface2.currentText())
+        combo_route.addItem(exam_page.E_p3_gb2_comboR1Interface3.currentText())
+        combo_route.addItem(exam_page.E_p3_gb2_comboR1Interface4.currentText())
+        combo_route.addItem("Other")
+
+    def combo_hop_invisible(): # If "Other" is selected, hides the combo and show the text box instead
+        if (E_p4_gb3_comboOutput.currentText() == "Other"):
+            E_p4_gb3_comboOutput.setCurrentIndex(0)
+            E_p4_gb3_comboOutput.setVisible(False)
+            E_p4_gb3_editOutput.setVisible(True)
+
+    def combo_hop_reset_visibility(): # When user "Add"s a static route or clicks "Clear", shows combo and wipe + hide text box
+        E_p4_gb3_editOutput.setVisible(False)
+        E_p4_gb3_editOutput.setText("200.0.0.2")
+        E_p4_gb3_comboOutput.setVisible(True)
 
     def hide_save_btn():
         if (self.stackedWidget_2.currentIndex() == 0):
@@ -3190,6 +3231,27 @@ def setupUiExam(self):
         self.E_p1_img1.setStyleSheet("")
         self.E_p1_img2.setStyleSheet("")
         self.E_p1_img3.setStyleSheet("")
+
+    def add_static_routing_to_table_level_1():
+        network = E_p4_gb3_editSubnet.text()
+        mask = subnet_functions.getMaskFromSlash(E_p4_gb3_comboCidr.currentText())
+        interface =""
+        if (E_p4_gb3_editOutput.isVisible()):
+            interface = E_p4_gb3_editOutput.text()
+        else:
+            interface = E_p4_gb3_comboOutput.currentText()
+        table = E_p4_gb3_table
+
+        data = "ip route " + str(network) + " " + str(mask) + " " + str(interface)
+        lastrow = table.rowCount()
+        table.insertRow(lastrow)
+        item1 = QTableWidgetItem(data)
+        table.setItem(lastrow, 0, item1)
+        combo_hop_reset_visibility()
+
+    def clear_static_routing_table_level_1():
+        exam_functions.clear_any_table(E_p4_gb3_table)
+        combo_hop_reset_visibility()
 
     def add_vlan_to_table():
         vlan_number = p2_1_gb_editVlan.text()
@@ -3302,6 +3364,10 @@ def setupUiExam(self):
                 dhcp_pool_name_set_srv2.clear()
 
     def add_routing_to_table():  # Used for GB2 and GB3 in SWL3 routing page when clicked on "Add" btn
+        global ospf_area_set_swl3
+        global ospf_area_set_r1
+        global ospf_area_set_r2
+
         protocol, network = "", ""
         item3, item4 = QTableWidgetItem("/"), QTableWidgetItem("/")
         edit_process, edit_bandwidth, rad_rip, network_rip, rad_ospf, network_ospf, slash_ospf, ospf_area, table = "", "", "", "", "", "", "", "", ""
@@ -3335,6 +3401,12 @@ def setupUiExam(self):
             area_ospf = ospf_area.text()
             item3 = QTableWidgetItem(wildcard_ospf)
             item4 = QTableWidgetItem(area_ospf)
+            if (self.stackedWidget_2.currentIndex() == 6):  # SWL3
+                ospf_area_set_swl3.add(area_ospf)
+            elif (self.stackedWidget_2.currentIndex() == 7 and p2_4_tabwidget.currentIndex() == 1):  # R1
+                ospf_area_set_r1.add(area_ospf)
+            elif (self.stackedWidget_2.currentIndex() == 7 and p2_4_tabwidget.currentIndex() == 3):  # R2
+                ospf_area_set_r2.add(area_ospf)
 
         elif (rad_rip.isChecked()):
             protocol = "RIP(v2)"
@@ -3350,20 +3422,23 @@ def setupUiExam(self):
         table.setItem(lastrow, 3, item4)
 
     def clear_routing_table():
-        if (self.stackedWidget_2.currentIndex() == 6): # Page 2_3
+        if (self.stackedWidget_2.currentIndex() == 6): # SWL3
             edit_process = E_p2_3_rou_gb1_editProcess
             edit_bandwidth = E_p2_3_rou_gb1_editBandwidth
             table = E_p2_3_rou_table1
+            ospf_area_set_swl3.clear()
 
-        elif (self.stackedWidget_2.currentIndex() == 7 and p2_4_tabwidget.currentIndex() == 1): # Page 2_4 (routers)
+        elif (self.stackedWidget_2.currentIndex() == 7 and p2_4_tabwidget.currentIndex() == 1): # R1
             edit_process = E_p2_4_R1_Rou_gb1_editProcess
             edit_bandwidth = E_p2_4_R1_Rou_gb1_editBandwidth
             table = E_p2_4_R1_Rou_table1
+            ospf_area_set_r1.clear()
 
-        elif (self.stackedWidget_2.currentIndex() == 7 and p2_4_tabwidget.currentIndex() == 3): # Page 2_4 (routers)
+        elif (self.stackedWidget_2.currentIndex() == 7 and p2_4_tabwidget.currentIndex() == 3): # R2
             edit_process = E_p2_4_R2_Rou_gb1_editProcess
             edit_bandwidth = E_p2_4_R2_Rou_gb1_editBandwidth
             table = E_p2_4_R2_Rou_table1
+            ospf_area_set_r2.clear()
 
         edit_process.setDisabled(False)
         edit_bandwidth.setDisabled(False)
