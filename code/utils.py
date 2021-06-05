@@ -9,7 +9,7 @@ import os, platform
 # This class contains blueprint functions that allows quick build of gui objects #
 #--------------------------------------------------------------------------------#
 
-version_number = 2.0
+version_number = 2.2
 
 class blueprintFunctions:
 

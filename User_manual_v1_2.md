@@ -3,11 +3,10 @@
 * [Procédures d'installation](#procédures-d'installation)
 * [Utilisation](#utilisation)
   * [Générateur examens de niveau 1](#Générateur-d'examens-de-niveau-1)
-    * (1) Choisir la topologie
-    * (2) Main Configuration
-    * (3) Connectivity
-    * (4) Addons
-    * (5) Fichiers Générés
+    * **(1) Choisir la topologie**
+    * **(2) Main Configuration**
+    * **(3) Connectivity**
+    * **(4) Addons**
   * [Calculatrice réseau](#calculatrice-réseau)
 
 ## Procédures d'installation
@@ -43,8 +42,8 @@
 
 <img src="img\img2.png" width="450" height="370" />
 
-* Une fois la topologie sélectionnée, celle-ci se voit encadré en rouge et un bouton apparaît.
-* Cliquer sur le bouton pour continuer.
+* Une fois la topologie sélectionnée, celle-ci se voit encadrée en rouge et un bouton apparaît.
+* Cliquez sur le bouton pour continuer.
 
 <div style="page-break-after: always;"></div>
 
@@ -68,7 +67,7 @@
 
   * > PS : Il n'est pas possible d'avoir 2 réseau avec le même nom !
     >
-    > PPS : Si jamais vous avez fait une bêtise, cliquer sur le bouton "`Clear`" qui effacera tout de la table.
+    > PPS : Si jamais vous avez fait une bêtise, cliquer sur le bouton "`Clear`" qui effacera tout le contenu de la table.
 
 * **(4) : La table VLSM**
 
@@ -79,16 +78,16 @@
 
 * **(5) : "Save Changes"**
 
-  * Une fois que vous avez mis toutes les informations désirées, cliquer sur ce bouton pour passer à la suite.
-  * Ce bouton va sauvegardé les données et faire apparaître le prochain bouton.
+  * Une fois que vous avez mis toutes les informations désirées, cliquez sur ce bouton pour passer à la suite.
+  * Ce bouton va sauvegarder les données et faire apparaître le prochain bouton.
 
 * **(6) : "Home"**
 
   * Permet de retourner à la page d'accueil du programme.
   * Utilité ?
     
-    * Permet d'aller dans la section "`Subnetting Utilities`" pour effectué un calcul de sous réseau pour ensuite revenir dans l'onglet "`Exam Generator`"
-  * >:warning: Attention, si c'est pour relancer le générateur d'examen, il est vivement conseillé de redémarrer le programme.
+    * Permet d'aller dans la section "`Subnetting Utilities`" pour effectuer un calcul de sous réseau pour ensuite revenir dans l'onglet "`Exam Generator`"
+  * >:warning: Attention, si c'est pour relancer le générateur d'examen, il est fortement recommandé de redémarrer le programme.
 
 <div style="page-break-after: always;"></div>
 
@@ -96,24 +95,24 @@
 
 <img src="img\img4.png" width="609" height="499" />
 
-- **(1)** : Représente les champs pour mettre le nom d'hôtes des différentes machines (Hostname).
+- **(1) : Représente les champs pour mettre le nom d'hôtes des différentes machines (Hostname).**
 
-- **(2)** : Menu déroulant pour indiquer dans quelle réseau/sous-réseau l'appareil en question se trouve.
+- **(2) : Menu déroulant permettant d'indiquer dans quel réseau/sous-réseau l'appareil en question se trouve.**
 
-  - Ce menu est constitué des sous-réseau sauvegardé de la page précédente + le réseau "WAN" (entre ISP et R1)
+  - Ce menu est constitué des sous-réseau sauvegardé de la page précédente ainsi que le réseau "WAN" (entre ISP et R1)
 
-- **(3)** : Menu déroulant comprenant la règle au niveau de l'adressage IP.
+- **(3) : Menu déroulant comprenant la règle au niveau de l'adressage IP.**
 
-  - "`1st IP Available`" => Indique qu'il faut donner la **1ère IP disponible** à cette appareil (PC1 par exemple).
-  - "`2nd IP Available`" => Indique qu'il faut donner la **2ème IP disponible**.
-  - "`Last-1 IP Available`" => Indique qu'il faut donner **l'avant-dernière IP disponible**.
-  - "`Last IP Available`" => Indique qu'il faut donner la **dernière IP disponible**.
+  - "`1st IP Available`" => Indique qu'il faut donner la **1ère adresse IP disponible** à cette appareil (PC1 par exemple).
+  - "`2nd IP Available`" => Indique qu'il faut donner la **2ème adresse IP disponible**.
+  - "`Last-1 IP Available`" => Indique qu'il faut donner **l'avant-dernière adresse IP disponible**.
+  - "`Last IP Available`" => Indique qu'il faut donner la **dernière adresse IP disponible**.
 
-- **(4)** : Schéma réseau avec des lettres utilisées pour représenté les interfaces disponibles.
+- **(4) : Schéma réseau avec des lettres utilisées pour représenter les interfaces disponibles.**
 
-- **(5)** : Menu déroulant avec les interfaces disponibles pour l'appareil en question.
+- **(5) : Menu déroulant avec les interfaces disponibles pour l'appareil en question.**
 
-- **(6)** : Permet de préciser quelle interface vous êtes en train de configurer.
+- **(6) : Permet de préciser quelle interface vous êtes en train de configurer.**
 
   - > Exemple 1 : R1 : (a) G0/0 => R1 vers S1 (interface a) utilisera l'interface GigabitEthernet0/0 (G0/0)
     >
@@ -121,13 +120,13 @@
   
 <div style="page-break-after: always;"></div>
 
-- **(7)** : Description
+- **(7) : Description**
 
   - Permet de mettre une description pour savoir de quoi il s'agit.
 
-- **(8)** : "Save Changes"
+- **(8) : "Save Changes"**
 
-  - Une fois que vous avez tout configuré comme vous le souhaité, appuyer sur ce bouton afin de sauvegarder les données et de passé à la suite.
+  - Une fois que vous avez tout configuré comme vous le souhaitez, appuyer sur ce bouton afin de sauvegarder les données et de passé à la suite.
 
   - > PS :  :warning: 2 boutons vont s'affichés par la suite : "(4) Addons" et "(5) Generate my exam !".
 
@@ -137,366 +136,56 @@
 
 <img src="img\img5.png" width="607" height="492" />
 
-* **(0)** : Il faut bien cliquer sur le bouton "(4) Addons" qui signifie "suppléments".
+* **(0) : Il faut bien cliquer sur le bouton "(4) Addons" qui signifie "suppléments".**
 
-  * Contient le nécessaire de sécurité de base, SSH et la possibilité d'ajouter **une** route statique/ par défaut.
+  * Contient le nécessaire de sécurité de base, SSH et la possibilité d'ajouter **des** route statique ou par défaut.
 
-* **(1)** : Le mot de passe secret.
+* **(1) : Le mot de passe secret.**
 
-* **(2)** : Le mot de passe pour accéder à la ligne console et distante.
+* **(2) : Le mot de passe pour accéder à la ligne console et distante.**
 
-* **(3)** : Coché si vous voulez chiffré les mots de passes (fortement conseillé).
+* **(3) : Coché si vous voulez chiffrer les mots de passes (fortement conseillé).**
 
-* **(4)** : Coché si vous voulez utilisez SSH.
+* **(4) : Coché si vous voulez utiliser SSH.**
 
-* **(5)** : Champs où il faut y indiquer le nom d'utilisateur et le mot de passe à utiliser lors des connections via SSH.
+* **(5) : Champs où il faut y indiquer le nom d'utilisateur et le mot de passe à utiliser lors des connexions via SSH.**
 
   * > Uniquement visible si la case "`SSH ?`"est cochée.
 
-* **(6)** : La bannière affiché lors d'une connexion à l'appareil.
+* **(6) : La bannière affichée lors d'une connexion à l'appareil.**
 
-* **(7)** : Le même menu sauf qu'il concerne les switchs.
+* **(7) : Le même menu sauf qu'il concerne les switchs.**
 
   * > :warning: Il n'est malheureusement PAS possible de configurer la sécurité des switchs individuellement.
 
   * Utilité ?
 
-    * Par exemple d'autorisé SSH sur R1 mais pas sur les switchs, avoir des mots de passes différents.
+    * Par exemple autoriser SSH sur R1 mais pas sur les switchs, avoir des mots de passes différents.
 
 <div style="page-break-after: always;"></div>
 
-* **(8)** : Champ pour insérer le réseau que l'on souhaite accéder.
+* **(8) : (Routage Statique) Champ permettant d'y mettre le réseau ainsi que son CIDR dont l'on souhaite accéder.**
 
-* **(9)** : Le masque de sous-réseau du réseau que l'on souhaite accéder.
+* **(9) : Menu déroulant contenant toutes les interfaces de R1 ainsi qu'une option "Other"**
 
-* **(10)** : Menu déroulant qui comprends l'interface de sortie du routeur (R1) et l'adresse IP de l'ISP.
+  * L'option "Other", permet de "transformer" le menu déroulant en champ de saisie (permettant ainsi d'y entrer l'adresse IP du "next hop").
+  * En cliquant sur "Add" ou "Clear", ce menu se "retransforme" en menu déroulant.
 
-  * Permet de choisir si l'on souhaite utilisé l'interface de sortie de R1 ou bien mettre l'adresse IP de l'ISP pour encoder la route statique.
+* **(10) : Les boutons "Add" et "Clear" permettant d'ajouter une route dans le tableau, ou bien nettoyer la table.**
 
-* **(11)** : Cocher cette case si vous voulez que la route soit sauvegardé
+* **(11) : Tableau reprenant les informations des routes statiques qui seront encodé par le programme**
 
-  * > :warning: Rappel : Qu'une seule route statique est possible.
+* **(12) : Comme d'habitude, appuyer sur ce bouton pour enregistrer les modifications.**
 
-* **(12)** : Comme d'habitude, appuyer sur ce bouton pour enregistrer les modifications.
-
-* **(13)** : Appuyer sur ce bouton pour générer les 2 fichiers de sorties.
+* **(13) : Appuyer sur ce bouton pour générer les 2 fichiers de sorties.**
 
   * "`solution.txt`" et "`packet-tracer.yaml`"
 
   * > PS : Ces 2 fichiers seront générer directement sur le bureau.
+  
+* Pour les routes statiques, lorsque vous sélectionnez l'option "Other", le menu se transforme en champ de saisie. Pas inquiétude, lors d'un clique sur le bouton "Add" ou "Clear", ce menu se "retransforme" en menu déroulant.
 
-<div style="page-break-after: always;"></div>
-
-#### 5. Fichiers générés
-
-1. **"`solution.txt`"**
-
-```java
-----------------
-   SUBNETS      
-----------------
-
-LAN B (100) : 192.168.0.1 => 192.168.0.126 /25 (255.255.255.128)
-
-LAN A (50) : 192.168.0.129 => 192.168.0.190 /26 (255.255.255.192)
-
-LAN C (10) : 192.168.0.193 => 192.168.0.206 /28 (255.255.255.240)
-
-----------------
-   PC1 (LAN A)
-----------------
-IP : 192.168.0.129
-Mask : 255.255.255.192
-Gateway : 192.168.0.190
-----------------
-   PC2 (LAN B)
-----------------
-IP : 192.168.0.1
-Mask : 255.255.255.128
-Gateway : 192.168.0.126
-----------------
-   PC3 (LAN C)
-----------------
-IP : 192.168.0.193
-Mask : 255.255.255.240
-Gateway : 192.168.0.206
-
-----------------
-   S1
-----------------
-en
-conf t
-host S1
-enable secret class
-
-banner motd #You are accessing a restricted system#
-
-line console 0
-   password cisco
-   login
-exit
-
-line vty 0 15
-   password cisco
-   login
-exit
-
-service password-encryption
-
-
-int vlan1
-   description To LAN A
-   ip add 192.168.0.189 255.255.255.192
-   no shut
-exit
-
-ip default-gateway 192.168.0.190
-end
-wr
-
-----------------
-   S2
-----------------
-en
-conf t
-host S2
-enable secret class
-
-banner motd #You are accessing a restricted system#
-
-line console 0
-   password cisco
-   login
-exit
-
-line vty 0 15
-   password cisco
-   login
-exit
-
-service password-encryption
-
-int vlan1
-   description To LAN B
-   ip add 192.168.0.125 255.255.255.128
-   no shut
-exit
-
-ip default-gateway 192.168.0.126
-end
-wr
-
-----------------
-   R1
-----------------
-en
-conf t
-host R1
-enable secret class
-
-banner motd #You are accessing a restricted system#
-
-ip domain-name formation.local
-crypto key generate rsa general-keys modulus 1024
-username username password password
-
-
-
-line console 0
-   password cisco
-   login
-exit
-
-line vty 0 4
-   password cisco
-   transport input ssh
-   login local
-exit
-
-line vty 0 15
-   password cisco
-   login
-exit
-
-service password-encryption
-
-int G0/0
-   description To LAN A
-   ip add 192.168.0.190 255.255.255.192
-   no shut
-exit
-
-int G0/1
-   description To LAN B
-   ip add 192.168.0.126 255.255.255.128
-   no shut
-exit
-
-int S0/0/0
-   description To ISP
-   ip add 200.0.0.1 255.255.255.252
-   no shut
-exit
-
-int E0/0/0
-   description To PC3
-   ip add 192.168.0.206 255.255.255.240
-   no shut
-exit
-
-ip route 0.0.0.0 0.0.0.0 S0/0/0
-end
-wr
-```
-
-<div style="page-break-after: always;"></div>
-
-
-1. **"`packet-tracer.yaml`"**
-
-```yaml
-Network:
-  PC1:
-    Default Gateway: 192.168.0.190
-    Ports:
-      F0:
-        IP: 192.168.0.129
-        Link:
-          Connects to: F0/1
-          Type: 0 0
-        Mask: 255.255.255.192
-  PC2:
-    Default Gateway: 192.168.0.126
-    Ports:
-      F0:
-        IP: 192.168.0.1
-        Link:
-          Connects to: F0/1
-          Type: 0 0
-        Mask: 255.255.255.128
-  PC3:
-    Default Gateway: 192.168.0.206
-    Ports:
-      F0:
-        IP: 192.168.0.193
-        Link:
-          Connects to: F0/1
-          Type: 0 0
-        Mask: 255.255.255.240
-  R1:
-    Banner MOTD: You are accessing a restricted system
-    Console Line:
-      Login: 1
-      Password: cisco
-    DNS:
-      Ip Domain Name: formation.local
-    Enable Secret: class
-    Host Name: R1
-    Ports:
-      E0/0/0:
-        Description: To PC3
-        IP: 192.168.0.206
-        Link to PC3:
-          Connects to F0: 'True'
-          Type: 0 0
-        Mask: 255.255.255.240
-        Port Status: 1
-      G0/0:
-        Description: To LAN A
-        IP: 192.168.0.190
-        Link to S1:
-          Connects to F0/1: 'True'
-          Type: 0 0
-        Mask: 255.255.255.192
-        Port Status: 1
-      G0/1:
-        Description: To LAN B
-        IP: 192.168.0.126
-        Link to S2:
-          Connects to F0/1: 'True'
-          Type: 0 0
-        Mask: 255.255.255.128
-        Port Status: 1
-      S0/0/0:
-        Description: To ISP
-        IP: 200.0.0.1
-        Link to ISP:
-          Connects to S0/0/0: 'True'
-          Type: 0 0
-        Mask: 255.255.255.252
-        Port Status: 1
-    Routes:
-      Static Routes:
-        Route0: 0.0.0.0-0-Serial0/0/0
-    Security:
-      Crypto Key Set: Check this case
-      Modulus Bits: 1024
-    Service Password Encryption: 1
-    Startup config: 1
-    User Names:
-      Username: username password
-    VTY Lines:
-      VTY Line 0:
-        Login: 2
-        Password: cisco
-        Transport Input: 2
-      VTY Line 15:
-        Login: 2
-        Password: cisco
-        Transport Input: 2
-  S1:
-    Banner MOTD: You are accessing a restricted system
-    Console Line:
-      Login: 1
-      Password: cisco
-    Default Gateway: 192.168.0.190
-    Enable Secret: class
-    Host Name: S1
-    Ports:
-      F0/1:
-        Link to R1:
-          Connects to G0/0: 'True'
-          Type: 0 0
-      Vlan1:
-        IP: 192.168.0.189
-        Mask: 255.255.255.192
-        Port Status: 1
-    Service Password Encryption: 1
-    Startup config: 1
-    VTY Lines:
-      VTY Line 0:
-        Login: 1
-        Password: cisco
-      VTY Line 15:
-        Login: 1
-        Password: cisco
-  S2:
-    Banner MOTD: You are accessing a restricted system
-    Console Line:
-      Login: 1
-      Password: cisco
-    Default Gateway: 192.168.0.126
-    Enable Secret: class
-    Host Name: S2
-    Ports:
-      F0/1:
-        Link to R1:
-          Connects to G0/1: 'True'
-          Type: 0 0
-      Vlan1:
-        IP: 192.168.0.125
-        Mask: 255.255.255.128
-        Port Status: 1
-    Service Password Encryption: 1
-    Startup config: 1
-    VTY Lines:
-      VTY Line 0:
-        Login: 1
-        Password: cisco
-      VTY Line 15:
-        Login: 1
-        Password: cisco
-```
+<img src="img\img5_1.png" width="400" height="200" />
 
 <div style="page-break-after: always;"></div>
 
@@ -507,10 +196,10 @@ Network:
 * **(1) : En fonction du CIDR, va générer en (2) :**
 
   * Le masque de sous-réseau
-  * Le masque de sous réseau inversé
+  * Le masque de sous-réseau inversé
   * Le nombre d'adresses IP disponibles (et utilisables)
 
-* **(3) : Mettre le réseau et le CIDR correspondant (va permettre des calculs de VLSM)**
+* **(3) : Mettre le réseau et le CIDR correspondant (va permettre d'effectuer des calculs de VLSM)**
 
 * **(4) : Mettre le nombre d'hôtes souhaité et à chaque fois cliquer sur "Add" pour ajouter un nombre d'hôte dans la table.**
 
