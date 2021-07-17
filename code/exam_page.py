@@ -1823,7 +1823,7 @@ def setupUiExam(self):
 
     # Groupbox Main configuration
     self.E_p2_2_srv2_gb1 = QtWidgets.QGroupBox(p2_2_tabwidget_tab6)
-    classBlueprint.mkGroupBox(self.E_p2_2_srv2_gb1, QtCore.QRect(10, 10, 505, 188), "SRV1 - Main configuration")
+    classBlueprint.mkGroupBox(self.E_p2_2_srv2_gb1, QtCore.QRect(10, 10, 505, 188), "SRV2 - Main configuration")
 
     self.E_p2_2_srv2_gb1_labelHostname = QtWidgets.QLabel(self.E_p2_2_srv2_gb1)
     classBlueprint.mkLabel(self.E_p2_2_srv2_gb1_labelHostname, QtCore.QRect(10, 35, 101, 21), "Hostname :", True)
@@ -1868,7 +1868,7 @@ def setupUiExam(self):
 
     # Groupbox DNS
     self.E_p2_2_srv2_gb2 = QtWidgets.QGroupBox(p2_2_tabwidget_tab6)
-    classBlueprint.mkGroupBox(self.E_p2_2_srv2_gb2, QtCore.QRect(10, 200, 505, 111), "SRV1 - DNS")
+    classBlueprint.mkGroupBox(self.E_p2_2_srv2_gb2, QtCore.QRect(10, 200, 505, 111), "SRV2 - DNS")
 
     self.E_p2_2_srv2_gb2_labelName = QtWidgets.QLabel(self.E_p2_2_srv2_gb2)
     classBlueprint.mkLabel(self.E_p2_2_srv2_gb2_labelName, QtCore.QRect(10, 35, 91, 21), "RR Name :", True)
@@ -1909,7 +1909,7 @@ def setupUiExam(self):
 
     # Groupbox DHCP
     self.E_p2_2_srv2_gb3 = QtWidgets.QGroupBox(p2_2_tabwidget_tab6)
-    classBlueprint.mkGroupBox(self.E_p2_2_srv2_gb3, QtCore.QRect(10, 320, 495, 161), "SRV1 - DHCP")
+    classBlueprint.mkGroupBox(self.E_p2_2_srv2_gb3, QtCore.QRect(10, 320, 495, 161), "SRV2 - DHCP")
 
     global E_p2_2_srv2_gb3_editName
     E_p2_2_srv2_gb3_editName = QtWidgets.QLineEdit(self.E_p2_2_srv2_gb3)

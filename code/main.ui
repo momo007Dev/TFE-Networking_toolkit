@@ -752,7 +752,7 @@ Generator</string>
        <string notr="true">background-color: rgb(173, 173, 173);</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="page_1">
        <widget class="QLabel" name="E_p1_label">
@@ -9456,7 +9456,7 @@ color: rgb(255, 0, 255)</string>
            </font>
           </property>
           <property name="title">
-           <string>SRV1 - DNS</string>
+           <string>SRV2 - DNS</string>
           </property>
           <widget class="QLabel" name="E_p2_2_srv2_gb2_labelType">
            <property name="geometry">
@@ -9731,7 +9731,7 @@ selection-color: rgb(85, 170, 0);</string>
            </font>
           </property>
           <property name="title">
-           <string>SRV1 - DHCP</string>
+           <string>SRV2 - DHCP</string>
           </property>
           <widget class="QLineEdit" name="E_p2_2_srv2_gb3_editIp">
            <property name="geometry">
@@ -10190,7 +10190,7 @@ color: rgb(255, 0, 255)</string>
            </font>
           </property>
           <property name="title">
-           <string>SRV1 - Main configuration</string>
+           <string>SRV2 - Main configuration</string>
           </property>
           <widget class="QLabel" name="E_p2_2_srv2_gb1_labelIp">
            <property name="geometry">

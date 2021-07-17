@@ -9,7 +9,7 @@ import os, platform
 # This class contains blueprint functions that allows quick build of gui objects #
 #--------------------------------------------------------------------------------#
 
-version_number = 2.2
+version_number = 3.0
 
 class blueprintFunctions:
 
@@ -148,11 +148,7 @@ class blueprintFunctions:
         get_manual_btn.clicked.disconnect()
         get_manual_btn.setStyleSheet("background-color: rgb(85, 255, 127);")
         get_manual_btn.setFont(font_btn3)
-
-        if (str(version_number)[0] == "1"):
-            get_manual_btn.clicked.connect(lambda: webbrowser.open('https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v1_2.pdf'))
-        elif (str(version_number)[0] == "2"):
-            get_manual_btn.clicked.connect(lambda: webbrowser.open('https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v2_0.pdf'))
+        get_manual_btn.clicked.connect(lambda: webbrowser.open('https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/Manuels.zip'))
 
         close_btn = msgBox.addButton('Close this window', QMessageBox.RejectRole)
         close_btn.setStyleSheet("background-color: rgb(255, 179, 179);")

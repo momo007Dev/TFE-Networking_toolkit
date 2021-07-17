@@ -7,48 +7,16 @@
 
 ### Manuel d'utilisation
 
-* **Générateur d'examen de niveau 1 :**
-  * [Version Markdown sur github](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/User_manual_v1_2.md)
-  * [Version PDF](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v1_2.pdf)
-* **Générateur d'examen de niveau 2 :**
-  * [Version Markdown sur github](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/User_manual_v2_0.md)
-  * [Version PDF](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/User_manual_v2_0.pdf)
+* [Archive contenant les 2 manuels en format PDF](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/Manuels.zip)
 
 ---
 
 ### Release
 
-* **Générateur d'examen de niveau 1 :**
-  * Version ***1.0*** : [release_windows_v1.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.0.zip)
-  * Version ***1.2*** : [release_windows_v1.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.2.zip)
-  * Version ***1.4*** : [release_windows_v1.4.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.4.zip)
-  * Version ***1.6*** :  [release_windows_v1.6.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.6.zip)
-  * Version ***1.8*** :  [release_windows_v1.8.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v1.8.zip)
+* Version complète, avec tous les bugs connus corrigés.
+	* Version ***3.0*** : [release_windows_v3.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v3.0.zip)
 
-> ***PS : Ces premières versions peuvent générer des examens de 1ère et incluent également un simplificateur de calcul de sous-réseau et VLSM. Disponible uniquement pour Windows***
->
-> **:warning:Les versions commençant par "`1.x`" contiennent uniquement les examens de niveau 1 !**
->
-> **:warning:Les versions commençant par "`2.x`" contiendront toutes les fonctionnalités.**
-
-* **Générateur d'examen de niveau 2 :**
-  * Version ***2.0*** : [release_windows_v2.0.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v2.0.zip)
-  * Version ***2.2*** : [release_windows_v2.2.zip](https://github.com/momo007Dev/TFE-Networking_toolkit/raw/main/release/release_windows_v2.2.zip) - ***Dernière version !***
-
-#### Problèmes Connues
-
-| Version | Où se situe le problème                                      | Description du problème                                      | Solution                                                     |
-| ------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **1.2** | Page "`(3) Connectivity`"                                    | Les valeurs par défauts des descriptions des interfaces sont toujours les mêmes. | ~~***Sera corrigé dans la prochaine version***.~~ ***Corrigé ! (v1.4)*** |
-| **1.2** | Fichier de sortie : "`packet-tracer.yaml`"                   | Au niveau de la route statique, il manque "-0-1" à la fin pour que **Packet Tracer** la prenne en compte. | ~~***Sera corrigé dans la prochaine version***.~~ ***Corrigé ! (v1.4)*** |
-| **1.2** | Page "`(4) Addons`"                                          | Après avoir sauvegarder les données de la page 3, le bouton "`(5) Generate my exam !`"est déjà visible. | ~~Il faudra d'abord passer par la page "`(4) Addons`" et sauvegarder avant de pouvoir générer l'examen. ***Sera corrigé dans la prochaine version***.~~ ***Corrigé ! (v1.4)*** |
-| **1.4** | Fichier de sortie : "`packet-tracer.yaml`"                   | Manque les descriptions des interfaces des switchs.          | ~~***Sera corrigé prochainement.***~~ ***Corrigé ! (v1.6)*** |
-| **1.4** | Page "`About`"                                               | Le numéro de version n'est pas à jour (toujours sur **1.2**). | ~~Un bouton permettant de télécharger directement le manuel d'utilisation sera ajouté également. ***Sera corrigé prochainement.***~~ ***Corrigé ! (v1.6)*** |
-| **1.6** | **Nouvelle Fonctionnalité.**                                 | Le client aimerait pouvoir ajouter plusieurs routes statiques (pour l'instant, le programme ne prends qu'une seule route). | ***~~Cette fonctionnalité sera ajouté prochainement.~~ Corrigé ! (v1.8)*** |
-| **2.0** | (***Examen de niveau 2***) Page "`(3) Pcs, Switchs and Servers`", onglet Servers. | Il manque un champ "DNS" au niveau des pool DHCP. Dans le pool, il devrait être possible d'indiquer le serveur DNS que les clients prendront en compte. | ~~Il faudra ajouté un champ DNS au niveau des 2 serveurs + ajouter le résultat dans les 2 fichiers de sorties (solution et Packet Tracer). ***Sera corrigé prochainement.~~ ***Corrigé ! (v2.2)*** |
-| **2.0** | (***Examen de niveau 2***) Fichier de sortie : "`packet-tracer.yaml`" | Les différentes zones OSPF ne sont pas prises en compte (champs "`Area`") dans le fichier de sortie Packet Tracer. | ***~~Sera corrigé prochainement.~~ Corrigé ! (v2.2)***       |
-| **2.0** | (***Examen de niveau 2***) Fichier de sortie : "`packet-tracer.yaml`" | Presque la totalité des descriptions des interfaces ne sont PAS pris en compte dans le fichier de sortie Packet Tracer. | ***~~Sera corrigé prochainement.~~ Corrigé ! (v2.2)***       |
-| **2.0** | (***Examen de niveau 2***) Fichier de sortie : "`packet-tracer.yaml`" | Les routes statiques ne respectent pas le format de Packet Tracer. | ***~~Sera corrigé prochainement.~~ Corrigé ! (v2.2)***       |
+> ***Nouveauté*** : Cette version permet désormais de générer un examen de 1ère ou de 2ème. Plus besoin de choisir la version du programme par rapport au besoin.
 
 ---
 
@@ -56,13 +24,7 @@
 
 Nom du fichier | hash sha1 associé
 ---------|----------
- release_windows_v1.0.zip | 2f7677315ed1412290d8318b9d17e308f580d369
- release_windows_v1.2.zip | 3b8b4821e52105fd6737129626b17d7b59a05e40
- release_windows_v1.4.zip | 8c0a6e78f2746a66930f85804e6217500d8fd533 
- release_windows_v1.6.zip | b627149beb60631cb93b5a2aa7dc63bf48a6badd 
- **release_windows_v1.8.zip** | d2b696c948c644c09b5533e2d39a187fb809b706 
- release_windows_v2.0.zip | 0774c2af9874d10ab4dbe8aeca835166786aaf35 
- **release_windows_v2.2.zip** | f5253e79eb7bcb441f11436620168f8856224c92 
+ release_windows_v3.0.zip | 68f0bb9bbc590e50e6b19d9e18a55f060288e130
 
 **Comment générer un hash sha1 sous windows ?**
 
@@ -79,18 +41,10 @@ Nom du fichier | hash sha1 associé
 
 - [Description du projet](#description-du-projet)
 - [Objectif du projet](#objectif-du-projet)
-- [Division en modules](#division-en-modules)
-  * [Premier module](#premier-module)
-  * [Second module](#second-module)
-  * [Troisiéme module](#troisième-module)
-  * [Fonctionnalités bonus](#fonctionnalités-bonus)
+- [Prochainement](#prochainement)
 - [Aspect technique](#aspect-technique)
-- [Organisation et trello](#organisation-et-trello)
 - [Mocup](#mocup)
-- [Démo](#démo)
-  * [Démo de la partie subneting utilities](#démo-de-la-partie-subneting-utilities)
 - [Souces utilisées](#sources-utilisées)
-- [Feedback Clients](#feedback-clients)
 ---
 
 ## Description du projet
@@ -112,54 +66,15 @@ L'objectif de ce projet, est de faire gagner du temps aux professeurs dans la mi
 
 ---
 
-## Division en modules
+## Prochainement
 
-### Premier module
-
-Le premier module consiste en la mise en place d'un générateur de commandes reprenant divers protocoles réseau et permettant la mise en place de : 
-- `Switch Layer 2` (Cisco)
-- `Switch Layer 3` (Cisco)
-- `Router` (Cisco)
-- `Serveur DNS` (bind par exemple)
-- `Serveur DHCP` (isc-dhcp-server par exemple)
-
----
-
-### Second module
-
-Le deuxième module consiste à mettre en place un générateur d'examen (blanc ou pas).
-Idéalement, celui-ci génèrera une topologie (schéma réseau), ainsi que toutes les commandes nécessaires permettant de résoudre l'examen généré. Il faudra ensuite l'encoder dans **`Packet Tracer`** si le professeur souhaite utiliser ce programme comme examen pour les étudiants.
-
-L'idée serait de proposé un "template" (une base) comprenant un schéma du réseau avec déjà des liaisons faites (Exemple : Un Pc relié à un switch et un switch relié à un routeur,...).
-
-Ensuite l'utilisateur pourra rajouté les fonctionnalités qu'il désire comme du routage dynamique tel que **`RIP`** (au lieu du routage statique), un système de **`VLAN`**, mise en place de **`NAT`**,...
-
-BONUS : Intégrer une sorte d'aide pour insérer dans Packet Tracer. 
-  * Afficher les commandes dans l'ordre des cases à cocher dans Packet Tracer.
-  * Afficher dans quel sous-menu mettre la commande.
-
----
-
-### Troisième module
-
-Ce dernier module est similaire à une calculatrice : il permettra de faciliter les calculs de **`VLSM`** et de calculs de sous-réseau.
-
-Pour les calculs de sous-réseau : 
-- Permet de trouver le **`wildcard`** (masque de sous-réseau inversé)
-- Permet de savoir le nombre d'adresses **`IP`** utilisable.
-
----
-
-### Fonctionnalités bonus
-
-> Correspond au bouton "Configuration Editor" dans le mocup en fin de page.
-
-Cette fonctionnalité consiste en une sorte d'IDE pour les configurations faites par le programme. 
-
-Entre autre, permet de :
-* **Visualiser les configurations** faites par le programme.
-* Visualiser en **couleur** afin d'y voir plus claire.
-* Pouvoir **choisir le type de fichier** (Switch Layer 2 / 3, Routeur, fichier de zone DNS, config DHCP,...)
+* Générateur de commande pour un appareil type (Routeur, Switch-L2/ L3)
+* Générateur de configuration de services linux (DNS et DHCP)
+  * Permettra de facilement configurer pour le DNS **`Bind9`** et pour le DHCP **` isc-dhcp-server`**.
+* Une sorte d'IDE, qui permettra de visualiser les différents fichier générer par le programme afin de pouvoir les personnaliser.
+  * Permettra de visualiser en couleur, d'éditer les fichiers, les sauvegardé et si possible, de proposer un système d'auto-complétion.
+* Possiblement un jour.... Une sorte de d'analyseur de fichier de config.
+  * On place un fichier de config dans le programme, et celui-ci doit être capable de dire, tout les fonctions / protocoles utilisées dans un 1er temps. Et dans un 2ème temps, générer un fichier permettant de facilement encoder dans Packet Tracer (pour les cas d'examens).
 
 ---
 
@@ -170,29 +85,13 @@ Plateforme | Langage (programmation) | Librairie ?
 ---------|----------|---------
  **Application de bureau** | **`Python`** | **`PyQt`** => Librairie permettant de mettre en place des GUI plus belle.
 
-> ***Ce programme disponible et utilisable sous Windows via un exécutable***
-
----
-
-## Organisation et trello
-
-<img src="img/trello.png" />
-
-* [Lien vers trello](https://trello.com/b/ywBg35gv/tfe)
+> ***Ce programme est disponible et utilisable sous Windows via un exécutable***.
 
 ---
 
 ## Mocup
 
 <img src="img/mocup.png" width="450" height="370" />
-
----
-
-## Démo
-
-### Démo de la partie subneting utilities
-
-![](img/demo_subnet.gif)
 
 ---
 
@@ -205,23 +104,3 @@ Plateforme | Langage (programmation) | Librairie ?
 * [Pycharm - IDE Python pour coder](https://www.jetbrains.com/pycharm/)
 * [Cheat-sheet pour les calculs de sous-réseau](https://nsrc.org/workshops/2009/summer/presentations/day3/subnetting.pdf)
 * [Typora - IDE pour Markdown](https://typora.io/#windows)
-
----
-
-## Feedback clients
-
-#### Examen de niveau 1
-
-* **Testé par : Madame Masson.**
-
-> J'ai testé. Voici ce que j'en pense:
->
-> - très facile et intuitif
-> - mode d'emploi très bien fait et très utile (attention à l'orthographe)
-> - MAIS... J'ai pu entrer de grosses bêtises . Il n'y a pas de vérification du nombre d'hôtes en fonction du /xx demandé
->
-> Est-ce prévu? Faisable? Inutile car on s'adresse à des profs?
-
-#### Examen de niveau 2
-
-TODO

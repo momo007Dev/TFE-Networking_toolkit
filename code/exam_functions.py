@@ -955,7 +955,7 @@ def save_changes_p2_2():
     table = exam_page.E_p2_2_srv2_tableDns #srv1_dns_list = ["rr_name + rr_type + rr_value", ...]
     rowCount = table.rowCount()
     for x in range(rowCount):
-        srv1_dns_list.append(str(table.item(x, 0).text()) + " " + str(table.item(x, 1).text()) + " " + str(table.item(x, 2).text()))
+        srv2_dns_list.append(str(table.item(x, 0).text()) + " " + str(table.item(x, 1).text()) + " " + str(table.item(x, 2).text()))
 
     global srv1_dict, srv2_dict, server_dict
     srv1_dict = {
@@ -1262,6 +1262,11 @@ def generate_solution_r1():
     output += "int " + str(r1_dict.get("a")[0]) + "\n"
     output += "   description " + str(r1_dict.get("a")[4]) + "\n"
     output += "   ip add " + str(r1_dict.get("a")[1]) + " " + str(r1_dict.get("a")[3]) + "\n"
+    output += "   no shut\n"
+    output += "\n"
+
+    output += "int " + str(r1_dict.get("b")[0]) + "\n"
+    output += "   no shut\n"
     output += "\n"
 
     vlan_used_s1 = get_vlan_used_by_a_switch(s1_dict)
@@ -1316,12 +1321,14 @@ def generate_solution_r2():
     output += "   description " + str(r2_dict.get("a")[4]) + "\n"
     output += "   ip add " + str(r2_dict.get("a")[1]) + " " + str(r2_dict.get("a")[3]) + "\n"
     output += "   ip nat inside\n"
+    output += "   no shut\n"
     output += "\n"
 
     output += "int " + str(r2_dict.get("b")[0]) + "\n"
     output += "   description " + str(r2_dict.get("b")[4]) + "\n"
     output += "   ip add " + str(r2_dict.get("b")[1]) + " " + str(r2_dict.get("b")[3]) + "\n"
     output += "   ip nat outside\n"
+    output += "   no shut\n"
     output += "\n"
 
     output = build_routing_txt_solution(r2_routing_dict, output)
@@ -1353,11 +1360,13 @@ def generate_solution_isp():
     output += "int " + str(isp_dict.get("a")[0]) + "\n"
     output += "   description " + str(isp_dict.get("a")[4]) + "\n"
     output += "   ip add " + str(isp_dict.get("a")[1]) + " " + str(isp_dict.get("a")[3]) + "\n"
+    output += "   no shut\n"
     output += "\n"
 
     output += "int " + str(isp_dict.get("b")[0]) + "\n"
     output += "   description " + str(isp_dict.get("b")[4]) + "\n"
     output += "   ip add " + str(isp_dict.get("b")[1]) + " " + str(isp_dict.get("b")[3]) + "\n"
+    output += "   no shut\n"
     output += "\n"
 
     output += "end" + "\n"
@@ -1421,8 +1430,8 @@ def build_routing_txt_solution(device_routing_dict, output):
         elif (protocol_is_ospf == False):
             output += "   network " + str(device_routing_dict.get(a)[1]) + "\n"
 
-    output += "   default-information originate ! Pour les routes par défauts \n"
-    output += "   redistribute static ! Pour les routes statiques \n"
+    output += "   default-information originate\n"
+    output += "   redistribute static\n"
     output += "\n"
 
     if (len(device_routing_dict.get("static")) > 0):
@@ -1447,7 +1456,7 @@ def generate_solution_packet_tracer_v2():
     for x in srv1_dhcp_dict.keys():
         pool_dhcp_srv1[x] = {
             "Default Gateway": srv1_dhcp_dict.get(x)[2],
-            "DNS Server IP": srv1_dhcp_dict.get(x)[3],
+            "Dns Server IP": srv1_dhcp_dict.get(x)[3],
             "Max User": "Check this case",
             "Name": x,
             "Start IP Address": srv1_dhcp_dict.get(x)[0],
@@ -1458,7 +1467,7 @@ def generate_solution_packet_tracer_v2():
     for x in srv2_dhcp_dict.keys():
         pool_dhcp_srv2[x] = {
             "Default Gateway": srv2_dhcp_dict.get(x)[2],
-            "DNS Server IP": srv2_dhcp_dict.get(x)[3],
+            "Dns Server IP": srv2_dhcp_dict.get(x)[3],
             "Max User": "Check this case",
             "Name": x,
             "Start IP Address": srv2_dhcp_dict.get(x)[0],
@@ -1824,7 +1833,7 @@ def generate_solution_packet_tracer_v2():
         "Network": {
              client_dict.get("PC1")[0]: {
                 "Default Gateway": "DHCP" if (client_dict.get("PC1")[1] == "dhcp") else client_dict.get("PC1")[3],
-                "DNS Server IP": "DHCP" if (client_dict.get("PC1")[1] == "dhcp") else client_dict.get("PC1")[4],
+                "Dns Server IP": "DHCP" if (client_dict.get("PC1")[1] == "dhcp") else client_dict.get("PC1")[4],
                 "Ports": {
                     "F0": {
                         "IP": "DHCP" if (client_dict.get("PC1")[1] == "dhcp") else client_dict.get("PC1")[1],
@@ -1838,7 +1847,7 @@ def generate_solution_packet_tracer_v2():
             },
             client_dict.get("PC2")[0]: {
                 "Default Gateway": "DHCP" if (client_dict.get("PC2")[1] == "dhcp") else client_dict.get("PC2")[3],
-                "DNS Server IP": "DHCP" if (client_dict.get("PC2")[1] == "dhcp") else client_dict.get("PC2")[4],
+                "Dns Server IP": "DHCP" if (client_dict.get("PC2")[1] == "dhcp") else client_dict.get("PC2")[4],
                 "Ports": {
                     "F0": {
                         "IP": "DHCP" if (client_dict.get("PC2")[1] == "dhcp") else client_dict.get("PC2")[1],
@@ -1852,7 +1861,7 @@ def generate_solution_packet_tracer_v2():
             },
             client_dict.get("PC3")[0]: {
                 "Default Gateway": "DHCP" if (client_dict.get("PC3")[1] == "dhcp") else client_dict.get("PC3")[3],
-                "DNS Server IP": "DHCP" if (client_dict.get("PC3")[1] == "dhcp") else client_dict.get("PC3")[4],
+                "Dns Server IP": "DHCP" if (client_dict.get("PC3")[1] == "dhcp") else client_dict.get("PC3")[4],
                 "Ports": {
                     "F0": {
                         "IP": "DHCP" if (client_dict.get("PC3")[1] == "dhcp") else client_dict.get("PC3")[1],
@@ -1866,7 +1875,7 @@ def generate_solution_packet_tracer_v2():
             },
             client_dict.get("PC4")[0]: {
                 "Default Gateway": "DHCP" if (client_dict.get("PC4")[1] == "dhcp") else client_dict.get("PC4")[3],
-                "DNS Server IP": "DHCP" if (client_dict.get("PC4")[1] == "dhcp") else client_dict.get("PC4")[4],
+                "Dns Server IP": "DHCP" if (client_dict.get("PC4")[1] == "dhcp") else client_dict.get("PC4")[4],
                 "Ports": {
                     "F0": {
                         "IP": "DHCP" if (client_dict.get("PC4")[1] == "dhcp") else client_dict.get("PC4")[1],
@@ -1880,17 +1889,17 @@ def generate_solution_packet_tracer_v2():
             }, #--SRV1--#
             srv1_dict.get("main")[0]: {
                 "Default Gateway": srv1_dict.get("main")[3],
-                "DHCP Server List" : { # Disparait si pas de server dhcp
+                "Dhcp Server List" : { # Disparait si pas de server dhcp
                     "DHCP Server" : {
                         "DHCP Enable" : 1,
                         "Pools" : pool_dhcp_srv1
                     }
                 },
-                "DNS Server" : { # Disparait si pas de server dns
+                "Dns Server" : { # Disparait si pas de server dns
                     "DNS Enable" : 1,
                     "Resource Records" : srv1_dns_pool
                 },
-                "DNS Server IP" : srv1_dict.get("main")[4], # If empty => Must delete this line
+                "Dns Server IP" : srv1_dict.get("main")[4], # If empty => Must delete this line
                 "Ports": {
                     "F0": {
                         "IP Address": srv1_dict.get("main")[1],
@@ -1900,17 +1909,17 @@ def generate_solution_packet_tracer_v2():
             }, #--SRV2--#
             srv2_dict.get("main")[0]: {
                 "Default Gateway": srv2_dict.get("main")[3],
-                "DHCP Server List": {  # Disparait si pas de server dhcp
+                "Dhcp Server List": {  # Disparait si pas de server dhcp
                     "DHCP Server": {
                         "DHCP Enable": 1,
                         "Pools": pool_dhcp_srv2
                     }
                 },
-                "DNS Server": {  # Disparait si pas de server dns
+                "Dns Server": {  # Disparait si pas de server dns
                     "DNS Enable": 1,
                     "Resource Records": srv2_dns_pool
                 },
-                "DNS Server IP": srv2_dict.get("main")[4],  # If empty => Must delete this line
+                "Dns Server IP": srv2_dict.get("main")[4],  # If empty => Must delete this line
                 "Ports": {
                     "F0": {
                         "IP Address": srv2_dict.get("main")[1],
@@ -1963,7 +1972,7 @@ def generate_solution_packet_tracer_v2():
                 "ACL":{ # If No ACL => Delete this
                     1: r1_acl_list
                 },
-                "DNS":{
+                "Dns":{
                     "IP Domain Name" : r1_ssh_dict.get("domain")
                 },
                 "Host Name" : r1_dict.get("name")[0],
@@ -2009,7 +2018,7 @@ def generate_solution_packet_tracer_v2():
                 "ACL": {  # If No ACL => Delete this
                     1: r2_acl_list
                 },
-                "DNS": {
+                "Dns": {
                     "IP Domain Name": r2_ssh_dict.get("domain")
                 },
                 "Host Name": r2_dict.get("name")[0],
@@ -2091,16 +2100,16 @@ def generate_solution_packet_tracer_v2():
     }
 
     if (bool(pool_dhcp_srv1) is False): # If srv1 no dhcp server
-        del packet_tracer_stuct_v2["Network"][srv1_dict.get("main")[0]]["DHCP Server List"]
+        del packet_tracer_stuct_v2["Network"][srv1_dict.get("main")[0]]["Dhcp Server List"]
 
     if (bool(pool_dhcp_srv2) is False): # If srv2 no dhcp server
-        del packet_tracer_stuct_v2["Network"][srv2_dict.get("main")[0]]["DHCP Server List"]
+        del packet_tracer_stuct_v2["Network"][srv2_dict.get("main")[0]]["Dhcp Server List"]
 
     if (bool(srv1_dns_pool) is False): # if srv1 no dns server
-        del packet_tracer_stuct_v2["Network"][srv1_dict.get("main")[0]]["DNS Server"]
+        del packet_tracer_stuct_v2["Network"][srv1_dict.get("main")[0]]["Dns Server"]
 
     if (bool(srv2_dns_pool) is False): # if srv2 no dns server
-        del packet_tracer_stuct_v2["Network"][srv2_dict.get("main")[0]]["DNS Server"]
+        del packet_tracer_stuct_v2["Network"][srv2_dict.get("main")[0]]["Dns Server"]
 
     remove_dns_from_output()
 
@@ -2134,7 +2143,7 @@ def generate_solution_packet_tracer_v2():
         del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["VTY Lines"]
         del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["Security"]
         del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["User Names"]
-        del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["DNS"]
+        del packet_tracer_stuct_v2["Network"][r1_dict.get("name")[0]]["Dns"]
 
     # Removes acl list if empty (R2) :
     if (len(r2_acl_list) < 1):
@@ -2147,7 +2156,7 @@ def generate_solution_packet_tracer_v2():
         del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["VTY Lines"]
         del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["Security"]
         del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["User Names"]
-        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["DNS"]
+        del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["Dns"]
 
     if (r2_routing_dict.get(0)[0] == "OSPF"): # Delete RIP bloc
         del packet_tracer_stuct_v2["Network"][r2_dict.get("name")[0]]["RIP"]
@@ -2165,30 +2174,30 @@ def generate_solution_packet_tracer_v2():
 
 def remove_dns_from_output():
     if (client_dict.get("PC1")[1] == "dhcp"):
-        packet_tracer_stuct_v2["Network"][client_dict.get("PC1")[0]]["DNS Server IP"] = "DHCP"
+        packet_tracer_stuct_v2["Network"][client_dict.get("PC1")[0]]["Dns Server IP"] = "DHCP"
     elif(len(client_dict.get("PC1")[4]) < 1):
-        del packet_tracer_stuct_v2["Network"][client_dict.get("PC1")[0]]["DNS Server IP"]
+        del packet_tracer_stuct_v2["Network"][client_dict.get("PC1")[0]]["Dns Server IP"]
 
     if (client_dict.get("PC2")[1] == "dhcp"):
-        packet_tracer_stuct_v2["Network"][client_dict.get("PC2")[0]]["DNS Server IP"] = "DHCP"
+        packet_tracer_stuct_v2["Network"][client_dict.get("PC2")[0]]["Dns Server IP"] = "DHCP"
     elif(len(client_dict.get("PC2")[4]) < 1):
-        del packet_tracer_stuct_v2["Network"][client_dict.get("PC2")[0]]["DNS Server IP"]
+        del packet_tracer_stuct_v2["Network"][client_dict.get("PC2")[0]]["Dns Server IP"]
 
     if (client_dict.get("PC3")[1] == "dhcp"):
-        packet_tracer_stuct_v2["Network"][client_dict.get("PC3")[0]]["DNS Server IP"] = "DHCP"
+        packet_tracer_stuct_v2["Network"][client_dict.get("PC3")[0]]["Dns Server IP"] = "DHCP"
     elif(len(client_dict.get("PC3")[4]) < 1):
-        del packet_tracer_stuct_v2["Network"][client_dict.get("PC3")[0]]["DNS Server IP"]
+        del packet_tracer_stuct_v2["Network"][client_dict.get("PC3")[0]]["Dns Server IP"]
 
     if (client_dict.get("PC4")[1] == "dhcp"):
-        packet_tracer_stuct_v2["Network"][client_dict.get("PC4")[0]]["DNS Server IP"] = "DHCP"
+        packet_tracer_stuct_v2["Network"][client_dict.get("PC4")[0]]["Dns Server IP"] = "DHCP"
     elif(len(client_dict.get("PC4")[4]) < 1):
-        del packet_tracer_stuct_v2["Network"][client_dict.get("PC4")[0]]["DNS Server IP"]
+        del packet_tracer_stuct_v2["Network"][client_dict.get("PC4")[0]]["Dns Server IP"]
 
     if (len(srv1_dict.get("main")[4]) < 1): # SRV1
-        del packet_tracer_stuct_v2["Network"][srv1_dict.get("main")[0]]["DNS Server IP"]
+        del packet_tracer_stuct_v2["Network"][srv1_dict.get("main")[0]]["Dns Server IP"]
 
     if (len(srv2_dict.get("main")[4]) < 1): # SRV2
-        del packet_tracer_stuct_v2["Network"][srv2_dict.get("main")[0]]["DNS Server IP"]
+        del packet_tracer_stuct_v2["Network"][srv2_dict.get("main")[0]]["Dns Server IP"]
 
 def generate_exam_v2():
     generate_solution_text_v2()
