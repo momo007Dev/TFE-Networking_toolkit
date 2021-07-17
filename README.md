@@ -37,6 +37,12 @@ Nom du fichier | hash sha1 associé
 > ***PS : Si le hash est différent (donc les données ont été altérées = possible virus), ne l'ouvrez surtout pas.***
 ---
 
+### Bugs connues et anciennes versions
+
+[Liens vers bugs.md](https://github.com/momo007Dev/TFE-Networking_toolkit/blob/main/bugs.md)
+
+---
+
 ## Table des matières
 
 - [Description du projet](#description-du-projet)
